@@ -12,23 +12,14 @@
   <title>AI-HUB - 연계 데이터</title>
 
   <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/tailwind.css">
 
   <!-- Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./js/lucide.min.js" defer></script>
 
-  <!-- Pretendard -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-  />
-
-  <!-- Common CSS -->
-  <link
-    rel="stylesheet"
-    href="./css/hub-common.css"
-  />
-    <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+   <!-- Pretendard -->
+  <link rel="stylesheet" href="./css/hub-common.css">
+  <link rel="icon" type="image/png" href="./img/hub-favicon.png">
 
 </head>
 
@@ -185,7 +176,7 @@
       "
     >
       <i
-        data-lucide="book-bookmark"
+        data-lucide="book-marked"
         class="h-6 w-6"
       ></i>
 
@@ -1243,7 +1234,7 @@
                 text-black"
             >
               <i
-                data-lucide="map-pin-search"
+                data-lucide="map-pin"
                 class="h-6 w-6"
               ></i>
 
@@ -2957,8 +2948,10 @@
 
   <!-- Lucide -->
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
-  </script>
+  });
+</script>
 
   <!-- Common JS -->
   <script src="./js/hub-common.js"></script>

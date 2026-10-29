@@ -343,7 +343,7 @@ const dataList =
 ========================================================= */
 
 const categoryIconMap = {
-  공간: "map-pin-search",
+  공간: "map-pin",
   선박: "ship",
   시간: "clock-3",
   행동: "square-check-big"
@@ -902,7 +902,7 @@ if (linkedDataPage) {
 
   const linkedCategoryIconMap = {
     "선박": "ship",
-    "공간": "map-pin-search",
+    "공간": "map-pin",
     "시간": "clock-3",
     "행동": "square-check-big"
   };
@@ -6063,8 +6063,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const desktopToggle = document.getElementById("userMenuToggle");
 
   if (!desktopNav || !mobileNav || !userMenu || !toggle) {
-    console.error("AI-HUB: 헤더 메뉴 요소를 찾을 수 없습니다.");
-    return;
+  return;
   }
 
   const menuItems = Array.from(desktopNav.children);
@@ -6097,3 +6096,4 @@ document.addEventListener("DOMContentLoaded", () => {
     media.addListener(syncNavigation);
   }
 });
+

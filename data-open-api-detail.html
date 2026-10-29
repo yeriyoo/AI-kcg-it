@@ -12,23 +12,14 @@
   <title>AI-HUB - 오픈 API 상세</title>
 
   <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/tailwind.css">
 
   <!-- Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./js/lucide.min.js" defer></script>
 
   <!-- Pretendard -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-  />
-
-  <!-- Common CSS -->
-  <link
-    rel="stylesheet"
-    href="./css/hub-common.css"
-  />
-    <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+  <link rel="stylesheet" href="./css/hub-common.css">
+  <link rel="icon" type="image/png" href="./img/hub-favicon.png">
 
 </head>
 
@@ -185,7 +176,7 @@
       "
     >
       <i
-        data-lucide="book-bookmark"
+        data-lucide="book-marked"
         class="h-6 w-6"
       ></i>
 
@@ -1194,7 +1185,7 @@
           "
         >
           <i
-            data-lucide="square-text"
+            data-lucide="file-text"
             class="h-5 w-5"
           ></i>
 
@@ -2196,8 +2187,12 @@
 
   <!-- Lucide -->
   <script>
-    lucide.createIcons();
-  </script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  });
+</script>
 
   <!-- Common JS -->
   <script src="./js/hub-common.js"></script>
