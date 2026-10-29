@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>품질검수 관리</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">품질검수 관리</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+<!-- =========================================
+     품질검수 관리
+========================================= -->
+<main id="mainContent" class="quality-page" tabindex="-1">
+
+  <!-- 페이지 제목 -->
+  <div class="quality-heading">
+    <div class="quality-heading-info">
+      <i data-lucide="square-check-big"></i>
+      <h1>품질검수 관리</h1>
+      <span class="quality-heading-divider"></span>
+      <p>AI탐지 정기 성능평가(주간·월간) · 성능 개선 이력 · 1-Cycle 자가점검 5단계 + 제3자 품질검증 — 기준 2026-10-05</p>
+    </div>
+  </div>
+
+  <!-- 현황 요약 -->
+  <section class="quality-summary">
+    <article class="quality-summary-card">
+      <span>정기 평가 대상</span>
+      <strong>12개</strong>
+      <small>주간 월 02:00 · 월간 1일 03:00</small>
+    </article>
+    <article class="quality-summary-card">
+      <span>최근 성능 재평가</span>
+      <strong>2026-10-05</strong>
+      <small>9월 SNPDB 확정</small>
+    </article>
+    <article class="quality-summary-card">
+      <span>성능 점검 이력</span>
+      <strong>53건</strong>
+      <small>2026-07-21 기준선부터</small>
+    </article>
+    <article class="quality-summary-card">
+      <span>품질 이슈 (미해결·보완 중)</span>
+      <strong>5건</strong>
+      <small>전체 10건</small>
+    </article>
+  </section>
+
+  <!-- 정기 성능평가 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>AI탐지 정기 성능평가 — 주간·월간 자동 실행</h2>
+      <p><span class="quality-badge warning">실행기록 조회 불가 (HTTP 404)</span> prediction 스케줄러가 실행하고 결과를 kcg.iuu_script_run에 적재 · 화면은 기록을 읽기만 함</p>
+    </div>
+
+    <div class="quality-schedule-grid">
+      <article class="quality-schedule-card">
+        <div class="quality-schedule-title">
+          <strong>주간 배치 (model_eval)</strong>
+          <span class="quality-badge blue">매주 월요일 02:00</span>
+        </div>
+        <p>24h 창 · 다음 실행 2026-11-02 02:00</p>
+        <small>prediction/jobs/model_eval.py — 2026-09-19 도입(669f74b4), 2026-10-04 대상 6 → 12개 확대(교차검증 포함)</small>
+      </article>
+      <article class="quality-schedule-card">
+        <div class="quality-schedule-title">
+          <strong>월간 배치 (model_eval)</strong>
+          <span class="quality-badge blue">매월 1일 03:00</span>
+        </div>
+        <p>168h(7일) 창 · 다음 실행 2026-11-01 03:00</p>
+        <small>주간 배치와 같은 12개 대상, 긴 창으로 안정성 확인(위험해역은 30일)</small>
+      </article>
+    </div>
+
+    <div class="quality-table-wrap">
+      <table class="quality-table quality-eval-table">
+        <thead>
+          <tr>
+            <th>AI탐지 메뉴</th>
+            <th>평가 대상</th>
+            <th>지표</th>
+            <th>스크립트</th>
+            <th>F1</th>
+            <th>F1 정합 기준</th>
+            <th>최근 실행</th>
+            <th>결과 요약</th>
+          </tr>
+        </thead>
+        <tbody id="qualityEvalBody"></tbody>
+      </table>
+    </div>
+    <p class="quality-footnote">수동 실행: python -m jobs.model_eval weekly --only &lt;대상키&gt; (기록 없이 확인은 --dry-run) · 대상별 제한시간 주간 30~60분 · 월간 90~120분, 전체 예산 주간 4h · 월간 10h</p>
+  </section>
+
+  <!-- 성능평가 이력 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading quality-heading-actions">
+      <div>
+        <h2>AI탐지 성능평가 이력 — 성능 개선·정기 점검 (2026-10-05 기준)</h2>
+      </div>
+      <div class="quality-actions">
+        <button type="button" class="quality-button" id="qualityDatasetButton">데이터맵으로 이동</button>
+        <button type="button" class="quality-button" id="qualityHistoryButton"><i data-lucide="external-link"></i> 이력 HTML 열기</button>
+        <button type="button" class="quality-button ghost" id="qualityHistoryDownload"><i data-lucide="download"></i> 내려받기</button>
+      </div>
+    </div>
+
+    <div class="quality-table-wrap">
+      <table class="quality-table quality-history-table">
+        <thead>
+          <tr>
+            <th>메뉴</th>
+            <th>최초 점검</th>
+            <th>최근 점검</th>
+            <th>점검 횟수</th>
+            <th>최근 실측 지표</th>
+          </tr>
+        </thead>
+        <tbody id="qualityHistoryBody"></tbody>
+      </table>
+    </div>
+
+    <div class="quality-history-filter">
+      <select id="qualityHistoryFilter" aria-label="성능평가 메뉴 필터">
+        <option value="all">전체 메뉴</option>
+      </select>
+      <span>53건 · 최신순</span>
+    </div>
+
+    <div class="quality-history-list" id="qualityHistoryList"></div>
+  </section>
+
+  <!-- 1-Cycle 품질검증 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>1-Cycle 자가점검 5단계 + 제3자 품질검증</h2>
+      <p>가이드 v4.0 표준 절차 · 표본 1% → 5~10% → 30% → 50% → 100%</p>
+    </div>
+    <div class="quality-cycle-grid">
+      <article class="quality-cycle-card">
+        <span>01</span><strong>샘플 1-Cycle</strong>
+        <small>데이터 포맷·학습모델 점검</small>
+        <em class="quality-badge green">완료</em>
+      </article>
+      <article class="quality-cycle-card">
+        <span>02</span><strong>초기 1-Cycle</strong>
+        <small>5~10% 사전오류 도출·예방</small>
+        <em class="quality-badge green">완료</em>
+      </article>
+      <article class="quality-cycle-card">
+        <span>03</span><strong>사전점검</strong>
+        <small>초기데이터 품질점검</small>
+        <em class="quality-badge green">완료</em>
+      </article>
+      <article class="quality-cycle-card active">
+        <span>04</span><strong>중간 1-Cycle</strong>
+        <small>사전점검 결과 수정반영 검토</small>
+        <em class="quality-badge blue">진행 중</em>
+      </article>
+      <article class="quality-cycle-card">
+        <span>05</span><strong>최종 품질점검</strong>
+        <small>품질검증 이전 최종확인</small>
+      </article>
+      <article class="quality-cycle-card">
+        <span>06</span><strong>외부 품질검증</strong>
+        <small>100% 데이터 품질검증</small>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4대 품질 지표 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>품질관리 4대 지표</h2>
+      <p>가이드 v4.0 부록 1 · 평균 91.7점 · 학습데이터 라벨링 품질검증 체계(목표 관리값 — 외부 품질검증 전)</p>
+    </div>
+    <div class="quality-metric-grid">
+      <article class="quality-metric-card">
+        <span>Process Adequacy</span>
+        <strong class="quality-metric-name">구축 공정 적정성</strong>
+        <div class="quality-metric-score">94.6<small>점</small></div>
+        <p>구축 계획·인력·환경·도구 등 프로세스 자체의 적정성</p>
+        <div class="quality-chip-row"><span>구축계획서</span><span>과제 일정</span><span>작업자 교육</span><span>보안조치</span></div>
+      </article>
+      <article class="quality-metric-card">
+        <span>Data Suitability</span>
+        <strong class="quality-metric-name">데이터 적합성</strong>
+        <div class="quality-metric-score">92.8<small>점</small></div>
+        <p>원시·원천 데이터의 업무 적합성·다양성·법적 적합성</p>
+        <div class="quality-chip-row"><span>수량 적정성</span><span>다양성</span><span>법적 권리</span><span>중복·노이즈</span></div>
+      </article>
+      <article class="quality-metric-card">
+        <span>Labeled Data Accuracy</span>
+        <strong class="quality-metric-name">가공데이터 정확성</strong>
+        <div class="quality-metric-score">90.4<small>점</small></div>
+        <p>라벨링·가공 결과의 정확성·일관성·완전성·유효성</p>
+        <div class="quality-chip-row"><span>라벨 정확성</span><span>일관성</span><span>완전성</span><span>구문 적합성</span></div>
+      </article>
+      <article class="quality-metric-card">
+        <span>Model Suitability</span>
+        <strong class="quality-metric-name">학습모델 적합성</strong>
+        <div class="quality-metric-score">88.9<small>점</small></div>
+        <p>학습 결과 모델의 성능·일반화·운영 적합성</p>
+        <div class="quality-chip-row"><span>정확도</span><span>일반화</span><span>학습 분할</span><span>성능 기여도</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 오류 유형 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>자동검수 결과 — 오류 유형별</h2>
+      <p>자동검수 규칙별 누적 213건 (라벨링 검수 단계)</p>
+    </div>
+    <div class="quality-error-grid">
+      <article><span>누락</span><strong>142<small>건</small></strong><p>필수 필드 미입력</p></article>
+      <article><span>중복</span><strong>38<small>건</small></strong><p>동일 객체 다중 라벨</p></article>
+      <article><span>좌표오류</span><strong>24<small>건</small></strong><p>경계 범위 이탈</p></article>
+      <article><span>포맷오류</span><strong>9<small>건</small></strong><p>스키마 불일치</p></article>
+    </div>
+  </section>
+
+  <!-- 품질 이슈 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>품질 이슈·보완 이력 (SNPDB 실학습·재평가 기준)</h2>
+    </div>
+    <div class="quality-table-wrap">
+      <table class="quality-table quality-issues-table">
+        <thead>
+          <tr><th>ID</th><th>대상</th><th>상태</th><th>사유</th><th>검증 방법</th><th>일자</th><th>조치</th></tr>
+        </thead>
+        <tbody id="qualityIssuesBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 알고리즘별 F1 -->
+  <section class="quality-panel">
+    <div class="quality-panel-heading">
+      <h2>AI탐지 알고리즘별 F1 Score — 2026-10-05 측정</h2>
+      <p>F1 = 2 × 정밀도 × 재현율 / (정밀도 + 재현율) · 정기 평가(model_eval) 24h 창 · 목표 ≥ 0.85 · 독립 정답 대비 F1 높은 순 · 규칙 재현(종류/과정 라벨이 없는 알고리즘은 아래에 따로 분류)</p>
+    </div>
+    <div class="quality-table-wrap">
+      <table class="quality-table quality-f1-table">
+        <thead>
+          <tr><th>알고리즘</th><th>메뉴</th><th>정답 기준</th><th>정밀도</th><th>재현율</th><th>F1</th><th>양성 수</th><th>기간</th><th>판정</th><th>비고</th></tr>
+        </thead>
+        <tbody id="qualityF1Body"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

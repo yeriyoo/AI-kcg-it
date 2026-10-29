@@ -1,0 +1,2090 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI-HUB - 오픈 API(연관데이터) 상세</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- Common CSS -->
+  <link
+    rel="stylesheet"
+    href="./css/hub-common.css"
+  />
+    <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+
+</head>
+
+
+<body
+  class="
+    page-open-api-detail
+    bg-white
+    font-['Pretendard']
+    text-[#142A4D]
+  "
+>
+
+  <div class="min-h-screen">
+
+
+    <!-- =====================================================
+        TOP NAVIGATION
+    ====================================================== -->
+    <header
+      class="
+        header-shell
+        fixed
+        left-0 top-0 right-0
+        z-50
+        flex h-[60px] shrink-0
+        items-center
+        border-b border-[#476187]
+        px-8
+      "
+    >
+
+  <!-- =====================================================
+       LOGO
+  ====================================================== -->
+  <h1
+    class="
+      mr-20
+      flex shrink-0
+      items-center gap-2
+      text-[24px] font-semibold
+      text-white
+    "
+  >
+    <span
+      class="
+        flex h-8 w-8
+        items-center justify-center
+        rounded-full
+      "
+    >
+      <img
+      src="./img/logo.svg"
+      alt="AI-HUB"
+      class="
+        h-8 w-8
+        shrink-0
+        object-contain
+      "
+    />
+
+    </span>
+
+    AI-HUB
+  </h1>
+
+
+  <!-- =====================================================
+       MAIN MENU
+  ====================================================== -->
+  <nav
+    id="mainHeaderNav"
+    class="flex h-full items-center gap-10"
+    aria-label="주요 메뉴"
+  >
+
+
+    <!-- Active -->
+    <button
+      type="button"
+      class="
+        active
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+      aria-current="page"
+    >
+      <i
+        data-lucide="scroll-text"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 목록
+
+      <span
+        class="
+          absolute inset-x-0 bottom-2
+          h-[4px]
+          bg-[#0061F0]
+        "
+      ></span>
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="workflow"
+        class="h-6 w-6"
+      ></i>
+
+      연계 데이터
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="file-pen"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 제공신청
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="book-bookmark"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 출처
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="file-cog"
+        class="h-6 w-6"
+      ></i>
+
+      표준화
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       HEADER UTILITY
+  ====================================================== -->
+  <div class="ml-auto shrink-0">
+
+
+    <!-- =================================================
+         DESKTOP / 1651px 이상
+    ================================================== -->
+    <div
+      id="headerUtilityDesktop"
+      class="flex items-center gap-3"
+    >
+
+      <!-- Time -->
+      <span
+        class="
+          whitespace-nowrap
+          text-lg font-semibold
+          text-white
+        "
+      >
+        11:43:50 KST
+      </span>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- Download -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="다운로드"
+      >
+        <i
+          data-lucide="download"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- App -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="메뉴"
+      >
+        <i
+          data-lucide="grid-3x3"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Print -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="인쇄"
+      >
+        <i
+          data-lucide="printer"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          relative
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="shopping-cart"
+          class="h-5 w-5"
+        ></i>
+
+        <span
+          class="
+            absolute right-0 top-0
+            flex h-[16px] min-w-[16px]
+            items-center justify-center
+            rounded-full
+            bg-[#F84141]
+            px-1
+            text-[10px] font-semibold
+            leading-none
+            text-white
+          "
+        >
+          2
+        </span>
+      </button>
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="bell"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Theme -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="화면 모드"
+      >
+        <i
+          data-lucide="moon"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- User -->
+      <button
+        id="userMenuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        class="
+          flex items-center gap-2
+          text-[#E7F7FF]
+          hover:text-white
+        "
+      >
+        <span
+          class="
+            flex h-7 w-7
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-sm font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <span class="whitespace-nowrap text-base">
+          여한상 (경위)
+        </span>
+      </button>
+
+    </div>
+
+    <!-- =================================================
+        COMPACT / 1650px 이하
+    ================================================== -->
+    <div
+      id="headerUtilityCompact"
+      class="relative hidden"
+    >
+
+      <button
+        id="headerUtilityToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        aria-label="계정 메뉴"
+        class="
+          flex h-10 w-10
+          items-center justify-center
+          rounded
+          text-white
+          hover:bg-[#476187]
+          hover:text-white
+        "
+      >
+        <i
+          data-lucide="menu"
+          class="h-6 w-6"
+        ></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+    <!-- =====================================================
+     USER MENU
+     1650px 이하 / 260 x 372
+    ====================================================== -->
+    <div
+      id="userMenu"
+      class="
+        fixed right-[28px] top-[50px]
+        z-[300]
+        hidden
+        h-[400px] w-[260px]
+        overflow-hidden
+        rounded
+        border border-[#476187]
+        bg-[#142A4D]
+        shadow-2xl
+      "
+    >
+    <nav
+      id="mobileMainNav"
+      class="hidden"
+      aria-label="모바일 주요 메뉴"
+    ></nav>
+
+      <!-- CURRENT TIME -->
+      <div
+        class="
+          flex h-[64px]
+          flex-col justify-center
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            text-sm
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+        <strong
+          id="accountCurrentTime"
+          class="
+            mt-1
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          2026-10-06 15:48:55
+        </strong>
+      </div>
+
+
+      <!-- TIMEZONE -->
+      <div
+        class="
+          flex h-[48px]
+          items-center justify-between
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span class="text-sm text-[#99ABC6]">
+          시간대
+        </span>
+
+        <div
+          class="
+            flex h-7
+            overflow-hidden
+            rounded
+            bg-[#476187]
+          "
+        >
+          <button
+            id="timezoneKst"
+            type="button"
+            data-timezone="Asia/Seoul"
+            class="
+              timezone-button active
+              flex min-w-[44px]
+              items-center justify-center
+              bg-white
+              px-3
+              text-sm font-semibold
+              text-[#142A4D]
+            "
+          >
+            KST
+          </button>
+
+          <button
+            id="timezoneUtc"
+            type="button"
+            data-timezone="UTC"
+            class="
+              timezone-button
+              flex min-w-[44px]
+              items-center justify-center
+              bg-[#476187]
+              px-3
+              text-sm font-semibold
+              text-[#CBD6EA]
+            "
+          >
+            UTC
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOOLS -->
+      <div
+        class="
+          grid
+          grid-cols-3
+          border-b border-[#476187]
+        "
+      >
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다운로드
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            엑셀
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            인쇄
+          </span>
+        </button>
+
+         <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="shopping-cart"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            알림
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다크모드
+          </span>
+        </button>
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <div
+        class="
+          flex h-[52px]
+          items-center gap-3
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            flex h-8 w-8
+            shrink-0
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-sm font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <strong
+          class="
+            truncate
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+      </div>
+
+
+      <!-- ACCOUNT MENU -->
+      <div
+        class="
+          h-[100px]
+          px-3 py-2
+        "
+      >
+    
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>내 정보</span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>로그아웃</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+     USER MENU
+     1650px 이하 / 260 x 372
+    ====================================================== -->
+    <div
+      id="userMenu"
+      class="
+        fixed right-[28px] top-[50px]
+        z-[300]
+        hidden
+        h-[400px] w-[260px]
+        overflow-hidden
+        rounded
+        border border-[#476187]
+        bg-[#142A4D]
+        shadow-2xl
+      "
+    >
+      <nav
+      id="mobileMainNav"
+      class="hidden"
+      aria-label="모바일 주요 메뉴"
+    ></nav>
+
+      <!-- CURRENT TIME -->
+      <div
+        class="
+          flex h-[64px]
+          flex-col justify-center
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            text-base
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+        <strong
+          id="accountCurrentTime"
+          class="
+            mt-1
+            text-base
+            font-medium
+            text-white
+          "
+        >
+          2026-10-06 15:48:55
+        </strong>
+      </div>
+
+
+      <!-- TIMEZONE -->
+      <div
+        class="
+          flex h-[48px]
+          items-center justify-between
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span class="text-base text-[#99ABC6]">
+          시간대
+        </span>
+
+        <div
+          class="
+            flex h-7
+            overflow-hidden
+            rounded
+            bg-[#476187]
+          "
+        >
+          <button
+            id="timezoneKst"
+            type="button"
+            data-timezone="Asia/Seoul"
+            class="
+              timezone-button active
+              flex min-w-[44px]
+              items-center justify-center
+              bg-white
+              px-3
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            KST
+          </button>
+
+          <button
+            id="timezoneUtc"
+            type="button"
+            data-timezone="UTC"
+            class="
+              timezone-button
+              flex min-w-[44px]
+              items-center justify-center
+              bg-[#476187]
+              px-3
+              text-base font-semibold
+              text-[#CBD6EA]
+            "
+          >
+            UTC
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOOLS -->
+      <div
+        class="
+          grid
+          grid-cols-3
+          border-b border-[#476187]
+        "
+      >
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            다운로드
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            엑셀
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            인쇄
+          </span>
+        </button>
+
+         <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <span class="relative">
+            <i
+              data-lucide="shopping-cart"
+              class="h-5 w-5"
+            ></i>
+
+            <span
+              class="
+                absolute -right-2 -top-2
+                flex h-4 min-w-4
+                items-center justify-center
+                rounded-full
+                bg-[#F84141]
+                px-1
+                text-[10px] font-semibold
+                leading-none text-white
+              "
+            >
+              2
+            </span>
+          </span>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            알림
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            다크모드
+          </span>
+        </button>
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <div
+        class="
+          flex h-[52px]
+          items-center gap-3
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            flex h-8 w-8
+            shrink-0
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <strong
+          class="
+            truncate
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+      </div>
+
+
+      <!-- ACCOUNT MENU -->
+      <div
+        class="
+          h-[100px]
+          px-3 py-2
+        "
+      >
+    
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>내 정보</span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>로그아웃</span>
+        </button>
+      </div>
+
+    </div>
+    
+    <!-- =====================================================
+     MAIN
+====================================================== -->
+<main
+  class="
+    flex h-screen
+    flex-col
+    overflow-hidden
+    pt-[60px]
+  "
+>
+
+  <!-- =================================================
+       BACK
+  ================================================== -->
+  <section class="shrink-0 bg-white">
+    <div
+      class="
+        mx-auto
+        flex h-[72px]
+        max-w-[1300px]
+        items-center
+        px-6
+      "
+    >
+      <button
+        type="button"
+        class="
+          flex items-center gap-1
+          text-base font-semibold
+          text-[#142A4D]
+        "
+      >
+        <i
+          data-lucide="chevron-left"
+          class="h-5 w-5"
+        ></i>
+
+        <span>데이터 목록으로</span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- =================================================
+       DETAIL HERO
+  ================================================== -->
+  <section
+    id="detailHero"
+    class="
+      relative
+      shrink-0
+      overflow-hidden
+    "
+     style="
+    background:
+      #E1E7F2
+      url('./img/page-bg.jpg')
+      center center / cover
+      no-repeat;
+  "
+  >
+
+    <div
+      class="
+        relative
+        mx-auto
+        max-w-[1300px]
+        px-6
+        py-8
+      "
+    >
+
+      <!-- TYPE -->
+      <div class="mb-3 flex items-center gap-2">
+
+        <span
+          class="
+            flex h-8
+            items-center
+            rounded
+            bg-[#142A4D]
+            px-3
+            text-base font-semibold
+            text-white
+          "
+        >
+          XML(GML)
+        </span>
+
+        <span
+          class="
+            flex h-8
+            items-center
+            rounded
+            bg-[#7C73DE]
+            px-3
+            text-base font-semibold
+            text-white
+          "
+        >
+          공간
+        </span>
+
+      </div>
+
+
+      <!-- TITLE -->
+      <h1
+        class="
+          text-[24px]
+          font-semibold
+          leading-[1.4]
+          text-black
+        "
+      >
+        전남 특성평가격자 조회
+      </h1>
+
+      <p
+        class="
+          text-lg
+          font-semibold
+          text-[#476187]
+        "
+      >
+        전남 특성평가격자 조회 (원천 규약)
+      </p>
+
+
+      <!-- META -->
+      <div
+        class="
+          mt-5
+          flex flex-wrap
+          items-center
+          gap-x-4 gap-y-2
+          text-lg
+        "
+      >
+
+        <div class="flex items-center gap-2">
+          <span
+            class="
+              rounded
+              bg-[#476187]
+              px-2 py-1
+              font-semibold
+              text-white
+            "
+          >
+            연계기관
+          </span>
+
+          <strong class="font-semibold text-black">
+            해양경찰청
+          </strong>
+        </div>
+
+
+        <div class="flex items-center gap-2">
+          <span
+            class="
+              rounded
+              bg-[#476187]
+              px-2 py-1
+              font-semibold
+              text-white
+            "
+          >
+            수정일
+          </span>
+
+          <strong class="font-semibold text-black">
+            2026-08-11
+          </strong>
+        </div>
+
+
+        <div class="flex items-center gap-2">
+          <span
+            class="
+              rounded
+              bg-[#476187]
+              px-2 py-1
+              font-semibold
+              text-white
+            "
+          >
+            조회수
+          </span>
+
+          <strong class="font-semibold text-black">
+            2
+          </strong>
+        </div>
+
+
+        <div class="flex items-center gap-2">
+          <span
+            class="
+              rounded
+              bg-[#476187]
+              px-2 py-1
+              font-semibold
+              text-white
+            "
+          >
+            활용신청
+          </span>
+
+          <strong class="font-semibold text-black">
+            1
+          </strong>
+        </div>
+
+
+        <div class="flex items-center gap-2">
+          <span
+            class="
+              rounded
+              bg-[#476187]
+              px-2 py-1
+              font-semibold
+              text-white
+            "
+          >
+            관심
+          </span>
+
+          <strong class="font-semibold text-black">
+            0
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- ACTION -->
+      <div
+        class="
+          mt-9
+          flex items-center
+          justify-between
+        "
+      >
+
+        <div class="flex items-center gap-2">
+
+          <button
+            type="button"
+            class="
+              flex h-10
+              items-center justify-center
+              gap-2
+              rounded
+              border border-[#476187]
+              bg-white
+              px-4
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            <i data-lucide="heart" class="h-5 w-5"></i>
+            관심
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-10
+              items-center justify-center
+              gap-2
+              rounded
+              border border-[#476187]
+              bg-white
+              px-4
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            <i data-lucide="check" class="h-5 w-5"></i>
+            담기
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-10
+              items-center justify-center
+              gap-2
+              rounded
+              border border-[#476187]
+              bg-white
+              px-4
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            <i
+              data-lucide="triangle-alert"
+              class="h-5 w-5"
+            ></i>
+
+            품질신고
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-10
+              items-center justify-center
+              gap-2
+              rounded
+              border border-[#476187]
+              bg-white
+              px-4
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            <i
+              data-lucide="message-circle-warning"
+              class="h-5 w-5"
+            ></i>
+
+            오류신고·문의
+          </button>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="
+            flex h-10
+            items-center justify-center
+            gap-2
+            rounded
+            bg-[#0061F0]
+            px-5
+            text-base font-semibold
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="pen-line"
+            class="h-5 w-5"
+          ></i>
+
+          활용신청
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =================================================
+       CONTENT
+  ================================================== -->
+  <section
+   id="detailScrollArea"
+    class="
+      min-h-0
+      flex-1
+      overflow-y-auto
+      bg-white
+    "
+  >
+
+    <div
+      class="
+        mx-auto
+        max-w-[1300px]
+        px-6
+        pb-20
+        pt-10
+      "
+    >
+
+      <!-- ERROR CODE -->
+      <div class="mb-3 flex justify-end">
+
+        <button
+          type="button"
+          class="
+            flex h-10
+            items-center justify-center
+            gap-2
+            rounded
+            border border-[#CDD6E8]
+            bg-white
+            px-4
+            text-base font-semibold
+            text-[#142A4D]
+          "
+        >
+          <i
+            data-lucide="square-text"
+            class="h-5 w-5"
+          ></i>
+
+          오픈 API 에러코드
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           OPEN API INFO
+      ================================================== -->
+      <section>
+
+        <h2
+          class="
+            mb-4
+            text-[24px]
+            font-semibold
+            text-black
+          "
+        >
+          오픈 API 정보
+        </h2>
+
+
+        <div
+          class="
+            overflow-hidden
+            border-y
+            border-[#99ABC6]
+          "
+        >
+          <table
+            class="
+              w-full
+              table-fixed
+              border-collapse
+              text-base
+            "
+          >
+            <colgroup>
+              <col class="w-[18%]" />
+              <col class="w-[32%]" />
+              <col class="w-[18%]" />
+              <col class="w-[32%]" />
+            </colgroup>
+
+            <tbody>
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  분류체계
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  공간
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  제공기관
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  해양수산부
+                </td>
+              </tr>
+
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  제공부서
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  해양수산부
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  연계시스템
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  공공데이터포털
+                </td>
+              </tr>
+
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  API 유형
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  REST API
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  데이터포맷
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  XML(GML)
+                </td>
+              </tr>
+
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  인증
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  불필요
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  비용부과유무
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  무료
+                </td>
+              </tr>
+
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  신청가능 트래픽
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  -
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  업데이트 주기
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  -
+                </td>
+              </tr>
+
+
+              <tr class="border-b border-[#CDD6E8]">
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  심의유형
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  개발·운영 자동승인
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  활용신청
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  0
+                </td>
+              </tr>
+
+
+              <tr>
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  등록일
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  2026-08-26
+                </td>
+
+                <th
+                  class="
+                    bg-[#E1E7F2]
+                    px-4 py-3
+                    text-left font-semibold
+                    text-[#476187]
+                  "
+                >
+                  수정일
+                </th>
+
+                <td class="px-4 py-3 text-black">
+                  2026-08-26
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- =================================================
+          TAB
+      ================================================== -->
+      <div
+        class="
+          mt-6
+          flex
+          gap-1
+          border-b border-[#99ABC6]
+        "
+      >
+
+        <!-- 상세기능 : 비활성 / 클릭 안됨 -->
+        <div
+          class="
+            flex h-11
+            items-center justify-center
+            rounded-t
+            border-x border-t
+            border-[#99ABC6]
+            bg-white
+            px-6
+            text-base font-semibold
+            text-[#99ABC6]
+            cursor-default
+            select-none
+          "
+        >
+          상세기능
+        </div>
+
+
+        <!-- 보관기관 : 비활성 / 클릭 안됨 -->
+        <div
+          class="
+            flex h-11
+            items-center justify-center
+            rounded-t
+            border-x border-t
+            border-[#99ABC6]
+            bg-white
+            px-6
+            text-base font-semibold
+            text-[#99ABC6]
+            cursor-default
+            select-none
+          "
+        >
+          보관기관
+        </div>
+
+
+        <!-- 연관데이터 : 활성 -->
+        <div
+          class="
+            flex h-11
+            items-center justify-center
+            rounded-t
+            bg-[#0061F0]
+            px-6
+            text-base font-semibold
+            text-white
+            cursor-default
+            select-none
+          "
+        >
+          연관데이터
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+          RELATED DATA
+      ================================================== -->
+      <section class="pt-6">
+
+        <!-- TITLE -->
+        <h2
+          class="
+            text-[24px]
+            font-semibold
+            text-black
+          "
+        >
+          연관데이터
+        </h2>
+
+
+        <!-- DESCRIPTION -->
+        <p
+          class="
+            mt-1
+            text-lg
+            font-semibold
+            text-[#476187]
+          "
+        >
+          이 데이터와 키워드를 공유하는 데이터입니다.
+        </p>
+
+
+        <!-- RELATED DATA ITEM -->
+        <div
+          class="
+            mt-5
+            rounded
+            border border-[#99ABC6]
+            bg-white
+            px-4 py-3
+          "
+        >
+
+          <!-- KEYWORD INFO -->
+          <div
+            class="
+              mb-2
+              flex items-center
+              gap-2
+            "
+          >
+
+            <span
+              class="
+                inline-flex h-7
+                items-center justify-center
+                rounded-full
+                bg-[#0061F0]
+                px-3
+                text-sm font-semibold
+                text-white
+              "
+            >
+              선박
+            </span>
+
+
+            <span
+              class="
+                text-base
+                font-semibold
+                text-[#0061F0]
+              "
+            >
+              키워드 2개 공유
+            </span>
+
+          </div>
+
+
+          <!-- RELATED DATA TITLE -->
+          <strong
+            class="
+              block
+              text-lg
+              font-semibold
+              text-black
+            "
+          >
+            선박 종합 스크리닝 정보(사고/제재/위험지표/변경이력)
+          </strong>
+
+        </div>
+
+      </section>
+    </main>
+    
+
+
+    <!-- =====================================================
+         CHATBOT FLOATING BUTTON
+    ====================================================== -->
+    <button
+      class="
+    fixed bottom-6 right-6
+    z-50
+    h-14 w-14
+    rounded-full
+    bg-transparent
+    shadow-none
+  "
+>
+      <img
+    src="./img/chat-bot.png"
+    alt="AI 챗봇"
+    class="
+      block
+      h-full w-full
+      rounded-full
+      object-cover
+      mix-blend-multiply
+      drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
+    "
+  />
+    </button>
+
+  </div>
+
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/hub-common.js"></script>
+
+  <script>
+  const detailHero =
+    document.getElementById("detailHero");
+
+  const detailScrollArea =
+    document.getElementById("detailScrollArea");
+
+  if (detailHero && detailScrollArea) {
+
+    const updateHeroShadow = () => {
+
+      if (detailScrollArea.scrollTop > 4) {
+        detailHero.style.boxShadow =
+          "0 10px 16px -14px rgba(20, 42, 77, 0.45)";
+      } else {
+        detailHero.style.boxShadow = "none";
+      }
+
+    };
+
+    detailScrollArea.addEventListener(
+      "scroll",
+      updateHeroShadow,
+      { passive: true }
+    );
+
+    updateHeroShadow();
+  }
+</script>
+
+</body>
+</html>

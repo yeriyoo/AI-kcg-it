@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>AIS신호탐지</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        
+        <!-- =====================================
+            AI분석알고리즘
+        ====================================== -->
+
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="ship-wheel"
+              class="h-[17px] w-[17px]"
+              aria-hidden="true"></i>
+            AI분석알고리즘
+          </div>
+
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar-submenu">
+
+          <a class="nav-item">
+            <i data-lucide="eye-off" aria-hidden="true"></i>
+            <span>불법어선 / Dark Vessel</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>중국어선 분석</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>환적 의심 탐지</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="link" aria-hidden="true"></i>
+            <span>어업형태별 탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>어구 위반 종합</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="git-compare" aria-hidden="true"></i>
+            <span>어구·선박 상관점수</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag" aria-hidden="true"></i>
+            <span>모선 추론</span>
+            <small>SFR-10·09-04</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="satellite" aria-hidden="true"></i>
+            <span>AIS신호탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search" aria-hidden="true"></i>
+            <span>불법선박위험해역</span>
+            <small>SFR-09·10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="fish" aria-hidden="true"></i>
+            <span>물고기 탐지</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-orange">기술협상</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waypoints" aria-hidden="true"></i>
+            <span>공급망그래프</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>중국항만</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="chart-no-axes-column" aria-hidden="true"></i>
+            <span>중국어시장물가</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            <span>중국선단관계분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="gavel" aria-hidden="true"></i>
+            <span>중국선박제재</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="box" aria-hidden="true"></i>
+            <span>위험 큐브</span>
+            <small>SFR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="trending-up" aria-hidden="true"></i>
+            <span>위험도 추이·이력</span>
+            <small>SFR-05-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="target" aria-hidden="true"></i>
+            <span>단속 우선지역 추천</span>
+            <small>SFR-06-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waves" aria-hidden="true"></i>
+            <span>괭생이모자반</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-blue">부가</em>
+          </a>
+
+        </div>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">AIS신호탐지</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+     <main
+        id="mainContent"
+        class="china-vessel-page ais-signal-page"
+        tabindex="-1"
+      >
+
+        <!-- =====================================
+            페이지 제목
+        ====================================== -->
+        <div class="cv-page-heading">
+          <div class="cv-title-group">
+
+            <i data-lucide="satellite" aria-hidden="true"></i>
+
+            <h1>AIS신호탐지</h1>
+
+            <span class="cv-title-divider" aria-hidden="true"></span>
+
+            <p>
+              SNPDB(AIS 원본 데이터베이스) 정합성 검토 –
+              5종 품질 저해된 AIS의 미송신·간헐송신·MMSI 조작,
+              항적↔AIS 시공간 불일치·누락·중복·어구AIS 정합성 (SFR-10)
+            </p>
+
+          </div>
+        </div>
+
+        <!-- =====================================
+            탭
+        ====================================== -->
+        <nav class="cv-tabs" aria-label="AIS신호탐지 메뉴">
+
+          <button
+            type="button"
+            class="cv-tab active"
+            data-cv-tab="overview"
+            aria-current="page"
+          >
+            개요
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="signal"
+          >
+            신호 의심
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="procedure"
+          >
+            절차
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="reference"
+          >
+            참고자료
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="result"
+          >
+            학습 결과
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="analysis"
+          >
+            분석
+          </button>
+
+          <button
+            type="button"
+            class="cv-tab"
+            data-cv-tab="evaluation"
+          >
+            성능·평가
+          </button>
+
+        </nav>
+
+        <!-- =====================================
+            콘텐츠
+        ====================================== -->
+        <div class="cv-content">
+
+          <!-- 개요 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="overview"
+          >
+
+            <!-- =====================================
+                목적
+            ====================================== -->
+            <article class="cv-card ais-purpose-card">
+
+              <div class="cv-card-heading">
+                <i data-lucide="shield-check" aria-hidden="true"></i>
+                <h2>목적</h2>
+              </div>
+
+              <div class="ais-purpose-description">
+                AIS는 자기신고(self-reported) 신호로
+                <strong>누락·왜곡·위조</strong>가 상존한다.
+                오염된 AIS를 그대로 학습에 투입하면 탐지 모델이 편향된다.
+                본 화면은 학습 데이터로 투입되기 전 AIS의
+                <strong>정합성(무결성)을 검토하고 신뢰도 등급을 부여</strong>해,
+                불법조업 탐지·모선 추론 학습셋의 품질을 보장한다.
+              </div>
+
+              <div class="ais-requirements">
+
+                <div class="ais-requirements-header">
+                  <h3>근거 요구사항</h3>
+                  <span class="ais-requirement-badge">SFR-10</span>
+                </div>
+
+                <dl class="ais-requirements-list">
+
+                  <div>
+                    <dt>원본 DB</dt>
+                    <dd>SNPDB — AIS 원본 데이터베이스 (5종 품질 저해)</dd>
+                  </div>
+
+                  <div>
+                    <dt>수집 규모(예)</dt>
+                    <dd>SNPDB 내 AIS 6h 3,027,373 포인트 / 12,507척</dd>
+                  </div>
+
+                  <div>
+                    <dt>분석 검증 지표</dt>
+                    <dd>kcgaihd (prediction → 5종 품질 write)</dd>
+                  </div>
+
+                  <div>
+                    <dt>산출</dt>
+                    <dd>레코드/구간별 신뢰도 등급 · 이상 유형 라벨 → 학습셋 필터</dd>
+                  </div>
+
+                  <div>
+                    <dt>연계</dt>
+                    <dd>모선 추론 · 어구 탐지 · 다크베슬 탐지 전처리 게이트</dd>
+                  </div>
+
+                </dl>
+
+              </div>
+
+            </article>
+
+            <!-- =====================================
+                반드시 반영되는 3대 분석 축
+            ====================================== -->
+            <div class="ais-section-title">
+              반드시 반영되는 3대 분석 축
+            </div>
+
+            <div class="ais-analysis-grid">
+
+              <!-- 1. 데이터 정합성 -->
+              <article class="cv-card ais-analysis-card">
+
+                <div class="cv-card-heading">
+                  <span class="ais-analysis-number">1</span>
+                  <i data-lucide="database" aria-hidden="true"></i>
+                  <h2>데이터 정합성</h2>
+                </div>
+
+                <p>
+                  송신 자체의 결함 — 신호가 없거나(off),
+                  끊기거나(intermittent), 식별정보가 위조된 경우.
+                </p>
+
+                <ul>
+                  <li>
+                    미송신: AIS off 구간(의도적 소등 vs 수신 음영 구분)
+                  </li>
+                  <li>
+                    간헐송신: 불규칙 on-off 스위칭 · 저빈도 수신
+                  </li>
+                  <li>
+                    MMSI 비정상·조작: 잘못된 MID · 중복 · 순간이동 위조
+                  </li>
+                </ul>
+
+              </article>
+
+              <!-- 2. 항적 ↔ AIS 정합성 -->
+              <article class="cv-card ais-analysis-card">
+
+                <div class="cv-card-heading">
+                  <span class="ais-analysis-number">2</span>
+                  <i data-lucide="route" aria-hidden="true"></i>
+                  <h2>항적 ↔ AIS 정합성</h2>
+                </div>
+
+                <p>
+                  항적과 AIS 데이터 간 시공간적 불일치·누락·중복을
+                  분석하고 신뢰도 수준을 분류.
+                </p>
+
+                <ul>
+                  <li>
+                    시공간 불일치: 보간 항적 대비 위치·시간 편차
+                  </li>
+                  <li>
+                    누락: 위치보고 주기 기준 결측 구간(gap) 검출
+                  </li>
+                  <li>
+                    중복: 동일 시각·좌표 중복 레코드 제거
+                  </li>
+                  <li>
+                    → 신뢰도 등급(A 신뢰 / B 주의 / C 배제) 분류
+                  </li>
+                </ul>
+
+              </article>
+
+              <!-- 3. 어구AIS 정합성 -->
+              <article class="cv-card ais-analysis-card">
+
+                <div class="cv-card-heading">
+                  <span class="ais-analysis-number">3</span>
+                  <i data-lucide="anchor" aria-hidden="true"></i>
+                  <h2>어구AIS 정합성</h2>
+                </div>
+
+                <p>
+                  MMSI 조작 가능성을 전제로,
+                  어구 부이(net marker) AIS의 정합성을
+                  정량적으로 검토.
+                </p>
+
+                <ul>
+                  <li>
+                    동일 위치 반복출현(고정 부이 클러스터링)
+                  </li>
+                  <li>
+                    출현·소실 주기(투·양망 사이클 규칙성)
+                  </li>
+                  <li>
+                    선박 접근·이탈과의 시간적 연관성
+                  </li>
+                </ul>
+
+              </article>
+
+            </div>
+
+            <!-- =====================================
+                AIS 데이터 품질 이슈 분류
+            ====================================== -->
+            <article class="cv-card ais-quality-card">
+
+              <div class="cv-card-heading">
+                <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                <h2>AIS 데이터 품질 이슈 분류</h2>
+              </div>
+
+              <div class="ais-table-scroll">
+
+                <table class="ais-quality-table">
+
+                  <thead>
+                    <tr>
+                      <th scope="col">유형</th>
+                      <th scope="col">현상</th>
+                      <th scope="col">오탐/누락 위험</th>
+                      <th scope="col">판정 접근</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr>
+                      <td>
+                        <span class="ais-type-label">
+                          <i data-lucide="eye-off" aria-hidden="true"></i>
+                          미송신
+                        </span>
+                      </td>
+                      <td>AIS 신호 부재(off) 구간</td>
+                      <td>조업 오탐(다크) 미탐 ↔ 수신 음영을 음영으로 오탐</td>
+                      <td>gap 길이·직전 속도·수신국 커버리지 교차</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <span class="ais-type-label">
+                          <i data-lucide="radio" aria-hidden="true"></i>
+                          간헐송신
+                        </span>
+                      </td>
+                      <td>불규칙 on-off, 저빈도 위치보고</td>
+                      <td>항적 단절 → 특정행동 왜곡</td>
+                      <td>보고 주기 편차·on-off 전환 빈도 이상탐지</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <span class="ais-type-label">
+                          <i data-lucide="fingerprint" aria-hidden="true"></i>
+                          MMSI 조작
+                        </span>
+                      </td>
+                      <td>위조·중복·MID 불일치 식별정보</td>
+                      <td>식별 오염 → 동일선박 분산/타선박 병합</td>
+                      <td>MMSI 유효성·순간이동·정적정보 관련 탐지</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <span class="ais-type-label">
+                          <i data-lucide="copy" aria-hidden="true"></i>
+                          불일치·누락·중복
+                        </span>
+                      </td>
+                      <td>항적과 좌표/시각 불일치, 결측, 중복</td>
+                      <td>학습 라벨 정합성 저하</td>
+                      <td>항적 보간 대비 편차 · 결측/중복 규칙</td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </article>
+
+          </section>
+
+          <!-- 신호 의심 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="signal"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>신호 의심</h2>
+              <p class="cv-placeholder">신호 의심 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+          <!-- 절차 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="procedure"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>절차</h2>
+              <p class="cv-placeholder">절차 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+          <!-- 참고자료 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="reference"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>참고자료</h2>
+              <p class="cv-placeholder">참고자료 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+          <!-- 학습 결과 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="result"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>학습 결과</h2>
+              <p class="cv-placeholder">학습 결과 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+          <!-- 분석 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="analysis"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>분석</h2>
+              <p class="cv-placeholder">분석 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+          <!-- 성능·평가 -->
+          <section
+            class="cv-tab-panel"
+            data-cv-panel="evaluation"
+            hidden
+          >
+            <article class="cv-card">
+              <h2>성능·평가</h2>
+              <p class="cv-placeholder">성능·평가 콘텐츠 영역입니다.</p>
+            </article>
+          </section>
+
+        </div>
+
+      </main>
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

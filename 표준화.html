@@ -1,0 +1,2038 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI-HUB - 표준화</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- Common CSS -->
+  <link
+    rel="stylesheet"
+    href="./css/hub-common.css"
+  />
+    <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+
+</head>
+
+
+<body
+  class="
+    linked-data-page
+    min-w-[1280px]
+    bg-white
+    font-['Pretendard']
+    text-[#142A4D]
+  "
+>
+
+  <div class="min-h-screen">
+
+
+    <!-- =====================================================
+        TOP NAVIGATION
+    ====================================================== -->
+    <header
+      class="
+        header-shell
+        fixed
+        left-0 top-0 right-0
+        z-50
+        flex h-[60px] shrink-0
+        items-center
+        border-b border-[#476187]
+        px-8
+      "
+    >
+
+  <!-- =====================================================
+       LOGO
+  ====================================================== -->
+  <h1
+    class="
+      mr-20
+      flex shrink-0
+      items-center gap-2
+      text-[24px] font-semibold
+      text-white
+    "
+  >
+    <span
+      class="
+        flex h-8 w-8
+        items-center justify-center
+        rounded-full
+      "
+    >
+      <img
+      src="./img/logo.svg"
+      alt="AI-HUB"
+      class="
+        h-8 w-8
+        shrink-0
+        object-contain
+      "
+    />
+
+    </span>
+
+    AI-HUB
+  </h1>
+
+
+  <!-- =====================================================
+       MAIN MENU
+  ====================================================== -->
+  <nav
+    id="mainHeaderNav"
+    class="flex h-full items-center gap-10"
+    aria-label="주요 메뉴"
+  >
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="scroll-text"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 목록
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="workflow"
+        class="h-6 w-6"
+      ></i>
+
+      연계 데이터
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="file-pen"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 제공신청
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+    >
+      <i
+        data-lucide="book-bookmark"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 출처
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        active
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+      aria-current="page"
+    >
+      <i
+        data-lucide="file-cog"
+        class="h-6 w-6"
+      ></i>
+
+      표준화
+      <span
+        class="
+          absolute inset-x-0 bottom-2
+          h-[4px]
+          bg-[#0061F0]
+        "
+      ></span>
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       HEADER UTILITY
+  ====================================================== -->
+  <div class="ml-auto shrink-0">
+
+
+    <!-- =================================================
+         DESKTOP / 1651px 이상
+    ================================================== -->
+    <div
+      id="headerUtilityDesktop"
+      class="flex items-center gap-3"
+    >
+
+      <!-- Time -->
+      <span
+        class="
+          whitespace-nowrap
+          text-lg font-medium
+          text-white
+        "
+      >
+        11:43:50 KST
+      </span>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- Download -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="다운로드"
+      >
+        <i
+          data-lucide="download"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- App -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="메뉴"
+      >
+        <i
+          data-lucide="grid-3x3"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Print -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="인쇄"
+      >
+        <i
+          data-lucide="printer"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          relative
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="shopping-cart"
+          class="h-5 w-5"
+        ></i>
+
+        <span
+          class="
+            absolute right-0 top-0
+            flex h-[16px] min-w-[16px]
+            items-center justify-center
+            rounded-full
+            bg-[#F84141]
+            px-1
+            text-[10px] font-semibold
+            leading-none
+            text-white
+          "
+        >
+          2
+        </span>
+      </button>
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="bell"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Theme -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="화면 모드"
+      >
+        <i
+          data-lucide="moon"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- User -->
+      <button
+        id="userMenuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        class="
+          flex items-center gap-2
+          text-[#E7F7FF]
+          hover:text-white
+        "
+      >
+        <span
+          class="
+            flex h-7 w-7
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <span class="whitespace-nowrap text-base">
+          여한상 (경위)
+        </span>
+      </button>
+
+    </div>
+
+    <!-- =================================================
+        COMPACT / 1650px 이하
+    ================================================== -->
+    <div
+      id="headerUtilityCompact"
+      class="relative hidden"
+    >
+
+      <button
+        id="headerUtilityToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        aria-label="계정 메뉴"
+        class="
+          flex h-10 w-10
+          items-center justify-center
+          rounded
+          text-white
+          hover:bg-[#476187]
+          hover:text-white
+        "
+      >
+        <i
+          data-lucide="menu"
+          class="h-6 w-6"
+        ></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+    <!-- =====================================================
+     USER MENU
+     1650px 이하 / 260 x 372
+    ====================================================== -->
+    <div
+      id="userMenu"
+      class="
+        fixed right-[28px] top-[50px]
+        z-[300]
+        hidden
+        h-[400px] w-[260px]
+        overflow-hidden
+        rounded
+        border border-[#476187]
+        bg-[#142A4D]
+        shadow-2xl
+      "
+    >
+
+    <nav
+      id="mobileMainNav"
+      class="hidden"
+      aria-label="모바일 주요 메뉴"
+    ></nav>
+
+
+      <!-- CURRENT TIME -->
+      <div
+        class="
+          flex h-[64px]
+          flex-col justify-center
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            text-base
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+        <strong
+          id="accountCurrentTime"
+          class="
+            mt-1
+            text-base
+            font-medium
+            text-white
+          "
+        >
+          2026-10-06 15:48:55
+        </strong>
+      </div>
+
+
+      <!-- TIMEZONE -->
+      <div
+        class="
+          flex h-[48px]
+          items-center justify-between
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span class="text-base text-[#99ABC6]">
+          시간대
+        </span>
+
+        <div
+          class="
+            flex h-7
+            overflow-hidden
+            rounded
+            bg-[#476187]
+          "
+        >
+          <button
+            id="timezoneKst"
+            type="button"
+            data-timezone="Asia/Seoul"
+            class="
+              timezone-button active
+              flex min-w-[44px]
+              items-center justify-center
+              bg-white
+              px-3
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            KST
+          </button>
+
+          <button
+            id="timezoneUtc"
+            type="button"
+            data-timezone="UTC"
+            class="
+              timezone-button
+              flex min-w-[44px]
+              items-center justify-center
+              bg-[#476187]
+              px-3
+              text-base font-semibold
+              text-[#CBD6EA]
+            "
+          >
+            UTC
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOOLS -->
+      <div
+        class="
+          grid
+          grid-cols-3
+          border-b border-[#476187]
+        "
+      >
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다운로드
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            엑셀
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            인쇄
+          </span>
+        </button>
+
+         <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <span class="relative">
+            <i
+              data-lucide="shopping-cart"
+              class="h-5 w-5"
+            ></i>
+
+            <span
+              class="
+                absolute -right-2 -top-2
+                flex h-4 min-w-4
+                items-center justify-center
+                rounded-full
+                bg-[#F84141]
+                px-1
+                text-[10px] font-semibold
+                leading-none text-white
+              "
+            >
+              2
+            </span>
+          </span>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            알림
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다크모드
+          </span>
+        </button>
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <div
+        class="
+          flex h-[52px]
+          items-center gap-3
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            flex h-8 w-8
+            shrink-0
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <strong
+          class="
+            truncate
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+      </div>
+
+
+      <!-- ACCOUNT MENU -->
+      <div
+        class="
+          h-[100px]
+          px-3 py-2
+        "
+      >
+    
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>내 정보</span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>로그아웃</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+        MAIN
+    ====================================================== -->
+    <main
+      class="
+        min-h-screen
+        bg-white
+        pt-[60px]
+      "
+    >
+
+      <!-- =================================================
+          PAGE INFO
+      ================================================== -->
+      <section class="bg-white">
+
+        <div
+          class="
+            mx-auto
+            flex h-[68px]
+            max-w-[1300px]
+            items-center
+            px-6
+          "
+        >
+
+          <div class="flex items-center gap-3">
+
+            <div class="flex items-center gap-2">
+
+              <i
+                data-lucide="file-check-2"
+                class="h-6 w-6 text-black"
+              ></i>
+
+              <h1
+                class="
+                  text-lg
+                  font-semibold
+                  text-black
+                "
+              >
+                데이터 표준화
+              </h1>
+
+            </div>
+
+            <p
+              class="
+                text-base
+                font-medium
+                text-[#476187]
+              "
+            >
+              「공공데이터베이스 표준화 관리 매뉴얼」(행정안전부·NIA, 2026.4)
+              기준 — 공통표준(용어·단어·도메인·코드)과 메타데이터 표준 관리항목을 안내합니다.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+          CONTENT
+      ================================================== -->
+      <section>
+
+        <div
+          class="
+            mx-auto
+            max-w-[1300px]
+            px-6
+            pb-20
+            pt-8
+          "
+        >
+
+          <!-- =================================================
+              TOP ACTION
+          ================================================== -->
+          <div
+            class="
+              relative z-30
+              flex
+              items-center
+              justify-between
+            "
+          >
+
+            <!-- LEFT BUTTONS -->
+            <div
+              class="
+                flex
+                items-center
+                gap-2
+              "
+            >
+
+              <!-- 개념도 -->
+              <div class="relative">
+
+                <button
+                  id="standardConceptButton"
+                  type="button"
+                  class="
+                    flex h-[42px]
+                    items-center justify-center
+                    gap-2
+                    rounded
+                    border border-[#99ABC6]
+                    bg-white
+                    px-4
+                    text-base font-semibold
+                    text-black
+                  "
+                >
+                  <i
+                    data-lucide="panels-top-left"
+                    class="h-5 w-5"
+                  ></i>
+
+                  표준 구성 개념도
+                </button>
+
+
+                <!-- CONCEPT POPOVER -->
+                <div
+                  id="standardConceptPopover"
+                  class="
+                    absolute
+                    left-0 top-[50px]
+                    z-[100]
+                    hidden
+                    w-[680px]
+                    rounded
+                    border border-[#476187]
+                    bg-white
+                    p-4
+                    shadow-[0_10px_24px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <!-- TOP 3 -->
+                  <div
+                    class="
+                      grid
+                      grid-cols-[1fr_32px_1fr_32px_1fr]
+                      items-stretch
+                    "
+                  >
+
+                    <!-- 표준단어 -->
+                    <div
+                      class="
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-[#F2F6FF]
+                        p-4
+                      "
+                    >
+
+                      <div
+                        class="
+                          mb-2
+                          flex items-center
+                          gap-2
+                          text-base font-semibold
+                          text-black
+                        "
+                      >
+                        <i
+                          data-lucide="type"
+                          class="h-5 w-5"
+                        ></i>
+
+                        표준단어
+                      </div>
+
+                      <p
+                        class="
+                          text-sm
+                          leading-5
+                          text-[#476187]
+                        "
+                      >
+                        용어를 구성하는 최소 의미 단위,
+                        영문약어와 함께 관리
+                      </p>
+
+                      <p
+                        class="
+                          mt-2
+                          text-sm
+                          text-[#476187]
+                        "
+                      >
+                        예) 선박(VSL), 항적(TRACK), 식별번호(ID)
+                      </p>
+
+                    </div>
+
+
+                    <div
+                      class="
+                        flex
+                        items-center justify-center
+                        text-[24px]
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      +
+                    </div>
+
+
+                    <!-- 표준도메인 -->
+                    <div
+                      class="
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-[#F2F6FF]
+                        p-4
+                      "
+                    >
+
+                      <div
+                        class="
+                          mb-2
+                          flex items-center
+                          gap-2
+                          text-base font-semibold
+                          text-black
+                        "
+                      >
+                        <i
+                          data-lucide="chart-column"
+                          class="h-5 w-5"
+                        ></i>
+
+                        표준도메인
+                      </div>
+
+                      <p
+                        class="
+                          text-sm
+                          leading-5
+                          text-[#476187]
+                        "
+                      >
+                        데이터 타입·길이·허용값을 정의하는
+                        표준 데이터 형식
+                      </p>
+
+                      <p
+                        class="
+                          mt-2
+                          text-sm
+                          text-[#476187]
+                        "
+                      >
+                        예) 명칭(VARCHAR(100)), 식별번호(BIGINT), 일자(DATE)
+                      </p>
+
+                    </div>
+
+
+                    <div
+                      class="
+                        flex
+                        items-center justify-center
+                        text-[24px]
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      =
+                    </div>
+
+
+                    <!-- 표준용어 -->
+                    <div
+                      class="
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-[#F2F6FF]
+                        p-4
+                      "
+                    >
+
+                      <div
+                        class="
+                          mb-2
+                          flex items-center
+                          gap-2
+                          text-base font-semibold
+                          text-black
+                        "
+                      >
+                        <i
+                          data-lucide="book-open"
+                          class="h-5 w-5"
+                        ></i>
+
+                        표준용어
+                      </div>
+
+                      <p
+                        class="
+                          text-sm
+                          leading-5
+                          text-[#476187]
+                        "
+                      >
+                        단어 + 도메인의 결합으로 정의되는
+                        컬럼명·속성명
+                      </p>
+
+                      <p
+                        class="
+                          mt-2
+                          text-sm
+                          text-[#476187]
+                        "
+                      >
+                        예) 선박식별번호 = 선박(VSL)+식별번호(ID): BIGINT
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- 표준코드 -->
+                  <div
+                    class="
+                      mt-4
+                      rounded
+                      border border-[#B8D3AA]
+                      bg-[#EAF4E6]
+                      p-4
+                    "
+                  >
+
+                    <div
+                      class="
+                        mb-1
+                        flex items-center
+                        gap-2
+                        text-base font-semibold
+                        text-black
+                      "
+                    >
+                      <i
+                        data-lucide="square-code"
+                        class="h-5 w-5"
+                      ></i>
+
+                      표준코드
+                    </div>
+
+                    <p
+                      class="
+                        text-sm
+                        leading-5
+                        text-[#476187]
+                      "
+                    >
+                      2개 이상 DB에서 공통으로 쓰이는 코드값 표준
+                    </p>
+
+                    <p
+                      class="
+                        mt-1
+                        text-sm
+                        text-[#476187]
+                      "
+                    >
+                      예) DBMS종류, 공개여부, 발생주기, 비공개사유
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- 필수 관리항목 -->
+              <div class="relative">
+
+                <button
+                  id="requiredItemButton"
+                  type="button"
+                  class="
+                    flex h-[42px]
+                    items-center justify-center
+                    gap-2
+                    rounded
+                    border border-[#99ABC6]
+                    bg-white
+                    px-4
+                    text-base font-semibold
+                    text-black
+                  "
+                >
+                  <i
+                    data-lucide="clipboard-check"
+                    class="h-5 w-5"
+                  ></i>
+
+                  필수 관리항목
+                </button>
+
+
+                <!-- REQUIRED POPOVER -->
+                <div
+                  id="requiredItemPopover"
+                  class="
+                    absolute
+                    left-0 top-[50px]
+                    z-[100]
+                    hidden
+                    w-[610px]
+                    overflow-hidden
+                    rounded
+                    border border-[#476187]
+                    bg-white
+                    shadow-[0_10px_24px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <div
+                    class="
+                      flex h-[42px]
+                      items-center
+                      bg-[#0053B8]
+                      px-4
+                      text-base font-semibold
+                      text-white
+                    "
+                  >
+                    필수 관리항목 (매뉴얼 IV·V장)
+                  </div>
+
+
+                  <div class="p-4">
+
+                    <table
+                      class="
+                        w-full
+                        border-collapse
+                        text-sm
+                      "
+                    >
+
+                      <thead>
+
+                        <tr
+                          class="
+                            bg-[#F2F2F2]
+                            text-[#476187]
+                          "
+                        >
+                          <th
+                            class="
+                              w-[110px]
+                              px-3 py-2
+                              text-left
+                              font-semibold
+                            "
+                          >
+                            표준 유형
+                          </th>
+
+                          <th
+                            class="
+                              px-3 py-2
+                              text-left
+                              font-semibold
+                            "
+                          >
+                            필수 관리항목
+                          </th>
+                        </tr>
+
+                      </thead>
+
+
+                      <tbody class="text-black">
+
+                        <tr class="border-b border-[#CDD6E8]">
+                          <th class="px-3 py-3 text-left">
+                            표준 용어
+                          </th>
+                          <td class="px-3 py-3">
+                            표준용어명, 영문용어명, 용어설명,
+                            표준도메인명, 제정일자
+                          </td>
+                        </tr>
+
+
+                        <tr class="border-b border-[#CDD6E8]">
+                          <th class="px-3 py-3 text-left">
+                            표준단어
+                          </th>
+                          <td class="px-3 py-3">
+                            표준단어명, 단어영문명, 단어영문약어명,
+                            단어설명, 형식단어여부, 도메인분류명, 제정일자
+                          </td>
+                        </tr>
+
+
+                        <tr class="border-b border-[#CDD6E8]">
+                          <th class="px-3 py-3 text-left">
+                            표준도메인
+                          </th>
+                          <td class="px-3 py-3">
+                            도메인분류명, 도메인명, 도메인설명,
+                            데이터타입, 데이터길이, 허용값, 제정일자
+                          </td>
+                        </tr>
+
+
+                        <tr>
+                          <th class="px-3 py-3 text-left">
+                            표준코드
+                          </th>
+                          <td class="px-3 py-3">
+                            한글코드명, 영문코드명, 코드설명,
+                            코드값, 코드값의미, 제정일자
+                          </td>
+                        </tr>
+
+                      </tbody>
+
+                    </table>
+
+
+                    <p
+                      class="
+                        mt-3
+                        text-xs
+                        text-[#476187]
+                      "
+                    >
+                      ※ 출처: 행정안전부·한국지능정보사회진흥원(NIA),
+                      「공공데이터베이스 표준화 관리 매뉴얼」(2026.4) IV·V장.
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- 관리 매뉴얼 -->
+              <button
+                type="button"
+                class="
+                  flex h-[42px]
+                  items-center justify-center
+                  gap-2
+                  rounded
+                  border border-[#99ABC6]
+                  bg-white
+                  px-4
+                  text-base font-semibold
+                  text-black
+                "
+              >
+                <i
+                  data-lucide="file-text"
+                  class="h-5 w-5"
+                ></i>
+
+                관리 매뉴얼(2026.4)
+              </button>
+
+            </div>
+
+
+            <!-- RIGHT BUTTONS -->
+            <div
+              class="
+                flex
+                items-center
+                gap-2
+              "
+            >
+
+              <button
+                type="button"
+                class="
+                  flex h-[42px]
+                  items-center justify-center
+                  gap-2
+                  rounded
+                  border border-[#99ABC6]
+                  bg-white
+                  px-4
+                  text-base font-semibold
+                  text-black
+                "
+              >
+                <i
+                  data-lucide="download"
+                  class="h-5 w-5"
+                ></i>
+
+                표준사전 다운로드
+              </button>
+
+
+              <button
+                type="button"
+                class="
+                  flex h-[42px]
+                  items-center justify-center
+                  rounded
+                  bg-[#0061F0]
+                  px-5
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                등록신청
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+              MAIN TABS
+          ================================================== -->
+          <div
+            id="standardTabs"
+            class="
+              mt-8
+              grid
+              h-[52px]
+              grid-cols-6
+              overflow-hidden
+              rounded
+              bg-[#E1E7F2]
+            "
+          >
+
+            <button
+              type="button"
+              data-standard-tab="term"
+              class="standard-main-tab
+              active
+              "
+            >
+              표준용어 (14,919)
+            </button>
+
+            <button
+              type="button"
+              data-standard-tab="word"
+              class="
+                standard-main-tab
+              "
+            >
+              표준단어 (3,661)
+            </button>
+
+            <button
+              type="button"
+              data-standard-tab="domain"
+              class="standard-main-tab"
+            >
+              표준도메인 (338)
+            </button>
+
+            <button
+              type="button"
+              data-standard-tab="code"
+              class="standard-main-tab"
+            >
+              표준코드 (160)
+            </button>
+
+            <button
+              type="button"
+              data-standard-tab="meta"
+              class="standard-main-tab"
+            >
+              메타항목정의 (51)
+            </button>
+
+            <button
+              type="button"
+              data-standard-tab="catalog"
+              class="standard-main-tab"
+            >
+              메타데이터 카탈로그 (0)
+            </button>
+
+          </div>
+
+
+          <!-- =================================================
+              SEARCH
+          ================================================== -->
+          <div
+            class="
+              mt-5
+              flex
+              items-center
+              gap-4
+            "
+          >
+
+            <input
+              type="text"
+              placeholder="명칭·설명·영문으로 검색"
+              class="
+                h-[44px]
+                min-w-0
+                flex-1
+                rounded
+                border border-[#476187]
+                bg-white
+                px-4
+                text-base
+                text-black
+                placeholder:text-[#99ABC6]
+                outline-none
+              "
+            />
+
+
+            <button
+              type="button"
+              class="
+                flex h-[44px]
+                items-center justify-center
+                gap-2
+                rounded
+                bg-[#0061F0]
+                px-5
+                text-base font-semibold
+                text-white
+              "
+            >
+              <i
+                data-lucide="search"
+                class="h-5 w-5"
+              ></i>
+
+              검색
+            </button>
+
+          </div>
+
+
+          <!-- 메타데이터 카탈로그 하위 탭 -->
+          <div
+            id="catalogSubTabs"
+            class="hidden w-full border-b border-[#99ABC6] mt-6"
+          >
+            <div class="flex items-end gap-1">
+
+              <button
+                type="button"
+                class="
+                  catalog-sub-tab active
+                  flex h-[40px] w-[120px]
+                  items-center justify-center
+                  rounded-t
+                  bg-[#0061F0]
+                  text-base font-semibold text-white
+                "
+                data-catalog-tab="all"
+              >
+                전체
+              </button>
+
+              <button
+                type="button"
+                class="
+                  catalog-sub-tab
+                  flex h-[40px] w-[120px]
+                  items-center justify-center
+                  rounded-t
+                  border border-b-0 border-[#99ABC6]
+                  bg-white
+                  text-base font-semibold text-[#99ABC6]
+                "
+                data-catalog-tab="system"
+              >
+                정보시스템
+              </button>
+
+              <button
+              type="button"
+              class="
+                catalog-sub-tab
+                flex h-[40px] w-[130px] shrink-0
+                items-center justify-center
+                whitespace-nowrap
+                rounded-t
+                border border-b-0 border-[#99ABC6]
+                bg-white
+                text-base font-semibold text-[#99ABC6]
+              "
+              data-catalog-tab="database"
+            >
+              데이터베이스
+            </button>
+
+              <button
+                type="button"
+                class="
+                  catalog-sub-tab
+                  flex h-[40px] w-[120px]
+                  items-center justify-center
+                  rounded-t
+                  border border-b-0 border-[#99ABC6]
+                  bg-white
+                  text-base font-semibold text-[#99ABC6]
+                "
+                data-catalog-tab="table"
+              >
+                테이블
+              </button>
+
+              <button
+                type="button"
+                class="
+                  catalog-sub-tab
+                  flex h-[40px] w-[120px]
+                  items-center justify-center
+                  rounded-t
+                  border border-b-0 border-[#99ABC6]
+                  bg-white
+                  text-base font-semibold text-[#99ABC6]
+                "
+                data-catalog-tab="column"
+              >
+                컬럼
+              </button>
+
+            </div>
+</div>
+
+
+          <!-- =================================================
+              COUNT / SORT
+          ================================================== -->
+          <div
+            class="
+              mt-5
+              flex
+              items-center
+              justify-between
+            "
+          >
+
+            <strong
+              id="standardTotalCount"
+              class="
+                text-lg
+                font-semibold
+                text-black
+              "
+            >
+              총 3,661건
+            </strong>
+
+
+            <div
+              class="
+                flex
+                items-center
+                gap-2
+              "
+            >
+
+              <!-- SORT -->
+              <div
+                class="
+                  relative
+                  w-[100px]
+                "
+                data-std-dropdown
+              >
+
+                <button
+                  type="button"
+                  id="standardSortButton"
+                  class="
+                    std-dropdown-trigger
+                    flex h-[40px]
+                    w-full
+                    items-center
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                  "
+                  aria-expanded="false"
+                >
+
+                  <span
+                    class="
+                      std-dropdown-label
+                      flex-1
+                    "
+                  >
+                    최신순
+                  </span>
+
+                  <i
+                    data-lucide="chevron-down"
+                    class="
+                      std-dropdown-icon
+                      h-4 w-4
+                      transition-transform
+                    "
+                  ></i>
+
+                </button>
+
+
+                <div
+                  class="
+                    std-dropdown-menu
+                    absolute
+                    right-0 top-[47px]
+                    z-50
+                    hidden
+                    w-full
+                    overflow-hidden
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <button
+                    type="button"
+                    data-value="최신순"
+                    class="
+                      std-dropdown-option
+                      selected
+                      flex h-[44px]
+                      w-full
+                      items-center
+                      bg-[#E1E7F2]
+                      px-3
+                      text-left
+                      text-base font-semibold
+                    "
+                  >
+                    최신순
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="오래된순"
+                    class="
+                      std-dropdown-option
+                      flex h-[44px]
+                      w-full
+                      items-center
+                      border-t border-[#CDD6E8]
+                      bg-white
+                      px-3
+                      text-left
+                      text-base
+                      hover:bg-[#F2F6FF]
+                    "
+                  >
+                    오래된순
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <!-- COUNT -->
+              <div
+                class="
+                  relative
+                  w-[90px]
+                "
+                data-std-dropdown
+              >
+
+                <button
+                  type="button"
+                  id="standardCountButton"
+                  class="
+                    std-dropdown-trigger
+                    flex h-[40px]
+                    w-full
+                    items-center
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                  "
+                  aria-expanded="false"
+                >
+
+                  <span
+                    class="
+                      std-dropdown-label
+                      flex-1
+                    "
+                  >
+                    10개
+                  </span>
+
+                  <i
+                    data-lucide="chevron-down"
+                    class="
+                      std-dropdown-icon
+                      h-4 w-4
+                      transition-transform
+                    "
+                  ></i>
+
+                </button>
+
+
+                <div
+                  class="
+                    std-dropdown-menu
+                    absolute
+                    right-0 top-[47px]
+                    z-50
+                    hidden
+                    w-full
+                    overflow-hidden
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <button
+                    type="button"
+                    data-value="10"
+                    class="
+                      std-dropdown-option
+                      selected
+                      flex h-[44px]
+                      w-full
+                      items-center
+                      bg-[#E1E7F2]
+                      px-3
+                      text-left
+                      text-base font-semibold
+                    "
+                  >
+                    10개
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="20"
+                    class="
+                      std-dropdown-option
+                      flex h-[44px]
+                      w-full
+                      items-center
+                      border-t border-[#CDD6E8]
+                      bg-white
+                      px-3
+                      text-left
+                      text-base
+                      hover:bg-[#F2F6FF]
+                    "
+                  >
+                    20개
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+              DYNAMIC TABLE
+          ================================================== -->
+          <div
+            id="standardTableWrap"
+            class="mt-5"
+          ></div>
+
+
+          <!-- =================================================
+              PAGINATION
+          ================================================== -->
+          <nav
+            id="standardPagination"
+            class="
+              mt-14
+              flex
+              items-center
+              justify-center
+              gap-2
+            "
+          >
+
+            <button
+              type="button"
+              class="
+                flex h-8 w-8
+                items-center justify-center
+              "
+            >
+              <i
+                data-lucide="chevron-left"
+                class="h-5 w-5"
+              ></i>
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                flex h-8 w-8
+                items-center justify-center
+                rounded
+                bg-[#476187]
+                text-sm font-semibold
+                text-white
+              "
+            >
+              1
+            </button>
+
+
+            <button class="h-8 w-8 text-sm">2</button>
+            <button class="h-8 w-8 text-sm">3</button>
+            <button class="h-8 w-8 text-sm">4</button>
+            <button class="h-8 w-8 text-sm">5</button>
+
+            <span>...</span>
+
+            <button class="h-8 w-8 text-sm">28</button>
+
+
+            <button
+              type="button"
+              class="
+                flex h-8 w-8
+                items-center justify-center
+              "
+            >
+              <i
+                data-lucide="chevron-right"
+                class="h-5 w-5"
+              ></i>
+            </button>
+
+          </nav>
+
+        </div>
+
+      </section>
+
+    </main>
+    
+   
+  
+    <!-- =====================================================
+         CHATBOT FLOATING BUTTON
+    ====================================================== -->
+    <button
+      class="
+    fixed bottom-6 right-6
+    z-50
+    h-14 w-14
+    rounded-full
+    bg-transparent
+    shadow-none
+  "
+>
+      <img
+    src="./img/chat-bot.png"
+    alt="AI 챗봇"
+    class="
+      block
+      h-full w-full
+      rounded-full
+      object-cover
+      mix-blend-multiply
+      drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
+    "
+  />
+    </button>
+
+  </div>
+
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/hub-common.js"></script>
+
+</body>
+</html>

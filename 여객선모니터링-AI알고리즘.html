@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>AI 알고리즘</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 여객선모니터링 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+
+        <div class="flex min-w-0 items-center gap-4">
+          <i data-lucide="ship"
+            class="h-[17px] w-[17px] shrink-0"
+            aria-hidden="true"></i>
+          <span>여객선모니터링</span>
+        </div>
+
+        <span class="flex items-center gap-3">
+          <em class="reference-badge">참고</em>
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+        <a class="nav-item">
+            <i data-lucide="ship"></i>
+            <span>여객선분석</span>
+          </a>
+
+          <a class="nav-item active"  aria-current="page">
+            <i data-lucide="brain-circuit"></i>
+            <span>AI 알고리즘</span>
+          </a>
+        </div>
+      
+       
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">AI 알고리즘</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+      <main id="mainContent" class="ai-algorithm-page" tabindex="-1">
+
+      <!-- 페이지 제목 -->
+      <div class="ai-algorithm-heading">
+        <div class="ai-algorithm-heading-title">
+          <i data-lucide="brain-circuit"></i>
+          <h1>AI 알고리즘</h1>
+          <span>
+            여객선 종합 위험정보 모니터링 — AIS + 기상·해양정보 · 실시간 위험 탐지 · 30분 후 위험 예측
+          </span>
+        </div>
+      </div>
+
+      <!-- 탭 : 클릭 기능 없음 -->
+      <nav class="cv-tabs ai-algorithm-tabs" aria-label="AI 알고리즘 메뉴">
+        <span class="cv-tab active">개요</span>
+        <span class="cv-tab">AIS모델위험도</span>
+        <span class="cv-tab">탐지알고리즘</span>
+        <span class="cv-tab">시나리오</span>
+        <span class="cv-tab">학습</span>
+        <span class="cv-tab">참고자료</span>
+        <span class="cv-tab">분석</span>
+        <span class="cv-tab">성능·평가</span>
+      </nav>
+
+      <!-- 상단 요약 카드 -->
+      <section class="ai-algorithm-summary">
+
+        <div class="ai-algorithm-summary-card">
+          <span>위험요인</span>
+          <strong>5종</strong>
+          <small>기상 · 충돌 · 항로 · 운항패턴 · AIS품질</small>
+        </div>
+
+        <div class="ai-algorithm-summary-card">
+          <span>예측 구간</span>
+          <strong class="is-blue">30분</strong>
+          <small>+5 · 10 · 15 · 20 · 30분</small>
+        </div>
+
+        <div class="ai-algorithm-summary-card">
+          <span>위험등급</span>
+          <strong>4단계</strong>
+          <small>정상 · 관심 · 주의 · 경계</small>
+        </div>
+
+        <div class="ai-algorithm-summary-card">
+          <span>적용</span>
+          <strong>규칙 기반</strong>
+          <small>「분석」 탭 지도에 실시간 적용</small>
+        </div>
+
+      </section>
+
+      <!-- 설계 목표 및 기본 방향 -->
+      <section class="ai-algorithm-panel">
+
+        <h2>설계 목표 및 기본 방향</h2>
+
+        <p class="ai-algorithm-description">
+          본 알고리즘은 여객선의 AIS 위치·속력·침로와 기상·해양정보를
+          실시간으로 융합하여, 현재의 위험뿐 아니라 향후 30분 이내
+          발생할 가능성이 있는 위험 징후를 사전에 탐지하는 것을 목표로 합니다.
+        </p>
+
+        <div class="ai-algorithm-table-wrap">
+          <table class="ai-algorithm-table">
+            <colgroup>
+              <col style="width: 22%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>분석 대상</th>
+                <th>내용</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>기상·해상 위험</td>
+                <td>풍속, 파고, 시정, 조류 등으로 인한 운항 위험</td>
+              </tr>
+              <tr>
+                <td>항로·운항 위험</td>
+                <td>비정상적인 항로 변경, 급감속, 장시간 정지</td>
+              </tr>
+              <tr>
+                <td>충돌 위험</td>
+                <td>주변 선박과의 상대 거리, 접근 속도, CPA/TCPA</td>
+              </tr>
+              <tr>
+                <td>위치정보 위험</td>
+                <td>AIS 신호 단절, 위치 점프, 비정상 속도</td>
+              </tr>
+              <tr>
+                <td>복합 위험</td>
+                <td>여러 위험요인이 동시에 발생하거나 짧은 시간 안에 악화되는 상황</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ai-algorithm-notice">
+          중요한 설계 원칙은 위험점수만 계산하는 것이 아니라,
+          <strong>위험 원인 · 위험 발생 예상시간 · 데이터 신뢰도 · 경보 조치</strong>를
+          함께 산출하는 것입니다.
+        </div>
+
+      </section>
+
+      <!-- 처리 흐름 -->
+      <section class="ai-algorithm-panel">
+
+        <h2>처리 흐름</h2>
+
+        <div class="ai-algorithm-table-wrap">
+          <table class="ai-algorithm-table">
+            <colgroup>
+              <col style="width: 42%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>단계</th>
+                <th>처리 내용</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>① 입력 데이터</td>
+                <td>AIS 위치·속력·침로 + 기상·해양 관측 및 예보</td>
+              </tr>
+              <tr>
+                <td>② 시간·공간 정합 및 데이터 품질 검사</td>
+                <td>시간 동기화 · 위치 보정 · 결측·이상치 확인</td>
+              </tr>
+              <tr>
+                <td>③ 환경 위험 엔진 / 운항 위험 엔진</td>
+                <td>풍속·파고·시정·조류 / 충돌·속력·침로·신호</td>
+              </tr>
+              <tr>
+                <td>④ 30분 예측 및 위험도 융합</td>
+                <td>현재 위험 + 미래 위험 + 위험 증가 추세 + 데이터 신뢰도</td>
+              </tr>
+              <tr>
+                <td>⑤ 위험등급·경보·GIS 시각화</td>
+                <td>선박별 점수 · 위험 원인 · 예상 시점 · 경보 이력</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- 적용 현황 -->
+      <section class="ai-algorithm-panel">
+
+        <h2>적용 현황</h2>
+
+        <p class="ai-algorithm-description">
+          설계서 알고리즘을 운항 중 여객선에 적용해 「분석」 탭 지도에
+          선박별 종합 위험도 · 30분 예측 · 경보를 표출합니다.
+          요인별 입력은 다음과 같습니다.
+        </p>
+
+        <div class="ai-algorithm-table-wrap">
+          <table class="ai-algorithm-table">
+            <colgroup>
+              <col style="width: 22%">
+              <col style="width: 18%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>위험요인</th>
+                <th>입력 데이터</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>기상·해상 위 (25%)</td>
+                <td>예보 격자(0.5°·1시간) 풍속·파고</td>
+                <td>시정·조류 자료 없음 → 결측으로 빼고 재정규화</td>
+              </tr>
+              <tr>
+                <td>충돌 C (30%)</td>
+                <td>주변 6NM 실시간 AIS — CPA/TCPA</td>
+                <td>
+                  항로 기준 — 자신 예상 항로와 상대선 항로로 30분 최근접 산출,
+                  다가오는 앞쪽 선박만(옆·뒤·멀어지는 선박 제외),
+                  정박·묘박·비정상·6분 넘게 끊긴 신호 제외,
+                  항내(항구 0.5NM) 평가 제외
+                </td>
+              </tr>
+              <tr>
+                <td>항로·운항 이상 N (20%)</td>
+                <td>직전 표본 대비 선회율·감속률</td>
+                <td>계획 항로 없음 → 대체 지표, 화면을 연 뒤 쌓인 표본만 사용</td>
+              </tr>
+              <tr>
+                <td>비정상 운항 패턴 O (15%)</td>
+                <td>오늘 운항한 운항 상태</td>
+                <td>모든 표본이 통제·비운항인데 운항 중이면 가점</td>
+              </tr>
+              <tr>
+                <td>AIS 데이터 이상 D (10%)</td>
+                <td>수신 지연·불가능한 속력</td>
+                <td>수신 지연이 길면 데이터 신뢰도도 낮춤</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="ai-algorithm-footnote">
+          임계치는 설계서의 테스트용 값입니다.
+          선박·항로별 운항기준을 확인하기 전에는 실제 안전 경보로 쓰지 않습니다.
+        </p>
+
+      </section>
+
+      <!-- 필수 전제 -->
+      <section class="ai-algorithm-panel">
+
+        <h2>필수 전제</h2>
+
+        <div class="ai-algorithm-notice">
+          AIS만으로는 여객 정원, 적재 상태, 선박 안정성, 기관 상태 등
+          모든 안전요소를 알 수 없습니다. 따라서 본 설계는
+          AIS와 기상·해양정보 기반의 위험 징후 탐지 체계이며,
+          실제 운항 허용 여부를 결정하는 법정 안전판정 체계를 대체하지 않습니다.
+        </div>
+
+      </section>
+
+      <!-- 최종 권고 -->
+      <section class="ai-algorithm-panel ai-algorithm-final">
+
+        <h2>최종 권고</h2>
+
+        <p class="ai-algorithm-description">
+          현재 조건에서는
+          <strong>규칙 기반 위험 탐지 + 30분 항적 예측 + 기상·해양 예보 결합 + 위험도 융합</strong>을
+          첫 번째 구현 목표로 설정하는 것이 좋습니다.
+          머신러닝은 충분한 과거 사례와 검증된 라벨이 확보된 후 추가하는 편이 안전합니다.
+        </p>
+
+        <p class="ai-algorithm-description">
+          다음 세 가지가 실제 구현을 시작하기 위한 핵심 입력입니다.
+        </p>
+
+        <ul class="ai-algorithm-list">
+          <li>
+            <strong>AIS 데이터 형식:</strong>
+            실시간 API, CSV, NMEA 원문 중 어떤 형식인지
+          </li>
+          <li>
+            <strong>기상·해양정보 출처:</strong>
+            예보 격자, 관측소, API 또는 자체 DB 중 어떤 데이터를 사용하는지
+          </li>
+          <li>
+            <strong>여객선 운항기준:</strong>
+            선박별 운항 제한, 계획 항로 및 정상 운항 기준을 확보할 수 있는지
+          </li>
+        </ul>
+
+        <p class="ai-algorithm-description">
+          이 정보가 확정되면 데이터 수집부터 위험 산정, 30분 예측,
+          PostgreSQL 저장, REST API 제공까지 연결할 실행 가능한
+          Python MVP로 구체화할 수 있습니다.
+        </p>
+
+      </section>
+
+    </main>
+
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

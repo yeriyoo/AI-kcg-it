@@ -1,0 +1,5528 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>함정용 플랫폼 - 선박정보(지도위-반응형)</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- 최소 공통 CSS -->
+  <link rel="stylesheet" href="./css/ship-common.css" />
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="./img/ship-favicon.png"
+  >
+</head>
+
+<body
+  data-disable-mobile-situation-open="true"
+  class="overflow-hidden bg-[#050505] font-['Pretendard'] text-white"
+>
+
+  <div class="flex h-screen min-h-[720px] flex-col">
+
+    <!-- =====================================================
+         TOP NAVIGATION
+    ====================================================== -->
+    <header
+      class="
+        relative z-50
+        flex h-[60px] shrink-0
+        items-center
+        border-b border-[#3D3D3D]
+        bg-[#050505]
+        px-8
+      "
+    >
+
+      <!-- Logo -->
+    <h1
+      class="
+        mr-20 shrink-0
+        flex items-center gap-2
+        text-[24px] font-semibold
+      "
+    >
+      <span
+        class="
+          flex h-10 w-10
+          shrink-0
+          items-center justify-center
+        "
+      >
+        <img
+          src="./img/SeaOn-logo.svg"
+          alt="SeaOn"
+          class="
+            h-10 w-10
+            shrink-0
+            object-contain
+          "
+        />
+      </span>
+
+      SeaOn
+    </h1>
+
+
+      <!-- Main Menu -->
+      <nav 
+      id="mainNavigation"
+      class="flex h-full items-center gap-10"
+      >
+
+        <!-- Active -->
+        <button
+          type="button"
+          class="
+            relative
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold text-white
+          "
+        >
+          <i
+            data-lucide="circle-gauge"
+            class="h-5 w-5"
+          ></i>
+
+          상황판
+
+          <span
+            class="
+              absolute inset-x-0 bottom-2
+              h-[4px]
+              bg-[#E7E7E7]
+            "
+          ></span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold
+            text-[#ADADAD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="ship"
+            class="h-5 w-5"
+          ></i>
+
+          선박정보
+        </button>
+
+        <button
+          type="button"
+          class="
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold
+            text-[#ADADAD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="locate-fixed"
+            class="h-5 w-5"
+          ></i>
+
+         추적세션
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold
+            text-[#ADADAD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="megaphone"
+            class="h-5 w-5"
+          ></i>
+
+          경보현황
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold
+            text-[#ADADAD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="wifi-cog"
+            class="h-5 w-5"
+          ></i>
+
+          경보 세팅
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-full items-center gap-2
+            px-2
+            text-lg font-semibold
+            text-[#ADADAD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="clipboard-minus"
+            class="h-5 w-5"
+          ></i>
+
+          보고내역
+        </button>
+      </nav>
+
+
+      <!-- =====================================================
+          HEADER UTILITY
+      ====================================================== -->
+
+      <div class="ml-auto shrink-0">
+
+        <!-- =================================================
+            DESKTOP / 1651px 이상
+        ================================================== -->
+        <div
+          id="headerUtilityDesktop"
+          class="flex items-center gap-5"
+        >
+
+          <!-- Date -->
+          <span class="whitespace-nowrap text-base font-medium text-[#E7E7E7]">
+            2026-08-05 08:56:50
+          </span>
+
+
+          <!-- Timezone -->
+          <div
+            class="
+              inline-flex h-[22px]
+              items-center
+              overflow-hidden
+              rounded
+              bg-[#3D3D3D]
+            "
+            role="group"
+            aria-label="시간대 선택"
+          >
+
+            <button
+              type="button"
+              class="
+                flex h-full min-w-8
+                items-center justify-center
+                bg-[#E7E7E7]
+                px-1
+                text-sm font-semibold
+                text-black
+              "
+              aria-pressed="true"
+            >
+              KST
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-full min-w-8
+                items-center justify-center
+                px-1
+                text-sm font-semibold
+                text-[#ADADAD]
+              "
+              aria-pressed="false"
+            >
+              UTC
+            </button>
+
+          </div>
+
+
+          <div class="h-5 w-px bg-[#3D3D3D]"></div>
+
+
+          <!-- Download -->
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              text-[#E7E7E7]
+              hover:text-white
+            "
+            aria-label="다운로드"
+          >
+            <i data-lucide="download" class="h-5 w-5"></i>
+          </button>
+
+
+          <!-- Sheet -->
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              text-[#E7E7E7]
+              hover:text-white
+            "
+            aria-label="표"
+          >
+            <i data-lucide="sheet" class="h-5 w-5"></i>
+          </button>
+
+
+          <!-- Print -->
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              text-[#E7E7E7]
+              hover:text-white
+            "
+            aria-label="인쇄"
+          >
+            <i data-lucide="printer" class="h-5 w-5"></i>
+          </button>
+
+
+          <div class="h-5 w-px bg-[#3D3D3D]"></div>
+
+
+          <!-- User -->
+          <button
+            type="button"
+            data-open-my-info
+            class="
+              flex items-center gap-2
+              text-[#E7E7E7]
+              hover:text-white
+            "
+          >
+            <span
+              class="
+                flex h-7 w-7
+                items-center justify-center
+                rounded-full
+                bg-[#3D3D3D]
+                text-sm font-semibold
+              "
+            >
+              여
+            </span>
+
+            <span class="whitespace-nowrap text-base">
+              여한상 (경위)
+            </span>
+          </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+            COMPACT / 1650px 이하
+        ================================================== -->
+        <div
+          id="headerUtilityCompact"
+          class="relative hidden"
+        >
+
+          <!-- Hamburger -->
+          <button
+            id="headerUtilityToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="headerUtilityMenu"
+            aria-label="상단 유틸리티 메뉴"
+            class="
+              flex h-10 w-10
+              items-center justify-center
+              rounded
+              text-[#E7E7E7]
+
+              hover:bg-[#232323]
+              hover:text-white
+            "
+          >
+            <i
+              data-lucide="menu"
+              class="h-6 w-6"
+            ></i>
+          </button>
+
+
+          <!-- Dropdown -->
+          <div
+            id="headerUtilityMenu"
+            class="
+              absolute
+              right-0 top-[46px]
+              z-[200]
+              hidden
+              w-[260px]
+              overflow-hidden
+              rounded
+              border border-[#3D3D3D]
+              bg-[#191919]
+              shadow-2xl
+            "
+          >
+
+            <!-- Date -->
+            <div
+              class="
+                border-b border-[#232323]
+                px-4 py-3
+              "
+            >
+              <span
+                class="
+                  block
+                  text-sm
+                  text-[#777777]
+                "
+              >
+                현재 시각
+              </span>
+
+              <strong
+                class="
+                  mt-1 block
+                  text-base
+                  font-medium
+                  text-[#E7E7E7]
+                "
+              >
+                2026-08-05 08:56:50
+              </strong>
+            </div>
+
+
+            <!-- Timezone -->
+            <div
+              class="
+                flex items-center justify-between
+                border-b border-[#232323]
+                px-4 py-3
+              "
+            >
+              <span class="text-sm text-[#ADADAD]">
+                시간대
+              </span>
+
+              <div
+                class="
+                  inline-flex h-[26px]
+                  overflow-hidden
+                  rounded
+                  bg-[#3D3D3D]
+                "
+              >
+                <button
+                  type="button"
+                  class="
+                    flex min-w-9
+                    items-center justify-center
+                    bg-[#E7E7E7]
+                    px-2
+                    text-sm font-semibold
+                    text-black
+                  "
+                >
+                  KST
+                </button>
+
+                <button
+                  type="button"
+                  class="
+                    flex min-w-9
+                    items-center justify-center
+                    px-2
+                    text-sm font-semibold
+                    text-[#ADADAD]
+                  "
+                >
+                  UTC
+                </button>
+              </div>
+            </div>
+
+
+            <!-- Tools -->
+            <div
+              class="
+                grid grid-cols-3
+                border-b border-[#232323]
+              "
+            >
+
+              <button
+                type="button"
+                class="
+                  flex h-[58px]
+                  flex-col
+                  items-center justify-center
+                  gap-1
+                  border-r border-[#232323]
+                  text-[#ADADAD]
+
+                  hover:bg-[#232323]
+                  hover:text-white
+                "
+              >
+                <i data-lucide="download" class="h-5 w-5"></i>
+                <span class="text-xs">다운로드</span>
+              </button>
+
+
+              <button
+                type="button"
+                class="
+                  flex h-[58px]
+                  flex-col
+                  items-center justify-center
+                  gap-1
+                  border-r border-[#232323]
+                  text-[#ADADAD]
+
+                  hover:bg-[#232323]
+                  hover:text-white
+                "
+              >
+                <i data-lucide="sheet" class="h-5 w-5"></i>
+                <span class="text-xs">표</span>
+              </button>
+
+
+              <button
+                type="button"
+                class="
+                  flex h-[58px]
+                  flex-col
+                  items-center justify-center
+                  gap-1
+                  text-[#ADADAD]
+
+                  hover:bg-[#232323]
+                  hover:text-white
+                "
+              >
+                <i data-lucide="printer" class="h-5 w-5"></i>
+                <span class="text-xs">인쇄</span>
+              </button>
+
+            </div>
+
+
+            <!-- =================================================
+     ACCOUNT
+================================================== -->
+<div>
+
+  <!-- User -->
+  <div
+    class="
+      flex h-[54px] w-full
+      items-center gap-3
+      border-b border-[#232323]
+      px-4
+    "
+  >
+
+    <span
+      class="
+        flex h-8 w-8 shrink-0
+        items-center justify-center
+        rounded-full
+        bg-[#3D3D3D]
+        text-sm font-semibold
+        text-white
+      "
+    >
+      함
+    </span>
+
+    <strong
+      class="
+        min-w-0 flex-1 truncate
+        text-sm font-medium
+        text-[#E7E7E7]
+      "
+    >
+      함정용관리자 (P-1234)
+    </strong>
+
+  </div>
+
+
+  <!-- Account Menu -->
+  <div
+    class="
+      border-b border-[#232323]
+      px-4 py-3
+    "
+  >
+
+    <div
+      class="
+        mb-2
+        text-sm
+        text-[#777777]
+      "
+    >
+      계정 메뉴
+    </div>
+
+
+    <button
+      type="button"
+      data-open-my-info
+      class="
+        flex h-10 w-full
+        items-center gap-3
+        text-left
+        text-sm
+        text-[#E7E7E7]
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="user-round"
+        class="h-5 w-5 text-[#ADADAD]"
+      ></i>
+
+      내 정보
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-10 w-full
+        items-center gap-3
+        text-left
+        text-sm
+        text-[#E7E7E7]
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="log-out"
+        class="h-5 w-5 text-[#ADADAD]"
+      ></i>
+
+      로그아웃
+    </button>
+
+  </div>
+
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+          1100 이하 통합 메뉴
+      ====================================================== -->
+      <div
+        id="headerAllCompact"
+        class="
+            relative ml-auto hidden
+            items-center gap-1
+          "
+      >
+
+
+    <!-- 1100px 이하 관할 선택 -->
+    <div class="jurisdiction jurisdiction--compact">
+
+      <i data-lucide="landmark" aria-hidden="true"></i>
+
+      <label class="sr-only" for="jurisdictionCompact">
+        관할 선택
+      </label>
+
+      <select
+        id="jurisdictionCompact"
+        class="jurisdiction-select"
+        disabled
+      >
+        <option value="jeju" selected>제주청</option>
+        <option value="incheon">중부청</option>
+        <option value="busan">남해청</option>
+        <option value="mokpo">서해청</option>
+        <option value="donghae">동해청</option>
+      </select>
+
+      <i
+        data-lucide="chevron-down"
+        aria-hidden="true"
+        class="jurisdiction-chevron"
+      ></i>
+
+      </div>
+
+
+      <!-- =================================================
+            1100 이하 클릭 확장형 검색
+        ================================================== -->
+        <div
+          id="headerSearchExpand"
+          class="
+            relative
+            flex h-10
+            items-center
+            justify-end
+          "
+        >
+
+          <div
+            id="headerSearchBox"
+            class="
+              flex h-10
+              items-center
+              overflow-hidden
+              rounded-full
+              border border-transparent
+              bg-transparent
+              transition-all duration-200
+            "
+          >
+
+            <input
+              id="headerSearchInput"
+              type="text"
+              placeholder="선박명 · MMSI · IMO · 위도, 경도"
+              class="
+                h-full
+                w-0
+                min-w-0
+                bg-transparent
+                px-0
+                text-base
+                text-white
+                placeholder:text-[#777777]
+                outline-none
+                opacity-0
+                transition-all duration-200
+              "
+            />
+
+            <button
+              id="headerSearchToggle"
+              type="button"
+              aria-expanded="false"
+              aria-label="검색"
+              class="
+                flex h-10 w-10
+                shrink-0
+                items-center justify-center
+                text-[#E7E7E7]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="search"
+                class="h-6 w-6"
+              ></i>
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Trigger -->
+        <button
+          id="headerAllToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="headerAllMenu"
+          aria-label="전체 메뉴"
+          class="
+            flex h-10 w-10
+            items-center justify-center
+            rounded
+            text-[#E7E7E7]
+
+            hover:bg-[#232323]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="menu"
+            class="h-6 w-6"
+          ></i>
+        </button>
+
+
+        <!-- Menu -->
+        <div
+          id="headerAllMenu"
+          class="
+            absolute
+            right-0 top-[46px]
+            z-[300]
+            hidden
+            w-[280px]
+            overflow-hidden
+            rounded
+            border border-[#3D3D3D]
+            bg-[#191919]
+            shadow-2xl
+          "
+        >
+
+        <!-- =================================================
+            HEADER SEARCH PANEL
+            1100 이하
+        ================================================== -->
+        <div
+          id="headerSearchPanel"
+          class="
+            absolute
+            right-0 top-[46px]
+            z-[310]
+            hidden
+            w-[320px]
+            rounded
+            border border-[#3D3D3D]
+            bg-[#191919]
+            p-3
+            shadow-2xl
+          "
+        >
+
+          <label class="relative block">
+
+            <input
+              type="text"
+              placeholder="선박명 · MMSI · IMO · 위도, 경도"
+              class="
+                h-10 w-full
+                rounded
+                border border-[#3D3D3D]
+                bg-[#050505]
+                pl-4 pr-10
+                text-sm text-white
+                placeholder:text-[#777777]
+                outline-none
+                focus:border-[#E7E7E7]
+              "
+            />
+
+            <i
+              data-lucide="search"
+              class="
+                absolute right-3 top-1/2
+                h-4 w-4
+                -translate-y-1/2
+                text-[#ADADAD]
+              "
+            ></i>
+
+          </label>
+
+        </div>
+        
+
+          <!-- =================================================
+              MAIN NAVIGATION
+          ================================================== -->
+          <div class="border-b border-[#232323]">
+
+            <!-- 상황판 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                bg-[#232323]
+                px-4
+                text-left
+                text-base font-semibold
+                text-white
+              "
+            >
+              <i
+                data-lucide="circle-gauge"
+                class="h-5 w-5"
+              ></i>
+
+              상황판
+            </button>
+
+
+            <!-- 선박정보 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                px-4
+                text-left
+                text-base font-semibold
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="ship"
+                class="h-5 w-5"
+              ></i>
+
+              선박정보
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                px-4
+                text-left
+                text-base font-semibold
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="locate-fixed"
+                class="h-5 w-5"
+              ></i>
+
+              추적세션
+            </button>
+
+
+            <!-- 경보현황 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                px-4
+                text-left
+                text-base font-semibold
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="megaphone"
+                class="h-5 w-5"
+              ></i>
+
+              경보현황
+            </button>
+
+
+            <!-- 경보 세팅 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                px-4
+                text-left
+                text-base font-semibold
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="wifi-cog"
+                class="h-5 w-5"
+              ></i>
+
+              경보 세팅
+            </button>
+
+
+            <!-- 보고내역 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                px-4
+                text-left
+                text-base font-semibold
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="clipboard-minus"
+                class="h-5 w-5"
+              ></i>
+
+              보고내역
+            </button>
+          </div>
+
+
+          <!-- =================================================
+              DATE / TIMEZONE
+          ================================================== -->
+          <div
+            class="
+              border-b border-[#232323]
+              px-4 py-3
+            "
+          >
+
+            <span
+              class="
+                block
+                text-xs
+                text-[#777777]
+              "
+            >
+              현재 시각
+            </span>
+
+            <strong
+              class="
+                mt-1 block
+                text-base font-medium
+                text-[#E7E7E7]
+              "
+            >
+              2026-08-05 08:56:50
+            </strong>
+
+
+            <div
+              class="
+                mt-3
+                flex items-center justify-between
+              "
+            >
+              <span class="text-sm text-[#ADADAD]">
+                시간대
+              </span>
+
+              <div
+                class="
+                  inline-flex h-[26px]
+                  overflow-hidden
+                  rounded
+                  bg-[#3D3D3D]
+                "
+                role="group"
+                aria-label="시간대 선택"
+              >
+                <button
+                  type="button"
+                  class="
+                    flex min-w-9
+                    items-center justify-center
+                    bg-[#E7E7E7]
+                    px-2
+                    text-sm font-semibold
+                    text-black
+                  "
+                  aria-pressed="true"
+                >
+                  KST
+                </button>
+
+                <button
+                  type="button"
+                  class="
+                    flex min-w-9
+                    items-center justify-center
+                    px-2
+                    text-sm font-semibold
+                    text-[#ADADAD]
+                  "
+                  aria-pressed="false"
+                >
+                  UTC
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+              TOOLS
+          ================================================== -->
+          <div
+            class="
+              grid grid-cols-3
+              border-b border-[#232323]
+            "
+          >
+
+            <button
+              type="button"
+              class="
+                flex h-[58px]
+                flex-col
+                items-center justify-center
+                gap-1
+                border-r border-[#232323]
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="download"
+                class="h-5 w-5"
+              ></i>
+
+              <span class="text-xs">
+                다운로드
+              </span>
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                flex h-[58px]
+                flex-col
+                items-center justify-center
+                gap-1
+                border-r border-[#232323]
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="sheet"
+                class="h-5 w-5"
+              ></i>
+
+              <span class="text-xs">
+                표
+              </span>
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                flex h-[58px]
+                flex-col
+                items-center justify-center
+                gap-1
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="printer"
+                class="h-5 w-5"
+              ></i>
+
+              <span class="text-xs">
+                인쇄
+              </span>
+            </button>
+
+          </div>
+
+
+          <!-- =================================================
+            ACCOUNT
+            1100px 이하 - 항상 펼쳐진 형태
+        ================================================== -->
+        <div
+          class="
+            border-t border-[#232323]
+            bg-[#191919]
+          "
+        >
+
+          <!-- 사용자 정보 -->
+          <div
+            class="
+              flex min-h-[72px]
+              items-center gap-3
+              border-b border-[#232323]
+              px-4 py-3
+            "
+          >
+
+            <!-- Profile -->
+            <span
+              class="
+                flex h-10 w-10 shrink-0
+                items-center justify-center
+                rounded-full
+                bg-[#3D3D3D]
+                text-base font-semibold
+                text-white
+              "
+            >
+              함
+            </span>
+
+
+            <!-- Name -->
+            <strong
+              class="
+                min-w-0 flex-1
+                truncate
+                text-base font-medium
+                text-[#E7E7E7]
+              "
+            >
+              함정용관리자 (P-1234)
+            </strong>
+
+          </div>
+
+
+          <!-- 계정 메뉴 -->
+          <div
+            class="
+              px-4
+              pb-4 pt-3
+            "
+          >
+
+            <!-- Label -->
+            <div
+              class="
+                mb-2
+                text-sm
+                font-medium
+                text-[#777777]
+              "
+            >
+              계정 메뉴
+            </div>
+
+
+            <!-- 내 정보 -->
+            <button
+              type="button"
+              data-open-my-info
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                text-left
+                text-base
+                text-[#E7E7E7]
+
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="user-round"
+                class="
+                  h-5 w-5 shrink-0
+                  text-[#ADADAD]
+                "
+              ></i>
+
+              <span>내 정보</span>
+            </button>
+
+
+            <!-- 로그아웃 -->
+            <button
+              type="button"
+              class="
+                flex h-11 w-full
+                items-center gap-3
+                text-left
+                text-base
+                text-[#E7E7E7]
+
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="log-out"
+                class="
+                  h-5 w-5 shrink-0
+                  text-[#ADADAD]
+                "
+              ></i>
+
+              <span>로그아웃</span>
+            </button>
+
+          </div>
+
+        </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+    <main
+      id="vesselMapMain"
+      class="relative flex min-h-0 flex-1"
+    >
+
+      <!-- =====================================================
+          VESSEL DETAIL SIDE PANEL
+      ====================================================== -->
+      <aside
+        id="vesselDetailPanel"
+        class="
+          relative z-30
+          flex w-[320px] shrink-0
+          flex-col
+          border-r border-[#3D3D3D]
+          bg-[#050505]
+          text-white
+        "
+      >
+
+      <div
+        id="vesselDefaultView"
+        class="flex min-h-0 flex-1 flex-col"
+      >
+
+        <!-- =================================================
+            HEADER
+        ================================================== -->
+        <div
+          class="
+            flex h-[54px] shrink-0
+            items-center
+            border-b border-[#3D3D3D]
+            px-3
+          "
+        >
+        <!-- 국적 -->
+        <span
+          class="
+            shrink-0
+            text-[20px]
+            leading-none
+          "
+          aria-label="대한민국"
+        >
+          🇰🇷
+        </span>
+
+          <strong
+            class="
+              min-w-0 flex-1
+              truncate
+              text-sm font-semibold
+              ml-1
+            "
+          >
+            T-7(4400020550)
+          </strong>
+
+
+          <!-- =================================================
+            조치 Dropdown
+        ================================================== -->
+        <div class="relative ml-2 shrink-0">
+
+          <!-- Trigger -->
+          <button
+            id="vesselActionToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vesselActionMenu"
+            class="
+              flex h-8
+              items-center gap-1.5
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]
+              px-2
+              text-sm font-semibold
+              text-[#E7E7E7]
+
+              hover:bg-[#232323]
+              hover:text-white
+
+              focus:outline-none
+            "
+          >
+            <span>조치</span>
+
+            <i
+              data-lucide="chevron-down"
+              class="
+                vessel-action-icon
+                h-4 w-4
+                transition-transform duration-150
+              "
+            ></i>
+          </button>
+
+
+          <!-- Dropdown -->
+          <div
+            id="vesselActionMenu"
+            class="
+              absolute
+              right-0 top-[38px]
+              z-[100]
+              hidden
+              w-[180px]
+              overflow-hidden
+              rounded-[4px]
+              border border-[#3D3D3D]
+              bg-[#191919]
+              shadow-xl
+            "
+          >
+
+            <!-- 검문 보고서 -->
+            <button
+              type="button"
+              data-vessel-action="inspection-report"
+              class="
+                vessel-action-item
+                flex h-11 w-full
+                items-center
+                border-b border-[#232323]
+                px-4
+                text-left
+                text-base
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              검문 보고서
+            </button>
+
+
+            <!-- 경고 보고서 -->
+            <button
+              type="button"
+              class="
+                vessel-action-item
+                flex h-11 w-full
+                items-center
+                border-b border-[#232323]
+                px-4
+                text-left
+                text-base
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              경고 보고서
+            </button>
+
+
+            <!-- 예인 보고서 -->
+            <button
+              type="button"
+              class="
+                vessel-action-item
+                flex h-11 w-full
+                items-center
+                border-b border-[#232323]
+                px-4
+                text-left
+                text-base
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              예인 보고서
+            </button>
+
+
+            <!-- 나포 보고서 -->
+            <button
+              type="button"
+              class="
+                vessel-action-item
+                flex h-11 w-full
+                items-center
+                border-b border-[#232323]
+                px-4
+                text-left
+                text-base
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              나포 보고서
+            </button>
+
+
+            <!-- 기타 보고서 -->
+            <button
+              type="button"
+              class="
+                vessel-action-item
+                flex h-11 w-full
+                items-center
+                px-4
+                text-left
+                text-base
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              기타 보고서
+            </button>
+
+          </div>
+
+        </div>
+
+
+          <!-- Close -->
+          <button
+            id="vesselDetailClose"
+            type="button"
+            aria-label="선박 상세 닫기"
+            class="
+              ml-2
+              flex h-8 w-8 shrink-0
+              items-center justify-center
+              text-[#E7E7E7]
+              hover:text-white
+            "
+          >
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+
+
+        <!-- =================================================
+            STATUS
+        ================================================== -->
+        <div class="p-3">
+
+          <div
+            class="
+              rounded
+              border border-[#F6C964]
+              bg-[#191919]
+              px-3 py-2
+            "
+          >
+            <p
+              class="
+                text-sm font-medium
+                text-[#F6C964]
+              "
+            >
+              신호대기
+            </p>
+
+            <p
+              class="
+                mt-1
+                text-sm
+                text-[#F6C964]
+              "
+            >
+              마지막 2026-09-29 23:54:35 · 1분전
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+          VESSEL DETAIL TABS
+      ================================================== -->
+      <div
+        class="
+          mx-2
+          grid h-9
+          grid-cols-4
+          border-b border-[#E7E7E7]
+        "
+        role="tablist"
+        aria-label="선박 상세 정보"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-vessel-tab="spec"
+          class="
+            vessel-detail-tab
+            flex h-full w-full
+            items-center justify-center
+            text-base font-semibold
+            text-[#777777]
+
+            hover:text-[#E7E7E7]
+          "
+        >
+          AI분석
+        </button>
+
+        <!-- 현재 -->
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-vessel-tab="current"
+          class="
+            vessel-detail-tab
+            flex h-full w-full
+            items-center justify-center
+            rounded-t-[4px]
+            bg-[#E7E7E7]
+            text-base font-semibold
+            text-black
+          "
+        >
+          현재
+        </button>
+
+
+        <!-- 제원 -->
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-vessel-tab="spec"
+          class="
+            vessel-detail-tab
+            flex h-full w-full
+            items-center justify-center
+            text-base font-semibold
+            text-[#777777]
+
+            hover:text-[#E7E7E7]
+          "
+        >
+          제원
+        </button>
+
+
+        <!-- 항적 -->
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-vessel-tab="track"
+          class="
+            vessel-detail-tab
+            flex h-full w-full
+            items-center justify-center
+            text-base font-semibold
+            text-[#777777]
+
+            hover:text-[#E7E7E7]
+          "
+        >
+          항적
+        </button>
+
+
+      </div>
+
+
+        <!-- =================================================
+            CURRENT CONTENT
+        ================================================== -->
+        <div
+          class="
+            panel-scroll
+            min-h-0 flex-1
+            overflow-y-auto
+          "
+        >
+
+        <div
+          id="vesselTabCurrent"
+          data-vessel-tab-content="current"
+        >
+
+          <!-- Action -->
+          <div
+            class="
+              flex items-center gap-2
+              border-b border-[#232323]
+              px-2 py-3
+            "
+          >
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                bg-[#E7E7E7]
+                px-3
+                text-sm font-semibold
+                text-black
+              "
+            >
+              함정 숨기기
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                border border-[#3D3D3D]
+                bg-[#050505]
+                px-3
+                text-sm
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              중심 이동
+            </button>
+
+            <span
+              class="
+                ml-auto
+                text-sm
+                text-[#777777]
+              "
+            >
+              MMSI 440020550
+            </span>
+          </div>
+        
+
+          <!-- =================================================
+              BASIC INFO
+          ================================================== -->
+
+          <!-- 속력 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">속력</span>
+            <strong class="font-medium">0 kn</strong>
+          </div>
+
+
+          <!-- 조업상태 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">조업상태</span>
+            <span class="text-[#777777]">해당없음</span>
+          </div>
+
+
+          <!-- 침로 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              침로 COG
+            </span>
+
+            <strong class="font-medium">
+              91.4°
+            </strong>
+          </div>
+
+
+          <!-- 선수방위 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              선수방위 HDG
+            </span>
+
+            <strong class="font-medium">
+              86°
+            </strong>
+          </div>
+
+
+          <!-- 항해상태 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              항해상태
+            </span>
+
+            <strong class="font-medium">
+              항행중(기관)
+            </strong>
+          </div>
+
+
+          <!-- 위험등급 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              위험등급
+            </span>
+
+            <div
+              class="
+                flex items-center gap-1
+                font-semibold
+                text-[#F6C964]
+              "
+            >
+              <span
+                class="
+                  h-2 w-2
+                  rounded-full
+                  bg-[#F6C964]
+                "
+              ></span>
+
+              주의
+            </div>
+          </div>
+
+
+          <!-- 위도 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              위도
+            </span>
+
+            <strong class="font-medium">
+              37°27.003′ N
+            </strong>
+          </div>
+
+
+          <!-- 경도 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              경도
+            </span>
+
+            <strong class="font-medium">
+              126°35.699′ E
+            </strong>
+          </div>
+
+
+          <!-- 최종수신 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              최종수신
+            </span>
+
+            <strong class="font-medium">
+              2026-09-30 17:15:05
+            </strong>
+          </div>
+
+
+          <!-- =================================================
+              COLLISION RISK
+          ================================================== -->
+
+          <div
+            class="
+              flex h-11
+              items-center
+              border-b border-[#232323]
+              px-3
+              text-base font-semibold
+            "
+          >
+            함정 P-1234 기준 충돌위험
+          </div>
+
+
+          <!-- 현재거리 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              현재거리
+            </span>
+
+            <strong class="font-medium">
+              10.67 NM
+            </strong>
+          </div>
+
+
+          <!-- DCPA -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              DCPA
+            </span>
+
+            <strong class="font-medium">
+              10.67 NM
+            </strong>
+          </div>
+
+
+          <!-- TCPA -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              TCPA
+            </span>
+
+            <strong class="font-medium">
+              — (멀어지는 중)
+            </strong>
+          </div>
+
+
+          <!-- 단계 -->
+          <div
+            class="
+              flex h-8
+              items-center justify-between
+              border-b border-[#232323]
+              px-3
+              text-base
+              m-2
+            "
+          >
+            <span class="text-[#777777]">
+              단계
+            </span>
+
+            <strong
+              class="
+                flex items-center gap-1
+                font-medium
+              "
+            >
+              <span
+                class="
+                  block h-2 w-2
+                  rotate-45
+                  border border-[#E7E7E7]
+                "
+              ></span>
+
+              관심
+            </strong>
+          </div>
+        </div>
+
+          <!-- =================================================
+              제원
+          ================================================== -->
+          <div
+            id="vesselTabSpec"
+            data-vessel-tab-content="spec"
+            class="hidden"
+          >
+
+          <div
+            class="
+              flex items-center gap-2
+              border-b border-[#232323]
+              px-2 py-3
+            "
+          >
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                bg-[#E7E7E7]
+                px-3
+                text-sm font-semibold
+                text-black
+              "
+            >
+              함정 숨기기
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                border border-[#3D3D3D]
+                bg-[#050505]
+                px-3
+                text-sm
+                text-[#ADADAD]
+
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              중심 이동
+            </button>
+
+            <span
+              class="
+                ml-auto
+                text-sm
+                text-[#777777]
+              "
+            >
+              MMSI 440020550
+            </span>
+          </div>
+
+            <!-- 호출부호 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                호출부호
+              </span>
+
+              <strong class="font-medium">
+                HLHZ
+              </strong>
+            </div>
+
+
+            <!-- IMO -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                IMO
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 선종 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                선종
+              </span>
+
+              <strong class="font-medium">
+                법집행선
+              </strong>
+            </div>
+
+
+            <!-- 용도 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                용도
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 총톤수 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                총톤수
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 기관출력 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                기관출력
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 길이/폭/깊이 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                길이/폭/깊이
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 건조년도 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                건조년도
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 선적항 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                선적항
+              </span>
+
+              <span class="text-[#777777]">
+                -
+              </span>
+            </div>
+
+
+            <!-- 국적 -->
+            <div
+              class="
+                mx-2
+                flex h-10
+                items-center justify-between
+                border-b border-[#232323]
+                px-3
+                text-base
+              "
+            >
+              <span class="text-[#777777]">
+                국적
+              </span>
+
+              <strong class="font-medium">
+                KR
+              </strong>
+            </div>
+
+          </div>
+
+
+       <!-- =================================================
+          항적
+      ================================================== -->
+      <div
+        id="vesselTabTrack"
+        data-vessel-tab-content="track"
+        class="hidden"
+      >
+
+        <!-- =================================================
+            공통 Action
+        ================================================== -->
+        <div
+          class="
+            flex items-center gap-2
+            border-b border-[#232323]
+            px-2 py-3
+          "
+        >
+          <!-- 함정 숨기기 -->
+          <button
+            type="button"
+            class="
+              flex h-8
+              items-center justify-center
+              rounded
+              bg-[#E7E7E7]
+              px-3
+              text-sm font-semibold
+              text-black
+            "
+          >
+            함정 숨기기
+          </button>
+
+          <!-- 중심 이동 -->
+          <button
+            type="button"
+            class="
+              flex h-8
+              items-center justify-center
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]
+              px-3
+              text-sm
+              text-[#ADADAD]
+              hover:bg-[#232323]
+              hover:text-[#E7E7E7]
+            "
+          >
+            중심 이동
+          </button>
+
+          <!-- MMSI -->
+          <span
+            class="
+              ml-auto
+              whitespace-nowrap
+              text-sm
+              text-[#777777]
+            "
+          >
+            MMSI 440020550
+          </span>
+        </div>
+
+
+        <!-- =================================================
+            항적 요약
+        ================================================== -->
+        <div>
+
+          <!-- 구간 시작 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              구간 시작
+            </span>
+
+            <strong class="font-medium">
+              2026-09-30 11:14:36
+            </strong>
+          </div>
+
+
+          <!-- 구간 종료 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              구간 종료
+            </span>
+
+            <strong class="font-medium">
+              2026-09-30 17:14:04
+            </strong>
+          </div>
+
+
+          <!-- 지속 시간 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              지속 시간
+            </span>
+
+            <strong class="font-medium">
+              359 min
+            </strong>
+          </div>
+
+
+          <!-- 이동 거리 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              이동 거리
+            </span>
+
+            <strong class="font-medium">
+              0.25 NM (0.5 km)
+            </strong>
+          </div>
+
+
+          <!-- 평균 속력 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              평균 속력
+            </span>
+
+            <strong class="font-medium">
+              0.0 kn
+            </strong>
+          </div>
+
+
+          <!-- 수신 포인트 -->
+          <div
+            class="
+              mx-2
+              flex h-10
+              items-center justify-between
+              border-b border-[#232323]
+              px-2
+              text-base
+            "
+          >
+            <span class="text-[#777777]">
+              수신 포인트
+            </span>
+
+            <strong class="font-medium">
+              453개
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+            포인트
+        ================================================== -->
+        <div class="px-2 pt-3">
+
+          <h3
+            class="
+              mb-3
+              text-base font-semibold
+              text-[#E7E7E7]
+            "
+          >
+            포인트
+          </h3>
+
+
+          <!-- Table -->
+          <div class="w-full">
+
+            <!-- Header -->
+            <div
+              class="
+                grid
+                grid-cols-[52px_1fr_46px_46px]
+                items-center
+                bg-[#191919]
+                px-2
+                text-sm
+                text-[#E7E7E7]
+              "
+            >
+              <div class="flex h-9 items-center">
+                시각
+              </div>
+
+              <div class="flex h-9 items-center">
+                위치
+              </div>
+
+              <div class="flex h-9 items-center justify-center">
+                SOG
+              </div>
+
+              <div class="flex h-9 items-center justify-center">
+                COG
+              </div>
+            </div>
+
+
+            <!-- ROW 01 -->
+            <div
+              class="
+                grid
+                grid-cols-[52px_1fr_46px_46px]
+                items-center
+                border-b border-[#232323]
+                px-2
+                text-sm
+              "
+            >
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="flex h-9 items-center whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 02 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 03 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 04 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 05 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 06 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 07 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 08 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 09 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+
+            <!-- ROW 10 -->
+            <div class="grid grid-cols-[52px_1fr_46px_46px] items-center border-b border-[#232323] px-2 text-sm">
+              <span class="flex h-9 items-center">02:54</span>
+              <span class="whitespace-nowrap">37.4500, 126.5950</span>
+              <span class="text-center">0</span>
+              <span class="text-center">0</span>
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+              Pagination
+          ================================================== -->
+          <div
+            class="
+              flex items-center justify-center
+              gap-1
+              py-3
+            "
+          >
+            <!-- 이전 -->
+            <button
+              type="button"
+              aria-label="이전 페이지"
+              class="
+                flex h-7 w-7
+                items-center justify-center
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              <i data-lucide="chevron-left" class="h-4 w-4"></i>
+            </button>
+
+
+            <!-- 1 Active -->
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                bg-[#E7E7E7]
+                px-2
+                text-sm font-semibold
+                text-black
+              "
+            >
+              1
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                text-sm
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              2
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                text-sm
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              3
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                text-sm
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              4
+            </button>
+
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                text-sm
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              5
+            </button>
+
+            <span
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                text-sm
+                text-[#777777]
+              "
+            >
+              ...
+            </span>
+
+            <button
+              type="button"
+              class="
+                flex h-7 min-w-7
+                items-center justify-center
+                rounded
+                text-sm
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              15
+            </button>
+
+
+            <!-- 다음 -->
+            <button
+              type="button"
+              aria-label="다음 페이지"
+              class="
+                flex h-7 w-7
+                items-center justify-center
+                text-[#E7E7E7]
+                hover:bg-[#191919]
+              "
+            >
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+        <!-- =================================================
+            사진
+        ================================================== -->
+        <div
+          id="vesselTabPhoto"
+          data-vessel-tab-content="photo"
+          class="hidden"
+        >
+
+          <!-- =================================================
+              공통 Action
+          ================================================== -->
+          <div
+            class="
+              flex items-center gap-2
+              border-b border-[#232323]
+              px-2 py-3
+            "
+          >
+            <!-- 함정 숨기기 -->
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                bg-[#E7E7E7]
+                px-3
+                text-sm font-semibold
+                text-black
+              "
+            >
+              함정 숨기기
+            </button>
+
+
+            <!-- 중심 이동 -->
+            <button
+              type="button"
+              class="
+                flex h-8
+                items-center justify-center
+                rounded
+                border border-[#3D3D3D]
+                bg-[#050505]
+                px-3
+                text-sm
+                text-[#ADADAD]
+                hover:bg-[#232323]
+                hover:text-[#E7E7E7]
+              "
+            >
+              중심 이동
+            </button>
+
+
+            <!-- MMSI -->
+            <span
+              class="
+                ml-auto
+                whitespace-nowrap
+                text-sm
+                text-[#777777]
+              "
+            >
+              MMSI 440020550
+            </span>
+          </div>
+
+
+          <!-- =================================================
+              PHOTO EMPTY
+          ================================================== -->
+          <div class="p-2">
+
+            <div
+              class="
+                flex h-[170px] w-full
+                flex-col
+                items-center justify-center
+                gap-2
+                rounded
+                border border-dashed border-[#777777]
+                bg-[#191919]
+                text-[#777777]
+              "
+            >
+
+              <!-- Image Icon -->
+              <i
+                data-lucide="image"
+                class="h-6 w-6"
+              ></i>
+
+
+              <!-- Empty Text -->
+              <span
+                class="
+                  text-sm
+                  font-medium
+                  text-[#777777]
+                "
+              >
+                보유 사진 없음
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+        </div>
+
+        </div>
+
+        <!-- =====================================================
+            INSPECTION REPORT VIEW
+        ====================================================== -->
+        <div
+          id="inspectionReportView"
+          class="
+            hidden
+            min-h-0 flex-1
+            flex-col
+            bg-[#050505]
+          "
+        >
+
+          <!-- =================================================
+              HEADER
+          ================================================== -->
+          <div
+            class="
+              flex h-[54px] shrink-0
+              items-center
+              border-b border-[#3D3D3D]
+              px-3
+            "
+          >
+
+            <!-- Back -->
+            <button
+              id="inspectionReportBack"
+              type="button"
+              aria-label="검문 보고서 닫기"
+              class="
+                flex h-8 w-8
+                shrink-0
+                items-center justify-center
+                text-[#E7E7E7]
+                hover:text-white
+              "
+            >
+              <i
+                data-lucide="arrow-left"
+                class="h-5 w-5"
+              ></i>
+            </button>
+
+
+            <!-- Title -->
+            <strong
+              class="
+                min-w-0 flex-1
+                truncate
+                text-base font-semibold
+              "
+            >
+              검문 보고서 작성
+            </strong>
+
+
+            <!-- MMSI -->
+            <span
+              class="
+                shrink-0
+                text-base
+                text-[#777777]
+              "
+            >
+              441367000
+            </span>
+
+          </div>
+
+
+          <!-- =================================================
+              SCROLL CONTENT
+          ================================================== -->
+          <div
+            class="
+              panel-scroll
+              min-h-0 flex-1
+              overflow-y-auto
+              px-3 py-3
+            "
+          >
+
+            <!-- 제목 -->
+            <div class="mb-5">
+
+              <label
+                for="inspectionReportTitle"
+                class="
+                  mb-2 block
+                  text-base
+                  text-[#E7E7E7]
+                "
+              >
+                제목
+              </label>
+
+              <input
+                id="inspectionReportTitle"
+                type="text"
+                value="검문 - 3005"
+                class="
+                  h-11 w-full
+                  rounded
+                  border border-transparent
+                  bg-[#191919]
+                  px-3
+                  text-base
+                  text-[#777777]
+                  outline-none
+
+                  focus:border-[#3D3D3D]
+                  focus:text-[#E7E7E7]
+                "
+              />
+
+            </div>
+
+
+            <!-- =================================================
+                결과
+            ================================================== -->
+            <div class="mb-5">
+
+              <p
+                class="
+                  mb-2
+                  text-base
+                  text-[#E7E7E7]
+                "
+              >
+                결과
+              </p>
+
+              <div
+                id="inspectionResultGroup"
+                class="grid grid-cols-3 gap-2"
+              >
+
+                <!-- 이상없음 -->
+                <button
+                  type="button"
+                  data-report-result="normal"
+                  class="
+                    inspection-result-btn
+                    flex h-10
+                    items-center justify-center
+                    rounded
+                    border border-[#3D3D3D]
+                    bg-[#050505]
+                    text-sm font-semibold
+                    text-[#ADADAD]
+
+                    hover:bg-[#232323]
+                    hover:text-[#E7E7E7]
+                  "
+                >
+                  이상없음
+                </button>
+
+
+                <!-- 위반확인 -->
+                <button
+                  type="button"
+                  data-report-result="violation"
+                  class="
+                    inspection-result-btn
+                    flex h-10
+                    items-center justify-center
+                    rounded
+                    border border-[#3D3D3D]
+                    bg-[#050505]
+                    text-sm font-semibold
+                    text-[#ADADAD]
+
+                    hover:bg-[#232323]
+                    hover:text-[#E7E7E7]
+                  "
+                >
+                  위반확인
+                </button>
+
+
+                <!-- 계속확인 / Active -->
+                <button
+                  type="button"
+                  data-report-result="continue"
+                  aria-pressed="true"
+                  class="
+                    inspection-result-btn
+                    flex h-10
+                    items-center justify-center
+                    rounded
+                    border border-[#E7E7E7]
+                    bg-[#E7E7E7]
+                    text-sm font-semibold
+                    text-black
+                  "
+                >
+                  계속확인
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                내용
+            ================================================== -->
+            <div class="mb-7">
+
+              <label
+                for="inspectionReportContent"
+                class="
+                  mb-2 block
+                  text-base
+                  text-[#E7E7E7]
+                "
+              >
+                내용
+              </label>
+
+              <textarea
+                id="inspectionReportContent"
+                class="
+                  h-[205px] w-full
+                  resize-none
+                  rounded
+                  border border-[#3D3D3D]
+                  bg-[#050505]
+                  p-3
+                  text-[14px]
+                  leading-[1.45]
+                  text-[#E7E7E7]
+                  outline-none
+
+                  focus:border-[#777777]
+                "
+              >1. 대상 선박
+        - 선박명 : DONG BO NO1
+        - MMSI / IMO : 440076650 / -
+        - 호출부호 : -
+        - 선종 / 용도 : 어선 / -
+        - 총톤수 : -
+        - 길이/폭/깊이 : -
+        - 선적항 / 국적 : - / KR
+
+        2. 조치 시점 상황
+        - 위치 : 37.46698, 126.60967</textarea>
+
+            </div>
+
+
+            <!-- =================================================
+                채증 자료
+            ================================================== -->
+            <div>
+
+              <div
+                class="
+                  mb-2
+                  flex items-center
+                  justify-between
+                "
+              >
+                <span class="text-base">
+                  채증 자료
+                </span>
+
+                <span
+                  class="
+                    text-sm
+                    text-[#777777]
+                  "
+                >
+                  (개당 100MB 이내)
+                </span>
+              </div>
+
+
+              <!-- Upload -->
+              <button
+                type="button"
+                class="
+                  flex h-[58px] w-full
+                  items-center justify-center
+                  gap-2
+                  rounded
+                  border border-dashed border-[#777777]
+                  bg-[#191919]
+                  text-sm
+                  text-[#777777]
+
+                  hover:border-[#ADADAD]
+                  hover:text-[#ADADAD]
+                "
+              >
+                <i
+                  data-lucide="plus"
+                  class="h-4 w-4"
+                ></i>
+
+                사진 · 영상 첨부
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+              FOOTER
+          ================================================== -->
+          <div
+            class="
+              grid shrink-0
+              grid-cols-[.75fr_1.25fr]
+              gap-2
+              bg-[#050505]
+              p-3
+            "
+          >
+
+            <!-- Cancel -->
+            <button
+              id="inspectionReportCancel"
+              type="button"
+              class="
+                flex h-10
+                items-center justify-center
+                rounded
+                border border-[#3D3D3D]
+                bg-[#050505]
+                text-base font-semibold
+                text-[#E7E7E7]
+
+                hover:bg-[#232323]
+              "
+            >
+              취소
+            </button>
+
+
+            <!-- Submit -->
+            <button
+              type="button"
+              class="
+                flex h-10
+                items-center justify-center
+                rounded
+                bg-[#E7E7E7]
+                text-base font-semibold
+                text-black
+              "
+            >
+              보고 등록
+            </button>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+
+     <!-- ===================================================
+           MAP
+      ==================================================== -->
+      <section class="relative min-w-0 flex-1 overflow-hidden">
+
+
+        <!-- 실제 지도 SDK 영역 -->
+        <div
+          id="map"
+          class="absolute inset-0 bg-[#191919]"
+        >
+          <!-- 임시 배경 이미지 -->
+          <div class="map-placeholder absolute inset-0"></div>
+        </div>
+
+
+        <!-- ===================================================
+             SEARCH
+        ==================================================== -->
+        
+        <!-- 지도 검색 및 관할 선택 -->
+        <div
+          id="mapSearch"
+          class="absolute left-4 top-6 z-20"
+        >
+          <div class="map-search-controls">
+
+            <!-- 검색창 -->
+            <label class="relative block">
+              <span class="sr-only">선박 검색</span>
+              <input
+                type="search"
+                placeholder="선박명 · MMSI · IMO · 위도, 경도"
+                autocomplete="off"
+                class="
+                  h-10 w-[300px]
+                  rounded-full
+                  border border-[#3D3D3D]
+                  bg-[#050505]/95
+                  pl-5 pr-11
+                  text-base text-white
+                  placeholder:text-[#777777]
+                  outline-none
+                  focus:border-[#E7E7E7]
+                "
+              />
+              <i
+                data-lucide="search"
+                aria-hidden="true"
+                class="
+                  absolute right-4 top-1/2
+                  h-4 w-4
+                  -translate-y-1/2
+                  text-white
+                "
+              ></i>
+            </label>
+
+            <!-- 관할 선택 -->
+            <div class="jurisdiction jurisdiction--map">
+              <i data-lucide="landmark" aria-hidden="true"></i>
+
+              <span class="jurisdiction-label">관할</span>
+
+              <label class="sr-only" for="jurisdictionMap">
+                관할 선택
+              </label>
+
+              <select
+                id="jurisdictionMap"
+                class="jurisdiction-select"
+                disabled
+              >
+                <option value="jeju" selected>제주지방해양경찰청</option>
+                <option value="incheon">중부지방해양경찰청</option>
+                <option value="busan">남해지방해양경찰청</option>
+                <option value="mokpo">서해지방해양경찰청</option>
+                <option value="donghae">동해지방해양경찰청</option>
+              </select>
+
+              <i
+                data-lucide="chevron-down"
+                aria-hidden="true"
+                class="jurisdiction-chevron"
+              ></i>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ===================================================
+             MAP SAMPLE CONTENT
+        ==================================================== -->
+
+        <!-- Warship Marker -->
+        <div
+        class="
+            absolute left-[45%] top-[28%]
+            flex flex-col items-center
+        "
+        >
+        <span
+            class="
+            mb-2
+            rounded
+            bg-[#050505]
+            px-2 py-1
+            text-sm
+            text-white
+            "
+        >
+            함정-P1234
+        </span>
+
+        <img
+            src="./img/warship.svg"
+            alt="함정"
+            class="h-6 w-6"
+        />
+        </div>
+
+        <div
+        class="
+            absolute left-[20%] top-[74%]
+            flex flex-col items-center
+        "
+        >
+        <span
+            class="
+            mb-2
+            rounded
+            bg-[#050505]
+            px-2 py-1
+            text-sm
+            text-white
+            "
+        >
+            1002(441827003)
+        </span>
+
+        <img
+            src="./img/ship.svg"
+            alt="선박"
+            class="h-6 w-6"
+        />
+        </div>
+
+
+        <!-- Danger Radius 01 -->
+        <div
+          class="
+            absolute left-[34%] top-[31%]
+            h-[300px] w-[300px]
+            rounded-full
+            border-[3px] border-dashed border-[#E7E7E7]/80
+            bg-[#777777]/20
+          "
+        >
+
+          <span
+            class="
+              absolute left-1/2 top-1/2
+              -translate-x-1/2 -translate-y-1/2
+              rounded
+              bg-[#232323]
+              px-3 py-1.5
+              text-base font-semibold
+            "
+          >
+            인천항 접근수로
+          </span>
+
+        </div>
+
+
+        <!-- Danger Radius 02 -->
+        <div
+          class="
+            absolute left-[29%] top-[53%]
+            h-[210px] w-[210px]
+            rounded-full
+            border-[3px] border-dashed border-[#E7E7E7]/80
+            bg-[#777777]/15
+          "
+        >
+
+          <span
+            class="
+              absolute left-1/2 top-1/2
+              -translate-x-1/2 -translate-y-1/2
+              whitespace-nowrap
+              rounded
+              bg-[#232323]
+              px-3 py-1.5
+              text-base font-semibold
+            "
+          >
+            덕적도 남방어장
+          </span>
+
+        </div>
+
+
+       <!-- ===================================================
+            MAP LEGEND STACK
+        ==================================================== -->
+        <div
+          id="mapLegendStack"
+          class="
+            absolute bottom-3 left-4 z-20
+            flex flex-col gap-2
+          "
+        >
+
+          <!-- =================================================
+              LEGEND BOX
+          ================================================== -->
+          <div
+            id="mapLegendBox"
+            class="
+              rounded
+              border border-[#232323]
+              bg-[#050505]/95
+              p-4
+            "
+          >
+
+            <ul class="space-y-2 text-sm">
+
+              <!-- 선박 -->
+              <li class="flex items-center gap-3">
+                <img
+                  src="./img/ship.svg"
+                  alt=""
+                  class="h-5 w-5 shrink-0"
+                />
+                <span>선박</span>
+              </li>
+
+
+              <!-- 어구 -->
+              <li class="flex items-center gap-3">
+                <img
+                  src="./img/buoey.svg"
+                  alt=""
+                  class="h-5 w-5 shrink-0"
+                />
+                <span>어구</span>
+              </li>
+
+
+              <!-- 함정 -->
+              <li class="flex items-center gap-3">
+                <img
+                  src="./img/warship.svg"
+                  alt=""
+                  class="h-5 w-5 shrink-0"
+                />
+                <span>함정</span>
+              </li>
+
+
+              <!-- 위험 -->
+              <li class="flex items-center gap-3">
+                <span
+                  class="
+                    h-4 w-4 shrink-0
+                    rounded-full
+                    border-2 border-[#E5514A]
+                  "
+                ></span>
+                <span>위험</span>
+              </li>
+
+
+              <!-- 주의 -->
+              <li class="flex items-center gap-3">
+                <span
+                  class="
+                    h-4 w-4 shrink-0
+                    rounded-full
+                    border-2 border-[#D07233]
+                  "
+                ></span>
+                <span>주의</span>
+              </li>
+
+
+              <!-- 레이더 접촉 -->
+              <li class="flex items-center gap-3">
+                <span
+                  class="
+                    h-4 w-4 shrink-0
+                    rounded-full
+                    bg-[#D07233]
+                  "
+                ></span>
+
+                <span>레이더 접촉</span>
+              </li>
+
+            </ul>
+
+
+            <!-- =============================================
+                SCALE
+                1650 이하부터 범례 내부 표시
+            ============================================== -->
+            <div
+              id="legendResponsiveScale"
+              class="
+                mt-3 hidden
+                border-t border-[#232323]
+                pt-3
+              "
+            >
+
+              <div
+                class="
+                  relative
+                  h-[23px] w-[78px]
+                  border-b border-l border-r
+                  border-[#E7E7E7]
+                "
+              >
+                <span
+                  class="
+                    absolute
+                    bottom-[3px] left-[7px]
+                    text-[12px] font-medium
+                    leading-none
+                    text-[#E7E7E7]
+                  "
+                >
+                  1km
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="mapBottomInfoMobile"
+            class="
+              hidden
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]/95
+              px-3 py-2
+              text-white
+            "
+          >
+            <!-- 1행 -->
+            <div class="map-mobile-info-row">
+              <span>15 vessels</span>
+
+              <span class="map-mobile-divider">|</span>
+
+              <span>반경 20NM</span>
+
+              <span class="map-mobile-divider">|</span>
+
+              <span>UTC+9</span>
+            </div>
+
+            <!-- 2행 -->
+            <div class="map-mobile-info-row">
+
+              <span>37°21.031 N</span>
+
+              <span class="map-mobile-divider">|</span>
+
+              <span>126°50.312 E</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================
+            DESKTOP SCALE
+            1651px 이상
+        ==================================================== -->
+        <div
+          id="mapScaleDesktop"
+          class="
+            absolute bottom-4 left-[160px] z-20
+          "
+        >
+
+          <div
+            class="
+              relative
+              h-[23px] w-[78px]
+              border-b border-l border-r
+              border-[#E7E7E7]
+            "
+          >
+            <span
+              class="
+                absolute
+                bottom-[3px] left-[7px]
+                text-[12px] font-medium
+                leading-none
+                text-[#E7E7E7]
+              "
+            >
+              1km
+            </span>
+          </div>
+
+        </div>
+
+
+              <!-- ===================================================
+            MAP BOTTOM INFO
+        ==================================================== -->
+        <div
+          id="mapBottomInfo"
+          class="
+            absolute bottom-4 z-20
+            flex items-center gap-3
+            right-[60px]
+          "
+        >
+
+          <!-- INFO 01 -->
+          <div
+            class="
+              map-bottom-info-part
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]/95
+              px-3 py-2
+              text-base font-medium
+              text-white
+              whitespace-nowrap
+            "
+          >
+            15 vessels
+            <span class="mx-2 text-[#777777]">|</span>
+            반경 20NM
+            <span class="mx-2 text-[#777777]">|</span>
+            UTC+9
+          </div>
+
+
+          <!-- 1650 이하에서 두 내용 사이에만 표시 -->
+          <span
+            class="
+              map-bottom-merge-divider
+              hidden
+              text-[#777777]
+            "
+          >
+            |
+          </span>
+
+
+          <!-- INFO 02 -->
+          <div
+            class="
+              map-bottom-info-part
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]/95
+              px-3 py-2
+              text-base font-medium
+              text-white
+              whitespace-nowrap
+            "
+          >
+            37°21.031 N
+            <span class="mx-2 text-[#777777]">|</span>
+            126°50.312 E
+          </div>
+
+        </div>
+
+
+
+        <!-- ===================================================
+            RESPONSIVE BOTTOM INFO
+            1650 이하
+        ==================================================== -->
+        <div
+          id="mapBottomInfoResponsive"
+          class="
+            absolute bottom-4 z-20
+            hidden
+          "
+        >
+          <div
+            class="
+              rounded
+              border border-[#3D3D3D]
+              bg-[#050505]/95
+              px-3 py-2
+              text-base font-medium
+              text-white
+              whitespace-nowrap
+            "
+          >
+            15 vessels
+            <span class="mx-2 text-[#777777]">|</span>
+
+            반경 20NM
+            <span class="mx-2 text-[#777777]">|</span>
+
+            UTC+9
+            <span class="mx-2 text-[#777777]">|</span>
+
+            37°21.031 N
+            <span class="mx-2 text-[#777777]">|</span>
+
+            126°50.312 E
+          </div>
+        </div>
+
+
+
+        <!-- ===================================================
+          MAP TOOLBAR
+      ==================================================== -->
+      <div
+        id="mapToolbar"
+        class="
+          absolute right-[24px] top-3 z-30
+          flex w-10 flex-col
+          overflow-visible
+          rounded
+          border border-[#3D3D3D]
+          bg-[#050505]
+        "
+      >
+
+        <!-- =================================================
+            COLLAPSE
+        ================================================== -->
+        <button
+          id="mapToolbarToggle"
+          type="button"
+          aria-expanded="true"
+          aria-controls="mapToolbarItems"
+          aria-label="툴바 접기"
+          class="
+            relative
+            flex h-10 w-10 shrink-0
+            items-center justify-center
+            border-b border-[#232323]
+            bg-[#050505]
+            text-[#E7E7E7]
+            hover:bg-[#232323]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="chevron-up"
+            class="
+              toolbar-toggle-icon
+              h-6 w-6
+              transition-transform duration-200
+            "
+          ></i>
+        </button>
+
+
+        <!-- =================================================
+            TOOLBAR ITEMS
+        ================================================== -->
+        <div
+          id="mapToolbarItems"
+          class="
+            flex flex-col
+            overflow-visible
+            transition-all duration-200
+          "
+        >
+
+          <!-- 01 기상 정보 -->
+          <button
+            id="alertSettingsOpen"
+            type="button"
+            aria-label="경보 설정"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="기상 정보"
+          >
+            <i data-lucide="cloud-sun" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 02 경보 설정 -->
+          <button
+            id="alertSettingsOpen"
+            type="button"
+            aria-label="경보 설정"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="경보 설정"
+          >
+            <i data-lucide="wifi-cog" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 03 표시구역 -->
+          <button
+            id="displayAreaOpen"
+            type="button"
+            aria-label="표시구역"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="표시 구역"
+          >
+            <i data-lucide="square-dashed" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 04 주변선박 -->
+          <button
+            id="nearbyVesselsOpen"
+            type="button"
+            aria-label="주변선박"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="주변선박"
+          >
+            <i data-lucide="ship-wheel" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 05 긴급 알림 -->
+          <button
+          id="emergencyAlertOpen"
+          type="button"
+          aria-label="긴급 알림"
+          aria-pressed="true"
+          class="map-toolbar-item
+            relative
+            flex h-10 w-10 shrink-0
+            items-center justify-center
+          bg-[#050505]
+          text-[#E7E7E7]
+          hover:bg-[#232323]
+          hover:text-white
+          "
+          data-tooltip="긴급 알림"
+        >
+            <i data-lucide="bell" class="h-6 w-6"></i>
+
+            <span
+              class="
+                absolute right-[2px] top-[2px]
+                flex h-[17px] min-w-[17px]
+                items-center justify-center
+                rounded-full
+                bg-[#E5514A]
+                px-1
+                text-[10px] font-semibold
+                leading-none
+                text-white
+              "
+            >
+              7
+            </span>
+          </button>
+
+
+          <!-- 06 추적 세션 -->
+          <button
+            type="button"
+            aria-label="탐지"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="추적 세션"
+          >
+            <i data-lucide="crosshair" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 07 착안사항 · 브리핑 -->
+          <!-- <button
+            type="button"
+            aria-label="위치 표시"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="착안사항 · 브리핑"
+          >
+            <i data-lucide="pin" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 08 NEWS · 상황 소식 -->
+          <button
+            id="newsPanelOpen"
+            type="button"
+            aria-label="NEWS 상황 소식"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="NEWS · 상황 소식"
+
+          >
+            <i data-lucide="newspaper" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 09 AI 챗봇 -->
+          <!-- <button
+            id="chatbotOpen"
+            type="button"
+            aria-label="AI 챗봇"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="AI 챗봇•지침 Q&A"
+          >
+            <i data-lucide="bot-message-square" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 10 백터 해도 / ACTIVE -->
+          <button
+            type="button"
+            aria-label="해역 위험지수"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#E7E7E7]
+              text-black
+            "
+            data-tooltip="백터 해도"
+          >
+            <i data-lucide="map" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 11 관심 위치 -->
+          <!-- <button
+            type="button"
+            aria-label="관심 위치"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+             data-tooltip="기본 해도"
+          >
+            <i data-lucide="map-pinned" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 12 지도 / DISABLED -->
+          <!-- <button
+            type="button"
+            disabled
+            aria-label="지도"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              cursor-not-allowed
+              items-center justify-center
+              
+              bg-[#050505]
+              text-[#3D3D3D]
+            "
+            data-tooltip="V-WORLD 지도"
+          >
+            <i data-lucide="globe" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 13 위성 / DISABLED -->
+          <!-- <button
+            type="button"
+            disabled
+            aria-label="위성"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              cursor-not-allowed
+              items-center justify-center
+              bg-[#050505]
+              text-[#3D3D3D]
+            "
+            data-tooltip="V-WORLD 위성"
+          >
+            <i data-lucide="satellite-dish" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 14 3D 보기 -->
+          <!-- <button
+            type="button"
+            aria-label="3D 보기"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="3D 해양지도"
+          >
+            <i data-lucide="box" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 15 내부 타일서버 -->
+          <!-- <button
+            type="button"
+            aria-label="레이어"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#3D3D3D]
+            "
+            data-tooltip="내부 타일서버"
+          >
+            <i data-lucide="layers-3" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 16 항만 정보 -->
+          <button
+            type="button"
+            aria-label="항만 정보"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="해도"
+          >
+            <i data-lucide="anchor" class="h-6 w-6"></i>
+          </button>
+
+          <!-- 16 출항 준비 -->
+          <button
+            type="button"
+            aria-label="항만 정보"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="출항 준비"
+          >
+            <i data-lucide="hard-drive-download" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 17 전체 화면 -->
+          <button
+            type="button"
+            aria-label="전체 화면"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="전체 화면"
+          >
+            <i data-lucide="maximize" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 18 현재 위치 -->
+          <button
+            type="button"
+            aria-label="현재 위치"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="함정 위치"
+          >
+            <i data-lucide="locate-fixed" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 19 거리 측정 -->
+          <button
+            type="button"
+            aria-label="거리 측정"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="거리 측정"
+          >
+            <i data-lucide="ruler" class="h-6 w-6"></i>
+          </button>
+
+          <!-- 20 비AIS 출연 격자 -->
+          <!-- <button
+            type="button"
+            aria-label="거리 측정"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="비AIS 출연 격자"
+          >
+            <i data-lucide="grid-3x3" class="h-6 w-6"></i>
+          </button> -->
+
+
+          <!-- 21 확대 -->
+          <button
+            type="button"
+            aria-label="확대"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="확대"
+          >
+            <i data-lucide="plus" class="h-6 w-6"></i>
+          </button>
+
+
+          <!-- 21 축소 -->
+          <button
+            type="button"
+            aria-label="축소"
+            class="map-toolbar-item
+              flex h-10 w-10 shrink-0
+              items-center justify-center
+              bg-[#050505]
+              text-[#E7E7E7]
+              hover:bg-[#232323]
+              hover:text-white
+            "
+            data-tooltip="축소"
+          >
+            <i data-lucide="minus" class="h-6 w-6"></i>
+          </button>
+
+        </div>
+      </div>
+
+      </section>
+
+
+      <!-- =====================================================
+        SITUATION SIDE PANEL
+    ====================================================== -->
+    <aside
+    id="situationPanel"
+    class="
+      relative z-30
+      flex w-0 shrink-0
+      flex-col
+      overflow-visible
+      bg-transparent
+    "
+  >
+
+  
+
+    <!-- Expanded Header -->
+    <div
+        id="situationPanelHeader"
+        class="
+        hidden
+        flex h-[54px] shrink-0
+        items-center justify-between
+        border-b border-[#3D3D3D]
+        px-5
+        "
+    >
+        <h2 class="text-[18px] font-semibold">
+        상황 요약
+        </h2>
+
+        <button
+        id="situationPanelToggle"
+        type="button"
+        aria-expanded="false"
+        class="text-[#E7E7E7] hover:text-white"
+        >
+        <i
+            data-lucide="arrow-right-from-line"
+            class="h-5 w-5"
+        ></i>
+        </button>
+    </div>
+
+
+    <!-- Expanded Content -->
+    <div
+        id="situationPanelContent"
+        class="
+        hidden
+        panel-scroll
+        min-h-0 flex-1
+        overflow-y-auto
+        p-3
+        "
+    >
+
+
+         <!-- =================================================
+            위험선박
+        ================================================== -->
+        <section class="mb-3">
+
+          <div
+            class="
+              flex h-10 w-full
+              items-center
+              rounded
+              bg-[#191919]
+              px-3
+            "
+          >
+
+            <!-- 왼쪽 : Accordion -->
+            <button
+              type="button"
+              class="
+                accordion-toggle
+                flex min-w-0 flex-1
+                items-center
+                text-left
+              "
+              aria-expanded="true"
+              aria-controls="dangerShipContent"
+              data-accordion-target="dangerShipContent"
+            >
+              <i
+                data-lucide="chevron-up"
+                class="
+                  accordion-icon
+                  mr-2 h-4 w-4
+                  shrink-0
+                  transition-transform duration-200
+                "
+              ></i>
+
+              <span
+                class="
+                  whitespace-nowrap
+                  text-lg font-semibold
+                "
+              >
+                위험선박
+              </span>
+            </button>
+
+
+            <!-- 오른쪽 -->
+            <div
+              class="
+                ml-3
+                flex shrink-0
+                items-center gap-2
+              "
+            >
+
+              <!-- 전체 / 위험 Toggle -->
+              <div
+                class="
+                  inline-flex h-7
+                  overflow-hidden
+                  rounded
+                  border border-[#3D3D3D]
+                  bg-[#050505]
+                "
+                role="group"
+                aria-label="위험선박 필터"
+              >
+
+                <!-- 전체 -->
+                <button
+                  type="button"
+                  class="
+                    danger-ship-filter
+                    flex h-full min-w-[42px]
+                    items-center justify-center
+                    bg-[#E7E7E7]
+                    px-2
+                    text-sm font-semibold
+                    text-black
+                  "
+                  data-filter="all"
+                  aria-pressed="true"
+                >
+                  전체
+                </button>
+
+                <!-- 위험 -->
+                <button
+                  type="button"
+                  class="
+                    danger-ship-filter
+                    flex h-full min-w-[42px]
+                    items-center justify-center
+                    border-l border-[#3D3D3D]
+                    bg-[#050505]
+                    px-2
+                    text-sm font-semibold
+                    text-[#777777]
+                  "
+                  data-filter="danger"
+                  aria-pressed="false"
+                >
+                  위험
+                </button>
+
+              </div>
+
+
+              <!-- Count -->
+              <span
+                class="
+                  min-w-[42px]
+                  text-right
+                  text-[16px] font-semibold
+                  text-[#E5514A]
+                "
+              >
+                800건
+              </span>
+
+            </div>
+
+          </div>
+
+
+            <!-- Accordion Content -->
+            <div
+                id="dangerShipContent"
+                class="
+                overflow-hidden
+                transition-all duration-200
+                "
+            >
+
+                <!-- =================================================
+                  위험선박 TABLE
+              ================================================== -->
+
+              <!-- Table Header -->
+              <div
+                class="
+                  grid
+                  grid-cols-[1.5fr_1.0fr_.6fr_.7fr]
+                  items-center
+                  border-b border-[#232323]
+                  px-2 py-3
+                  text-base
+                  text-[#777777]
+                "
+              >
+                <span>대상</span>
+                <span>국적</span>
+                <span>속력</span>
+                <span>조업상태</span>
+              </div>
+
+
+              <!-- ROW 01 -->
+              <button
+                type="button"
+                class="
+                  relative
+                  grid w-full
+                  grid-cols-[1.5fr_1.0fr_.6fr_.7fr]
+                  items-center
+                  border-b border-[#232323]
+                  px-2 py-3
+                  text-left
+                  hover:bg-[#191919]
+                "
+              >
+
+                <!-- 대상 : 3줄 -->
+                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+
+                  <span
+                    class="
+                      rounded-full
+                      bg-[#D07233]
+                      px-2.5 py-[3px]
+                      text-base font-semibold
+                      leading-none text-white
+                    "
+                  >
+                    R-03
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-base font-medium
+                      text-[#E7E7E7]
+                    "
+                  >
+                    412204480
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-[15px]
+                      text-[#777777]
+                    "
+                  >
+                    YUN STAR
+                  </span>
+
+                </div>
+
+                <!-- 국적 -->
+                <div class="text-base text-[#E7E7E7]">
+                  대한민국
+                </div>
+
+                <!-- 속력 -->
+                <div class="text-base text-[#E7E7E7]">
+                  0.2
+                </div>
+
+                <!-- 조업상태 -->
+                <div class="text-base text-[#E7E7E7]">
+                  조업중
+                </div>
+              </button>
+
+
+              <!-- ROW 02 -->
+              <button
+                type="button"
+                class="
+                  relative
+                  grid w-full
+                  grid-cols-[1.5fr_1.0fr_.6fr_.7fr]
+                  items-center
+                  border-b border-[#232323]
+                  px-2 py-3
+                  text-left
+                  hover:bg-[#191919]
+                "
+              >
+
+                <!-- 대상 : 3줄 -->
+                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+
+                  <span
+                    class="
+                      rounded-full
+                      bg-[#D07233]
+                      px-2.5 py-[3px]
+                      text-base font-semibold
+                      leading-none text-white
+                    "
+                  >
+                    R-03
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-base font-medium
+                      text-[#E7E7E7]
+                    "
+                  >
+                    412204480
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-[15px]
+                      text-[#777777]
+                    "
+                  >
+                    P-119
+                  </span>
+
+                </div>
+
+                <!-- 국적 -->
+                <div class="text-base text-[#E7E7E7]">
+                  대한민국
+                </div>
+
+                <!-- 속력 -->
+                <div class="text-base text-[#E7E7E7]">
+                  0.1
+                </div>
+
+                <!-- 조업상태 -->
+                <div class="text-base text-[#E7E7E7]">
+                  조업중
+                </div>
+              </button>
+
+
+              <!-- ROW 03 -->
+              <button
+                type="button"
+                class="
+                  relative
+                  grid w-full
+                  grid-cols-[1.5fr_1.0fr_.6fr_.7fr]
+                  items-center
+                  border-b border-[#232323]
+                  px-2 py-3
+                  text-left
+                  hover:bg-[#191919]
+                "
+              >
+ 
+
+                <!-- 대상 : 3줄 -->
+                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+
+                  <span
+                    class="
+                      rounded-full
+                      bg-[#D07233]
+                      px-2.5 py-[3px]
+                      text-base font-semibold
+                      leading-none text-white
+                    "
+                  >
+                    R-03
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-base font-medium
+                      text-[#E7E7E7]
+                    "
+                  >
+                    412204480
+                  </span>
+
+                  <span
+                    class="
+                      w-full truncate
+                      text-[15px]
+                      text-[#777777]
+                    "
+                  >
+                    KCG503
+                  </span>
+
+                </div>
+
+                <!-- 국적 -->
+                <div class="text-base text-[#E7E7E7]">
+                  대한민국
+                </div>
+
+                <!-- 속력 -->
+                <div class="text-base text-[#E7E7E7]">
+                  0
+                </div>
+
+                <!-- 조업상태 -->
+                <div class="text-base text-[#E7E7E7]">
+                  조업중
+                </div>
+              </button>
+
+            </section>
+
+
+          <!-- =================================================
+                해역 위험지수
+            ================================================== -->
+            <section class="mb-3">
+
+            <!-- Accordion Header -->
+            <button
+                type="button"
+                class="
+                accordion-toggle
+                flex h-10 w-full
+                items-center
+                rounded
+                bg-[#191919]
+                px-3
+                "
+                aria-expanded="true"
+                aria-controls="riskIndexContent"
+                data-accordion-target="riskIndexContent"
+            >
+
+                <i
+                data-lucide="chevron-up"
+                class="
+                    accordion-icon
+                    mr-2 h-4 w-4
+                    transition-transform duration-200
+                "
+                ></i>
+
+                <span class="text-lg font-semibold">
+                해역 위험지수
+                </span>
+
+                <span
+                class="
+                    ml-auto
+                    text-[16px] font-semibold
+                    text-[#777777]
+                "
+                >
+                16 • 관심
+                </span>
+
+            </button>
+
+
+            <!-- Accordion Content -->
+            <div
+                id="riskIndexContent"
+                class="
+                overflow-hidden
+                transition-all duration-200
+                "
+            >
+
+                <div class="px-2 py-3">
+
+                <!-- Title -->
+                <div class="flex items-center justify-between">
+
+                    <strong class="text-base">
+                    인천항 접근수로
+                    </strong>
+
+                    <span class="text-sm text-[#777777]">
+                    10초 주기 재산출
+                    </span>
+
+                </div>
+
+
+                <!-- Gauge + Score -->
+                <div class="mt-5 flex items-center gap-6">
+
+                    <!-- Gauge -->
+                    <div
+                    class="
+                        relative
+                        h-[105px] w-[145px]
+                        shrink-0
+                        mb-10
+                    "
+                    >
+
+                    <svg
+                        class="absolute inset-0 h-full w-full"
+                        viewBox="0 0 145 105"
+                        fill="none"
+                    >
+
+                        <!-- Background -->
+                        <path
+                        d="
+                            M 16 82
+                            A 56 56 0 0 1 128 82
+                        "
+                        stroke="#191919"
+                        stroke-width="16"
+                        stroke-linecap="round"
+                        fill="none"
+                        />
+
+                        <!-- Progress -->
+                        <path
+                        d="
+                            M 16 82
+                            A 56 56 0 0 1 128 82
+                        "
+                        stroke="#FFFFFF"
+                        stroke-width="16"
+                        stroke-linecap="round"
+                        fill="none"
+                        pathLength="100"
+                        stroke-dasharray="20 100"
+                        />
+
+                        <!-- Current Point -->
+                        <circle
+                        cx="37"
+                        cy="43"
+                        r="10"
+                        fill="#8A8A8A"
+                        stroke="#FFFFFF"
+                        stroke-width="1.5"
+                        />
+
+                    </svg>
+
+
+                    <!-- Value -->
+                    <div
+                        class="
+                        absolute inset-x-0 top-[48px]
+                        text-center
+                        "
+                    >
+
+                        <strong
+                        class="
+                            block
+                            text-[34px] font-semibold
+                            leading-none
+                            mt-2
+                        "
+                        >
+                        20
+                        </strong>
+
+                        <span
+                        class="
+                            mt-3 block
+                            whitespace-nowrap
+                            text-lg
+                            leading-none
+                        "
+                        >
+                        100 · 관심
+                        </span>
+
+                    </div>
+
+                    </div>
+
+
+                    <!-- Score -->
+                    <div class="flex-1 space-y-3 text-base">
+
+                    <div class="flex justify-between">
+                        <span class="text-[#ADADAD]">
+                        행동축 <small>0.35</small>
+                        </span>
+
+                        <strong>23</strong>
+                    </div>
+
+
+                    <div class="flex justify-between">
+                        <span class="text-[#ADADAD]">
+                        선박축 <small>0.25</small>
+                        </span>
+
+                        <strong>30</strong>
+                    </div>
+
+
+                    <div class="flex justify-between">
+                        <span class="text-[#ADADAD]">
+                        공간축 <small>0.25</small>
+                        </span>
+
+                        <strong>21</strong>
+                    </div>
+
+
+                    <div class="flex justify-between">
+                        <span class="text-[#ADADAD]">
+                        시간축 <small>0.15</small>
+                        </span>
+
+                        <strong>0</strong>
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Highest Risk -->
+                <div
+                    class="
+                    mt-4
+                    flex justify-between
+                    border-t border-[#232323]
+                    pt-3
+                    text-base
+                    "
+                >
+
+                    <span class="text-[#777777]">
+                    최고 위험
+                    </span>
+
+                    <strong>
+                    412230884
+                    </strong>
+
+                    <strong class="text-[#E5514A]">
+                    20
+                    </strong>
+
+                </div>
+
+                </div>
+
+            </div>
+
+            </section>
+
+
+          <!-- =================================================
+            WEATHER
+        ================================================== -->
+        <section class="mb-3">
+
+        <!-- Accordion Header -->
+        <button
+            type="button"
+            class="
+            accordion-toggle
+            flex h-10 w-full
+            items-center
+            rounded
+            bg-[#191919]
+            px-3
+            "
+            aria-expanded="true"
+            aria-controls="weatherContent"
+            data-accordion-target="weatherContent"
+        >
+
+            <i
+            data-lucide="chevron-up"
+            class="
+                accordion-icon
+                mr-2 h-4 w-4
+                transition-transform duration-200
+            "
+            ></i>
+
+            <span class="text-lg font-semibold">
+            기상 | 인천 앞바다
+            </span>
+
+            <span class="ml-auto text-base text-[#777777]">
+            16:00
+            </span>
+
+        </button>
+
+
+        <!-- Accordion Content -->
+        <div
+            id="weatherContent"
+            class="
+            overflow-hidden
+            transition-all duration-200
+            "
+        >
+
+            <div class="grid grid-cols-2">
+
+            <!-- 풍속 -->
+            <div
+                class="
+                flex h-[38px]
+                items-center justify-between
+                border-b border-r border-[#232323]
+                px-2
+                text-base
+                "
+            >
+
+                <span>
+                풍속
+                </span>
+
+                <strong class="font-semibold">
+                3
+
+                <small
+                    class="
+                    text-sm
+                    font-normal
+                    text-[#777777]
+                    "
+                >
+                    m/s
+                </small>
+                </strong>
+
+            </div>
+
+
+            <!-- 파고 -->
+            <div
+                class="
+                flex h-[38px]
+                items-center justify-between
+                
+                px-2
+                text-base
+                "
+            >
+
+                <span>
+                파고
+                </span>
+
+                <strong class="font-semibold">
+                0.9
+
+                <small
+                    class="
+                    text-sm
+                    font-normal
+                    text-[#777777]
+                    "
+                >
+                    m
+                </small>
+                </strong>
+
+            </div>
+
+
+            <!-- 시정 -->
+            <div
+                class="
+                flex h-[38px]
+                items-center justify-between
+                border-b border-r border-[#232323]
+                px-2
+                text-base
+                "
+            >
+
+                <span>
+                시정
+                </span>
+
+                <strong class="font-semibold">
+                14
+
+                <small
+                    class="
+                    text-sm
+                    font-normal
+                    text-[#777777]
+                    "
+                >
+                    km
+                </small>
+                </strong>
+
+            </div>
+
+
+            <!-- 강수확률 -->
+            <div
+                class="
+                flex h-[38px]
+                items-center justify-between
+                
+                px-2
+                text-base
+                "
+            >
+
+                <span>
+                강수확률
+                </span>
+
+                <strong class="font-semibold">
+                0
+
+                <small
+                    class="
+                    text-sm
+                    font-normal
+                    text-[#777777]
+                    "
+                >
+                    %
+                </small>
+                </strong>
+
+            </div>
+
+            </div>
+
+
+            <!-- Success Status -->
+            <div
+            class="
+                mt-2
+                flex h-8
+                items-center
+                rounded
+                border border-[#4DAA73]
+                px-3
+                text-base font-medium
+                text-[#4DAA73]
+            "
+            >
+
+            <span
+                class="
+                mr-2
+                h-2 w-2
+                rounded-full
+                bg-[#4DAA73]
+                "
+            ></span>
+
+            해상 작업 가능
+
+            </div>
+
+        </div>
+
+        </section>
+
+
+          <!-- =================================================
+            ALERT HISTORY
+        ================================================== -->
+        <section>
+
+        <!-- Accordion Header -->
+        <button
+            type="button"
+            class="
+            accordion-toggle
+            flex h-10 w-full
+            items-center
+            rounded
+            bg-[#191919]
+            px-3
+            "
+            aria-expanded="true"
+            aria-controls="alertHistoryContent"
+            data-accordion-target="alertHistoryContent"
+        >
+
+            <i
+            data-lucide="chevron-up"
+            class="
+                accordion-icon
+                mr-2 h-4 w-4
+                transition-transform duration-200
+            "
+            ></i>
+
+            <span class="text-lg font-semibold">
+            경보 이력
+            </span>
+
+        </button>
+
+
+        <!-- Accordion Content -->
+        <div
+            id="alertHistoryContent"
+            class="
+            overflow-hidden
+            transition-all duration-200
+            "
+        >
+
+            <!-- Row 01 -->
+            <div
+            class="
+                grid
+                grid-cols-[42px_8px_1fr]
+                items-center
+                gap-2
+                
+                px-2 py-3
+                text-sm
+            "
+            >
+
+            <time class="text-[#777777]">
+                14:10
+            </time>
+
+            <span
+                class="
+                h-2 w-2
+                shrink-0
+                rounded-full
+                bg-[#E5514A]
+                "
+            ></span>
+
+            <p
+                class="
+                m-0
+                leading-[1.35]
+                text-[#E7E7E7]
+                "
+            >
+                불법조업 의심-트롤 조업 패턴 /
+                어선 · K-2015
+            </p>
+
+            </div>
+
+
+            <!-- Row 02 -->
+            <div
+            class="
+                grid
+                grid-cols-[42px_8px_1fr]
+                items-center
+                gap-2
+                
+                px-2 py-3
+                text-sm
+            "
+            >
+
+            <time class="text-[#777777]">
+                14:05
+            </time>
+
+            <span
+                class="
+                h-2 w-2
+                shrink-0
+                rounded-full
+                bg-[#E5514A]
+                "
+            ></span>
+
+            <p
+                class="
+                m-0
+                leading-[1.35]
+                text-[#E7E7E7]
+                "
+            >
+                고속 도주 의심-단속정 접근 후 가속 ·
+                SAEBYEOL
+            </p>
+
+            </div>
+
+        </div>
+
+        <!-- =================================================
+          더 보기
+      ================================================== -->
+      <div class="px-2 pt-2 pb-1">
+        <button
+          type="button"
+          class="
+            flex h-10 w-full
+            items-center justify-center
+            rounded
+            border border-[#3D3D3D]
+            bg-[#050505]
+            text-base font-semibold
+            text-[#ADADAD]
+            hover:bg-[#191919]
+            hover:text-[#E7E7E7]
+          "
+        >
+          더 보기 (98건 남음)
+        </button>
+      </div>
+
+        </section>
+
+        </div>
+
+      <!-- Collapsed Button -->
+        <button
+        id="situationPanelCollapsed"
+        type="button"
+        disabled
+        class="
+            absolute right-0 top-3 z-40
+            w-[44px]
+            flex-col
+            overflow-hidden
+            rounded
+        "
+        >
+        <!-- Arrow -->
+        <span
+            class="
+            flex h-[44px] w-full
+            items-center justify-center
+            border border-[#3D3D3D]
+            bg-[#050505]
+            text-white
+            "
+        >
+            <i
+            data-lucide="arrow-left-from-line"
+            class="h-6 w-6"
+            ></i>
+        </span>
+
+        <!-- Danger Summary -->
+        <span
+            class="
+            flex min-h-[140px] w-full
+            flex-col
+            items-center justify-center
+            bg-[#E5514A]
+            px-2
+            text-center text-white
+            "
+        >
+            <span
+            class="
+                text-base font-semibold
+                leading-[1.4]
+            "
+            >
+            위<br>
+            험<br>
+            선<br>
+            박
+            </span>
+
+            <strong
+            class="
+                mt-2
+                text-base font-semibold
+                leading-none
+            "
+            >
+            800
+            </strong>
+        </span>
+        </button>
+
+         <!-- =====================================================
+            SITUATION COLLAPSED BUTTON
+            1100 이하 전용
+        ====================================================== -->
+        <button
+          id="situationPanelCollapsedMobile"
+          type="button"
+          disabled
+          aria-label="상황요약 펼치기"
+          class="
+            absolute
+            left-5 top-0
+            z-40
+            hidden
+            h-[44px]
+            overflow-hidden
+            rounded-b-[4px]
+          "
+        >
+
+          <!-- 빨간 영역 -->
+          <span
+            class="
+              flex h-full
+              items-center
+              gap-2
+              bg-[#E5514A]
+              px-4
+              text-white
+            "
+          >
+            <span
+              class="
+                whitespace-nowrap
+                text-base font-semibold
+              "
+            >
+              위험선박
+            </span>
+
+            <strong
+              class="
+                whitespace-nowrap
+                text-base font-semibold
+              "
+            >
+              800
+            </strong>
+          </span>
+
+
+          <!-- 화살표 영역 -->
+          <span
+            class="
+              flex h-full w-[52px]
+              items-center justify-center
+              border-l border-[#232323]
+              bg-[#050505]
+              text-white
+            "
+          >
+            <i
+              data-lucide="arrow-down-from-line"
+              class="h-5 w-5"
+            ></i>
+          </span>
+
+        </button>
+
+        </aside>
+
+    </main>
+
+  </div>
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/ship-common.js"></script>
+
+</body>
+</html>

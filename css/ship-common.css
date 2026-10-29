@@ -1,0 +1,3973 @@
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+
+:root {
+  --color-main-950: #050505;
+  --color-main-900: #191919;
+  --color-main-800: #232323;
+
+  --color-sub-700: #2B2B2B;
+  --color-sub-600: #3D3D3D;
+  --color-sub-100: #E7E7E7;
+
+  --color-disabled-600: #777777;
+  --color-disabled-400: #ADADAD;
+
+  --color-danger: #E5514A;
+  --color-success: #4DAA73;
+  --color-warning: #F6C964;
+  --color-orange: #D07233;
+
+  --color-text-black: #000000;
+  --color-text-white: #FFFFFF;
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   MAP BACKGROUND
+   실제 지도 SDK 적용 시 이 클래스는 제거 가능
+========================================================= */
+
+.map-placeholder {
+  background:
+    linear-gradient(
+      rgba(5, 5, 5, 0.15),
+      rgba(5, 5, 5, 0.15)
+    ),
+    url("../img/bg.jpg")
+    center center / cover no-repeat;
+}
+
+
+/* =========================================================
+   RISK GAUGE
+   반원 형태 때문에 pseudo-element만 CSS 사용
+========================================================= */
+
+.gauge-ring {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+
+  width: 120px;
+  height: 60px;
+
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.gauge-ring::before {
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  border: 12px solid var(--color-main-900);
+  border-radius: 9999px;
+}
+
+
+/* =========================================================
+   PANEL SCROLLBAR
+========================================================= */
+
+.panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--color-sub-600)
+    var(--color-main-950);
+}
+
+.panel-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-scroll::-webkit-scrollbar-track {
+  background-color: var(--color-main-950);
+}
+
+.panel-scroll::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--color-sub-600);
+}
+
+.panel-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-disabled-600);
+}
+
+
+/* =========================================================
+   MAP TOOLBAR TOOLTIP
+========================================================= */
+
+.map-toolbar-item {
+  position: relative;
+  overflow: visible;
+}
+
+
+/* =========================================================
+   TOOLTIP
+========================================================= */
+
+.map-toolbar-item::after {
+  content: attr(data-tooltip);
+
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+
+  transform:
+    translateY(-50%)
+    translateX(4px);
+
+  z-index: 9999;
+
+  width: max-content;
+  max-width: 180px;
+
+  padding: 6px 10px;
+
+  border: 1px solid var(--color-sub-600);
+  border-radius: 4px;
+
+  background-color: var(--color-main-950);
+
+  color: var(--color-text-white);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    visibility 0.15s ease;
+}
+
+
+/* =========================================================
+   TOOLTIP ARROW
+   툴팁 우측에 붙는 화살표
+========================================================= */
+
+.map-toolbar-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  /*
+    tooltip 우측 끝이
+    button 기준 -10px 위치이므로
+
+    8x8 사각형의 중심도
+    같은 위치에 맞춤
+  */
+  right: calc(100% + 6px);
+
+  width: 8px;
+  height: 8px;
+
+  z-index: 10000;
+
+  background-color: var(--color-main-950);
+
+  /*
+    회전 후 화살표 외곽선이
+    tooltip border와 자연스럽게 연결됨
+  */
+  border-top: 1px solid var(--color-sub-600);
+  border-right: 1px solid var(--color-sub-600);
+
+  transform:
+    translateY(-50%)
+    rotate(45deg);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.map-toolbar-item:hover::after,
+.map-toolbar-item:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.map-toolbar-item:hover::after {
+  transform:
+    translateY(-50%)
+    translateX(0);
+}
+
+
+/* =========================================================
+   HEADER RESPONSIVE
+   1650px 이하 : Utility -> Hamburger
+========================================================= */
+
+#headerUtilityDesktop {
+  display: flex;
+}
+
+#headerUtilityCompact {
+  display: none;
+}
+
+/* =========================================================
+   1651px 이상
+   기존 배치 유지
+========================================================= */
+
+#mapScaleDesktop {
+  display: block;
+}
+
+#legendResponsiveScale {
+  display: none;
+}
+
+#mapBottomInfoMobile {
+  display: none;
+}
+
+
+#mapBottomInfoDesktop {
+  display: flex;
+}
+
+#mapBottomInfoResponsive {
+  display: none;
+}
+
+
+/* 1650 이하 : 우측 Utility만 Compact */
+#headerUtilityDesktop {
+  display: flex;
+}
+
+#headerUtilityCompact {
+  display: none;
+}
+
+#headerAllCompact {
+  display: none;
+}
+
+#mapBottomInfo {
+    left: auto;
+    right: 24px;
+    transform: none;
+  }
+
+#weatherTabWeather {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.weather-forecast-scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#vesselDbContent {
+  position: relative;
+}
+
+#vesselDbPagination {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+
+/* =========================================
+   WEATHER / SITUATION PANEL HEADER
+========================================= */
+
+#weatherPanel > div:first-child,
+#situationPanelHeader {
+  height: 54px;
+  min-height: 54px;
+  flex-shrink: 0;
+}
+
+
+
+/* =========================================
+   WEATHER ALERT AREA TOGGLE
+========================================= */
+
+#weatherPanel .weather-alert-toggle-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 12px 16px 0;
+}
+
+#weatherPanel .weather-alert-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 4px 5px 4px 10px;
+  border-radius: 9999px;
+  background: #E7E7E7;
+  color: #191919;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+#weatherPanel .weather-alert-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+#weatherPanel .weather-alert-toggle-track {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #777777;
+  transition: background 0.2s;
+}
+
+#weatherPanel .weather-alert-toggle-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #000000;
+  transition: transform 0.2s;
+}
+
+#weatherPanel .weather-alert-toggle input:checked
+  + .weather-alert-toggle-track {
+  background: #050505;
+}
+
+#weatherPanel .weather-alert-toggle input:checked
+  + .weather-alert-toggle-track::after {
+  transform: translateX(0);
+}
+
+#weatherPanel .weather-alert-toggle input:focus-visible
+  + .weather-alert-toggle-track {
+  outline: 2px solid #0061F0;
+  outline-offset: 3px;
+}
+
+/* 토글과 탭 사이 간격 */
+#weatherPanel [role="tablist"] {
+  margin-top: 12px;
+}
+
+
+/* =====================================================
+   SITUATION SUMMARY — REDESIGN
+===================================================== */
+
+#situationPanel .situation-section {
+  margin-bottom: 14px;
+  min-width: 0;
+}
+
+#situationPanel .situation-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 4px;
+  background: #191919;
+}
+
+#situationPanel .situation-section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #E7E7E7;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+#situationPanel .situation-section-title .accordion-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+#situationPanel .situation-section-total {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  color: #777777;
+  font-size: 14px;
+}
+
+#situationPanel .situation-section-total strong {
+  color: #E7E7E7;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#situationPanel .situation-section-meta {
+  flex-shrink: 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+/* =====================================================
+   VESSEL FILTERS
+===================================================== */
+
+#situationPanel .situation-vessel-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 2px;
+}
+
+#situationPanel .situation-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#situationPanel .situation-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid #3D3D3D;
+  border-radius: 999px;
+  background: #050505;
+  color: #E7E7E7;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+#situationPanel .situation-filter-chip:hover {
+  background: #232323;
+}
+
+#situationPanel .situation-filter-chip[aria-pressed="true"] {
+  border-color: #E7E7E7;
+  background: #232323;
+}
+
+#situationPanel .situation-mode-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #E7E7E7;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#situationPanel .situation-mode-control input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+#situationPanel .situation-mode-track {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #3D3D3D;
+  transition: background 0.2s;
+}
+
+#situationPanel .situation-mode-track::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #B5B5B5;
+  transition: transform 0.2s;
+}
+
+#situationPanel .situation-mode-control input:checked
+  + .situation-mode-track {
+  background: #156BB7;
+}
+
+#situationPanel .situation-mode-control input:checked
+  + .situation-mode-track::before {
+  transform: translateX(16px);
+  background: #FFFFFF;
+}
+
+#situationPanel .situation-mode-control input:focus-visible
+  + .situation-mode-track {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   SEVERITY TABS
+===================================================== */
+
+#situationPanel .situation-severity-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 4px;
+  border-radius: 8px;
+  background: #191919;
+}
+
+#situationPanel .situation-severity-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  height: 38px;
+  border-radius: 4px;
+  color: #777777;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+#situationPanel .situation-severity-tab:hover {
+  color: #E7E7E7;
+}
+
+#situationPanel .situation-severity-tab.is-active {
+  background: #232323;
+  color: #E7E7E7;
+  box-shadow: inset 0 -2px 0 #E5514A;
+}
+
+#situationPanel .severity-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+#situationPanel .severity-critical {
+  background: #E5514A;
+}
+
+#situationPanel .severity-warning {
+  background: #D07233;
+}
+
+#situationPanel .severity-caution {
+  background: #F6C964;
+}
+
+#situationPanel .severity-count {
+  color: inherit;
+}
+
+/* =====================================================
+   VESSEL LIST
+===================================================== */
+
+#situationPanel .situation-vessel-list {
+  min-width: 0;
+}
+
+#situationPanel .situation-vessel-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid #232323;
+}
+
+#situationPanel .situation-vessel-card[hidden] {
+  display: none;
+}
+
+#situationPanel .situation-risk-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  min-height: 50px;
+  border-radius: 4px;
+  background: #321616;
+  color: #E5514A;
+}
+
+#situationPanel .situation-risk-box strong {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#situationPanel .situation-risk-box span {
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+#situationPanel .situation-vessel-details {
+  flex: 1;
+  min-width: 0;
+}
+
+#situationPanel .situation-vessel-details h3 {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+#situationPanel .situation-vessel-details h3 span {
+  font-size: 13px;
+}
+
+#situationPanel .situation-vessel-details p {
+  margin-top: 3px;
+  color: #777777;
+  font-size: 14px;
+}
+
+#situationPanel .situation-vessel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+#situationPanel .situation-tag {
+  max-width: 100%;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: #232323;
+  color: #999999;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+#situationPanel .situation-tag-danger {
+  background: #321616;
+  color: #E5514A;
+}
+
+#situationPanel .situation-vessel-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #3D3D3D;
+  border-radius: 4px;
+  color: #E7E7E7;
+}
+
+#situationPanel .situation-vessel-plus:hover {
+  background: #232323;
+}
+
+#situationPanel .situation-vessel-empty {
+  padding: 28px 12px;
+  color: #777777;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =====================================================
+   WEATHER ALERT
+===================================================== */
+
+#situationPanel .situation-weather-content {
+  padding-top: 10px;
+}
+
+#situationPanel .situation-weather-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 48px;
+  margin-bottom: 6px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: #191919;
+}
+
+#situationPanel .situation-weather-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #E7E7E7;
+  font-size: 14px;
+}
+
+#situationPanel .situation-weather-name svg {
+  flex-shrink: 0;
+  color: #47B5C7;
+}
+
+#situationPanel .situation-weather-name span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#situationPanel .situation-weather-badge {
+  flex-shrink: 0;
+  padding: 4px 6px;
+  border: 1px solid #F6C964;
+  border-radius: 4px;
+  color: #F6C964;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#situationPanel .situation-weather-more {
+  padding: 6px 4px;
+  color: #777777;
+  font-size: 14px;
+  text-align: right;
+}
+
+/* =====================================================
+   ALERT HISTORY
+===================================================== */
+
+#situationPanel .situation-history-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  color: #999999;
+  font-size: 14px;
+}
+
+#situationPanel .situation-history-more:hover {
+  color: #FFFFFF;
+}
+
+#situationPanel .situation-history-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  color: #777777;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+
+/* =====================================================
+   SITUATION PANEL — COLLAPSED RESTORE
+===================================================== */
+
+#situationPanelCollapsed {
+  width: 44px;
+  min-width: 44px;
+  height: auto;
+}
+
+#situationPanelCollapsed .situation-collapsed-summary {
+  display: flex;
+  width: 44px;
+  min-height: 140px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-radius: 0 0 4px 4px;
+  background: #E5514A;
+  color: #FFFFFF;
+}
+
+#situationPanelCollapsed .situation-collapsed-label {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+}
+
+#situationPanelCollapsed .situation-collapsed-summary strong {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   MOBILE COLLAPSED BUTTON
+===================================================== */
+
+#situationPanelCollapsedMobile {
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.situation-mobile-collapsed-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  background: #E5514A;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.situation-mobile-collapsed-arrow {
+  display: flex;
+  width: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #3D3D3D;
+  background: #050505;
+  color: #FFFFFF;
+}
+
+/* =====================================================
+   MOBILE SUMMARY
+===================================================== */
+
+.situation-mobile-summary {
+  width: 100%;
+  min-height: 54px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: #050505;
+}
+
+.situation-mobile-stat,
+.situation-mobile-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 54px;
+  border-right: 1px solid #3D3D3D;
+  border-bottom: 1px solid #3D3D3D;
+  color: #777777;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.situation-mobile-stat strong {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.situation-mobile-stat:first-child strong,
+.situation-mobile-stat:nth-child(2) strong {
+  color: #E5514A;
+}
+
+.situation-mobile-stat.is-active {
+  background: #E7E7E7;
+  color: #050505;
+}
+
+.situation-mobile-close {
+  color: #E7E7E7;
+}
+
+/* 상황 요약 모바일 상단 메뉴 */
+#situationMobileSummary {
+  display: none;
+}
+
+
+/* =========================================
+   MAP SEARCH / JURISDICTION
+========================================= */
+
+.map-search-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.jurisdiction {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #3D3D3D;
+  border-radius: 9999px;
+  background: #050505;
+  color: #E7E7E7;
+}
+
+.jurisdiction > svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #ADADAD;
+  pointer-events: none;
+}
+
+.jurisdiction-label {
+  flex-shrink: 0;
+  color: #ADADAD;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.jurisdiction-select {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #E7E7E7;
+  font-family: "Pretendard", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jurisdiction-select option {
+  background: #191919;
+  color: #FFFFFF;
+}
+
+.jurisdiction:focus-within {
+  border-color: #E7E7E7;
+}
+
+.jurisdiction-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* 지도 위 관할 선택 */
+.jurisdiction--map {
+  width: 272px;
+  flex: 0 1 272px;
+}
+
+/* 작은 화면 관할 선택 */
+.jurisdiction--compact {
+  display: none;
+}
+
+
+
+/* =========================================
+   SeaOn - Tracking Session
+   Page scoped styles
+========================================= */
+
+.page-tracking {
+  --tracking-bg: #050505;
+  --tracking-panel: #191919;
+  --tracking-line: #3d3d3d;
+  --tracking-text: #e7e7e7;
+  --tracking-muted: #adadad;
+
+  margin: 0;
+  background: var(--tracking-bg);
+  color: var(--tracking-text);
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-size: 16px;
+}
+
+.page-tracking *,
+.page-tracking *::before,
+.page-tracking *::after {
+  box-sizing: border-box;
+}
+
+.page-tracking button,
+.page-tracking input,
+.page-tracking select {
+  font: inherit;
+}
+
+.page-tracking button {
+  cursor: pointer;
+}
+
+.page-tracking button:focus-visible,
+.page-tracking input:focus-visible,
+.page-tracking select:focus-visible,
+.page-tracking a:focus-visible {
+  outline: 2px solid #9ccaff;
+  outline-offset: 2px;
+}
+
+.page-tracking [hidden] {
+  display: none !important;
+}
+
+.page-tracking .tracking-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page-tracking .tracking-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+}
+
+/* =========================================
+   Header
+========================================= */
+
+.page-tracking .tracking-header {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  height: 60px;
+  flex-shrink: 0;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--tracking-line);
+  background: #050505;
+}
+
+.page-tracking .tracking-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.page-tracking .tracking-logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.page-tracking .tracking-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 100%;
+  min-width: 0;
+}
+
+.page-tracking .tracking-nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 6px;
+  color: var(--tracking-muted);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.page-tracking .tracking-nav-link:hover,
+.page-tracking .tracking-nav-link.is-active {
+  color: #fff;
+}
+
+.page-tracking .tracking-nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  left: 6px;
+  height: 3px;
+  background: #e7e7e7;
+}
+
+.page-tracking .tracking-nav-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.page-tracking .tracking-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.page-tracking .tracking-clock {
+  color: #e7e7e7;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.page-tracking .tracking-timezone {
+  display: flex;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #3d3d3d;
+}
+
+.page-tracking .tracking-timezone button {
+  padding: 3px 5px;
+  border: 0;
+  background: transparent;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.page-tracking .tracking-timezone button.is-active {
+  background: #e7e7e7;
+  color: #111;
+}
+
+.page-tracking .tracking-tool-divider {
+  width: 1px;
+  height: 20px;
+  background: #3d3d3d;
+}
+
+.page-tracking .tracking-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #aaa;
+}
+
+.page-tracking .tracking-icon-button:hover {
+  color: #fff;
+}
+
+.page-tracking .tracking-icon-button svg {
+  width: 19px;
+  height: 19px;
+}
+
+.page-tracking .tracking-account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #e7e7e7;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.page-tracking .tracking-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3d3d3d;
+  font-size: 13px;
+}
+
+.page-tracking .tracking-menu-toggle {
+  display: none;
+}
+
+.page-tracking .tracking-compact-menu {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  z-index: 200;
+  width: 280px;
+  max-height: calc(100dvh - 76px);
+  overflow-y: auto;
+  border: 1px solid #3d3d3d;
+  border-radius: 4px;
+  background: #191919;
+  box-shadow: 0 12px 30px #0009;
+}
+
+.page-tracking .tracking-compact-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 0 16px;
+  color: #adadad;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.page-tracking .tracking-compact-nav a:hover,
+.page-tracking .tracking-compact-nav a.is-active {
+  background: #232323;
+  color: #fff;
+}
+
+.page-tracking .tracking-compact-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+.page-tracking .tracking-compact-utility {
+  border-top: 1px solid #3d3d3d;
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+.page-tracking .tracking-compact-buttons {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.page-tracking .tracking-compact-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #3d3d3d;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+}
+
+.page-tracking .tracking-compact-buttons svg {
+  width: 18px;
+  height: 18px;
+}
+
+.page-tracking .tracking-compact-account {
+  padding-top: 12px;
+  border-top: 1px solid #3d3d3d;
+}
+
+/* =========================================
+   Main
+========================================= */
+
+.page-tracking .tracking-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  background: #050505;
+}
+
+/* =========================================
+   Left filter
+========================================= */
+
+.page-tracking .tracking-filter {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  flex-shrink: 0;
+  min-height: 0;
+  padding: 24px 18px 18px;
+  border-right: 1px solid #3d3d3d;
+  background: #191919;
+}
+
+.page-tracking .tracking-filter-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.page-tracking .tracking-filter-fields {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.page-tracking .tracking-fieldset {
+  min-width: 0;
+  margin: 0 0 28px;
+  padding: 0;
+  border: 0;
+}
+
+.page-tracking .tracking-fieldset legend,
+.page-tracking .tracking-field label {
+  display: block;
+  margin-bottom: 10px;
+  padding: 0;
+  color: #e7e7e7;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-tracking .tracking-field {
+  margin-bottom: 28px;
+}
+
+.page-tracking .tracking-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-tracking .tracking-chip {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: transparent;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.page-tracking .tracking-chip.is-selected {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 600;
+}
+
+.page-tracking #trackingSearch {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+}
+
+.page-tracking #trackingSearch::placeholder {
+  color: #777;
+}
+
+.page-tracking .tracking-filter-actions {
+  display: grid;
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.page-tracking .tracking-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 42px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+  font-weight: 600;
+}
+
+.page-tracking .tracking-action-primary {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+}
+
+.page-tracking .tracking-action svg {
+  width: 17px;
+  height: 17px;
+}
+
+.page-tracking .tracking-filter-heading,
+.page-tracking .tracking-filter-close,
+.page-tracking .tracking-filter-toggle {
+  display: none;
+}
+
+/* =========================================
+   Right content
+========================================= */
+
+.page-tracking .tracking-content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 32px;
+}
+
+.page-tracking .tracking-tabs {
+  border-bottom: 1px solid #777;
+}
+
+.page-tracking .tracking-tab-active {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 22px;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 600;
+  border-radius: 4px 4px 0 0;
+}
+
+.page-tracking .tracking-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 24px 0 12px;
+}
+
+.page-tracking .tracking-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-tracking .tracking-count {
+  padding: 4px 12px;
+  border: 1px solid #666;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.page-tracking .tracking-count-green {
+  border-color: #3d9965;
+}
+
+.page-tracking .tracking-count-yellow {
+  border-color: #d8b347;
+}
+
+.page-tracking .tracking-table-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #888;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.page-tracking #trackingPageSize {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #191919;
+  color: #e7e7e7;
+  font-size: 14px;
+}
+
+.page-tracking .tracking-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.page-tracking .tracking-table {
+  width: 100%;
+  min-width: 960px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 15px;
+}
+
+.page-tracking .tracking-table thead {
+  background: #191919;
+}
+
+.page-tracking .tracking-table th {
+  height: 48px;
+  padding: 0 12px;
+  color: #e7e7e7;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.page-tracking .tracking-table td {
+  height: 64px;
+  padding: 0 12px;
+  border-bottom: 1px solid #303030;
+  color: #ccc;
+}
+
+.page-tracking .tracking-empty {
+  text-align: center;
+}
+
+.page-tracking .tracking-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* =========================================
+   선박정보 전체 DB - 모바일 검색 필터
+========================================= */
+
+/* 기본: PC에서는 숨김 */
+.vessel-db-filter-toggle,
+.vessel-db-filter-close {
+  display: none;
+}
+
+.vessel-db-filter-overlay[hidden] {
+  display: none;
+}
+
+
+/* =========================================
+   SeaOn - Information Status
+   ========================================= */
+
+.page-information .information-main {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #050505;
+  color: #e7e7e7;
+  font-size: 14px;
+}
+
+.page-information .information-main * {
+  box-sizing: border-box;
+}
+
+.page-information .information-main button,
+.page-information .information-main input,
+.page-information .information-main select {
+  font: inherit;
+}
+
+.page-information .information-main button {
+  cursor: pointer;
+}
+
+.page-information .information-main [hidden] {
+  display: none !important;
+}
+
+.page-information .information-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 좌측 검색 패널 */
+
+.page-information .information-filter {
+  display: flex;
+  flex: 0 0 246px;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 24px 16px 16px;
+  border-right: 1px solid #3d3d3d;
+  background: #191919;
+}
+
+.page-information .information-filter-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.page-information .information-filter-fields {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.page-information .information-field,
+.page-information .information-fieldset {
+  min-width: 0;
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+}
+
+.page-information .information-field label,
+.page-information .information-fieldset legend {
+  display: block;
+  margin-bottom: 9px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.page-information #informationSearch {
+  width: 100%;
+  height: 33px;
+  padding: 0 10px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+}
+
+.page-information .information-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.page-information .information-chip {
+  min-height: 33px;
+  padding: 6px 11px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: transparent;
+  color: #ddd;
+  white-space: nowrap;
+}
+
+.page-information .information-chip.is-selected {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 600;
+}
+
+.page-information .information-filter-actions {
+  display: grid;
+  gap: 7px;
+  padding-top: 12px;
+}
+
+.page-information .information-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+}
+
+.page-information .information-action-primary {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+}
+
+.page-information .information-action svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 우측 콘텐츠 */
+
+.page-information .information-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 30px 28px;
+}
+
+.page-information .information-tabs {
+  display: flex;
+  border-bottom: 1px solid #777;
+}
+
+.page-information .information-tab {
+  min-height: 33px;
+  padding: 0 18px;
+  border: 0;
+  background: transparent;
+  color: #e7e7e7;
+  font-weight: 600;
+}
+
+.page-information .information-tab.is-active {
+  border-radius: 4px 4px 0 0;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 700;
+}
+
+.page-information .information-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 12px;
+}
+
+.page-information .information-counts,
+.page-information .information-table-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-information .information-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 4px 11px;
+  border: 1px solid #3d3d3d;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.page-information .information-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4daa73;
+}
+
+.page-information .information-search-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 4px 7px 4px 11px;
+  border-radius: 999px;
+  background: #e7e7e7;
+  color: #111;
+  cursor: pointer;
+}
+
+.page-information .information-search-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.page-information .information-switch-track {
+  position: relative;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #777;
+}
+
+.page-information .information-switch-track::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #050505;
+}
+
+.page-information .information-search-switch input:checked
+  + .information-switch-track {
+  background: #050505;
+}
+
+.page-information .information-search-switch input:focus-visible
+  + .information-switch-track {
+  outline: 2px solid #0061f0;
+  outline-offset: 3px;
+}
+
+.page-information .information-table-options {
+  color: #888;
+}
+
+.page-information #informationPageSize {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #191919;
+  color: #e7e7e7;
+}
+
+.page-information .information-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.page-information .information-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.page-information .information-table th {
+  height: 40px;
+  padding: 0 8px;
+  background: #191919;
+  font-weight: 600;
+}
+
+.page-information .information-table td {
+  height: 64px;
+  padding: 0 8px;
+  border-bottom: 1px solid #232323;
+}
+
+.page-information .information-empty {
+  text-align: center;
+}
+
+.page-information .information-history-empty {
+  padding: 32px 0;
+  text-align: center;
+  color: #adadad;
+}
+
+.page-information .information-filter-header,
+.page-information .information-filter-toggle,
+.page-information .information-filter-close,
+.page-information .information-overlay {
+  display: none;
+}
+
+
+
+/* =========================================
+   SeaOn - 보고내역
+========================================= */
+
+.page-report .report-main {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #050505;
+  color: #e7e7e7;
+  font-size: 14px;
+}
+
+.page-report .report-main * {
+  box-sizing: border-box;
+}
+
+.page-report .report-main button,
+.page-report .report-main input,
+.page-report .report-main select {
+  font: inherit;
+}
+
+.page-report .report-main button {
+  cursor: pointer;
+}
+
+.page-report .report-main [hidden] {
+  display: none !important;
+}
+
+.page-report .report-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 좌측 필터 */
+
+.page-report .report-filter {
+  display: flex;
+  flex: 0 0 256px;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 24px 15px 14px;
+  border-right: 1px solid #3d3d3d;
+  background: #191919;
+}
+
+.page-report .report-filter-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.page-report .report-filter-fields {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.page-report .report-filter-field,
+.page-report .report-filter-fieldset {
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.page-report .report-filter-field label,
+.page-report .report-filter-fieldset legend {
+  display: block;
+  margin-bottom: 9px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.page-report #reportKeyword,
+.page-report .report-date-label input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+  outline: none;
+  color-scheme: dark;
+}
+
+.page-report #reportKeyword::placeholder {
+  color: #777;
+}
+
+.page-report .report-date-fields {
+  display: grid;
+  gap: 10px;
+}
+
+.page-report .report-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-report .report-chip {
+  min-height: 34px;
+  padding: 6px 11px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+  white-space: nowrap;
+}
+
+.page-report .report-chip.is-selected {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 600;
+}
+
+.page-report .report-filter-actions {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.page-report .report-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 37px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: transparent;
+  color: #e7e7e7;
+}
+
+.page-report .report-action-primary {
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+  color: #111;
+}
+
+.page-report .report-action svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 우측 콘텐츠 */
+
+.page-report .report-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 32px 30px;
+}
+
+.page-report .report-tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid #777;
+  scrollbar-width: none;
+}
+
+.page-report .report-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.page-report .report-tab {
+  flex-shrink: 0;
+  min-height: 34px;
+  padding: 0 20px;
+  border: 0;
+  background: transparent;
+  color: #999;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.page-report .report-tab.is-active {
+  border-radius: 4px 4px 0 0;
+  background: #e7e7e7;
+  color: #111;
+  font-weight: 700;
+}
+
+.page-report .report-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 20px 0 12px;
+}
+
+.page-report .report-total {
+  margin: 0;
+  color: #e7e7e7;
+  font-weight: 600;
+}
+
+.page-report .report-total strong {
+  margin: 0 5px;
+}
+
+.page-report #reportPageSize {
+  height: 36px;
+  min-width: 82px;
+  padding: 0 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #191919;
+  color: #e7e7e7;
+  color-scheme: dark;
+}
+
+.page-report .report-list {
+  border-bottom: 1px solid #232323;
+}
+
+.page-report .report-empty {
+  margin: 0;
+  padding: 27px 12px;
+  color: #777;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.page-report .report-filter-toggle,
+.page-report .report-filter-overlay {
+  display: none;
+}
+
+
+
+
+
+@media (max-width: 1650px) {
+   .page-tracking .tracking-header {
+    gap: 22px;
+    padding: 0 20px;
+  }
+
+  .page-tracking .tracking-nav {
+    gap: 8px;
+  }
+
+  .page-tracking .tracking-nav-link {
+    font-size: 14px;
+  }
+
+  .page-tracking .tracking-desktop-tool,
+  .page-tracking .tracking-account,
+  .page-tracking .tracking-tool-divider {
+    display: none;
+  }
+
+  .page-tracking .tracking-menu-toggle {
+    display: flex;
+  }
+
+/* 1101 이상 */
+#mapToolbar {
+  left: auto;
+  right: 24px;
+}
+
+
+  #headerUtilityDesktop {
+    display: none;
+  }
+
+  #headerUtilityCompact {
+    display: block;
+  }
+
+
+  #headerUtilityDesktop {
+    display: none;
+  }
+
+  #headerUtilityCompact {
+    display: block;
+  }
+
+  /* 기존 별도 축척 숨김 */
+  #mapScaleDesktop {
+    display: none;
+  }
+
+  /* 범례 내부 축척 표시 */
+  #legendResponsiveScale {
+    display: block;
+  }
+
+ #mapBottomInfo {
+    display: none;
+  }
+
+    /* 기존 외부 축척 숨김 */
+  #mapScaleDesktop {
+    display: none;
+  }
+
+  /* 범례 안 축척 표시 */
+  #legendResponsiveScale {
+    display: block;
+  }
+
+
+  /* 기존 2개 박스 숨김 */
+  #mapBottomInfoDesktop {
+    display: none;
+  }
+
+  /* 합친 1개 박스 표시 */
+  #mapBottomInfoResponsive {
+    display: block;
+
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =====================================================
+   1100px 이하
+===================================================== */
+
+@media (max-width: 1100px) {
+
+   .page-tracking .tracking-clock,
+  .page-tracking .tracking-timezone {
+    display: none;
+  }
+
+  .page-tracking .tracking-nav-link {
+    gap: 5px;
+    padding: 0 4px;
+  }
+
+  .page-tracking .tracking-nav-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+   .page-tracking .tracking-nav {
+    display: none;
+  }
+
+  .page-tracking .tracking-content {
+    padding: 24px;
+  }
+
+  .jurisdiction--map {
+    display: none;
+  }
+
+  #headerAllCompact .jurisdiction--compact {
+    display: flex;
+    width: 142px;
+    flex: 0 0 142px;
+    height: 36px;
+    margin-right: 4px;
+    padding: 0 10px;
+  }
+
+  .jurisdiction--compact .jurisdiction-label {
+    display: none;
+  }
+
+  .jurisdiction--compact .jurisdiction-select {
+    padding-right: 14px;
+    font-size: 14px;
+  }
+
+  .jurisdiction--compact > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .jurisdiction--compact .jurisdiction-chevron {
+    right: 7px;
+    width: 15px;
+    height: 15px;
+  }
+
+  #situationPanelContent {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+    align-content: start;
+  }
+
+  #situationPanelContent > .situation-section {
+    min-width: 0;
+  }
+
+  #situationPanelContent > .situation-vessel-section {
+    grid-row: span 2;
+  }
+
+  #situationPanel .situation-vessel-filters {
+    gap: 8px;
+  }
+
+  #situationPanel .situation-vessel-card {
+    padding: 10px 0;
+  }
+
+  #situationPanel {
+    overflow: visible !important;
+  }
+
+  #situationPanelCollapsed:not(.hidden) {
+    display: flex !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    z-index: 100;
+    width: 44px;
+    height: auto;
+    overflow: visible;
+  }
+
+  #situationPanelCollapsed.hidden {
+    display: none !important;
+  }
+  
+  #situationPanel {
+    overflow: visible !important;
+  }
+
+  #situationPanelCollapsedMobile:not(.hidden) {
+    display: flex !important;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 100;
+    width: auto;
+    height: 44px;
+  }
+
+  #situationPanelCollapsedMobile.hidden {
+    display: none !important;
+  }
+
+  #situationMobileSummary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    min-height: 54px;
+    background: #050505;
+    border-bottom: 1px solid #3d3d3d;
+  }
+
+  .situation-mobile-summary-item,
+  .situation-mobile-summary-collapse {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 4px;
+    border-right: 1px solid #3d3d3d;
+    color: #777777;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .situation-mobile-summary-item strong {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .situation-mobile-summary-item.is-active {
+    background: #e7e7e7;
+    color: #050505;
+  }
+
+  .situation-mobile-summary-item.is-active strong {
+    color: #e5514a;
+  }
+
+  .situation-mobile-summary-collapse {
+    gap: 6px;
+    border-right: 0;
+    color: #e7e7e7;
+  }
+
+  .situation-mobile-summary-item:focus-visible,
+  .situation-mobile-summary-collapse:focus-visible {
+    outline: 2px solid #e7e7e7;
+    outline-offset: -2px;
+  }
+
+  /* 기존 상황 요약 제목 헤더 대신 요약 탭 표시 */
+  #situationPanelHeader {
+    display: none !important;
+  }
+
+  #situationMobileSummary:not(.hidden) {
+    display: grid !important;
+  }
+
+  #situationPanel {
+    height: 240px;
+  }
+
+  /* 기존 2열 그리드 해제 */
+  #situationPanelContent:not(.hidden) {
+    display: block !important;
+    padding: 12px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  #situationPanelContent > .situation-section {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  /* 모바일 상단에는 기존 아코디언 제목 숨김 */
+  #situationPanelContent
+  > .situation-vessel-section
+  > .situation-section-header {
+    display: none;
+  }
+
+  /* 필터 영역 */
+  #situationPanel .situation-vessel-filters {
+    padding: 0 0 12px;
+  }
+
+  /* 위험도 탭 */
+  #situationPanel .situation-severity-tabs {
+    width: 100%;
+  }
+
+  /* 선박 목록 */
+  #situationPanel .situation-vessel-card {
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  /* PC용 접힘 버튼 숨김 */
+  #situationPanelCollapsed {
+    display: none !important;
+  }
+
+  #situationPanelCollapsedMobile:not(.hidden) {
+    display: flex !important;
+  }
+}
+
+/* =====================================================
+   768px 이하
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .page-report .report-filter {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 310;
+
+    width: min(280px, 85vw);
+    height: auto;
+    max-height: calc(100dvh - 60px);
+
+    transform: translate3d(-101%, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0.3s;
+  }
+
+  .page-report .report-filter.is-open {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s;
+  }
+
+  /* 화면 왼쪽 중앙 버튼 */
+  .page-report #reportFilterToggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 290;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 44px;
+    height: 100px;
+    min-width: 44px;
+    min-height: 100px;
+    padding: 8px 4px;
+    margin: 0;
+
+    transform: translateY(-50%);
+
+    border: 1px solid #555;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    background: #191919;
+    color: #e7e7e7;
+
+    font-size: 14px;
+    white-space: normal;
+    overflow: hidden;
+  }
+
+  .page-report #reportFilterToggle svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .page-report #reportFilterToggle span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+  }
+
+  .page-report #reportFilterToggle[aria-expanded="true"] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .page-report .report-content {
+    width: 100%;
+    padding: 22px 16px;
+  }
+
+  .page-report .report-filter-overlay:not([hidden]) {
+    position: fixed;
+    inset: 60px 0 0;
+    z-index: 300;
+    display: block;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  
+  .page-information .information-filter {
+    position: fixed;
+    top: 54px;
+    bottom: 0;
+    left: 0;
+    z-index: 310;
+    width: min(280px, 85vw);
+    height: auto;
+    max-height: calc(100dvh - 54px);
+    padding: 18px 16px;
+    border-right: 1px solid #3d3d3d;
+    border-radius: 0;
+    transform: translate3d(-101%, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0.3s;
+    will-change: transform;
+  }
+
+  .page-information .information-filter.is-open {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s;
+  }
+
+  .page-information .information-filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .page-information .information-filter-header h2 {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .page-information .information-filter-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #232323;
+    color: #fff;
+  }
+
+  .page-information .information-filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    margin-bottom: 16px;
+    padding: 0 12px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #191919;
+    color: #fff;
+  }
+
+  .page-information .information-filter-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .page-information .information-content {
+    width: 100%;
+    padding: 20px 16px;
+  }
+
+  .page-information .information-overlay:not([hidden]) {
+    position: fixed;
+    inset: 54px 0 0;
+    z-index: 300;
+    display: block;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .page-information .information-filter-toggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 290;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 56px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+
+    transform: translateY(-50%);
+
+    border: 1px solid #555;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    background: #191919;
+    color: #fff;
+
+    font-size: 0;
+  }
+
+  .page-information .information-filter-toggle svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  /* 필터가 펼쳐졌을 때 버튼 숨김 */
+  .page-information:has(.information-filter.is-open)
+  .information-filter-toggle {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  /* 좌측 필터 패널 */
+  #vesselDbFilter {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    z-index: 201;
+
+    width: min(320px, 90vw);
+    height: calc(100dvh - 60px);
+    overflow-y: auto;
+
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  #vesselDbFilter.is-open {
+    transform: translateX(0);
+  }
+
+  /* 필터 열기 버튼 - 화면 좌측 중앙 */
+  .vessel-db-filter-toggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 48px;
+    min-height: 120px;
+    margin: 0;
+    padding: 12px 8px;
+
+    transform: translateY(-50%);
+
+    border: 1px solid #555;
+    border-left: 0;
+    border-radius: 0 8px 8px 0;
+    background: #191919;
+    color: #e7e7e7;
+
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .vessel-db-filter-toggle svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .vessel-db-filter-toggle span {
+    display: block;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    letter-spacing: 2px;
+  }
+
+  /* 필터 열렸을 때 버튼 숨김 */
+  .vessel-db-filter-toggle[aria-expanded="true"] {
+    display: none;
+  }
+
+  /* 어두운 배경 */
+  .vessel-db-filter-overlay:not([hidden]) {
+    position: fixed;
+    inset: 60px 0 0;
+    z-index: 200;
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  /* 닫기 버튼 */
+  .vessel-db-filter-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border: 0;
+    border-radius: 4px;
+    background: #232323;
+    color: #e7e7e7;
+    cursor: pointer;
+  }
+
+  .vessel-db-filter-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* 본문 전체 너비 */
+  #vesselDbContent {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  /* 필터 패널 기본 상태: 화면 왼쪽 바깥 */
+  #vesselDbFilter {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 201;
+
+    width: min(320px, 90vw);
+    height: calc(100dvh - 60px);
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* 닫힌 상태 */
+    transform: translate3d(-100%, 0, 0);
+    visibility: hidden;
+
+    transition:
+      transform 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
+
+  /* 열린 상태: 왼쪽에서 오른쪽으로 등장 */
+  #vesselDbFilter.is-open {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+
+    transition:
+      transform 0.3s ease,
+      visibility 0s;
+  }
+
+  /* 배경 딤 */
+  .vessel-db-filter-overlay:not([hidden]) {
+    position: fixed;
+    inset: 60px 0 0;
+    z-index: 200;
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  /* 필터 닫기 버튼 */
+  .vessel-db-filter-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+  }
+
+  /* 닫힌 상태: 왼쪽 화면 밖으로 이동 */
+  .page-tracking #trackingFilter {
+    display: flex;
+    flex-direction: column;
+
+    left: 0;
+    right: auto;
+    top: 60px;
+    bottom: 0;
+
+    width: min(320px, 90vw);
+    height: calc(100dvh - 60px);
+
+    border-radius: 0;
+
+    transform: translate3d(-100%, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0.3s;
+  }
+
+  /* 열린 상태: 왼쪽에서 오른쪽으로 등장 */
+  .page-tracking #trackingFilter.is-open {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s;
+  }
+
+  /* 닫힌 상태 오버레이 숨김 */
+  .page-tracking #trackingOverlay[hidden] {
+    display: none !important;
+  }
+
+   .page-tracking .tracking-filter {
+    width: 250px;
+  }
+
+  .page-tracking .tracking-content {
+    padding: 20px;
+  }
+
+  .page-tracking .tracking-filter-toggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 48px;
+    min-height: 120px;
+    margin: 0;
+    padding: 12px 8px;
+
+    transform: translateY(-50%);
+
+    border: 1px solid #555;
+    border-left: 0;
+    border-radius: 0 8px 8px 0;
+    background: #191919;
+    color: #e7e7e7;
+
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    white-space: normal;
+    cursor: pointer;
+  }
+
+  .page-tracking .tracking-filter-toggle svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .page-tracking .tracking-filter-toggle span {
+    display: block;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    letter-spacing: 2px;
+  }
+
+
+  .page-tracking .tracking-header {
+    height: 58px;
+    padding: 0 14px;
+  }
+
+  .page-tracking .tracking-logo {
+    font-size: 21px;
+  }
+
+  .page-tracking .tracking-logo img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .page-tracking .tracking-compact-menu {
+    top: 58px;
+    right: 10px;
+  }
+
+  .page-tracking .tracking-main {
+    display: block;
+    overflow-y: auto;
+  }
+
+  .page-tracking .tracking-content {
+    min-height: 100%;
+    padding: 20px 16px;
+  }
+
+  .page-tracking .tracking-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    margin-bottom: 18px;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #191919;
+    color: #eee;
+  }
+
+  .page-tracking .tracking-filter-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .page-tracking .tracking-filter {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 310;
+    width: 100%;
+    height: min(78dvh, 650px);
+    padding: 20px;
+    border: 0;
+    border-top: 1px solid #555;
+    border-radius: 16px 16px 0 0;
+    transform: translateY(105%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s;
+  }
+
+  .page-tracking .tracking-filter.is-open {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .page-tracking .tracking-filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .page-tracking .tracking-mobile-heading {
+    font-size: 18px;
+  }
+
+  .page-tracking .tracking-filter-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+  }
+
+  .page-tracking .tracking-filter-close svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .page-tracking .tracking-overlay:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgb(0 0 0 / 65%);
+  }
+
+  .page-tracking .tracking-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-tracking .tracking-table-options {
+    align-self: flex-end;
+  }
+
+  .page-tracking .tracking-table {
+    font-size: 14px;
+  }
+
+
+   header a[aria-label="SeaOn 홈으로 이동"] img {
+    width: 32px;
+    height: 32px;
+  }
+
+  header a[aria-label="SeaOn 홈으로 이동"] span {
+    font-size: 20px;
+  }
+
+   #situationPanelContent {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  #situationPanelContent > .situation-vessel-section {
+    grid-row: auto;
+  }
+
+  .situation-mobile-stat,
+  .situation-mobile-close {
+    gap: 4px;
+    font-size: 14px;
+  }
+
+  .situation-mobile-stat strong {
+    font-size: 18px;
+  }
+
+  #situationPanelContent:not(.hidden) {
+    padding: 12px;
+  }
+}
+
+
+/* =========================================================
+   1100 이하
+   Main Menu + Utility 모두 하나의 Hamburger
+========================================================= */
+
+@media (max-width: 1100px) {
+  #situationPanelHeader {
+    height: 54px;
+    min-height: 54px;
+  }
+
+  /* 기존 대메뉴 숨김 */
+  #mainNavigation {
+    display: none;
+  }
+
+  /* 1650용 Utility Hamburger도 숨김 */
+  #headerUtilityCompact {
+    display: none;
+  }
+
+  /* 1100용 통합 Hamburger */
+  #headerAllCompact {
+    display: flex;
+  }
+
+  /* 기존 지도 위 검색창 숨김 */
+  #mapSearch {
+    display: none;
+  }
+
+  /* 통합 헤더 영역 */
+  #headerAllCompact {
+    display: flex;
+  }
+
+   /* 지도 중앙 하단 정보 숨김 */
+  #mapBottomInfo {
+    display: none;
+  }
+
+   #mapBottomInfoResponsive {
+    display: none !important;
+  }
+
+  /* 범례 내부 상태정보 표시 */
+  #legendResponsiveStatus {
+    display: block;
+  }
+
+  /* 범례 자체도 조금 컴팩트하게 */
+  #mapLegendGroup {
+    padding: 12px;
+  }
+
+  #mapBottomInfoResponsive {
+    position: absolute;
+
+    left: 16px;
+    right: auto;
+    bottom: 16px;
+
+    transform: none;
+  }
+
+ #mapLegendStack {
+    bottom: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    /* 고정 width 넣지 않음 */
+    width: auto;
+  }
+
+  /* 기존 범례 크기 유지 */
+  #mapLegendBox {
+    width: auto;
+  }
+
+   /* =====================================================
+     두 번째 정보박스
+  ====================================================== */
+
+  #mapBottomInfoMobile {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    width: auto;
+
+    padding: 8px 10px;
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+
+  .map-mobile-info-row {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    white-space: nowrap;
+  }
+
+
+  .map-mobile-divider {
+    color: #777777;
+  }
+
+  #headerSearchBox {
+    width: 40px;
+  }
+
+
+  /* 검색 클릭 후 */
+  #headerSearchBox.is-open {
+    width: 360px;
+
+    border-color: #232323;
+
+    background-color: #050505;
+  }
+
+
+  #headerSearchBox.is-open #headerSearchInput {
+    width: 310px;
+
+    padding-left: 20px;
+    padding-right: 8px;
+
+    opacity: 1;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  /* =====================================================
+     SITUATION PANEL
+  ====================================================== */
+
+  #situationPanel {
+    order: -1;
+
+    width: 100% !important;
+    height: 240px;
+
+    flex: 0 0 auto;
+
+    border-left: 0;
+    border-bottom: 1px solid #3D3D3D;
+
+    background-color: #050505;
+  }
+
+
+  /* Header */
+  #situationPanelHeader {
+    height: 40px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+
+  /* Content */
+  #situationPanelContent {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 28px;
+
+    padding: 0 14px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /*
+    내부 section이 기존 mb 값을 갖고 있어도
+    가로 배치에서는 제거
+  */
+  #situationPanelContent > section {
+    margin-bottom: 0;
+    min-width: 0;
+  }
+
+
+  /* =====================================================
+     EXPANDED TOGGLE
+  ====================================================== */
+
+  .situation-toggle-desktop {
+    display: none;
+  }
+
+  .situation-toggle-mobile {
+    display: block;
+  }
+
+
+  /* =====================================================
+     COLLAPSED STATE
+  ====================================================== */
+
+  /*
+    패널 내부가 숨겨졌을 때
+    aside 자체가 공간을 차지하지 않게 함
+  */
+  #situationPanel:has(
+    #situationPanelContent.hidden
+  ) {
+    height: 0;
+
+    border-bottom: 0;
+
+    background: transparent;
+  }
+
+
+  /*
+    접힌 버튼
+    화면 좌측 상단에 가로로 표시
+  */
+  #situationPanelCollapsed {
+    top: 0;
+    left: 20px;
+    right: auto;
+
+    width: auto;
+    height: 62px;
+
+    flex-direction: row;
+
+    border-radius: 0 0 4px 4px;
+  }
+
+
+  /* 빨간 위험선박 영역 */
+  #situationPanelCollapsed
+  .situation-collapsed-summary {
+    order: 1;
+
+    width: auto;
+    min-width: 164px;
+    min-height: 62px;
+
+    flex-direction: row;
+
+    gap: 10px;
+
+    padding: 0 18px;
+  }
+
+
+  /* 검정 Arrow 영역 */
+  #situationPanelCollapsed
+  .situation-collapsed-arrow {
+    order: 2;
+
+    width: 60px;
+    height: 62px;
+
+    border: 0;
+    border-left: 1px solid #232323;
+  }
+
+
+  .situation-arrow-desktop {
+    display: none;
+  }
+
+  .situation-arrow-mobile {
+    display: block;
+  }
+
+
+  /* 세로 '위/험/선/박' 숨김 */
+  .situation-summary-desktop {
+    display: none;
+  }
+
+
+  /* 가로 '위험선박' 표시 */
+  .situation-summary-mobile {
+    display: inline;
+  }
+
+
+  /* 800 */
+  #situationPanelCollapsed
+  .situation-summary-count {
+    margin-top: 0;
+  }
+
+
+  /* =====================================================
+     상황요약 상단
+  ====================================================== */
+
+  #situationPanelHeader {
+    height: 52px;
+    padding: 0 20px;
+
+    /* 기존 하단선 제거 */
+    border-bottom: 0;
+  }
+
+
+  /* =====================================================
+     우측 접기 아이콘
+  ====================================================== */
+
+  #situationPanelToggle {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    color: #FFFFFF;
+
+    opacity: 1;
+    visibility: visible;
+
+    flex-shrink: 0;
+  }
+
+
+  #situationPanelToggle svg {
+    width: 22px;
+    height: 22px;
+
+    stroke: #FFFFFF !important;
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  /* 데스크톱 아이콘 숨김 */
+  .situation-toggle-desktop {
+    display: none;
+  }
+
+
+  /* 1100 이하 아이콘 표시 */
+  .situation-toggle-mobile {
+    display: block !important;
+
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+  }
+
+  /* 기존 데스크톱용 접힘 버튼은 숨김 */
+  #situationPanelCollapsed {
+    display: none !important;
+  }
+
+
+  /* 모바일 전용 버튼은 상태에 따라 JS로 hidden 제어 */
+  #situationPanelCollapsedMobile {
+    flex-direction: row;
+  }
+
+
+  #situationPanelCollapsedMobile.hidden {
+    display: none !important;
+  }
+
+
+  #situationPanelCollapsedMobile:not(.hidden) {
+    display: flex;
+  }
+ 
+   #mapToolbar {
+    left: auto;
+    right: 16px;
+    top: 12px;
+
+    transition: top 0.2s ease;
+  }
+  
+  body.situation-open #mapToolbar {
+    top: 252px; /* 상황요약 240px + 기존 12px */
+  }
+  
+  /* =========================================================
+      WEATHER PANEL
+      1100 이하
+    ========================================================= */
+
+    #weatherPanel,
+    #displayAreaPanel,
+    #nearbyVesselsPanel,
+    #emergencyAlertPanel,
+    #newsPanel {
+      width: 400px;
+
+      height: 400px !important;
+      max-height: 400px !important;
+
+      right: 68px;
+      top: 12px;
+
+      overflow: hidden;
+      transition: top 0.2s ease;
+    }
+
+      /* 상황요약 펼쳐졌을 때 */
+    body.situation-open #weatherPanel {
+      top: 252px;
+    }
+
+    #alertSettingsPanel,
+    #trackingSessionPanel,
+    #trackingSessionPanel,
+    #briefingPanel,
+    #chatbotPanel {
+      width: 400px;
+
+      right: 68px;
+      top: 12px;
+
+      overflow: hidden;
+      transition: top 0.2s ease;
+    }
+
+    /* 상황요약 펼쳐졌을 때 */
+    body.situation-open #alertSettingsPanel {
+    top: 252px;
+  }
+
+
+/* 핵심:
+     기상 탭 전체가 스크롤 */
+  #weatherTabWeather,
+  #weatherTabWarning,
+  #weatherTabTyphoon {
+    min-height: 0;
+    flex: 1 1 auto;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+
+  /* 내부 예보표 스크롤 해제 */
+  .weather-forecast-scroll {
+    min-height: auto !important;
+
+    flex: 0 0 auto !important;
+
+    overflow: visible !important;
+  }
+
+  /* 태풍 예상진로 내부 스크롤 해제 */
+  .typhoon-forecast-scroll {
+    min-height: auto !important;
+    flex: 0 0 auto !important;
+
+    overflow: visible !important;
+  }
+
+  /*
+    공용 CSS의
+    main { flex-direction: column; }
+    영향 제거
+
+    선박 DB는 계속 좌우 배치
+  */
+  #vesselDbMain {
+    flex-direction: row;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+
+  /* 좌측 필터 폭 축소 */
+  #vesselDbFilter {
+    width: 220px;
+    flex: 0 0 220px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* 우측 테이블 영역 */
+  #vesselDbContent {
+    min-width: 0;
+    flex: 1 1 auto;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    overflow: hidden;
+  }
+
+
+  /* 테이블 가로 스크롤 */
+  #vesselDbTableScroll {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  /* 테이블은 기존 폭 유지 */
+  #vesselDbTableScroll table {
+    width: 1380px;
+    min-width: 1380px;
+  }
+
+  /* =====================================================
+     MAIN
+     bottom sheet 공간 확보
+  ====================================================== */
+
+  #evidenceBottomSheet {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    height: 260px;
+    max-height: 260px;
+
+    z-index: 100;
+
+    border-left: 0;
+    border-top: 1px solid #3D3D3D;
+
+    background-color: #191919;
+
+    padding: 16px 20px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /* =====================================================
+     액션 버튼
+     7열 → 여러 줄
+  ====================================================== */
+
+  #evidenceActionGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+
+  #evidenceActionGrid > button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #evidenceMainContent {
+    padding-bottom: 290px;
+  }
+
+  #sopStepGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#sopStepGrid > button {
+  width: 100%;
+  min-width: 0;
+}
+
+#fishingProcessSteps {
+    flex-wrap: wrap;
+    row-gap: 12px;
+    column-gap: 16px;
+  }
+
+  #fishingTableActions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  /* =====================================================
+     선박정보 페이지 MAIN
+     지도는 항상 전체 영역 유지
+  ====================================================== */
+
+  body main {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    min-width: 0;
+    min-height: 0;
+  }
+
+
+  /*
+    선박 상세 패널은 더 이상
+    좌측 고정 레이아웃 공간을 차지하지 않음
+  */
+  #vesselDetailPanel {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(380px, calc(100% - 32px));
+    height: min(640px, calc(100% - 32px));
+
+    transform: translate(-50%, -50%);
+
+    z-index: 100;
+
+    display: none;
+
+    flex-direction: column;
+
+    border: 1px solid #3D3D3D;
+    border-radius: 4px;
+
+    background-color: #050505;
+
+    overflow: hidden;
+
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+
+
+  /* 선박 클릭 후 표시 */
+  #vesselDetailPanel.is-open {
+    display: flex;
+  }
+
+
+  /* ---------------------------------------------------------
+     MAIN
+     지도 영역을 기준 레이아웃으로 유지
+  --------------------------------------------------------- */
+  #vesselMapMain {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+  }
+
+
+  /* ---------------------------------------------------------
+     MAP
+     항상 화면 전체 폭 사용
+  --------------------------------------------------------- */
+  #vesselMapMain > section {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    flex: 1 1 100%;
+  }
+
+
+  /* ---------------------------------------------------------
+     VESSEL DETAIL
+     기존 좌측 고정 패널 → 지도 위 팝업
+  --------------------------------------------------------- */
+  #vesselDetailPanel {
+    position: absolute;
+
+    left: 53%;
+    top: 60%;
+
+    width: min(380px, calc(100% - 32px));
+    height: min(640px, calc(100% - 32px));
+
+    transform: translate(-50%, -50%);
+
+    z-index: 100;
+
+    display: none;
+    flex-direction: column;
+
+    border: 1px solid #3D3D3D;
+    border-radius: 4px;
+
+    background-color: #050505;
+
+    overflow: hidden;
+
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  #vesselDetailPanel.is-open {
+    display: flex;
+  }
+
+
+  /* ---------------------------------------------------------
+     SITUATION PANEL
+
+     중요:
+     가로 flex 공간을 차지하지 않고
+     지도 위 overlay로 띄움
+  --------------------------------------------------------- */
+  #vesselMapMain > #situationPanel {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    width: 100% !important;
+    height: 240px;
+
+    z-index: 40;
+
+    flex: none;
+    order: initial;
+
+    border-left: 0;
+    border-bottom: 1px solid #3D3D3D;
+
+    background-color: #050505;
+  }
+
+
+  /* 상황요약 접혔을 때는 지도 공간 그대로 */
+  #vesselMapMain > #situationPanel:has(
+    #situationPanelContent.hidden
+  ) {
+    height: 0;
+
+    border-bottom: 0;
+
+    background: transparent;
+
+    pointer-events: none;
+  }
+
+}
+
+@media (max-width: 375px) {
+    .page-report .report-content {
+    padding: 18px 12px;
+  }
+
+  .page-report .report-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .situation-mobile-summary-item,
+  .situation-mobile-summary-collapse {
+    gap: 4px;
+    font-size: 14px;
+  }
+
+  .situation-mobile-summary-item strong {
+    font-size: 16px;
+  }
+
+   #headerAllCompact .jurisdiction--compact {
+    width: 112px;
+    flex-basis: 112px;
+    gap: 4px;
+    padding-left: 7px;
+  }
+
+  .jurisdiction--compact .jurisdiction-select {
+    font-size: 13px;
+  }
+
+  .page-tracking .tracking-header {
+    padding: 0 10px;
+  }
+
+  .page-tracking .tracking-logo {
+    font-size: 19px;
+  }
+
+  .page-tracking .tracking-content {
+    padding: 16px 12px;
+  }
+
+  .page-tracking .tracking-count {
+    padding: 4px 8px;
+  }
+
+  .page-tracking .tracking-toolbar {
+    margin-top: 18px;
+  }
+
+   .page-information .information-content {
+    padding: 16px 12px;
+  }
+
+  .page-information .information-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

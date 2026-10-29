@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>PDF 파싱</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">PDF 파싱</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+<!-- =========================================
+     PDF 파싱
+========================================= -->
+<main id="mainContent" class="pdf-page" tabindex="-1">
+
+  <!-- 페이지 타이틀 -->
+  <div class="pdf-heading">
+    <div class="pdf-heading-left">
+      <i data-lucide="file-text"></i>
+      <h1>PDF 파싱</h1>
+      <span class="pdf-heading-line"></span>
+      <p>
+        PDF → JSON(구조화) · Markdown · HTML · Text · Tagged-PDF 변환 ·
+        공공문서 RAG · NLP 학습데이터 구축 · 접근성(PDF/UA) 자동 태깅
+      </p>
+    </div>
+
+    <div class="pdf-heading-actions">
+      <a
+        href="https://github.com/opendataloader-project/opendataloader-pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pdf-link-btn"
+      >
+        <i data-lucide="github"></i>
+        GitHub
+      </a>
+
+      <a
+        href="https://www.npmjs.com/package/@opendataloader/pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pdf-link-btn"
+      >
+        <i data-lucide="package"></i>
+        npm @opendataloader/pdf
+      </a>
+    </div>
+  </div>
+
+  <!-- 소개 배너 -->
+  <section class="pdf-intro">
+    <h2>📕 opendataloader-pdf — Open-source PDF Parser</h2>
+    <p>
+      PDF 문서를 JSON(bounding box·시맨틱 요소 타입)·Markdown·HTML·Text로
+      구조화 추출하는 오픈소스 파서입니다.
+      복잡한 표·다단 레이아웃의 읽기 순서를 복원하고,
+      태그가 없는 PDF를 접근성(PDF/UA) Tagged-PDF로 자동 변환합니다.
+      Java 11+ 기반 엔진에 Node·Python·Java 바인딩을 제공하며
+      RAG 지식베이스·NLP 학습 데이터 구축에 활용할 수 있습니다.
+      (Apache License 2.0)
+    </p>
+  </section>
+
+  <!-- 출력 포맷 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">출력 포맷 (5종)</h2>
+
+    <div class="pdf-format-grid">
+      <div class="pdf-format-card">
+        <strong>JSON</strong>
+        <span>bounding box 좌표 + 시맨틱 요소 타입</span>
+      </div>
+
+      <div class="pdf-format-card">
+        <strong>Markdown</strong>
+        <span>LLM 컨텍스트 · RAG 최적화</span>
+      </div>
+
+      <div class="pdf-format-card">
+        <strong>HTML</strong>
+        <span>웹 표시용 구조 보존</span>
+      </div>
+
+      <div class="pdf-format-card">
+        <strong>Text</strong>
+        <span>순수 텍스트 추출</span>
+      </div>
+
+      <div class="pdf-format-card">
+        <strong>Tagged-PDF</strong>
+        <span>접근성(PDF/UA) 자동 태깅</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 주요 기능 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">주요 기능 (8종)</h2>
+
+    <div class="pdf-feature-grid">
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">🧩</span>
+        <h3>JSON 구조화</h3>
+        <p>bounding box 좌표 + 시맨틱 요소 타입으로 레이아웃 보존</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">📝</span>
+        <h3>Markdown 변환</h3>
+        <p>제목·목록·표 구조 유지 — LLM 컨텍스트·RAG 입력</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">📊</span>
+        <h3>표 추출·레이아웃 복원</h3>
+        <p>복잡 표/다단 레이아웃의 셀·읽기순서(reading order) 재구성</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">♿</span>
+        <h3>접근성 자동 태깅</h3>
+        <p>Untagged PDF → Tagged PDF(PDF/UA) 자동 변환</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">🔀</span>
+        <h3>Hybrid 모드</h3>
+        <p>복잡 표는 docling 연계로 정확도 향상</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">🖼️</span>
+        <h3>이미지 추출</h3>
+        <p>본문 이미지 추출 + 포맷/디렉토리 지정</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">🛡️</span>
+        <h3>Content Safety</h3>
+        <p>민감정보 sanitize · invalid 문자 치환 옵션</p>
+      </article>
+
+      <article class="pdf-feature-card">
+        <span class="pdf-feature-icon">☕</span>
+        <h3>JVM 엔진</h3>
+        <p>Java 11+ 기반 안정적 파싱 — Node/Python/Java 바인딩 제공</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 파이프라인 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">
+      파이프라인 — PDF → 학습데이터
+    </h2>
+
+    <div class="pdf-pipeline-grid">
+
+      <article class="pdf-step-card">
+        <span class="pdf-step-number">1</span>
+        <h3>업로드</h3>
+        <p>PDF(.pdf) 파일을 드래그&드롭 또는 선택</p>
+      </article>
+
+      <article class="pdf-step-card">
+        <span class="pdf-step-number">2</span>
+        <h3>파싱</h3>
+        <p>opendataloader 엔진(JVM)이 레이아웃·요소 분석</p>
+      </article>
+
+      <article class="pdf-step-card">
+        <span class="pdf-step-number">3</span>
+        <h3>추출</h3>
+        <p>JSON(구조) · Markdown(텍스트) · 메타데이터 출력</p>
+      </article>
+
+      <article class="pdf-step-card">
+        <span class="pdf-step-number">4</span>
+        <h3>활용</h3>
+        <p>AI 학습데이터셋(NLP/RAG) · 문서 지식베이스 · 접근성 PDF</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 직접 파싱해보기 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">
+      🚀 직접 파싱해보기
+    </h2>
+
+    <p class="pdf-section-desc">
+      업로드한 PDF는 서버의 opendataloader-pdf 엔진으로 전달되어
+      JSON·Markdown으로 변환됩니다. (서버에 Node 20+ · Java 11+ 필요)
+      현재 화면은 파일 선택 데모이며 서버 전송은 하지 않습니다.
+    </p>
+
+    <div
+      class="pdf-dropzone"
+      id="pdfDropzone"
+      role="button"
+      tabindex="0"
+      aria-label="PDF 파일 업로드"
+    >
+      <input
+        type="file"
+        id="pdfFileInput"
+        accept=".pdf,application/pdf"
+        hidden
+      >
+
+      <div class="pdf-drop-content">
+        <i data-lucide="upload"></i>
+        <strong>클릭하거나 PDF 파일을 드래그하세요</strong>
+        <span>.pdf</span>
+      </div>
+    </div>
+
+    <div class="pdf-upload-result" id="pdfUploadResult" hidden>
+      <div class="pdf-upload-file">
+        <i data-lucide="file-check"></i>
+
+        <div>
+          <strong id="pdfFileName"></strong>
+          <span id="pdfFileSize"></span>
+        </div>
+      </div>
+
+      <div class="pdf-upload-actions">
+        <span>파일 선택 완료 · 파싱 엔진 미연결</span>
+
+        <button type="button" id="pdfFileRemove">
+          <i data-lucide="x"></i>
+          제거
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 통합 코드 예시 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">
+      📝 통합 코드 예시
+    </h2>
+
+    <div class="pdf-code-grid">
+
+      <!-- Node.js -->
+      <article class="pdf-code-card">
+        <div class="pdf-code-heading">
+          <strong>🧩 Node.js</strong>
+
+          <button
+            type="button"
+            class="pdf-copy-btn"
+            data-copy="pdfCodeNode"
+          >
+            <i data-lucide="copy"></i>
+            복사
+          </button>
+        </div>
+
+        <pre><code id="pdfCodeNode">import { convert } from '@opendataloader/pdf';
+
+// outputDir에 .md / .json 결과 파일 생성
+await convert(['document.pdf'], {
+  outputDir: 'output/',
+  format: 'markdown,json',
+});</code></pre>
+      </article>
+
+      <!-- CLI -->
+      <article class="pdf-code-card">
+        <div class="pdf-code-heading">
+          <strong>🧩 CLI (npx)</strong>
+
+          <button
+            type="button"
+            class="pdf-copy-btn"
+            data-copy="pdfCodeCli"
+          >
+            <i data-lucide="copy"></i>
+            복사
+          </button>
+        </div>
+
+        <pre><code id="pdfCodeCli"># 단일/다중/폴더 변환
+npx @opendataloader/pdf document.pdf -o output/ -f markdown,json
+
+# 접근성 Tagged-PDF 생성
+npx @opendataloader/pdf document.pdf -f tagged-pdf
+
+# 복잡 표 정확도 향상 (hybrid)
+npx @opendataloader/pdf --hybrid docling-fast document.pdf</code></pre>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 해경 적용 사례 -->
+  <section class="pdf-panel">
+    <h2 class="pdf-section-title">
+      🚢 해경 적용 사례
+    </h2>
+
+    <div class="pdf-usecase-grid">
+
+      <article class="pdf-usecase-card">
+        <h3>법령·고시 PDF RAG 코퍼스</h3>
+        <p>
+          해양경찰법·수산업법·EEZ 관련 법령/고시 PDF를
+          JSON·Markdown으로 구조화 → SFR-19 생성형 AI Q&A
+          지식베이스 적재
+        </p>
+      </article>
+
+      <article class="pdf-usecase-card">
+        <h3>스캔 보고서 구조화</h3>
+        <p>
+          단속·사고 보고서 스캔 PDF의 레이아웃·표를 복원 →
+          NER·분류 모델 학습데이터(RPT-CLS · DAR-01) →
+          비식별화는 KCG-POL-003 별도 적용
+        </p>
+      </article>
+
+      <article class="pdf-usecase-card">
+        <h3>시방서·계약서 표 추출</h3>
+        <p>
+          입찰 시방서·계약서 PDF의 복잡 표를 hybrid 모드로
+          정확 추출 → 변경관리(PMR-08) 연계
+        </p>
+      </article>
+
+      <article class="pdf-usecase-card">
+        <h3>접근성 PDF 변환</h3>
+        <p>
+          대국민 공개 문서를 Tagged-PDF(PDF/UA)로
+          자동 변환 → 웹 접근성 준수
+        </p>
+      </article>
+
+      <article class="pdf-usecase-card">
+        <h3>외부 문헌 정제</h3>
+        <p>
+          연구보고서·논문 PDF를 정제(refined) 단계 자동 입력 →
+          학습데이터셋 버전 관리(DAR-05)
+        </p>
+      </article>
+
+      <article class="pdf-usecase-card">
+        <h3>다국어/혼합 문서</h3>
+        <p>
+          읽기순서 복원 + invalid 문자 치환으로
+          표·다단 혼합 PDF의 텍스트 품질 확보
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 출처 -->
+  <footer class="pdf-footer">
+    출처: opendataloader-pdf ·
+    github.com/opendataloader-project/opendataloader-pdf ·
+    Apache License 2.0
+  </footer>
+
+</main>
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

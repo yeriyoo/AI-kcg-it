@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>한글문서 파싱</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">한글문서 파싱</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+
+<!-- =========================================
+     한글문서 파싱
+========================================= -->
+<main id="mainContent" class="hwp-page" tabindex="-1">
+
+  <!-- 페이지 타이틀 -->
+  <div class="hwp-heading">
+    <div class="hwp-heading-left">
+      <i data-lucide="file-text"></i>
+      <h1>한글문서 파싱</h1>
+      <span class="hwp-heading-line"></span>
+      <p>
+        HWP · HWPX · PDF · DOCX · XLSX → Markdown 변환 ·
+        정부 공공문서 RAG · NLP 학습데이터 구축 · MCP AI Agent 연동
+      </p>
+    </div>
+
+    <div class="hwp-heading-actions">
+      <a
+        href="https://github.com/chrisryuji/kordoc"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hwp-link-btn"
+      >
+        <i data-lucide="github"></i>
+        GitHub
+      </a>
+
+      <a
+        href="https://www.npmjs.com/package/kordoc"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hwp-link-btn"
+      >
+        <i data-lucide="package"></i>
+        npm v2.9.0
+      </a>
+    </div>
+  </div>
+
+  <!-- 소개 배너 -->
+  <section class="hwp-intro">
+    <h2>📘 kordoc — Korean Document Parser</h2>
+    <p>
+      한국 공무원이 7년 이상 정부 문서 작성 경험을 바탕으로 만든
+      종합 문서 파서. 한컴 HWP 전 버전(3.x/5.x/HWPX/HWPML) +
+      PDF/XLSX/DOCX를 Markdown으로 변환하며,
+      병합 셀·중첩 표·이미지·OCR·DRM 문서까지 지원합니다.
+      AI Agent와 MCP(Model Context Protocol)로 직접 연동되어
+      RAG 지식베이스·NLP 학습 데이터 구축에 즉시 활용 가능합니다.
+    </p>
+  </section>
+
+  <!-- 지원 포맷 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">지원 포맷 (8종)</h2>
+
+    <div class="hwp-format-grid">
+      <div class="hwp-format-card">
+        <strong>HWP</strong>
+        <span>한컴 5.x 표준 (정부·공공 표준)</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>HWPX</strong>
+        <span>한컴 2020+ ZIP/XML 기반</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>HWP3</strong>
+        <span>한컴 3.x 레거시 (1996~2002)</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>HWPML</strong>
+        <span>한컴 XML 포맷</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>PDF</strong>
+        <span>OCR 지원 (이미지 PDF)</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>XLSX</strong>
+        <span>Microsoft Excel</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>XLS</strong>
+        <span>Excel 97-2003</span>
+      </div>
+
+      <div class="hwp-format-card">
+        <strong>DOCX</strong>
+        <span>Microsoft Word</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 주요 기능 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">주요 기능 (8종)</h2>
+
+    <div class="hwp-feature-grid">
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">📝</span>
+        <h3>Markdown 변환</h3>
+        <p>구조 보존 (제목·목록·표·이미지) Markdown 출력</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">📊</span>
+        <h3>복잡 표 재구성</h3>
+        <p>병합 셀·중첩 표 지원 — 정부 양식 정확 처리</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">🔁</span>
+        <h3>문서 비교 (Diff)</h3>
+        <p>버전 간 변경 사항 자동 추출</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">📋</span>
+        <h3>서식 자동 채우기</h3>
+        <p>원본 서식 유지하며 양식 작성</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">🔒</span>
+        <h3>DRM 문서 지원</h3>
+        <p>정부 배포용 DRM 보호 문서 처리</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">🖼️</span>
+        <h3>이미지 추출 + OCR</h3>
+        <p>본문 이미지 추출 + 이미지 PDF OCR</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">🔄</span>
+        <h3>역변환 (Markdown→HWPX)</h3>
+        <p>편집 후 HWPX 형식으로 재내보내기</p>
+      </article>
+
+      <article class="hwp-feature-card">
+        <span class="hwp-feature-icon">🤖</span>
+        <h3>MCP AI Agent 통합</h3>
+        <p>8종 MCP 도구 — Claude/Cursor 등 직접 연동</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 파이프라인 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">
+      파이프라인 — 한글문서 → 학습데이터
+    </h2>
+
+    <div class="hwp-pipeline-grid">
+      <article class="hwp-step-card">
+        <span class="hwp-step-number">1</span>
+        <h3>업로드</h3>
+        <p>한글 문서(.hwp/.hwpx) 등을 드래그&드롭 또는 선택</p>
+      </article>
+
+      <article class="hwp-step-card">
+        <span class="hwp-step-number">2</span>
+        <h3>파싱</h3>
+        <p>kordoc 엔진이 IR(Intermediate Representation) 블록 생성</p>
+      </article>
+
+      <article class="hwp-step-card">
+        <span class="hwp-step-number">3</span>
+        <h3>변환</h3>
+        <p>Markdown · 구조화 블록 · 메타데이터 출력</p>
+      </article>
+
+      <article class="hwp-step-card">
+        <span class="hwp-step-number">4</span>
+        <h3>활용</h3>
+        <p>AI 학습데이터셋(NLP/RAG) · 법령 코퍼스 · RPA 자동화</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 파일 업로드 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">
+      🚀 직접 파싱해보기 (브라우저)
+    </h2>
+
+    <p class="hwp-section-desc">
+      업로드한 파일은 브라우저 내에서만 처리되며 서버로 전송되지 않습니다.
+      현재 화면은 파일 선택 데모입니다.
+      한컴 .hwp/.hwpx, PDF, DOCX, XLSX 등을 시험해보세요.
+    </p>
+
+    <div
+      class="hwp-dropzone"
+      id="hwpDropzone"
+      role="button"
+      tabindex="0"
+      aria-label="문서 파일 업로드"
+    >
+      <input
+        type="file"
+        id="hwpFileInput"
+        accept=".hwp,.hwpx,.pdf,.docx,.xlsx,.xls,.hwpml,.hwp3"
+        hidden
+      >
+
+      <div class="hwp-drop-content" id="hwpDropContent">
+        <i data-lucide="upload"></i>
+        <strong>클릭하거나 파일을 드래그하세요</strong>
+        <span>.hwp · .hwpx · .pdf · .docx · .xlsx · .xls · .hwpml · .hwp3</span>
+      </div>
+    </div>
+
+    <div class="hwp-upload-result" id="hwpUploadResult" hidden>
+      <div class="hwp-upload-file">
+        <i data-lucide="file-check"></i>
+        <div>
+          <strong id="hwpFileName"></strong>
+          <span id="hwpFileSize"></span>
+        </div>
+      </div>
+
+      <div class="hwp-upload-actions">
+        <span class="hwp-upload-status">
+          파일 선택 완료 · 파싱 엔진 미연결
+        </span>
+        <button type="button" id="hwpFileRemove">
+          <i data-lucide="x"></i>
+          제거
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 통합 코드 예시 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">
+      📝 통합 코드 예시
+    </h2>
+
+    <div class="hwp-code-grid">
+
+      <article class="hwp-code-card">
+        <div class="hwp-code-heading">
+          <strong>🧩 브라우저 / Node.js</strong>
+          <button type="button" class="hwp-copy-btn" data-copy="hwpCodeJs">
+            <i data-lucide="copy"></i>
+            복사
+          </button>
+        </div>
+
+        <pre><code id="hwpCodeJs">import { parse } from 'kordoc';
+import { readFileSync } from 'fs';
+
+const buffer = readFileSync('document.hwpx');
+const result = await parse(buffer.buffer);
+
+if (result.success) {
+  console.log(result.markdown);   // Markdown 텍스트
+  console.log(result.blocks);     // IRBlock[] 구조화 데이터
+  console.log(result.metadata);   // 제목·작성자·일자
+}</code></pre>
+      </article>
+
+      <article class="hwp-code-card">
+        <div class="hwp-code-heading">
+          <strong>🧩 CLI (npx)</strong>
+          <button type="button" class="hwp-copy-btn" data-copy="hwpCodeCli">
+            <i data-lucide="copy"></i>
+            복사
+          </button>
+        </div>
+
+        <pre><code id="hwpCodeCli"># 단일 파일 변환
+npx kordoc document.hwpx > document.md
+
+# 폴더 일괄 변환 (watch 모드)
+npx kordoc --watch ./hwp-input ./md-output
+
+# MCP 연동 (Claude Desktop · Cursor 등)
+npx -y kordoc setup
+# → 8종 MCP 도구가 AI 에이전트에 등록됨</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <!-- 해경 적용 사례 -->
+  <section class="hwp-panel">
+    <h2 class="hwp-section-title">🚢 해경 적용 사례</h2>
+
+    <div class="hwp-usecase-grid">
+      <article class="hwp-usecase-card">
+        <h3>법령 RAG 코퍼스 구축</h3>
+        <p>
+          해양경찰청·수산업법·EEZ법 등 법령 HWP/PDF를 Markdown으로 변환
+          → SFR-19 생성형 AI Q&A 지식베이스 자동 적재
+        </p>
+      </article>
+
+      <article class="hwp-usecase-card">
+        <h3>단속·사고 보고서 NLP</h3>
+        <p>
+          단속 보고서 HWP 일괄 파싱 → NER·분류 모델 학습데이터
+          (RPT-CLS · DAR-01) → 비식별화는 KCG-POL-003 별도 적용
+        </p>
+      </article>
+
+      <article class="hwp-usecase-card">
+        <h3>내부 지침·매뉴얼 정제</h3>
+        <p>
+          KCG-POL 시리즈·운영매뉴얼 → 정제(refined) 단계 자동 입력
+          → 학습데이터셋 버전 관리(DAR-05)
+        </p>
+      </article>
+
+      <article class="hwp-usecase-card">
+        <h3>시방서·계약서 비교</h3>
+        <p>
+          문서 Diff 기능 활용 → 입찰 시방서 개정 이력 자동 추출 +
+          변경관리 절차(PMR-08) 연계
+        </p>
+      </article>
+
+      <article class="hwp-usecase-card">
+        <h3>서식 자동 채우기</h3>
+        <p>
+          신청서·보고서 표준 양식에 단속 메타데이터를 자동 채워 발급
+          → 모바일·함정 Agent UI에서 호출
+        </p>
+      </article>
+
+      <article class="hwp-usecase-card">
+        <h3>MCP AI Agent 연동</h3>
+        <p>
+          함정 Agent(SFR-16) MCP 게이트웨이에 kordoc 8 tools 등록
+          → “이 보고서 요약해줘” 자연어 명령 처리
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 출처 -->
+  <footer class="hwp-footer">
+    출처: kordoc v2.9.0 · github.com/chrisryuji/kordoc · MIT License ·
+    MCP Model Context Protocol
+  </footer>
+
+</main>
+
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

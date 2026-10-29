@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>전체목록</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 한중어업공동단속시스템 -->
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+
+          <!-- 왼쪽 아이콘 + 메뉴명 -->
+          <div class="flex items-center gap-4 min-w-0">
+            <i data-lucide="handshake" class="h-[17px] w-[17px] shrink-0"></i>
+            <span>한중어업공동단속시스템</span>
+          </div>
+
+          <!-- 오른쪽 참고 배지 + 접기 아이콘 -->
+          <div class="flex items-center gap-3 ml-auto shrink-0">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="minus" class="h-4 w-4"></i>
+          </div>
+
+        </div>
+
+        <div class="sidebar-submenu permit-sidebar-menu">
+
+          <div class="permit-menu-group">AI통계분석</div>
+
+          <a class="nav-item permit-analysis-link">
+            <i data-lucide="chart-column-increasing"></i>
+            <span>허가선박분석</span>
+          </a>
+
+          <div class="permit-menu-group">공동대응시스템</div>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="list"></i>
+            <span>전체 목록</span>
+          </a>
+
+          <div class="permit-menu-group">어선종합관리</div>
+
+          <a class="nav-item">
+            <i data-lucide="ship"></i>
+            <span>허가어선 전체목록</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-eye"></i>
+            <span>상세조회</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="git-compare-arrows"></i>
+            <span>입출역현황</span>
+          </a>
+
+          <div class="permit-menu-group">공동대응정보</div>
+
+          <a class="nav-item">
+            <i data-lucide="gavel"></i>
+            <span>불법어업단속정보</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="clipboard-list"></i>
+            <span>승선조사</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>양무허가</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="route"></i>
+            <span>북측수역이동</span>
+          </a>
+
+        </div>
+      
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">전체 목록</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+      <main id="mainContent" class="joint-vessel-page" tabindex="-1">
+
+      <!-- 페이지 상단 -->
+      <div class="joint-page-heading">
+        <div class="joint-page-heading-left">
+          <span class="joint-page-category">한중어업공동단속시스템</span>
+
+          <div class="joint-page-title-row">
+            <div class="joint-page-title">
+              <i data-lucide="list"></i>
+              <h1>전체 목록</h1>
+            </div>
+
+            <span class="joint-page-description">
+              공동대응시스템 통보 내역 전체 — 기관 · 지도선 · 발견구분 통합
+            </span>
+          </div>
+        </div>
+
+        <button type="button" class="joint-primary-btn" id="jointRegisterButton">
+          <i data-lucide="plus"></i>
+          등록하기
+        </button>
+      </div>
+
+      <!-- 검색 조건 -->
+      <form id="jointSearchForm" class="joint-search-panel">
+
+        <div class="joint-search-grid">
+
+          <div class="joint-search-field">
+            <label for="jointVesselName">어선명</label>
+            <input
+              type="search"
+              id="jointVesselName"
+              placeholder=""
+            >
+          </div>
+
+          <div class="joint-search-field">
+            <label for="jointDocumentNo">문서번호</label>
+            <input
+              type="search"
+              id="jointDocumentNo"
+              placeholder=""
+            >
+          </div>
+
+          <div class="joint-search-field">
+            <label for="jointAgency">단속기관</label>
+            <select id="jointAgency">
+              <option value="">전체</option>
+              <option value="남해어업관리단">남해어업관리단</option>
+              <option value="서해어업관리단">서해어업관리단</option>
+              <option value="동해어업관리단">동해어업관리단</option>
+            </select>
+          </div>
+
+          <div class="joint-search-field">
+            <label for="jointDiscoveryType">발견구분</label>
+            <select id="jointDiscoveryType">
+              <option value="">전체</option>
+              <option value="잠정조치수역">잠정조치수역</option>
+              <option value="공동관리수역">공동관리수역</option>
+              <option value="기타">기타</option>
+            </select>
+          </div>
+
+          <div class="joint-search-field joint-search-subtype">
+            <label for="jointDiscoveryDetail" class="sr-only">발견구분 상세</label>
+            <select id="jointDiscoveryDetail">
+              <option value="">세부 (대분류 먼저)</option>
+              <option value="잠정조치수역">잠정조치수역</option>
+              <option value="공동관리수역">공동관리수역</option>
+            </select>
+          </div>
+
+          <div class="joint-search-field">
+            <label for="jointEntryStatus">열람여부</label>
+            <select id="jointEntryStatus">
+              <option value="">전체</option>
+              <option value="미열람">미열람</option>
+              <option value="열람">열람</option>
+            </select>
+          </div>
+
+          <div class="joint-search-actions">
+            <button type="submit" class="joint-primary-btn">
+              <i data-lucide="search"></i>
+              검색
+            </button>
+          </div>
+
+        </div>
+
+      </form>
+
+      <!-- 검색 결과 요약 -->
+      <div class="joint-result-toolbar">
+        <p id="jointResultSummary">
+          1–15 / 6,888건 (1/460 페이지) · 미열람 4495건 · 전체 6,888건
+        </p>
+
+        <button type="button" class="joint-excel-btn" id="jointExcelButton">
+          <i data-lucide="file-spreadsheet"></i>
+          XLS 다운
+        </button>
+      </div>
+
+      <!-- 목록 -->
+      <section class="joint-list-panel">
+
+        <div class="joint-table-scroll">
+          <table class="joint-list-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>단속 시간</th>
+                <th>부번</th>
+                <th>단속 기관</th>
+                <th>지도선(함정)</th>
+                <th>어선명</th>
+                <th>위도</th>
+                <th>경도</th>
+                <th>해구</th>
+                <th>발견구분</th>
+                <th>통보시각</th>
+                <th>열람시각</th>
+              </tr>
+            </thead>
+
+            <tbody id="jointTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <nav class="joint-pagination" aria-label="전체 목록 페이지">
+          <button type="button" data-joint-page="first" aria-label="첫 페이지">
+            «
+          </button>
+          <button type="button" data-joint-page="prev" aria-label="이전 페이지">
+            ‹
+          </button>
+
+          <div id="jointPageNumbers" class="joint-page-numbers"></div>
+
+          <button type="button" data-joint-page="next" aria-label="다음 페이지">
+            ›
+          </button>
+          <button type="button" data-joint-page="last" aria-label="마지막 페이지">
+            »
+          </button>
+        </nav>
+
+        <!-- 안내 -->
+        <div class="joint-list-notice">
+          <p>
+            어선명이 선택된 건이 없습니다 (선명은 최대 40자, 숫자·영문 혼합 가능).
+            단속기관, 지도선 및 발견구분을 기준으로 검색할 수 있습니다.
+          </p>
+          <p>
+            열람시각이 없는 건은 미열람 상태로 표시됩니다.
+            목록의 선박명을 선택하면 해당 건의 상세정보를 확인할 수 있습니다.
+          </p>
+          <p>
+            위도/경도/단속 시간은 원천 기록 기준이며, 실제 관측 위치 및 통보 시각과 차이가 있을 수 있습니다.
+          </p>
+        </div>
+
+      </section>
+
+    </main>
+
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

@@ -1,0 +1,709 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061629">
+
+  <title>기상포털 | 예·특보</title>
+
+  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <link rel="stylesheet" href="./css/wea-common.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./js/wea-common.js" defer></script>
+</head>
+
+<body class="page-forecast">
+  <div class="app-shell">
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+    <header class="topbar">
+
+      <div class="brand-area">
+        <a class="brand" aria-label="기상포털 홈">
+          <img src="./img/logo.png" alt="" width="44" height="44">
+          <span>기상포털</span>
+        </a>
+
+        <button
+          class="icon-button nav-toggle"
+          type="button"
+          id="navToggle"
+          aria-label="전체 메뉴 열기"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <time class="clock" id="clock" aria-label="현재 한국 시간">
+          --:--:-- KST
+        </time>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="downloadButton"
+          aria-label="자료 다운로드"
+        >
+          <i data-lucide="download" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="printButton"
+          aria-label="인쇄"
+        >
+          <i data-lucide="printer" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="notificationButton"
+          aria-label="알림"
+        >
+          <i data-lucide="bell" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="brightnessButton"
+          aria-label="화면 밝기 전환"
+        >
+          <i data-lucide="sun" aria-hidden="true"></i>
+        </button>
+
+        <span class="header-separator" aria-hidden="true"></span>
+
+        <button
+          class="account-button"
+          type="button"
+          id="accountButton"
+          aria-expanded="false"
+          aria-controls="accountMenu"
+        >
+          <span class="avatar" aria-hidden="true">초</span>
+          <span class="account-name">초기 관리자</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="account-menu" id="accountMenu" hidden>
+          <span>초기 관리자</span>
+          <span>관리자 계정</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================
+         전체메뉴 오버레이
+    ========================================= -->
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+
+    <!-- =========================================
+         전체메뉴
+    ========================================= -->
+    <nav
+      class="nav-menu"
+      id="navMenu"
+      aria-label="전체메뉴"
+      aria-hidden="true"
+      inert
+    >
+      <div class="nav-menu-header">
+        <strong>전체메뉴</strong>
+
+        <button
+          type="button"
+          class="nav-close"
+          id="navClose"
+          aria-label="전체메뉴 닫기"
+        >
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 기상청 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navWeather"
+        >
+          <span>기상청</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navWeather">
+
+          <div class="nav-item-group">
+            <div class="nav-item nav-item-parent is-active">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+              <span>예·특보</span>
+            </div>
+
+            <a class="nav-sub-item is-active" aria-current="page">
+              예보
+            </a>
+            <a class="nav-sub-item">특보</a>
+          </div>
+
+          <a class="nav-item">
+            <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            <span>현재날씨</span>
+          </a>
+
+          <a class="nav-item">
+            <img src="./img/typhoon-icon.svg" alt="typhoon">
+            <span>태풍</span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="grip" aria-hidden="true"></i>
+            <span>
+              <strong>해구별 해양기상정보</strong>
+              <small>해구별 값 9종 · 대해구도·소해구도</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="wind" aria-hidden="true"></i>
+            <span>
+              <strong>저고도 WINTEM</strong>
+              <small>항공기상청 고도별 바람 · 기온 예측</small>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 기타 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navOthers"
+        >
+          <span>기타</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navOthers">
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            <span>
+              <strong>CMEMS 예측 <em>모델</em></strong>
+              <small>코페르니쿠스 해양서비스</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            <span>
+              <strong>GOCI-II 위성 <em>관측</em></strong>
+              <small>천리안위성 2B호 관측 장면</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            <span>
+              <strong>GDACS 재난 <em>자동산출</em></strong>
+              <small>글로벌 재난 인식 및 조정 시스템</small>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 브리핑 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navBriefing"
+        >
+          <span>브리핑</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navBriefing">
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="square-activity" aria-hidden="true"></i>
+            <span>
+              <strong>해상풍·파고 예상도</strong>
+              <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>
+              <strong>출항 브리핑</strong>
+              <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            <span>
+              <strong>태풍특보비교</strong>
+              <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
+            </span>
+          </a>
+        </div>
+      </section>
+    </nav>
+
+    <!-- =========================================
+         MAIN
+    ========================================= -->
+    <main class="map-main" id="map">
+
+      <!-- 지도 영역 -->
+      <div
+        class="map-viewport"
+        id="mapViewport"
+        aria-label="한국 주변 해역 예·특보 지도"
+      >
+        <div class="map-scene" id="mapScene">
+
+          <!-- 배경 지도 -->
+          <div class="map-background">
+            <img
+              src="./img/wea-forecast-bg.png"
+              alt="한국과 주변 해역 지도"
+              class="map-background-image"
+              draggable="false"
+            >
+          </div>
+
+          <!-- =====================================
+               해상 예·특보 영역
+          ===================================== -->
+          <div
+            class="forecast-layer"
+            id="stations"
+            aria-label="해상 예·특보 정보"
+          >
+
+            <!-- 서해 -->
+            <div class="forecast-card" style="--x:34%;--y:30%">
+              <strong>서해중부 북쪽먼바다</strong>
+              <span>0.5~2.0m ☀️</span>
+              <small>S 5~10 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:42%;--y:26%">
+              <strong>인천·경기북부앞바다</strong>
+              <span>0.5~1.0m ☀️</span>
+              <small>S 4~8 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:44%;--y:38%">
+              <strong>충남북부앞바다</strong>
+              <span>0.5~1.0m ☀️</span>
+              <small>E 3~8 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:34%;--y:42%">
+              <strong>서해중부 남쪽먼바다</strong>
+              <span>0.5~2.0m ☀️</span>
+              <small>S 5~10 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:45%;--y:49%">
+              <strong>전북북부앞바다</strong>
+              <span>0.5~1.0m ☀️</span>
+              <small>N 6~9 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:40%;--y:56%">
+              <strong>서해남부 북쪽먼바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 8~12 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:32%;--y:68%">
+              <strong>서해남부 남쪽먼바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 8~12 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:39%;--y:72%">
+              <strong>서해남부 남쪽앞바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 8~12 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:47%;--y:63%">
+              <strong>전남서부앞바다</strong>
+              <span>0.5m ☀️</span>
+              <small>N 5~8 m/s</small>
+            </div>
+
+            <!-- 남해 -->
+            <div class="forecast-card" style="--x:53%;--y:59%">
+              <strong>경남서부남해앞바다</strong>
+              <span>0.5~1.0m ☀️</span>
+              <small>N 2~5 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:57%;--y:72%">
+              <strong>남해동부중간바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 4~8 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:46%;--y:79%">
+              <strong>제주도남쪽앞바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 8~12 m/s</small>
+            </div>
+
+            <!-- 동해 -->
+            <div class="forecast-card" style="--x:57%;--y:28%">
+              <strong>강원중부앞바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>W 6~12 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:68%;--y:24%">
+              <strong>동해중부바깥먼바다</strong>
+              <span>1.5~3.5m ☀️</span>
+              <small>SW 8~16 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:59%;--y:39%">
+              <strong>경북북부앞바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>SW 6~10 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:70%;--y:41%">
+              <strong>동해남부북쪽먼바다</strong>
+              <span>1.0~3.0m ☀️</span>
+              <small>N 8~14 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:59%;--y:55%">
+              <strong>울산앞바다</strong>
+              <span>0.5~1.5m ☀️</span>
+              <small>N 3~7 m/s</small>
+            </div>
+
+            <div class="forecast-card" style="--x:68%;--y:61%">
+              <strong>동해남부남쪽먼바다</strong>
+              <span>1.0~2.0m ☀️</span>
+              <small>N 4~8 m/s</small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 지도 출처 -->
+      <div class="map-attribution">
+        NASA/GSFC SVS | NASA/USGS · NOAA ETOPO · 기상청
+      </div>
+
+      <!-- 우측 도구 모음 -->
+    <div class="toolbar" id="toolbar" aria-label="지도 도구">
+
+      <!-- 기상청 / 기타 / 브리핑 묶음 -->
+      <div class="toolbar-main">
+
+        <button
+          class="toolbar-collapse"
+          id="toolbarCollapse"
+          type="button"
+          aria-expanded="true"
+          aria-controls="toolbarGroups"
+          aria-label="도구 모음 접기"
+        >
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <div id="toolbarGroups">
+
+          <!-- 기상청 -->
+          <div class="tool-group">
+            <span class="tool-title">기상청</span>
+
+            <button class="tool-btn is-active" type="button"
+                    data-tool="calendar"
+                    aria-label="예·특보"
+                    aria-pressed="true">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="temperature"
+                    aria-label="현재 날씨"
+                    aria-pressed="false">
+              <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="typhoon"
+                    aria-label="태풍"
+                    aria-pressed="false">
+              <img src="./img/typhoon-icon.svg" alt="">
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="grid"
+                    aria-label="해구별 해양기상정보"
+                    aria-pressed="false">
+              <i data-lucide="grip" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="wind"
+                    aria-label="저고도 WINTEM"
+                    aria-pressed="false">
+              <i data-lucide="wind" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- 기타 -->
+          <div class="tool-group">
+            <span class="tool-title">기타</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="chart" aria-label="CMEMS 예측">
+              <i data-lucide="chart-column" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="satellite" aria-label="GOCI-ll위성">
+              <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="alert" aria-label="GDACS 재난">
+              <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- 브리핑 -->
+          <div class="tool-group">
+            <span class="tool-title">브리핑</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="briefing" aria-label="해상풍•파고 예상도">
+              <i data-lucide="square-activity" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="marine" aria-label="출항 브리핑">
+              <i data-lucide="anchor" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="compare" aria-label="태풍특보비교">
+              <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 지도: 별도 박스 -->
+      <div class="toolbar-map">
+        <div class="tool-group">
+          <span class="tool-title">지도</span>
+
+          <button class="tool-btn" type="button"
+                  id="fullscreenButton" aria-label="전체 화면">
+            <i data-lucide="maximize" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomIn" aria-label="확대">
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomOut" aria-label="축소">
+            <i data-lucide="minus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomReset" aria-label="방향 전환">
+            <i data-lucide="compass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- =====================================
+           하단 예보 타임라인
+      ===================================== -->
+      <section
+        class="forecast-timeline"
+        aria-label="해상 예보 날짜 및 시간 선택"
+      >
+        <div class="timeline-current">
+          <span id="forecastDateLabel">10.28 12:00 단기</span>
+        </div>
+
+        <div class="timeline-bottom">
+
+          <button
+            type="button"
+            class="timeline-play"
+            id="timelinePlay"
+            aria-label="예보 자동 재생"
+            aria-pressed="false"
+          >
+            <i data-lucide="play" aria-hidden="true"></i>
+          </button>
+
+          <div class="timeline-scroll">
+            <div class="timeline-progress">
+              <span id="timelineProgress"></span>
+            </div>
+
+            <div class="timeline-days" id="timelineDays">
+
+              <div class="timeline-day">
+                <span class="timeline-date">10/28</span>
+                <div class="timeline-slots">
+                  <button
+                    type="button"
+                    class="is-active"
+                    data-date="10.28"
+                    data-time="12:00"
+                  >오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">10/29</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="10.29" data-time="06:00">오전</button>
+                  <button type="button" data-date="10.29" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">10/30</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="10.30" data-time="06:00">오전</button>
+                  <button type="button" data-date="10.30" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">10/31</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="10.31" data-time="06:00">오전</button>
+                  <button type="button" data-date="10.31" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/01</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.01" data-time="06:00">오전</button>
+                  <button type="button" data-date="11.01" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/02</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.02" data-time="06:00">오전</button>
+                  <button type="button" data-date="11.02" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/03</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.03" data-time="06:00">오전</button>
+                  <button type="button" data-date="11.03" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/04</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.04" data-time="06:00">오전</button>
+                  <button type="button" data-date="11.04" data-time="12:00">오후</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/05</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.05" data-time="00:00">종일</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/06</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.06" data-time="00:00">종일</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/07</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.07" data-time="00:00">종일</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/08</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.07" data-time="00:00">종일</button>
+                </div>
+              </div>
+
+              <div class="timeline-day">
+                <span class="timeline-date">11/09</span>
+                <div class="timeline-slots">
+                  <button type="button" data-date="11.07" data-time="00:00">종일</button>
+                </div>
+
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 알림 메시지 -->
+      <div
+        class="map-toast"
+        id="mapToast"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+    </main>
+  </div>
+</body>
+</html>

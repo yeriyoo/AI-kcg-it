@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>라벨링 관리</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">라벨링 관리</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+<!-- =========================================
+     라벨링 관리
+========================================= -->
+<main id="mainContent" class="labeling-page" tabindex="-1">
+
+  <!-- 페이지 제목 -->
+  <div class="labeling-heading">
+    <div class="labeling-heading-left">
+      <i data-lucide="tag" aria-hidden="true"></i>
+      <h1>라벨링 관리</h1>
+      <p>
+        SNPDB 실학습 데이터셋 라벨 — 규칙 태깅 · GFW 교차검증 ·
+        허가명부 코드북 기반 자동 구성. 영상 · NLP 라벨링 도구는 확장 예정.
+      </p>
+    </div>
+
+    <button type="button" class="labeling-guide-btn" id="labelingGuideBtn">
+      <i data-lucide="file-text" aria-hidden="true"></i>
+      라벨링 기준서
+    </button>
+  </div>
+
+  <!-- 요약 카드 -->
+  <section class="labeling-summary" aria-label="라벨링 현황 요약">
+    <div class="labeling-summary-card">
+      <span>라벨 구성 완료율</span>
+      <strong>100.0%</strong>
+      <small class="green">17,692 / 17,692건</small>
+    </div>
+
+    <div class="labeling-summary-card">
+      <span>라벨링 대상 데이터셋</span>
+      <strong>4셋</strong>
+      <small>지도학습(라벨 有)</small>
+    </div>
+
+    <div class="labeling-summary-card">
+      <span>라벨 소스</span>
+      <strong>자동·교차 3종</strong>
+      <small>규칙 · GFW · 코드북</small>
+    </div>
+
+    <div class="labeling-summary-card">
+      <span>교차검증 일치(저인망)</span>
+      <strong>90.2%</strong>
+      <small class="green">GFW 공개라벨 · 2026-10-04</small>
+    </div>
+  </section>
+
+  <!-- 라벨링 도구 -->
+  <section class="labeling-section labeling-tools">
+    <div class="labeling-section-header">
+      <h2>라벨링 도구 (확장 예정 — 영상·NLP)</h2>
+      <p>
+        현재 학습 라벨은 항적 자동 라벨(규칙·교차검증) 위주이며,
+        영상·NLP 라벨링은 아래 오픈소스 도구를 확장 연계 예정(미도입).
+      </p>
+    </div>
+
+    <div class="labeling-tool-grid">
+
+      <!-- CVAT -->
+      <article class="labeling-tool-card tool-cvat">
+        <div class="labeling-tool-title">
+          <div class="labeling-tool-icon cvat-icon">
+            <i data-lucide="video"></i>
+          </div>
+
+          <div class="labeling-tool-title-text">
+            <div class="labeling-tool-name">
+              <h3>CVAT</h3>
+              <span class="labeling-pill green">MIT</span>
+              <span class="labeling-pill muted">확장 예정</span>
+            </div>
+            <p>이미지 객체탐지 · 영상 객체 추적 (확장 예정)</p>
+          </div>
+        </div>
+
+        <dl class="labeling-tool-info">
+          <div>
+            <dt>용도</dt>
+            <dd>
+              <span class="labeling-mini-badge image">IMG</span>
+              <span class="labeling-mini-badge satellite">SAT</span>
+              Bounding Box · 영상 트래킹 · CCTV/드론/위성 (미도입)
+            </dd>
+          </div>
+          <div>
+            <dt>계획</dt>
+            <dd>영상 기반 탐지(계획)</dd>
+          </div>
+          <div>
+            <dt>배포</dt>
+            <dd>self-hosted (Docker)</dd>
+          </div>
+          <div>
+            <dt>저장소</dt>
+            <dd>
+              <a href="https://github.com/cvat-ai/cvat"
+                 target="_blank" rel="noopener noreferrer">
+                <i data-lucide="external-link"></i>
+                github.com/cvat-ai/cvat
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <a class="labeling-tool-link"
+           href="https://www.cvat.ai/"
+           target="_blank" rel="noopener noreferrer">
+          공식 사이트 <i data-lucide="arrow-up-right"></i>
+        </a>
+      </article>
+
+      <!-- Doccano -->
+      <article class="labeling-tool-card tool-doccano">
+        <div class="labeling-tool-title">
+          <div class="labeling-tool-icon doccano-icon">
+            <i data-lucide="message-square"></i>
+          </div>
+
+          <div class="labeling-tool-title-text">
+            <div class="labeling-tool-name">
+              <h3>Doccano</h3>
+              <span class="labeling-pill green">MIT</span>
+              <span class="labeling-pill muted">확장 예정</span>
+            </div>
+            <p>NLP · NER · 텍스트 분류 (확장 예정)</p>
+          </div>
+        </div>
+
+        <dl class="labeling-tool-info">
+          <div>
+            <dt>용도</dt>
+            <dd>
+              <span class="labeling-mini-badge text">TXT</span>
+              NER · 문장유형 분류 · 단속보고서 NLP (미도입)
+            </dd>
+          </div>
+          <div>
+            <dt>계획</dt>
+            <dd>LLM Q&amp;A · NER(계획)</dd>
+          </div>
+          <div>
+            <dt>배포</dt>
+            <dd>self-hosted (Docker)</dd>
+          </div>
+          <div>
+            <dt>저장소</dt>
+            <dd>
+              <a href="https://github.com/doccano/doccano"
+                 target="_blank" rel="noopener noreferrer">
+                <i data-lucide="external-link"></i>
+                github.com/doccano/doccano
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <a class="labeling-tool-link"
+           href="https://github.com/doccano/doccano"
+           target="_blank" rel="noopener noreferrer">
+          공식 사이트 <i data-lucide="arrow-up-right"></i>
+        </a>
+      </article>
+
+      <!-- Labelme -->
+      <article class="labeling-tool-card tool-labelme">
+        <div class="labeling-tool-title">
+          <div class="labeling-tool-icon labelme-icon">
+            <i data-lucide="pentagon"></i>
+          </div>
+
+          <div class="labeling-tool-title-text">
+            <div class="labeling-tool-name">
+              <h3>Labelme</h3>
+              <span class="labeling-pill green">GPL-3.0</span>
+              <span class="labeling-pill muted">확장 예정</span>
+            </div>
+            <p>폴리곤 세그멘테이션 (확장 예정)</p>
+          </div>
+        </div>
+
+        <dl class="labeling-tool-info">
+          <div>
+            <dt>용도</dt>
+            <dd>
+              <span class="labeling-mini-badge image">IMG</span>
+              <span class="labeling-mini-badge satellite">SAT</span>
+              어구 폴리곤 · 해안선 · 유막 (미도입)
+            </dd>
+          </div>
+          <div>
+            <dt>계획</dt>
+            <dd>위성·항공 영상(계획)</dd>
+          </div>
+          <div>
+            <dt>배포</dt>
+            <dd>desktop (Python)</dd>
+          </div>
+          <div>
+            <dt>저장소</dt>
+            <dd>
+              <a href="https://github.com/wkentaro/labelme"
+                 target="_blank" rel="noopener noreferrer">
+                <i data-lucide="external-link"></i>
+                github.com/wkentaro/labelme
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <a class="labeling-tool-link"
+           href="https://github.com/wkentaro/labelme"
+           target="_blank" rel="noopener noreferrer">
+          공식 사이트 <i data-lucide="arrow-up-right"></i>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 데이터셋 구성 + 라벨 소스 -->
+  <div class="labeling-content-grid">
+
+    <!-- 데이터셋별 라벨 구성 -->
+    <section class="labeling-section labeling-datasets">
+      <h2>데이터셋별 라벨 구성</h2>
+
+      <div class="labeling-progress-list">
+
+        <div class="labeling-progress-item">
+          <div class="labeling-progress-head">
+            <div class="labeling-progress-name">
+              <a href="#" data-label-dataset="DS-2026-005">DS-2026-005</a>
+              <strong>어구 위반 분류</strong>
+            </div>
+            <div class="labeling-progress-status">
+              <span class="labeling-category trk">TRK</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+          <div class="labeling-progress-meta">
+            <span>규칙 태깅(G-01~06) · 검수</span>
+            <span>5,595건</span>
+          </div>
+          <div class="labeling-progress-track">
+            <span style="width:100%"></span>
+          </div>
+          <p>gear_pattern · GroupKFold k=5 · Macro-F1 0.994</p>
+        </div>
+
+        <div class="labeling-progress-item">
+          <div class="labeling-progress-head">
+            <div class="labeling-progress-name">
+              <a href="#" data-label-dataset="DS-2026-004">DS-2026-004</a>
+              <strong>어업형태 분류</strong>
+            </div>
+            <div class="labeling-progress-status">
+              <span class="labeling-category trk">TRK</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+          <div class="labeling-progress-meta">
+            <span>허가 등록 업종(지식전달)</span>
+            <span>645건</span>
+          </div>
+          <div class="labeling-progress-track">
+            <span style="width:100%"></span>
+          </div>
+          <p>정확도 0.828 · 평가셋 645척</p>
+        </div>
+
+        <div class="labeling-progress-item">
+          <div class="labeling-progress-head">
+            <div class="labeling-progress-name">
+              <a href="#" data-label-dataset="DS-2026-003">DS-2026-003</a>
+              <strong>중국어선 국적분류</strong>
+            </div>
+            <div class="labeling-progress-status">
+              <span class="labeling-category trk">TRK</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+          <div class="labeling-progress-meta">
+            <span>항적 5-fold OOF 라벨</span>
+            <span>10,375건</span>
+          </div>
+          <div class="labeling-progress-track">
+            <span style="width:100%"></span>
+          </div>
+          <p>MMSI 배제 · 항적 기반 · F1 0.916</p>
+        </div>
+
+        <div class="labeling-progress-item">
+          <div class="labeling-progress-head">
+            <div class="labeling-progress-name">
+              <a href="#" data-label-dataset="DS-2026-002">DS-2026-002</a>
+              <strong>한중어업 허가어선 (2026)</strong>
+            </div>
+            <div class="labeling-progress-status">
+              <span class="labeling-category enf">ENF</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+          <div class="labeling-progress-meta">
+            <span>허가명부 코드북 매핑</span>
+            <span>1,077건</span>
+          </div>
+          <div class="labeling-progress-track">
+            <span style="width:100%"></span>
+          </div>
+          <p>업종 코드화 · 선단 600</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 라벨 소스·방법 -->
+    <section class="labeling-section labeling-sources">
+      <h2>라벨 소스·방법 (자동·교차·검수)</h2>
+
+      <div class="labeling-source-list">
+
+        <div class="labeling-source-item">
+          <div class="labeling-source-text">
+            <strong>규칙 태깅</strong>
+            <span>어구 위반 G-01~06 (gear_pattern)</span>
+          </div>
+          <div class="labeling-source-value">
+            <strong>5,595</strong>
+            <span class="labeling-state complete">완료</span>
+          </div>
+        </div>
+
+        <div class="labeling-source-item">
+          <div class="labeling-source-text">
+            <strong>GFW 공개라벨 교차검증</strong>
+            <span>모선추론 어구 교차일치 표본 (60/60/50척)</span>
+          </div>
+          <div class="labeling-source-value">
+            <strong>170척</strong>
+            <span class="labeling-state complete">완료</span>
+          </div>
+        </div>
+
+        <div class="labeling-source-item">
+          <div class="labeling-source-text">
+            <strong>허가명부 코드북</strong>
+            <span>한중어업 허가어선 업종 (2026)</span>
+          </div>
+          <div class="labeling-source-value">
+            <strong>1,077척</strong>
+            <span class="labeling-state complete">완료</span>
+          </div>
+        </div>
+
+        <div class="labeling-source-item">
+          <div class="labeling-source-text">
+            <strong>전문가 검수</strong>
+            <span>AIS 정합성 · 환적 규칙 라벨</span>
+          </div>
+          <div class="labeling-source-value">
+            <strong>진행</strong>
+            <span class="labeling-state ongoing">진행</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="labeling-source-note">
+        인간 크라우드 라벨링(작업자 배정·인터·어노테이터 충돌)은
+        미수행 — 자동 규칙·GFW 교차검증으로 라벨 정합성 확보.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- 교차검증 일치도 -->
+  <section class="labeling-section labeling-validation">
+    <div class="labeling-section-header">
+      <h2>교차검증 일치도 (라벨 정합성)</h2>
+      <p>
+        인간 라벨 충돌 대신, GFW 공개라벨 · 모델 교차검증으로
+        라벨 신뢰도를 검증한다.
+      </p>
+    </div>
+
+    <div class="labeling-table-scroll">
+      <table class="labeling-validation-table">
+        <thead>
+          <tr>
+            <th>검증 대상</th>
+            <th>검증 기준</th>
+            <th>일치도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>저인망(TRAWL)</td>
+            <td>GFW 공개라벨 (모선추론)</td>
+            <td>
+              <span class="labeling-result success">90.2%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>어구 유형(GILLNET/PURSE)</td>
+            <td>GroupKFold k=5</td>
+            <td>
+              <span class="labeling-result success">Macro-F1 0.994</span>
+            </td>
+          </tr>
+          <tr>
+            <td>자망 · 선망</td>
+            <td>GFW 공개라벨 (모선추론)</td>
+            <td>
+              <span class="labeling-result danger">자망 7.1% / 선망 0%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>중국어선 국적</td>
+            <td>5-fold OOF · 어선 10,375척</td>
+            <td>
+              <span class="labeling-result success">F1 0.916</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="labeling-validation-note">
+      자망·선망은 표본 희소(급어기) · GFW 일반라벨 한계로
+      교차일치가 낮으며, 조업기 표본 확보 후 재검증.
+    </p>
+  </section>
+
+</main>
+
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

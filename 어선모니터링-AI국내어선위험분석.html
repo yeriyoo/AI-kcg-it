@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>AI국내어선위험분석</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 어선모니터링 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+
+        <div class="flex min-w-0 items-center gap-4">
+          <i data-lucide="fish"
+            class="h-[17px] w-[17px] shrink-0"
+            aria-hidden="true"></i>
+          <span>어선모니터링</span>
+        </div>
+
+        <span class="flex items-center gap-3">
+          <em class="reference-badge">참고</em>
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+        <a class="nav-item active" aria-current="page">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI국내어선위험분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain-circuit"></i>
+            <span>AI알고리즘</span>
+          </a>
+        </div>
+      
+       
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">AI국내어선위험분석</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+
+<main id="mainContent" class="dr-page" tabindex="-1">
+
+  <!-- 상단 제목 -->
+  <div class="dr-heading">
+    <div class="dr-heading-title">
+      <i data-lucide="layout-dashboard"></i>
+      <h1>통합상황판</h1>
+      <span>소형어선 위치 · 위험도 · 이상징후 · 사고 대응 통합 모니터링</span>
+    </div>
+    <span class="dr-live">LIVE · 피드 지연 0분</span>
+  </div>
+
+  <!-- 상단 지표 -->
+  <section class="dr-stats" aria-label="어선 모니터링 현황">
+    <div class="dr-stat">
+      <i data-lucide="ship"></i>
+      <div>
+        <span>전체 어선</span>
+        <strong>1,076<small>척</small></strong>
+        <em>실신호 1073</em>
+      </div>
+    </div>
+
+    <div class="dr-stat">
+      <i data-lucide="circle-check"></i>
+      <div>
+        <span class="dr-status dr-green">정상 운항</span>
+        <strong>946<small>척</small></strong>
+        <em>(87.9%)</em>
+      </div>
+    </div>
+
+    <div class="dr-stat">
+      <i data-lucide="octagon"></i>
+      <div>
+        <span class="dr-status dr-yellow">주의 단계</span>
+        <strong>42<small>척</small></strong>
+        <em>(3.9%)</em>
+      </div>
+    </div>
+
+    <div class="dr-stat">
+      <i data-lucide="shield-alert"></i>
+      <div>
+        <span class="dr-status dr-orange">위험 단계</span>
+        <strong>87<small>척</small></strong>
+        <em>(8.1%)</em>
+      </div>
+    </div>
+
+    <div class="dr-stat">
+      <i data-lucide="siren"></i>
+      <div>
+        <span class="dr-status dr-red">긴급(사고 의심)</span>
+        <strong>1<small>척</small></strong>
+        <em>(0.1%)</em>
+      </div>
+    </div>
+
+    <div class="dr-stat">
+      <i data-lucide="wifi-off"></i>
+      <div>
+        <span>통신 미응답 의심</span>
+        <strong>85<small>척</small></strong>
+        <em class="dr-danger-text">무응답 1</em>
+      </div>
+    </div>
+
+    <div class="dr-stat dr-weather">
+      <span>현재 해상상황 (전국 평균)</span>
+      <div>
+        <div><i data-lucide="wind"></i><strong>10.4<small>m/s</small></strong><em>풍속</em></div>
+        <div><i data-lucide="waves"></i><strong>1.2<small>m</small></strong><em>파고</em></div>
+        <div><i data-lucide="thermometer"></i><strong>20.0<small>°C</small></strong><em>수온</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 중간: 위험목록 / 지도 / 상세정보 -->
+  <div class="dr-workspace">
+
+    <!-- 좌측 위험 어선 목록 -->
+    <aside class="dr-risk-panel">
+      <div class="dr-panel-heading">위험 어선 우선순위</div>
+
+      <!-- 탭: 클릭 기능 없음 -->
+      <div class="dr-risk-tabs">
+        <span class="is-active">전체(130)</span>
+        <span>긴급(1)</span>
+        <span>위험(87)</span>
+        <span>주의(42)</span>
+        <span>통신이상(85)</span>
+      </div>
+
+      <label class="dr-search">
+        <i data-lucide="search"></i>
+        <input type="search" id="drVesselSearch" placeholder="선박명 검색">
+      </label>
+
+      <div class="dr-risk-list" id="drRiskList">
+        <button class="dr-risk-item is-selected" type="button"
+                data-name="108BU CHANG" data-score="92"
+                data-level="긴급" data-distance="28km">
+          <span class="dr-risk-rank">1</span>
+          <span class="dr-risk-info">
+            <strong>108BU CHANG <em class="dr-tag dr-tag-red">전복 의심</em></strong>
+            <small>인천 서방향 남서쪽 28km · 12일 전</small>
+          </span>
+          <b>92</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="102 POO REUM HO" data-score="80"
+                data-level="위험" data-distance="37km">
+          <span class="dr-risk-rank">2</span>
+          <span class="dr-risk-info">
+            <strong>102 POO REUM HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>남해 미조항 북동쪽 · 1시간 37분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="105 SAM SEONG HO" data-score="80"
+                data-level="위험" data-distance="12km">
+          <span class="dr-risk-rank">3</span>
+          <span class="dr-risk-info">
+            <strong>105 SAM SEONG HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>통영항 인근 · 2시간 51분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="2 GO RYEO HO" data-score="80"
+                data-level="위험" data-distance="8km">
+          <span class="dr-risk-rank">4</span>
+          <span class="dr-risk-info">
+            <strong>2 GO RYEO HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>부안 위도 인근 · 1시간 49분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="5 DONG SIN" data-score="80"
+                data-level="위험" data-distance="6km">
+          <span class="dr-risk-rank">5</span>
+          <span class="dr-risk-info">
+            <strong>5 DONG SIN <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>완도항 인근 · 1시간 58분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="5MIN SEONG HO" data-score="80"
+                data-level="위험" data-distance="4km">
+          <span class="dr-risk-rank">6</span>
+          <span class="dr-risk-info">
+            <strong>5MIN SEONG HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>통영항 인근 · 1시간 45분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="AES HO" data-score="80"
+                data-level="위험" data-distance="2km">
+          <span class="dr-risk-rank">7</span>
+          <span class="dr-risk-info">
+            <strong>AES HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>여수항 남서쪽 2km · 1시간 37분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="BA SA NAM HO" data-score="80"
+                data-level="위험" data-distance="9km">
+          <span class="dr-risk-rank">8</span>
+          <span class="dr-risk-info">
+            <strong>BA SA NAM HO <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>통영항 남쪽 9km · 1시간 37분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+
+        <button class="dr-risk-item" type="button"
+                data-name="CHANG YOUNG" data-score="80"
+                data-level="위험" data-distance="10km">
+          <span class="dr-risk-rank">9</span>
+          <span class="dr-risk-info">
+            <strong>CHANG YOUNG <em class="dr-tag dr-tag-orange">통신두절</em></strong>
+            <small>강릉 주문진 인근 · 1시간 37분 전</small>
+          </span>
+          <b>80</b>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 중앙 지도 -->
+    <section class="dr-map-panel" aria-label="어선 위험 지도">
+      <div class="dr-map-stage" id="drMapStage">
+        <img
+          id="drMapImage"
+          class="dr-map-img"
+          src="./img/domestic-risk-map.png"
+          alt="대한민국 주변 어선 위험도 지도"
+        >
+      </div>
+
+      <!-- 지도 종류 -->
+      <div class="dr-map-layers">
+        <strong>지도종류 <i data-lucide="x"></i></strong>
+        <label><input type="radio" name="drMapType"> 해도</label>
+        <label><input type="radio" name="drMapType" checked> 위성</label>
+        <hr>
+        <label><input type="checkbox" checked> AIS 어선</label>
+        <label><input type="checkbox"> 기상정보</label>
+        <label><input type="checkbox" checked> 위험구역</label>
+        <label><input type="checkbox"> 어장정보</label>
+        <label><input type="checkbox" checked> 표류예측</label>
+        <label><input type="checkbox" checked> 함정 · 항공기</label>
+      </div>
+
+      <label class="dr-map-search">
+        <input type="search" placeholder="선박명, 어선번호, MMSI 검색">
+        <i data-lucide="search"></i>
+      </label>
+
+      <label class="dr-map-history">
+        <input type="checkbox"> 실시간 기상 레이어
+      </label>
+
+      <div class="dr-map-zoom">
+        <button type="button" id="drZoomIn" aria-label="확대">+</button>
+        <button type="button" id="drZoomOut" aria-label="축소">−</button>
+      </div>
+
+      <div class="dr-map-legend">
+        <span><i class="dr-dot green"></i> 정상</span>
+        <span><i class="dr-dot yellow"></i> 주의</span>
+        <span><i class="dr-dot orange"></i> 위험</span>
+        <span><i class="dr-dot red"></i> 긴급</span>
+        <span><i class="dr-dot gray"></i> 신호 없음</span>
+        <span><i class="dr-dot outline"></i> 최초 위험구역</span>
+      </div>
+
+      <div class="dr-map-credit">NASA/USGS · NOAA ETOPO</div>
+    </section>
+
+    <!-- 우측 상세정보 -->
+    <aside class="dr-detail-panel">
+      <div class="dr-panel-heading dr-detail-heading">
+        <strong>선택 선박 상세정보</strong>
+      </div>
+
+      <!-- 탭: 클릭 기능 없음 -->
+      <div class="dr-detail-tabs">
+        <span class="is-active">종합정보</span>
+        <span>AI 분석</span>
+        <span>기상/해양</span>
+        <span>경보 · 이력</span>
+      </div>
+
+      <div class="dr-detail-scroll">
+        <div class="dr-ship-summary">
+          <div class="dr-ship-icon"><i data-lucide="ship"></i></div>
+          <div>
+            <div class="dr-ship-name">
+              <strong id="drSelectedName">108BU CHANG</strong>
+              <em class="dr-tag dr-tag-red" id="drSelectedLevel">긴급</em>
+            </div>
+            <p>위치 <span id="drSelectedDistance">지도 서방향 남서쪽 28km</span></p>
+            <p>업종 어선 · 송신원 -</p>
+            <p>톤수 -</p>
+            <p>출항 -</p>
+            <p>등급 <span class="dr-tag dr-tag-green">일반관리</span> 0점</p>
+          </div>
+        </div>
+
+        <div class="dr-score-area">
+          <div class="dr-score-box">
+            <span>위험도</span>
+            <div class="dr-score-gauge">
+              <strong id="drSelectedScore">92</strong>
+              <small>/100</small>
+            </div>
+            <em>전체 위험 매우 높음</em>
+          </div>
+
+          <dl class="dr-ship-facts">
+            <div><dt>횡경사</dt><dd>88.0° <em>위험</em></dd></div>
+            <div><dt>파고</dt><dd>0.8 m</dd></div>
+            <div><dt>풍속</dt><dd>11.2 m/s <em>주의</em></dd></div>
+            <div><dt>선속</dt><dd>0.9 노트</dd></div>
+            <div><dt>선수방향</dt><dd>86° (동)</dd></div>
+            <div><dt>최종 통신</dt><dd>12일 전 <em>위험</em></dd></div>
+          </dl>
+        </div>
+
+        <div class="dr-risk-breakdown">
+          <strong>영역별 위험도</strong>
+          <div><span>선체 1.0</span><div><i style="width:100%;background:#f04452"></i></div><b>100</b></div>
+          <div><span>기상 0.15</span><div><i style="width:26%;background:#20c997"></i></div><b>26</b></div>
+          <div><span>운항 0.65</span><div><i style="width:78%;background:#f04452"></i></div><b>78</b></div>
+          <div><span>인명 0.10</span><div><i style="width:70%;background:#f04452"></i></div><b>70</b></div>
+        </div>
+
+        <div class="dr-emergency">
+          <i data-lucide="phone-call"></i>
+          <div><strong>선장 상태 확인 · 무응답</strong><small>09:27 요청 · AI 분석완료</small></div>
+          <span>확인 요청</span>
+        </div>
+
+        <div class="dr-detail-actions">
+          <button type="button">표 예측 실행</button>
+          <button type="button">항적 숨기기</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 하단 현황 -->
+  <div class="dr-bottom-grid">
+
+    <section class="dr-bottom-panel">
+      <div class="dr-bottom-heading">
+        <strong>근처 선박 · 함정 — 108BU CHANG</strong>
+        <span class="dr-blue-pill">어선(20)</span>
+        <span>함정 · 구조자원</span>
+      </div>
+      <table class="dr-near-table">
+        <thead><tr><th>선박명</th><th>거리</th><th>상태</th><th>위험</th></tr></thead>
+        <tbody>
+          <tr><td>2022 HAN IL HO</td><td>7.3NM</td><td>정지</td><td><em>정상</em></td></tr>
+          <tr><td>7MANBOG HO</td><td>7.4NM</td><td>조업</td><td><em>정상</em></td></tr>
+          <tr><td>505 DEOK UN HO</td><td>7.4NM</td><td>정지</td><td><em>정상</em></td></tr>
+          <tr><td>108 JIN YEONG HO</td><td>7.4NM</td><td>정지</td><td><em>정상</em></td></tr>
+          <tr><td>388MI RAE HO</td><td>7.4NM</td><td>정지</td><td><em>정상</em></td></tr>
+          <tr><td>EOSEONGHO</td><td>7.4NM</td><td>정지</td><td><em>정상</em></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="dr-bottom-panel dr-chart-panel">
+      <div class="dr-bottom-heading">
+        <strong>위험도 추이</strong>
+        <span>6시간</span><span>12시간</span>
+        <span class="dr-blue-pill">24시간</span>
+      </div>
+      <div class="dr-chart-legend">
+        <span>긴급</span><span>위험</span><span>주의</span><span>통신미응답</span><span>정상</span>
+      </div>
+      <div class="dr-chart-wrap">
+        <canvas id="drRiskChart" aria-label="위험도 추이 차트"></canvas>
+      </div>
+    </section>
+
+    <section class="dr-bottom-panel">
+      <div class="dr-bottom-heading"><strong>최근 경보 현황</strong></div>
+      <table class="dr-alert-table">
+        <thead><tr><th>시간</th><th>선박명</th><th>경보내용</th><th>위험도</th></tr></thead>
+        <tbody>
+          <tr><td>11:56</td><td>MMSI 440176740</td><td><em>위험</em> 근접충돌 위험</td><td>12</td></tr>
+          <tr><td>11:56</td><td>MMSI 440197670</td><td><em>위험</em> 근접충돌 위험</td><td>49</td></tr>
+          <tr><td>11:56</td><td>MMSI 440153080</td><td><em>위험</em> 근접충돌 위험</td><td>64</td></tr>
+          <tr><td>11:56</td><td>MMSI 440117470</td><td><em>위험</em> 근접충돌 위험</td><td>12</td></tr>
+          <tr><td>11:56</td><td>HAE JOON</td><td><em>위험</em> 근접충돌 위험</td><td>49</td></tr>
+          <tr><td>11:56</td><td>MMSI 440089820</td><td><em>위험</em> 근접충돌 위험</td><td>30</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="dr-bottom-panel dr-drift-panel">
+      <!-- 제목 -->
+      <div class="dr-bottom-heading">
+        <strong>실종 · 표류 예측</strong>
+        <small>(OpenDrift 호환 Leeway)</small>
+      </div>
+
+      <!-- 표류 유형 -->
+      <div class="dr-drift-top">
+        <div class="dr-drift-type">
+          <span>선박 표류</span>
+          <span class="dr-blue-pill">사람 표류(MOB)</span>
+        </div>
+
+        <span class="dr-drift-vessel">
+          108BU CHANG · 전복
+        </span>
+      </div>
+
+      <!-- 지도 -->
+      <div class="dr-drift-preview">
+        <img
+          src="./img/drift-prediction-map.png"
+          alt="실종자 표류 예측 지도"
+          class="dr-drift-map-img"
+        >
+
+        <div class="dr-drift-legend">
+          <span><i class="dr-legend-dot red"></i>50% 예측 범위</span>
+          <span><i class="dr-legend-dot blue"></i>90% 예측 범위</span>
+          <span><i class="dr-legend-line"></i>예상 표류경로</span>
+        </div>
+
+        <span class="dr-drift-location">
+          사고 추정위치 (09:38)
+        </span>
+
+        <span class="dr-drift-info">
+          <i data-lucide="info"></i>
+        </span>
+      </div>
+
+      <!-- 예측 시간 -->
+      <div class="dr-drift-time">
+        <span class="dr-time-label">예측 시간</span>
+        <span>+1h</span>
+        <span>+3h</span>
+        <b>+6h</b>
+        <span>+12h</span>
+        <span>+24h</span>
+        <span>+48h</span>
+      </div>
+
+      <!-- 예측 정보 -->
+      <div class="dr-drift-values">
+
+        <div>
+          <small>예상 표류거리</small>
+          <strong>2.9 NM</strong>
+        </div>
+
+        <div>
+          <small>예상 표류방향</small>
+          <strong>동 (81°)</strong>
+        </div>
+
+        <div>
+          <small>예상 위치 시각</small>
+          <strong>10.15 15:38</strong>
+        </div>
+
+        <div>
+          <small>90% / 50% 범위</small>
+          <strong>42.1 / 13.3km²</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+</main>
+
+
+
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

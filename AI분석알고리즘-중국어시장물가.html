@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>중국어시장물가</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        
+        <!-- =====================================
+            AI분석알고리즘
+        ====================================== -->
+
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="ship-wheel"
+              class="h-[17px] w-[17px]"
+              aria-hidden="true"></i>
+            AI분석알고리즘
+          </div>
+
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar-submenu">
+
+          <a class="nav-item">
+            <i data-lucide="eye-off" aria-hidden="true"></i>
+            <span>불법어선 / Dark Vessel</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>중국어선 분석</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>환적 의심 탐지</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="link" aria-hidden="true"></i>
+            <span>어업형태별 탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>어구 위반 종합</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="git-compare" aria-hidden="true"></i>
+            <span>어구·선박 상관점수</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag" aria-hidden="true"></i>
+            <span>모선 추론</span>
+            <small>SFR-10·09-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="satellite" aria-hidden="true"></i>
+            <span>AIS신호탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search" aria-hidden="true"></i>
+            <span>불법선박위험해역</span>
+            <small>SFR-09·10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="fish" aria-hidden="true"></i>
+            <span>물고기 탐지</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-orange">기술협상</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waypoints" aria-hidden="true"></i>
+            <span>공급망그래프</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>중국항만</span>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            <span>중국어시장물가</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            <span>중국선단관계분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="gavel" aria-hidden="true"></i>
+            <span>중국선박제재</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="box" aria-hidden="true"></i>
+            <span>위험 큐브</span>
+            <small>SFR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="trending-up" aria-hidden="true"></i>
+            <span>위험도 추이·이력</span>
+            <small>SFR-05-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="target" aria-hidden="true"></i>
+            <span>단속 우선지역 추천</span>
+            <small>SFR-06-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waves" aria-hidden="true"></i>
+            <span>괭생이모자반</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-blue">부가</em>
+          </a>
+
+        </div>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">중국어시장물가</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+    
+    <main id="mainContent" class="china-market-page" tabindex="-1">
+
+      <!-- 페이지 제목 -->
+      <div class="cm-heading">
+        <div class="cm-heading-left">
+          <i data-lucide="chart-column" aria-hidden="true"></i>
+          <h1>수산시장 연계 분석</h1>
+          <span class="cm-heading-divider"></span>
+          <p>중국 도매시장 수산물 가격·변동률과 항만 연결 분석</p>
+        </div>
+        <div class="cm-heading-actions">
+          <span class="cm-badge cm-green">pfsc.agri.cn 도매가격</span>
+          <span class="cm-date">기준일 2026-10-26</span>
+          <button type="button" class="cm-outline-button" id="cmRefresh">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i> 갱신
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI -->
+      <section class="cm-kpi-grid" aria-label="수산시장 주요 지표">
+        <article class="cm-kpi">
+          <i data-lucide="store" aria-hidden="true"></i>
+          <div>
+            <h2>시장 후보</h2>
+            <div class="cm-kpi-value">44 <small>개</small>
+              <span class="cm-badge cm-blue">주요 시장 10개</span>
+            </div>
+          </div>
+        </article>
+        <article class="cm-kpi">
+          <i data-lucide="alert-triangle" aria-hidden="true"></i>
+          <div>
+            <h2>가격 이상 시장</h2>
+            <div class="cm-kpi-value">1 <small>개</small>
+              <span class="cm-badge cm-red">가격 이상도 0.5 이상</span>
+            </div>
+          </div>
+        </article>
+        <article class="cm-kpi">
+          <i data-lucide="trending-up" aria-hidden="true"></i>
+          <div>
+            <h2>가격 급등 품목</h2>
+            <div class="cm-kpi-value">0 <small>개</small>
+              <span class="cm-badge cm-orange">변동률 +5% 이상</span>
+            </div>
+          </div>
+        </article>
+        <article class="cm-kpi">
+          <i data-lucide="trending-down" aria-hidden="true"></i>
+          <div>
+            <h2>가격 급락 품목</h2>
+            <div class="cm-kpi-value">2 <small>개</small>
+              <span class="cm-badge cm-blue">변동률 -5% 이하</span>
+            </div>
+          </div>
+        </article>
+        <article class="cm-kpi">
+          <i data-lucide="anchor" aria-hidden="true"></i>
+          <div>
+            <h2>연계 항만</h2>
+            <div class="cm-kpi-value">1 <small>개</small>
+              <span class="cm-badge cm-cyan">항만-시장 연결 보유</span>
+            </div>
+          </div>
+        </article>
+        <article class="cm-kpi">
+          <i data-lucide="circle-help" aria-hidden="true"></i>
+          <div>
+            <h2>자료 부족 시장</h2>
+            <div class="cm-kpi-value">43 <small>개</small>
+              <span class="cm-badge cm-neutral">연계·가격 반영 없음</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 접이식 목록 -->
+      <section class="cm-accordion-group" aria-label="감시 대상">
+        <div class="cm-accordion">
+          <button class="cm-accordion-trigger" type="button"
+            aria-expanded="false" aria-controls="cmSpeciesPanel">
+            <span><i data-lucide="chevron-right" class="cm-chevron"></i>
+              <i data-lucide="fish" class="cm-section-icon"></i>
+              감시 대상 어종 · 18종
+            </span>
+            <span class="cm-badge cm-neutral">가격 수집 4종 / 18종</span>
+          </button>
+          <div class="cm-accordion-content" id="cmSpeciesPanel" hidden>
+            <div class="cm-chip-list">
+              <span>갈치</span><span>부세</span><span>대두어</span>
+              <span>백련어</span><span>살오징어</span>
+              <span>기타 감시 어종 13종</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cm-accordion">
+          <button class="cm-accordion-trigger" type="button"
+            aria-expanded="false" aria-controls="cmMarketsPanel">
+            <span><i data-lucide="chevron-right" class="cm-chevron"></i>
+              <i data-lucide="store" class="cm-section-icon"></i>
+              감시 대상 수산시장 (API 연계) · 30개소
+            </span>
+            <span class="cm-badge cm-green">getMarketByProvinceCode</span>
+            <span class="cm-badge cm-neutral">연안 28개소</span>
+          </button>
+          <div class="cm-accordion-content" id="cmMarketsPanel" hidden>
+            <div class="cm-chip-list">
+              <span>광저우 황사수산시장</span>
+              <span>베이징 징성해선시장</span>
+              <span>상하이 강양수산시장</span>
+              <span>주산 국제수산성</span>
+              <span>복주 해협수산교역센터</span>
+              <span>그 외 감시 대상 시장</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 어종별 도매가격 -->
+      <section class="cm-panel cm-price-panel">
+        <div class="cm-panel-heading">
+          <h2><i data-lucide="fish"></i> 어종별 도매가격 (최신 기준일)</h2>
+          <span class="cm-badge cm-green">오늘 값 4/18종</span>
+        </div>
+        <div class="cm-table-scroll">
+          <table class="cm-table cm-price-table">
+            <thead>
+              <tr>
+                <th scope="col">어종</th>
+                <th scope="col">중국 품목명</th>
+                <th scope="col">ASFIS</th>
+                <th scope="col">감시</th>
+                <th scope="col">평균가</th>
+                <th scope="col">전일</th>
+                <th scope="col">변동률</th>
+                <th scope="col">FIPS 품목군</th>
+              </tr>
+            </thead>
+            <tbody id="cmPriceBody"></tbody>
+          </table>
+        </div>
+        <div class="cm-pagination">
+          <button type="button" id="cmPrevPage">이전</button>
+          <span id="cmPageInfo">1 / 4 · 전체 4종</span>
+          <button type="button" id="cmNextPage">다음</button>
+        </div>
+        <p class="cm-source-note">
+          원천(pfsc.agri.cn growthRanking)은 전체 농산물 상위 20개 변동 품목을 제공하며,
+          품목·건수 파라미터를 무시합니다. 오늘 기준 수산물은 5종이고 그중 ASFIS
+          종 수준이 확정된 4종을 연결 표시합니다(5종 중 초과 시 매핑).
+          가격(위안)은 원천 미제공으로 표시하지 않습니다.
+        </p>
+      </section>
+
+      <!-- 지도 + 시장 목록 -->
+      <div class="cm-analysis-grid">
+
+        <section class="cm-panel cm-map-panel">
+          <div class="cm-panel-heading">
+            <h2><i data-lucide="map"></i> 주요 시장 및 항만 연결</h2>
+            <div class="cm-panel-badges">
+              <span class="cm-badge cm-purple">시장 44</span>
+              <span class="cm-badge cm-orange">항만 12</span>
+            </div>
+          </div>
+
+          <div class="cm-map-wrap">
+            <div class="cm-map-viewport" id="cmMapViewport">
+              <img
+                src="./img/ch-market-map.png"
+                alt="중국 주요 수산시장과 항만 연결 위치 지도"
+                id="cmMapImage"
+                draggable="false"
+              >
+            </div>
+            <div class="cm-map-zoom" role="group" aria-label="지도 확대 축소">
+              <button type="button" id="cmZoomIn" aria-label="지도 확대">
+                <i data-lucide="plus"></i>
+              </button>
+              <button type="button" id="cmZoomOut" aria-label="지도 축소">
+                <i data-lucide="minus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="cm-map-legend">
+            <span class="cm-badge cm-green">실측</span>
+            <span class="cm-badge cm-purple">수산시장 위치</span>
+            <span class="cm-badge cm-orange">중국 항만 위치</span>
+            <span class="cm-badge cm-yellow">추정</span>
+            <span class="cm-badge cm-neutral">항만-시장 연결 (점선)</span>
+          </div>
+          <p class="cm-map-note">
+            실선 = 관측 데이터 기반 · 점선 = 공간·시간 기반 추정 · 선 굵기 =
+            연계점수. 추정 경로는 항만-AIS 직선거리 기반이며,
+            차량 GPS·물류 운송 데이터가 없어 실제 물류 경로로 단정하지 않습니다.
+            본 단계는 실제 입하량 원천이 없어 매핑 표시합니다.
+          </p>
+        </section>
+
+        <section class="cm-panel cm-market-panel">
+          <div class="cm-panel-heading">
+            <h2><i data-lucide="store"></i> 감시 대상 수산시장</h2>
+          </div>
+          <div class="cm-market-scroll">
+            <table class="cm-table cm-market-table">
+              <thead>
+                <tr>
+                  <th scope="col">시장</th>
+                  <th scope="col">소재</th>
+                  <th scope="col">연결 항만</th>
+                  <th scope="col">구분</th>
+                </tr>
+              </thead>
+              <tbody id="cmMarketBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 결과 해석 -->
+      <section class="cm-panel cm-result-panel">
+        <div class="cm-panel-heading">
+          <h2><i data-lucide="info"></i> 결과 해석</h2>
+        </div>
+
+        <h3>확보된 실제 데이터</h3>
+        <p>· 시장별·품목별 평균가 및 전일 대비 변동률 (元/公斤)</p>
+        <p>· 품목 가격 상승·하락 순위</p>
+        <p>· 감시 대상 수산시장 좌표·소재·주요 감시 구분</p>
+        <p>· 항만-시장 연결 후보 (미스터 매핑 기준)</p>
+
+        <h3>데이터 성격 구분</h3>
+        <div class="cm-data-legend">
+          <span><b class="cm-badge cm-green">관측</b> 시장 가격 (PFSC)</span>
+          <span><b class="cm-badge cm-green">관측</b> GFW 항만방문</span>
+          <span><b class="cm-badge cm-green">관측</b> AIS 항적 (SNPDB)</span>
+          <span><b class="cm-badge cm-green">관측</b> 시장·항만 좌표</span>
+          <span><b class="cm-badge cm-blue">파생</b> 가격변동률·이상 품목 수</span>
+          <span><b class="cm-badge cm-blue">파생</b> 항만 체류시간·방문 횟수</span>
+          <span><b class="cm-badge cm-yellow">추정</b> 항만-시장 연계점수</span>
+          <span><b class="cm-badge cm-yellow">추정</b> 항만-시장 이동경로</span>
+          <span><b class="cm-badge cm-yellow">추정</b> 미중 연계 가능성</span>
+          <span><b class="cm-badge cm-neutral">자료 부족</b> 시장 거래량·입하량</span>
+        </div>
+
+        <div class="cm-result-message">
+          시장 거래량이 제공되지 않는 경우 가격변동, 항만방문 및 어종 일치도를
+          이용하여 연계 가능성을 분석합니다. 점선 경로와 연계점수는
+          AI·공간분석 기반 추정 결과입니다.
+        </div>
+
+        <p class="cm-result-note">
+          본 분석은 간접 증거 기반이므로 결과는 <strong>불법어획물 유입 가능성
+          상승 및 항만 입항과 시장 가격 변동 간 연관성</strong>으로 해석해야 하며,
+          유입 확정 근거로 사용하지 않습니다.
+        </p>
+
+        <div class="cm-result-actions">
+          <button type="button" class="cm-outline-button" id="cmGoPorts">
+            <i data-lucide="anchor"></i> 항만분석
+          </button>
+          <button type="button" class="cm-outline-button" id="cmGoNetwork">
+            <i data-lucide="network"></i> 공급망그래프
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

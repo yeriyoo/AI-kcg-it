@@ -1,0 +1,6184 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI-HUB - 마이페이지</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- Common CSS -->
+  <link
+    rel="stylesheet"
+    href="./css/hub-common.css"
+  />
+  <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+</head>
+
+
+<body
+  class="
+    linked-data-page
+    min-w-[1280px]
+    bg-white
+    font-['Pretendard']
+    text-[#142A4D]
+  "
+>
+
+  <div class="min-h-screen">
+
+
+    <!-- =====================================================
+        TOP NAVIGATION
+    ====================================================== -->
+    <header
+      class="
+        header-shell
+        fixed
+        left-0 top-0 right-0
+        z-50
+        flex h-[60px] shrink-0
+        items-center
+        border-b border-[#476187]
+        px-8
+      "
+    >
+
+  <!-- =====================================================
+       LOGO
+  ====================================================== -->
+  <h1
+    class="
+      mr-20
+      flex shrink-0
+      items-center gap-2
+      text-[24px] font-semibold
+      text-white
+    "
+  >
+    <span
+      class="
+        flex h-8 w-8
+        items-center justify-center
+        rounded-full
+      "
+    >
+      <img
+      src="./img/logo.svg"
+      alt="AI-HUB"
+      class="
+        h-8 w-8
+        shrink-0
+        object-contain
+      "
+    />
+
+    </span>
+
+    AI-HUB
+  </h1>
+
+
+  <!-- =====================================================
+       MAIN MENU
+  ====================================================== -->
+  <nav
+      id="mainHeaderNav"
+      class="flex h-full items-center gap-10"
+      aria-label="주요 메뉴"
+    >
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="scroll-text"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 목록
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="workflow"
+        class="h-6 w-6"
+      ></i>
+
+      연계 데이터
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="file-pen"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 제공신청
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+    >
+      <i
+        data-lucide="book-bookmark"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 출처
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+    >
+      <i
+        data-lucide="file-cog"
+        class="h-6 w-6"
+      ></i>
+
+      표준화
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       HEADER UTILITY
+  ====================================================== -->
+  <div class="ml-auto shrink-0">
+
+
+    <!-- =================================================
+         DESKTOP / 1651px 이상
+    ================================================== -->
+    <div
+      id="headerUtilityDesktop"
+      class="flex items-center gap-3"
+    >
+
+      <!-- Time -->
+      <span
+        class="
+          whitespace-nowrap
+          text-lg font-medium
+          text-white
+        "
+      >
+        11:43:50 KST
+      </span>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- Download -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="다운로드"
+      >
+        <i
+          data-lucide="download"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- App -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="메뉴"
+      >
+        <i
+          data-lucide="grid-3x3"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Print -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="인쇄"
+      >
+        <i
+          data-lucide="printer"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          relative
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="shopping-cart"
+          class="h-5 w-5"
+        ></i>
+
+        <span
+          class="
+            absolute right-0 top-0
+            flex h-[16px] min-w-[16px]
+            items-center justify-center
+            rounded-full
+            bg-[#F84141]
+            px-1
+            text-[10px] font-semibold
+            leading-none
+            text-white
+          "
+        >
+          2
+        </span>
+      </button>
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="bell"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Theme -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="화면 모드"
+      >
+        <i
+          data-lucide="moon"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- User -->
+      <button
+        id="userMenuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        class="
+          flex items-center gap-2
+          text-[#E7F7FF]
+          hover:text-white
+        "
+      >
+        <span
+          class="
+            flex h-7 w-7
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <span class="whitespace-nowrap text-base">
+          여한상 (경위)
+        </span>
+      </button>
+
+    </div>
+
+    <!-- =================================================
+        COMPACT / 1650px 이하
+    ================================================== -->
+    <div
+      id="headerUtilityCompact"
+      class="relative hidden"
+    >
+
+      <button
+        id="headerUtilityToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        aria-label="계정 메뉴"
+        class="
+          flex h-10 w-10
+          items-center justify-center
+          rounded
+          text-white
+          hover:bg-[#476187]
+          hover:text-white
+        "
+      >
+        <i
+          data-lucide="menu"
+          class="h-6 w-6"
+        ></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+    <!-- =====================================================
+     USER MENU
+     1650px 이하 / 260 x 372
+    ====================================================== -->
+    <div
+      id="userMenu"
+      class="
+        fixed right-[28px] top-[50px]
+        z-[300]
+        hidden
+        h-[400px] w-[260px]
+        overflow-hidden
+        rounded
+        border border-[#476187]
+        bg-[#142A4D]
+        shadow-2xl
+      "
+    >
+    <!-- 1440px 이하 주요 메뉴 -->
+    <nav
+      id="mobileMainNav"
+      class="hidden"
+      aria-label="모바일 주요 메뉴"
+    ></nav>
+
+      <!-- CURRENT TIME -->
+      <div
+        class="
+          flex h-[64px]
+          flex-col justify-center
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            text-base
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+        <strong
+          id="accountCurrentTime"
+          class="
+            mt-1
+            text-base
+            font-medium
+            text-white
+          "
+        >
+          2026-10-06 15:48:55
+        </strong>
+      </div>
+
+
+      <!-- TIMEZONE -->
+      <div
+        class="
+          flex h-[48px]
+          items-center justify-between
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span class="text-base text-[#99ABC6]">
+          시간대
+        </span>
+
+        <div
+          class="
+            flex h-7
+            overflow-hidden
+            rounded
+            bg-[#476187]
+          "
+        >
+          <button
+            id="timezoneKst"
+            type="button"
+            data-timezone="Asia/Seoul"
+            class="
+              timezone-button active
+              flex min-w-[44px]
+              items-center justify-center
+              bg-white
+              px-3
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            KST
+          </button>
+
+          <button
+            id="timezoneUtc"
+            type="button"
+            data-timezone="UTC"
+            class="
+              timezone-button
+              flex min-w-[44px]
+              items-center justify-center
+              bg-[#476187]
+              px-3
+              text-base font-semibold
+              text-[#CBD6EA]
+            "
+          >
+            UTC
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOOLS -->
+      <div
+        class="
+          grid
+          grid-cols-3
+          border-b border-[#476187]
+        "
+      >
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다운로드
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            엑셀
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            인쇄
+          </span>
+        </button>
+
+         <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <span class="relative">
+            <i
+              data-lucide="shopping-cart"
+              class="h-5 w-5"
+            ></i>
+
+            <span
+              class="
+                absolute -right-2 -top-2
+                flex h-4 min-w-4
+                items-center justify-center
+                rounded-full
+                bg-[#F84141]
+                px-1
+                text-[10px] font-semibold
+                leading-none text-white
+              "
+            >
+              2
+            </span>
+          </span>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            알림
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-sm">
+            다크모드
+          </span>
+        </button>
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <div
+        class="
+          flex h-[52px]
+          items-center gap-3
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            flex h-8 w-8
+            shrink-0
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <strong
+          class="
+            truncate
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+      </div>
+
+
+      <!-- ACCOUNT MENU -->
+      <div
+        class="
+          h-[100px]
+          px-3 py-2
+        "
+      >
+    
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>내 정보</span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>로그아웃</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+        MAIN : MY PAGE
+    ====================================================== -->
+    <main
+      class="
+        min-h-screen
+        bg-[#F2F6FF]
+        pt-[60px]
+        text-black
+      "
+    >
+
+      <!-- =================================================
+          PAGE INFO
+      ================================================== -->
+      <section class="bg-white">
+        <div
+          class="
+            mx-auto
+            flex h-[76px]
+            max-w-[1300px]
+            items-center
+            px-6
+          "
+        >
+          <div class="flex items-center gap-3">
+
+            <div class="flex items-center gap-2">
+              <i
+                data-lucide="settings"
+                class="h-6 w-6 text-black"
+              ></i>
+
+              <h1 class="text-lg font-semibold text-black">
+                마이페이지
+              </h1>
+            </div>
+
+            <p class="text-base font-medium text-[#476187]">
+              내 계정 정보와 데이터 사용 신청·발급 현황을 관리합니다.
+            </p>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =================================================
+          CONTENT
+      ================================================== -->
+      <section>
+        <div
+          class="
+            mx-auto
+            flex
+            max-w-[1300px]
+            items-start
+            gap-8
+            px-6
+            py-12
+          "
+        >
+
+          <!-- =================================================
+              LEFT MENU
+          ================================================== -->
+          <aside
+            class="
+              w-[210px]
+              shrink-0
+              overflow-hidden
+              rounded
+              border border-[#CDD6E8]
+              bg-white
+            "
+          >
+
+            <div
+              class="
+                flex h-[42px]
+                items-center
+                bg-[#142A4D]
+                px-4
+                text-base font-semibold
+                text-white
+              "
+            >
+              마이페이지
+            </div>
+
+
+            <button
+              type="button"
+              data-mypage-menu="profile"
+              class="
+                mypage-menu-item
+                flex h-[48px]
+                w-full
+                items-center justify-between
+                border-b border-[#E1E7F2]
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>내 정보</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <button
+              type="button"
+              data-mypage-menu="favorite"
+              class="
+                mypage-menu-item
+                flex h-[48px]
+                w-full
+                items-center justify-between
+                border-b border-[#E1E7F2]
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>관심 데이터</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <button
+              type="button"
+              data-mypage-menu="quality"
+              class="
+                mypage-menu-item
+                flex h-[48px]
+                w-full
+                items-center justify-between
+                border-b border-[#E1E7F2]
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>품질 신고 내역</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <button
+              type="button"
+              data-mypage-menu="inquiry"
+              class="
+                mypage-menu-item
+                flex h-[48px]
+                w-full
+                items-center justify-between
+                border-b border-[#E1E7F2]
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>오류신고·문의 내역</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <button
+              type="button"
+              data-mypage-menu="standard"
+              class="
+                mypage-menu-item
+                flex h-[48px]
+                w-full
+                items-center justify-between
+                border-b border-[#E1E7F2]
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>표준 등록신청 내역</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <div
+              class="
+                px-4
+                pb-1 pt-4
+                text-base font-semibold
+                text-black
+              "
+            >
+              데이터 사용
+            </div>
+
+            <div
+              class="
+                px-4 py-1
+                text-sm font-medium
+                text-[#99ABC6]
+              "
+            >
+              OPEN API
+            </div>
+
+
+            <button
+              type="button"
+              data-mypage-menu="api-use"
+              class="
+                mypage-menu-item
+                flex h-[44px]
+                w-full
+                items-center justify-between
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>사용신청 현황</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <button
+              type="button"
+              data-mypage-menu="api-key"
+              class="
+                mypage-menu-item
+                flex h-[44px]
+                w-full
+                items-center justify-between
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>인증키 발급현황</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+
+            <div
+              class="
+                px-4
+                pb-1 pt-3
+                text-sm font-medium
+                text-[#99ABC6]
+              "
+            >
+              파일 데이터
+            </div>
+
+
+            <button
+              type="button"
+              data-mypage-menu="download"
+              class="
+                mypage-menu-item
+                flex h-[44px]
+                w-full
+                items-center justify-between
+                px-4
+                text-left
+                text-base font-semibold
+              "
+            >
+              <span>다운로드 승인신청 현황</span>
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+
+          </aside>
+
+
+
+          <!-- =================================================
+              RIGHT CONTENT
+          ================================================== -->
+          <div class="min-w-0 flex-1">
+
+
+            <!-- =====================================================
+                내 정보
+            ====================================================== -->
+            <section
+              data-mypage-panel="profile"
+              class="mypage-panel"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold">
+                내 정보
+              </h2>
+
+
+              <div
+                class="
+                  flex h-[104px]
+                  items-center justify-between
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  px-6
+                "
+              >
+
+                <div class="flex items-center gap-4">
+
+                  <span
+                    class="
+                      flex h-12 w-12
+                      items-center justify-center
+                      rounded-full
+                      bg-[#476187]
+                      text-lg font-semibold
+                      text-white
+                    "
+                  >
+                    여
+                  </span>
+
+                  <div>
+
+                    <div class="flex items-center gap-2">
+
+                      <strong class="text-base font-semibold">
+                        여한상 (경위)
+                      </strong>
+
+                      <span
+                        class="
+                          rounded-full
+                          bg-[#476187]
+                          px-2 py-0.5
+                          text-sm font-semibold
+                          text-white
+                        "
+                      >
+                        ADMIN
+                      </span>
+
+                      <span
+                        class="
+                          rounded-full
+                          bg-[#0061F0]
+                          px-2 py-0.5
+                          text-sm font-semibold
+                          text-white
+                        "
+                      >
+                        ACTIVE
+                      </span>
+
+                    </div>
+
+                    <p class="mt-1 text-base text-[#476187]">
+                      KCG-HQ · 계정 ID admin
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div class="text-right">
+
+                  <p class="text-base text-[#476187]">
+                    최근 로그인
+                  </p>
+
+                  <strong class="mt-1 block text-base font-semibold">
+                    2026-08-13 07:47
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="
+                  mt-5
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <table class="w-full table-fixed border-collapse text-base">
+
+                  <tbody>
+
+                    <tr class="border-y border-[#99ABC6]">
+                      <th class="w-[170px] bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        이름
+                      </th>
+                      <td class="px-4 py-3">
+                        여한상 (경위)
+                      </td>
+
+                      <th class="w-[170px] bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        계정 ID
+                      </th>
+                      <td class="px-4 py-3">
+                        admin
+                      </td>
+                    </tr>
+
+
+                    <tr class="border-b border-[#99ABC6]">
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        이메일
+                      </th>
+                      <td class="px-4 py-3">
+                        admin@kcg.go.kr
+                      </td>
+
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        소속
+                      </th>
+                      <td class="px-4 py-3">
+                        KCG-HQ
+                      </td>
+                    </tr>
+
+
+                    <tr class="border-b border-[#99ABC6]">
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        역할
+                      </th>
+                      <td class="px-4 py-3">
+                        ADMIN
+                      </td>
+
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        상태
+                      </th>
+                      <td class="px-4 py-3">
+                        ACTIVE
+                      </td>
+                    </tr>
+
+
+                    <tr class="border-b border-[#99ABC6]">
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        접근 시스템
+                      </th>
+
+                      <td class="px-4 py-3">
+
+                        <div class="flex flex-wrap gap-1">
+
+                          <span class="rounded-full bg-[#E1E7F2] px-2 py-1 text-sm text-[#0053B8]">
+                            CONNECTION
+                          </span>
+
+                          <span class="rounded-full bg-[#E1E7F2] px-2 py-1 text-sm text-[#0053B8]">
+                            MONITORING
+                          </span>
+
+                          <span class="rounded-full bg-[#E1E7F2] px-2 py-1 text-sm text-[#0053B8]">
+                            KCGAIHUB
+                          </span>
+
+                          <span class="rounded-full bg-[#E1E7F2] px-2 py-1 text-sm text-[#0053B8]">
+                            ADMIN
+                          </span>
+
+                          <span class="rounded-full bg-[#E1E7F2] px-2 py-1 text-sm text-[#0053B8]">
+                            SAMPLE
+                          </span>
+
+                        </div>
+
+                      </td>
+
+                      <th class="bg-[#E1E7F2] px-4 py-3 text-left font-semibold text-[#476187]">
+                        가입일
+                      </th>
+
+                      <td class="px-4 py-3">
+                        2026-08-11
+                      </td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+
+              <div
+                class="
+                  mt-5
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-[1fr_1fr_auto]
+                    items-end
+                    gap-5
+                  "
+                >
+
+                  <div>
+
+                    <label class="mb-2 block text-base font-medium">
+                      현재 비밀번호
+                    </label>
+
+                    <div class="relative">
+
+                      <input
+                        type="password"
+                        value="kcg-admin1234"
+                        class="
+                          h-[42px] w-full
+                          rounded
+                          border border-[#CDD6E8]
+                          px-3 pr-10
+                          text-base
+                          outline-none
+                        "
+                      />
+
+                      <i
+                        data-lucide="eye"
+                        class="
+                          absolute
+                          right-3 top-1/2
+                          h-5 w-5
+                          -translate-y-1/2
+                        "
+                      ></i>
+
+                    </div>
+
+                  </div>
+
+
+                  <div></div>
+                  <div></div>
+
+
+                  <div>
+
+                    <label class="mb-2 block text-base font-medium">
+                      새 비밀번호
+                    </label>
+
+                    <div class="relative">
+
+                      <input
+                        type="password"
+                        value="1234567890"
+                        class="
+                          h-[42px] w-full
+                          rounded
+                          border border-[#CDD6E8]
+                          px-3 pr-10
+                          text-base
+                          outline-none
+                        "
+                      />
+
+                      <i
+                        data-lucide="eye-off"
+                        class="
+                          absolute
+                          right-3 top-1/2
+                          h-5 w-5
+                          -translate-y-1/2
+                        "
+                      ></i>
+
+                    </div>
+
+                  </div>
+
+
+                  <div>
+
+                    <label class="mb-2 block text-base font-medium">
+                      새 비밀번호 확인
+                    </label>
+
+                    <div class="relative">
+
+                      <input
+                        type="password"
+                        placeholder="비밀번호를 입력하세요."
+                        class="
+                          h-[42px] w-full
+                          rounded
+                          border border-[#CDD6E8]
+                          px-3 pr-10
+                          text-base
+                          placeholder:text-[#99ABC6]
+                          outline-none
+                        "
+                      />
+
+                      <i
+                        data-lucide="eye-off"
+                        class="
+                          absolute
+                          right-3 top-1/2
+                          h-5 w-5
+                          -translate-y-1/2
+                        "
+                      ></i>
+
+                    </div>
+
+                  </div>
+
+
+                  <button
+                    type="button"
+                    class="
+                      h-[42px]
+                      rounded
+                      bg-[#0061F0]
+                      px-5
+                      text-base font-semibold
+                      text-white
+                    "
+                  >
+                    비밀번호 변경
+                  </button>
+
+                </div>
+
+
+                <p class="mt-3 text-sm text-[#476187]">
+                  * 이름·소속 등 계정 정보는 통합 로그인(IAM) 시스템에서 관리됩니다.
+                </p>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                관심 데이터
+            ====================================================== -->
+            <section
+              data-mypage-panel="favorite"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold">
+                관심 데이터
+              </h2>
+
+
+              <!-- =================================================
+                  TAB
+              ================================================== -->
+              <div class="flex items-end gap-1 border-b border-[#99ABC6]">
+
+                <!-- API -->
+                <button
+                  type="button"
+                  data-favorite-tab="api"
+                  class="
+                    favorite-tab
+                    flex h-[52px] min-w-[160px]
+                    items-center justify-center
+                    rounded-t
+                    border
+                    border-b-0
+                    px-6
+                    text-lg font-semibold
+                    focus:outline-none
+                  "
+                >
+                  API (0)
+                </button>
+
+
+                <!-- DATASET -->
+                <button
+                  type="button"
+                  data-favorite-tab="dataset"
+                  class="
+                    favorite-tab
+                    flex h-[52px] min-w-[160px]
+                    items-center justify-center
+                    rounded-t
+                    border
+                    border-b-0
+                    px-6
+                    text-lg font-semibold
+                    focus:outline-none
+                  "
+                >
+                  데이터셋 (2)
+                </button>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  API PANEL
+              ================================================== -->
+              <div data-favorite-panel="api">
+
+                <h3 class="my-5 text-lg font-semibold">
+                  총 0건
+                </h3>
+
+                <div
+                  class="
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    px-5 py-6
+                    text-base
+                  "
+                >
+                  관심 등록한 API이 없습니다. 목록·상세에서 하트를 눌러 추가하세요.
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  DATASET PANEL
+              ================================================== -->
+              <div
+                data-favorite-panel="dataset"
+                class="hidden"
+              >
+
+                <h3 class="my-5 text-lg font-semibold">
+                  총 2건
+                </h3>
+
+
+                <!-- TABLE BOX -->
+               <div
+                class="
+                  w-full
+                  overflow-hidden
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  px-6 py-6
+                "
+              >
+
+                <table
+                  class="
+                    w-full
+                    max-w-full
+                    table-fixed
+                    border-collapse
+                    text-base
+                  "
+                >
+
+                  <colgroup>
+                    <col style="width: 15%;" />
+                    <col style="width: 24%;" />
+                    <col style="width: 25%;" />
+                    <col style="width: 22%;" />
+                    <col style="width: 14%;" />
+                  </colgroup>
+
+
+                    <!-- =========================
+                        HEADER
+                    ========================== -->
+                    <thead>
+
+                      <tr class="bg-[#142A4D] text-white">
+
+                        <th
+                          class="
+                            rounded-l
+                            px-5 py-3
+                            text-left
+                            font-semibold
+                            whitespace-nowrap
+                          "
+                        >
+                          위험대분류
+                        </th>
+
+                        <th
+                          class="
+                            px-5 py-3
+                            text-left
+                            font-semibold
+                            whitespace-nowrap
+                          "
+                        >
+                          이름
+                        </th>
+
+                        <th
+                          class="
+                            px-5 py-3
+                            text-left
+                            font-semibold
+                            whitespace-nowrap
+                          "
+                        >
+                          제공
+                        </th>
+
+                        <th
+                          class="
+                            px-5 py-3
+                            text-left
+                            font-semibold
+                            whitespace-nowrap
+                          "
+                        >
+                          관심일
+                        </th>
+
+                        <th
+                          class="
+                            rounded-r
+                            px-5 py-3
+                            text-center
+                            font-semibold
+                          "
+                        >
+                        </th>
+
+                      </tr>
+
+                    </thead>
+
+
+
+                    <!-- =========================
+                        BODY
+                    ========================== -->
+                    <tbody>
+
+
+                      <!-- ROW 01 -->
+                      <tr class="border-b border-[#E1E7F2]">
+
+                        <!-- 위험대분류 -->
+                        <td class="px-5 py-3 align-middle">
+
+                          <span
+                            class="
+                              inline-flex
+                              items-center justify-center
+                              rounded
+                              bg-[#7C6FE8]
+                              px-3 py-1
+                              text-base font-semibold
+                              text-white
+                            "
+                          >
+                            공간
+                          </span>
+
+                        </td>
+
+
+                        <!-- 이름 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            font-medium
+                            text-black
+                          "
+                        >
+                          특정금지구역
+                        </td>
+
+
+                        <!-- 제공 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            text-black
+                          "
+                        >
+                          국립해양조사원
+                        </td>
+
+
+                        <!-- 관심일 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            whitespace-nowrap
+                            text-black
+                          "
+                        >
+                          2026-08-19
+                        </td>
+
+
+                        <!-- 관심 버튼 -->
+                        <td class="px-5 py-3 text-center align-middle">
+
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              h-[34px]
+                              items-center justify-center
+                              gap-1
+                              rounded
+                              bg-[#F84141]
+                              px-3
+                              text-base font-semibold
+                              text-white
+                              hover:bg-[#DE3535]
+                            "
+                          >
+                            <i
+                              data-lucide="heart"
+                              class="
+                                h-5 w-5
+                                fill-white
+                                text-white
+                              "
+                            ></i>
+
+                            관심
+                          </button>
+
+                        </td>
+
+                      </tr>
+
+
+
+                      <!-- ROW 02 -->
+                      <tr class="border-b border-[#E1E7F2]">
+
+                        <!-- 위험대분류 -->
+                        <td class="px-5 py-3 align-middle">
+
+                          <span
+                            class="
+                              inline-flex
+                              items-center justify-center
+                              rounded
+                              bg-[#7C6FE8]
+                              px-3 py-1
+                              text-base font-semibold
+                              text-white
+                            "
+                          >
+                            공간
+                          </span>
+
+                        </td>
+
+
+                        <!-- 이름 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            font-medium
+                            text-black
+                          "
+                        >
+                          관제구역
+                        </td>
+
+
+                        <!-- 제공 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            text-black
+                          "
+                        >
+                          해양수산부
+                        </td>
+
+
+                        <!-- 관심일 -->
+                        <td
+                          class="
+                            px-5 py-3
+                            align-middle
+                            whitespace-nowrap
+                            text-black
+                          "
+                        >
+                          2026-08-19
+                        </td>
+
+
+                        <!-- 관심 버튼 -->
+                        <td class="px-5 py-3 text-center align-middle">
+
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              h-[34px]
+                              items-center justify-center
+                              gap-1
+                              rounded
+                              bg-[#F84141]
+                              px-3
+                              text-base font-semibold
+                              text-white
+                              hover:bg-[#DE3535]
+                            "
+                          >
+                            <i
+                              data-lucide="heart"
+                              class="
+                                h-5 w-5
+                                fill-white
+                                text-white
+                              "
+                            ></i>
+
+                            관심
+                          </button>
+
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+              품질 신고 내역
+          ====================================================== -->
+          <section
+            data-mypage-panel="quality"
+            class="mypage-panel hidden"
+          >
+
+            <h2 class="mb-4 text-lg font-semibold text-black">
+              품질 신고 내역
+            </h2>
+
+
+            <!-- =================================================
+                검색 조건
+            ================================================== -->
+            <div
+              class="
+                rounded
+                border border-[#CDD6E8]
+                bg-white
+                p-6
+              "
+            >
+
+              <div
+                class="
+                  grid
+                  grid-cols-2
+                  gap-x-10
+                  gap-y-5
+                "
+              >
+
+                <!-- 대상 -->
+                <div>
+                  <label
+                    class="
+                      mb-2
+                      block
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    대상
+                  </label>
+
+                  <input
+                    type="text"
+                    class="
+                      h-[42px]
+                      w-full
+                      rounded
+                      border border-[#CDD6E8]
+                      bg-white
+                      px-3
+                      text-base
+                      text-black
+                      outline-none
+                    "
+                  />
+                </div>
+
+
+                <!-- 신고유형 -->
+                <div>
+                  <label class="mb-2 block text-base font-semibold text-black">
+                    신고유형
+                  </label>
+
+                  <div
+                    class="mypage-custom-dropdown relative w-full"
+                    data-mypage-dropdown
+                    data-default-value="전체"
+                  >
+                    <!-- 선택 버튼 -->
+                    <button
+                      type="button"
+                      class="
+                        mypage-dropdown-trigger
+                        flex h-[42px] w-full
+                        items-center justify-between
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-left text-base
+                        text-black
+                        focus:outline-none
+                      "
+                      aria-expanded="false"
+                    >
+                      <span class="mypage-dropdown-label">
+                        전체
+                      </span>
+
+                      <i
+                        data-lucide="chevron-down"
+                        class="
+                          mypage-dropdown-icon
+                          h-5 w-5
+                          shrink-0
+                          transition-transform
+                        "
+                      ></i>
+                    </button>
+
+
+                    <!-- 목록 -->
+                    <div
+                      class="
+                        mypage-dropdown-menu
+                        absolute
+                        left-0 top-full
+                        z-50
+                        mt-2
+                        hidden
+                        w-full
+                        overflow-hidden
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        shadow-lg
+                      "
+                    >
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-[#E1E7F2]
+                          px-3
+                          text-left text-base
+                          font-semibold
+                          text-black
+                        "
+                        data-value="전체"
+                      >
+                        전체
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="값 오류"
+                      >
+                        값 오류
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="최신성 (오래됨)"
+                      >
+                        최신성 (오래됨)
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="누락/결측"
+                      >
+                        누락/결측
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="표준·형식 불일치"
+                      >
+                        표준·형식 불일치
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="기타"
+                      >
+                        기타
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <!-- 상태 -->
+                <div>
+                  <label class="mb-2 block text-base font-semibold text-black">
+                    상태
+                  </label>
+
+                  <div
+                    class="mypage-custom-dropdown relative w-full"
+                    data-mypage-dropdown
+                    data-default-value="전체"
+                  >
+                    <!-- 선택 버튼 -->
+                    <button
+                      type="button"
+                      class="
+                        mypage-dropdown-trigger
+                        flex h-[42px] w-full
+                        items-center justify-between
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-left text-base
+                        text-black
+                        focus:outline-none
+                      "
+                      aria-expanded="false"
+                    >
+                      <span class="mypage-dropdown-label">
+                        전체
+                      </span>
+
+                      <i
+                        data-lucide="chevron-down"
+                        class="
+                          mypage-dropdown-icon
+                          h-5 w-5
+                          shrink-0
+                          transition-transform
+                        "
+                      ></i>
+                    </button>
+
+
+                    <!-- 목록 -->
+                    <div
+                      class="
+                        mypage-dropdown-menu
+                        absolute
+                        left-0 top-full
+                        z-50
+                        mt-2
+                        hidden
+                        w-full
+                        overflow-hidden
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        shadow-lg
+                      "
+                    >
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-[#E1E7F2]
+                          px-3
+                          text-left text-base
+                          font-semibold
+                          text-black
+                        "
+                        data-value="전체"
+                      >
+                        전체
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="접수대기"
+                      >
+                        접수대기
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="처리중"
+                      >
+                        처리중
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          border-b border-[#E1E1E1]
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="처리완료"
+                      >
+                        처리완료
+                      </button>
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-option
+                          flex h-[46px] w-full
+                          items-center
+                          bg-white
+                          px-3
+                          text-left text-base
+                          text-black
+                        "
+                        data-value="반려"
+                      >
+                        반려
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <!-- 신고일 -->
+                <div>
+                  <label
+                    class="
+                      mb-2
+                      block
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    신고일
+                  </label>
+
+                  <div
+                    class="
+                      flex
+                      items-center
+                      gap-3
+                    "
+                  >
+
+                    <input
+                      type="date"
+                      class="
+                        h-[42px]
+                        min-w-0
+                        flex-1
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                    <span class="shrink-0 text-base text-black">
+                      ~
+                    </span>
+
+                    <input
+                      type="date"
+                      class="
+                        h-[42px]
+                        min-w-0
+                        flex-1
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!-- 버튼 -->
+              <div
+                class="
+                  mt-6
+                  flex
+                  justify-end
+                  gap-2
+                "
+              >
+
+                <button
+                  type="button"
+                  class="
+                    flex h-[42px]
+                    items-center justify-center
+                    gap-2
+                    rounded
+                    bg-[#E1E7F2]
+                    px-4
+                    text-base
+                    font-semibold
+                    text-black
+                  "
+                >
+                  <i
+                    data-lucide="refresh-cw"
+                    class="h-5 w-5"
+                  ></i>
+
+                  초기화
+                </button>
+
+
+                <button
+                  type="button"
+                  class="
+                    flex h-[42px]
+                    items-center justify-center
+                    gap-2
+                    rounded
+                    bg-[#0061F0]
+                    px-4
+                    text-base
+                    font-semibold
+                    text-white
+                  "
+                >
+                  <i
+                    data-lucide="search"
+                    class="h-5 w-5"
+                  ></i>
+
+                  검색
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                결과
+            ================================================== -->
+            <h3
+              class="
+                mb-4
+                mt-8
+                text-lg
+                font-semibold
+                text-black
+              "
+            >
+              총 0건
+            </h3>
+
+
+            <div
+              class="
+                rounded
+                border border-[#CDD6E8]
+                bg-white
+                px-5 py-6
+                text-base
+                text-black
+              "
+            >
+              신고 내역이 없습니다. 데이터셋·연계데이터·API 상세의
+              "품질 신고" 버튼으로 신고할 수 있습니다.
+            </div>
+
+          </section>
+
+
+            <!-- =====================================================
+                오류신고·문의 내역
+            ====================================================== -->
+            <section
+              data-mypage-panel="inquiry"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold text-black">
+                오류신고·문의 내역
+              </h2>
+
+
+              <!-- =================================================
+                  검색 조건
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-6
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-2
+                    gap-x-10
+                    gap-y-5
+                  "
+                >
+
+                  <!-- =============================================
+                      대상
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      대상
+                    </label>
+
+                    <input
+                      type="text"
+                      class="
+                        h-[42px]
+                        w-full
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+
+
+                  <!-- =============================================
+                      구분
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      구분
+                    </label>
+
+
+                    <div
+                      class="
+                        mypage-custom-dropdown
+                        relative
+                        w-full
+                      "
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <!-- trigger -->
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <!-- dropdown menu -->
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0
+                          top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left
+                            text-base
+                            font-semibold
+                            text-black
+                          "
+                          data-value="전체"
+                        >
+                          전체
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="오류신고"
+                        >
+                          오류신고
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="문의"
+                        >
+                          문의
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+                  <!-- =============================================
+                      상태
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      상태
+                    </label>
+
+
+                    <div
+                      class="
+                        mypage-custom-dropdown
+                        relative
+                        w-full
+                      "
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <!-- trigger -->
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <!-- dropdown menu -->
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0
+                          top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left
+                            text-base
+                            font-semibold
+                            text-black
+                          "
+                          data-value="전체"
+                        >
+                          전체
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="접수대기"
+                        >
+                          접수대기
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="처리중"
+                        >
+                          처리중
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="처리완료"
+                        >
+                          처리완료
+                        </button>
+
+
+                        <button
+                          type="button"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                          data-value="반려"
+                        >
+                          반려
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+
+                  <!-- =============================================
+                      접수일
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      접수일
+                    </label>
+
+
+                    <div
+                      class="
+                        flex
+                        items-center
+                        gap-3
+                      "
+                    >
+
+                      <div class="relative min-w-0 flex-1">
+
+                        <input
+                          type="date"
+                          class="
+                            h-[42px]
+                            w-full
+                            rounded
+                            border border-[#CDD6E8]
+                            bg-white
+                            px-3
+                            text-base
+                            text-black
+                            outline-none
+                          "
+                        />
+
+                      </div>
+
+
+                      <span class="shrink-0 text-base text-black">
+                        ~
+                      </span>
+
+
+                      <div class="relative min-w-0 flex-1">
+
+                        <input
+                          type="date"
+                          class="
+                            h-[42px]
+                            w-full
+                            rounded
+                            border border-[#CDD6E8]
+                            bg-white
+                            px-3
+                            text-base
+                            text-black
+                            outline-none
+                          "
+                        />
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- =============================================
+                    초기화 / 검색
+                ============================================== -->
+                <div
+                  class="
+                    mt-6
+                    flex
+                    justify-end
+                    gap-2
+                  "
+                >
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#E1E7F2]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    <i
+                      data-lucide="refresh-cw"
+                      class="h-5 w-5"
+                    ></i>
+
+                    초기화
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#0061F0]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-white
+                    "
+                  >
+                    <i
+                      data-lucide="search"
+                      class="h-5 w-5"
+                    ></i>
+
+                    검색
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  결과
+              ================================================== -->
+              <h3
+                class="
+                  mb-4
+                  mt-8
+                  text-lg
+                  font-semibold
+                  text-black
+                "
+              >
+                총 1건
+              </h3>
+
+
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <table
+                  class="
+                    w-full
+                    table-fixed
+                    border-collapse
+                    text-base
+                  "
+                >
+
+                  <colgroup>
+                    <col style="width: 32%;" />
+                    <col style="width: 11%;" />
+                    <col style="width: 13%;" />
+                    <col style="width: 12%;" />
+                    <col style="width: 12%;" />
+                    <col style="width: 10%;" />
+                    <col style="width: 10%;" />
+                  </colgroup>
+
+
+                  <thead>
+
+                    <tr
+                      class="
+                        bg-[#142A4D]
+                        text-white
+                      "
+                    >
+
+                      <th class="rounded-l px-4 py-3 text-left font-semibold">
+                        대상
+                      </th>
+
+                      <th class="px-4 py-3 text-left font-semibold">
+                        구분
+                      </th>
+
+                      <th class="px-4 py-3 text-left font-semibold">
+                        유형
+                      </th>
+
+                      <th class="px-4 py-3 text-left font-semibold">
+                        내용
+                      </th>
+
+                      <th class="px-4 py-3 text-left font-semibold">
+                        상태
+                      </th>
+
+                      <th class="px-4 py-3 text-left font-semibold">
+                        처리답변
+                      </th>
+
+                      <th class="rounded-r px-4 py-3 text-left font-semibold">
+                        접수일
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody>
+
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-5">
+
+                        <strong class="block font-semibold">
+                          연안정지 관측소 정보
+                        </strong>
+
+                        <span
+                          class="
+                            mt-1 block
+                            text-sm
+                            text-[#476187]
+                          "
+                        >
+                          API · 407
+                        </span>
+
+                      </td>
+
+
+                      <td class="px-4 py-5">
+                        문의
+                      </td>
+
+
+                      <td class="px-4 py-5">
+                        데이터 관련
+                      </td>
+
+
+                      <td class="px-4 py-5">
+                        4114
+                      </td>
+
+
+                      <td class="px-4 py-5">
+
+                        <span
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            whitespace-nowrap
+                            rounded-full
+                            bg-[#0061F0]
+                            px-3 py-1
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
+                          접수대기
+                        </span>
+
+                      </td>
+
+
+                      <td class="px-4 py-5">
+                        -
+                      </td>
+
+
+                      <td class="px-4 py-5 whitespace-nowrap">
+                        2026-09-10
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                표준 등록신청 내역
+            ====================================================== -->
+            <section
+              data-mypage-panel="standard"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold text-black">
+                표준 등록신청 내역
+              </h2>
+
+
+              <!-- =================================================
+                  검색 조건
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-6
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-2
+                    gap-x-10
+                    gap-y-5
+                  "
+                >
+
+                  <!-- =============================================
+                      대상명
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      대상명
+                    </label>
+
+                    <input
+                      type="text"
+                      class="
+                        h-[42px]
+                        w-full
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+
+
+                  <!-- =============================================
+                      대상 유형
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      대상 유형
+                    </label>
+
+                    <div
+                      class="mypage-custom-dropdown relative w-full"
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <!-- trigger -->
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <!-- menu -->
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0 top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          data-value="전체"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left text-base
+                            font-semibold
+                            text-black
+                          "
+                        >
+                          전체
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="표준단어"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          표준단어
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="표준도메인"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          표준도메인
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="표준용어"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          표준용어
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- =============================================
+                      신청 유형
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      신청 유형
+                    </label>
+
+                    <div
+                      class="mypage-custom-dropdown relative w-full"
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0 top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          data-value="전체"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left text-base
+                            font-semibold
+                            text-black
+                          "
+                        >
+                          전체
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="신규 등록"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          신규 등록
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="수정"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          수정
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="삭제"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          삭제
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- =============================================
+                      상태
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      상태
+                    </label>
+
+                    <div
+                      class="mypage-custom-dropdown relative w-full"
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0 top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          data-value="전체"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left text-base
+                            font-semibold
+                            text-black
+                          "
+                        >
+                          전체
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="접수"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          접수
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="승인"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          승인
+                        </button>
+
+                        <button
+                          type="button"
+                          data-value="반려"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px] w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left text-base
+                            text-black
+                          "
+                        >
+                          반려
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- =============================================
+                      신청일
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      신청일
+                    </label>
+
+                    <div class="flex items-center gap-3">
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                      <span class="shrink-0 text-base text-black">
+                        ~
+                      </span>
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- =================================================
+                    초기화 / 검색
+                ================================================== -->
+                <div class="mt-6 flex justify-end gap-2">
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#E1E7F2]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    <i
+                      data-lucide="refresh-cw"
+                      class="h-5 w-5"
+                    ></i>
+
+                    초기화
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#0061F0]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-white
+                    "
+                  >
+                    <i
+                      data-lucide="search"
+                      class="h-5 w-5"
+                    ></i>
+
+                    검색
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  결과
+              ================================================== -->
+              <h3
+                class="
+                  mb-4
+                  mt-8
+                  text-lg
+                  font-semibold
+                  text-black
+                "
+              >
+                총 50건
+              </h3>
+
+
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <table
+                  class="
+                    w-full
+                    table-fixed
+                    border-collapse
+                    text-base
+                  "
+                >
+
+                  <colgroup>
+                    <col style="width: 110px;" />
+                    <col style="width: 120px;" />
+                    <col />
+                    <col style="width: 90px;" />
+                    <col style="width: 100px;" />
+                    <col style="width: 130px;" />
+                  </colgroup>
+
+
+                  <thead>
+
+                    <tr class="bg-[#142A4D] text-white">
+
+                      <th
+                        class="
+                          rounded-l
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        대상
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        신청 유형
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        제안 내용 / 사유
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-center
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        상태
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-center
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        검토의견
+                      </th>
+
+                      <th
+                        class="
+                          rounded-r
+                          px-4 py-3
+                          text-center
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        신청일
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody>
+
+                    <!-- 01 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+
+                        <strong class="block font-semibold">
+                          프롬프트
+                        </strong>
+
+                        <span
+                          class="
+                            mt-1
+                            block
+                            text-sm
+                            text-[#476187]
+                          "
+                        >
+                          표준단어
+                        </span>
+
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 영문약어명: PROMPT · 형식단어여부: N ·
+                        용어설명: 생성형 모델에 전송되는 입력 전문 · 출처: AI활용점검
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+
+                        <span
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            whitespace-nowrap
+                            rounded-full
+                            bg-[#0061F0]
+                            px-3 py-1
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
+                          접수
+                        </span>
+
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        -
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 02 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          정규화
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 영문약어명: PROMPT · 형식단어여부: N ·
+                        용어설명: 생성형 모델에 전송되는 입력 전문
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        -
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 03 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          질의
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 영문약어명: PROMPT · 형식단어여부: N ·
+                        AI활용점검 신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        -
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 04 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          추적
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · AI활용점검 · wordName: 프롬프트
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 05 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          청킹
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 신규 등록 요청
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 06 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          말리초
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · AI활용점검
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 07 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          해시
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 표준화 신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 08 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          깃
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        wordName: 프롬프트 · 신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 09 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          활성구분코드
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        영문명: Prompt · 형식단어여부 N
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+
+                    <!-- 10 -->
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <td class="px-4 py-4 align-top">
+                        <strong class="block font-semibold">
+                          불용어
+                        </strong>
+                        <span class="mt-1 block text-sm text-[#476187]">
+                          표준단어
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 align-top whitespace-nowrap">
+                        신규 등록
+                      </td>
+
+                      <td class="px-4 py-4 align-top leading-6">
+                        표준단어 등록 신청
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">
+                        <span class="inline-flex whitespace-nowrap rounded-full bg-[#0061F0] px-3 py-1 text-sm font-semibold text-white">
+                          접수
+                        </span>
+                      </td>
+
+                      <td class="px-4 py-4 text-center align-top">-</td>
+
+                      <td class="px-4 py-4 text-center align-top whitespace-nowrap">
+                        2026-08-11
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+
+                <!-- =================================================
+                    페이지네이션
+                ================================================== -->
+                <div
+                  class="
+                    mt-8
+                    flex
+                    items-center
+                    justify-center
+                    gap-3
+                  "
+                >
+
+                  <button type="button">
+                    <i
+                      data-lucide="chevron-left"
+                      class="h-5 w-5"
+                    ></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-7 w-7
+                      items-center justify-center
+                      rounded
+                      bg-[#476187]
+                      text-sm
+                      text-white
+                    "
+                  >
+                    1
+                  </button>
+
+                  <button type="button">2</button>
+                  <button type="button">3</button>
+                  <button type="button">4</button>
+                  <button type="button">5</button>
+
+                  <span>...</span>
+
+                  <button type="button">28</button>
+
+                  <button type="button">
+                    <i
+                      data-lucide="chevron-right"
+                      class="h-5 w-5"
+                    ></i>
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                사용신청 현황
+            ====================================================== -->
+            <section
+              data-mypage-panel="api-use"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold text-black">
+                사용신청 현황
+              </h2>
+
+
+              <!-- =================================================
+                  검색 조건
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-6
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-2
+                    gap-x-10
+                    gap-y-5
+                  "
+                >
+
+                  <!-- =============================================
+                      키 이름
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      키 이름
+                    </label>
+
+                    <input
+                      type="text"
+                      class="
+                        h-[42px]
+                        w-full
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+
+
+                  <!-- =============================================
+                      상태
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      상태
+                    </label>
+
+
+                    <div
+                      class="
+                        mypage-custom-dropdown
+                        relative
+                        w-full
+                      "
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <!-- trigger -->
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <!-- dropdown -->
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0
+                          top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <!-- 전체 -->
+                        <button
+                          type="button"
+                          data-value="전체"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left
+                            text-base
+                            font-semibold
+                            text-black
+                          "
+                        >
+                          전체
+                        </button>
+
+
+                        <!-- 심사 대기 -->
+                        <button
+                          type="button"
+                          data-value="심사 대기"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          심사 대기
+                        </button>
+
+
+                        <!-- 승인 -->
+                        <button
+                          type="button"
+                          data-value="승인"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          승인
+                        </button>
+
+
+                        <!-- 반려 -->
+                        <button
+                          type="button"
+                          data-value="반려"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          반려
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- =============================================
+                      신청일
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      신청일
+                    </label>
+
+                    <div
+                      class="
+                        flex
+                        items-center
+                        gap-3
+                      "
+                    >
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                      <span class="shrink-0 text-base text-black">
+                        ~
+                      </span>
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- =================================================
+                    초기화 / 검색
+                ================================================== -->
+                <div
+                  class="
+                    mt-6
+                    flex
+                    justify-end
+                    gap-2
+                  "
+                >
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#E1E7F2]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    <i
+                      data-lucide="refresh-cw"
+                      class="h-5 w-5"
+                    ></i>
+
+                    초기화
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#0061F0]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-white
+                    "
+                  >
+                    <i
+                      data-lucide="search"
+                      class="h-5 w-5"
+                    ></i>
+
+                    검색
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  결과
+              ================================================== -->
+              <h3
+                class="
+                  mb-4
+                  mt-8
+                  text-lg
+                  font-semibold
+                  text-black
+                "
+              >
+                총 1건
+              </h3>
+
+
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <table
+                  class="
+                    w-full
+                    table-fixed
+                    border-collapse
+                    text-base
+                  "
+                >
+
+                  <colgroup>
+                    <col style="width: 34%;" />
+                    <col style="width: 14%;" />
+                    <col style="width: 14%;" />
+                    <col style="width: 20%;" />
+                    <col style="width: 18%;" />
+                  </colgroup>
+
+
+                  <thead>
+
+                    <tr
+                      class="
+                        bg-[#142A4D]
+                        text-white
+                      "
+                    >
+
+                      <th
+                        class="
+                          rounded-l
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                        "
+                      >
+                        키 이름
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        신청 API
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                        "
+                      >
+                        상태
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                        "
+                      >
+                        신청일
+                      </th>
+
+                      <th
+                        class="
+                          rounded-r
+                          px-4 py-3
+                          text-center
+                        "
+                      >
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody>
+
+                    <tr class="border-b border-[#E1E7F2]">
+
+                      <!-- 키 이름 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                        "
+                      >
+                        최근 위치 업데이트된 선박-2026-08-11
+                      </td>
+
+
+                      <!-- 신청 API -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        1개
+                      </td>
+
+
+                      <!-- 상태 -->
+                      <td class="px-4 py-4 align-middle">
+
+                        <span
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            whitespace-nowrap
+                            rounded-full
+                            bg-[#0061F0]
+                            px-3 py-1
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
+                          승인
+                        </span>
+
+                      </td>
+
+
+                      <!-- 신청일 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-08-11
+                      </td>
+
+
+                      <!-- 상세 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          text-center
+                          align-middle
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          class="
+                            inline-flex
+                            h-[32px]
+                            items-center
+                            justify-center
+                            rounded
+                            border border-[#99ABC6]
+                            bg-white
+                            px-4
+                            text-sm
+                            font-medium
+                            text-black
+                          "
+                        >
+                          상세
+                        </button>
+
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                인증키 발급현황
+            ====================================================== -->
+            <section
+              data-mypage-panel="api-key"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold text-black">
+                인증키 발급현황
+              </h2>
+
+
+              <!-- =================================================
+                  검색 조건
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-6
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-2
+                    gap-x-10
+                    gap-y-5
+                  "
+                >
+
+                  <!-- =============================================
+                      키 이름
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      키 이름
+                    </label>
+
+                    <input
+                      type="text"
+                      class="
+                        h-[42px]
+                        w-full
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+
+
+                  <!-- =============================================
+                      신청일
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      신청일
+                    </label>
+
+                    <div
+                      class="
+                        flex
+                        items-center
+                        gap-3
+                      "
+                    >
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                      <span class="shrink-0 text-base text-black">
+                        ~
+                      </span>
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- =================================================
+                    초기화 / 검색
+                ================================================== -->
+                <div
+                  class="
+                    mt-6
+                    flex
+                    justify-end
+                    gap-2
+                  "
+                >
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#E1E7F2]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+                    <i
+                      data-lucide="refresh-cw"
+                      class="h-5 w-5"
+                    ></i>
+
+                    초기화
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#0061F0]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-white
+                    "
+                  >
+                    <i
+                      data-lucide="search"
+                      class="h-5 w-5"
+                    ></i>
+
+                    검색
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  결과 상단
+              ================================================== -->
+              <div
+                class="
+                  mb-4
+                  mt-8
+                  flex
+                  items-center
+                  justify-between
+                "
+              >
+
+                <h3
+                  class="
+                    text-lg
+                    font-semibold
+                    text-black
+                  "
+                >
+                  총 2건
+                </h3>
+
+
+                <!-- 만료/폐기 포함 토글 -->
+                <label
+                  class="
+                    flex
+                    cursor-pointer
+                    items-center
+                    gap-2
+                    text-sm
+                    font-medium
+                    text-[#476187]
+                  "
+                >
+
+                  <span>
+                    만료 · 폐기 키 포함 보기
+                  </span>
+
+
+                  <span class="relative inline-flex">
+
+                    <input
+                      type="checkbox"
+                      class="peer sr-only"
+                      checked
+                    />
+
+                    <!-- track -->
+                    <span
+                      class="
+                        block
+                        h-[22px]
+                        w-[40px]
+                        rounded-full
+                        bg-[#CDD6E8]
+                        transition
+                        peer-checked:bg-[#0061F0]
+                      "
+                    ></span>
+
+                    <!-- knob -->
+                    <span
+                      class="
+                        absolute
+                        left-[3px]
+                        top-[3px]
+                        h-[16px]
+                        w-[16px]
+                        rounded-full
+                        bg-white
+                        transition-transform
+                        peer-checked:translate-x-[18px]
+                      "
+                    ></span>
+
+                  </span>
+
+                </label>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  인증키 목록
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-5
+                "
+              >
+
+                <table
+                  class="
+                    w-full
+                    table-fixed
+                    border-collapse
+                    text-base
+                  "
+                >
+
+                  <colgroup>
+                  <col style="width: 29%;" /> <!-- 키 이름 -->
+                  <col style="width: 25%;" /> <!-- 키 -->
+                  <col style="width: 8%;" />  <!-- 상태 -->
+                  <col style="width: 11%;" /> <!-- 만료일 -->
+                  <col style="width: 11%;" /> <!-- 최근 사용 -->
+                  <col style="width: 10%;" /> <!-- 발급일 -->
+                  <col style="width: 10%;" />  <!-- 상세 -->
+                </colgroup>
+
+
+                  <!-- =================================================
+                      HEADER
+                  ================================================== -->
+                  <thead>
+
+                    <tr
+                      class="
+                        bg-[#142A4D]
+                        text-white
+                      "
+                    >
+
+                      <th
+                        class="
+                          rounded-l
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        키 이름
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        키
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        상태
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        만료일
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        최근 사용
+                      </th>
+
+                      <th
+                        class="
+                          px-4 py-3
+                          text-left
+                          font-semibold
+                          whitespace-nowrap
+                        "
+                      >
+                        발급일
+                      </th>
+
+                      <th
+                        class="
+                          rounded-r
+                          px-2 py-3
+                        "
+                      >
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+
+                  <!-- =================================================
+                      BODY
+                  ================================================== -->
+                  <tbody>
+
+
+                    <!-- =================================================
+                        ROW 01
+                    ================================================== -->
+                    <tr
+                      class="
+                        border-b
+                        border-[#E1E7F2]
+                      "
+                    >
+
+                      <!-- 키 이름 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        최근 위치 업데이트된 선박-2026-08-11
+                      </td>
+
+
+                      <!-- 키 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                        "
+                      >
+
+                        <div
+                          class="
+                            flex
+                            items-center
+                            gap-2
+                          "
+                        >
+
+                          <span
+                            class="
+                              text-base
+                              font-medium
+                              text-black
+                            "
+                          >
+                            k***
+                          </span>
+
+                          <button
+                            type="button"
+                            class="
+                              flex
+                              h-7 w-7
+                              items-center
+                              justify-center
+                              rounded
+                              text-black
+                              hover:bg-[#F2F6FF]
+                            "
+                            aria-label="인증키 보기"
+                          >
+                            <i
+                              data-lucide="eye"
+                              class="h-5 w-5"
+                            ></i>
+                          </button>
+
+                        </div>
+
+                      </td>
+
+
+                      <!-- 상태 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                        "
+                      >
+
+                        <span
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            whitespace-nowrap
+                            rounded-full
+                            bg-[#0061F0]
+                            px-3 py-1
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
+                          활성
+                        </span>
+
+                      </td>
+
+
+                      <!-- 만료일 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-11-11
+                      </td>
+
+
+                      <!-- 최근 사용 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-08-11
+                      </td>
+
+
+                      <!-- 발급일 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-08-11
+                      </td>
+
+
+                      <!-- 상세 -->
+                      <td
+                        class="
+                          px-2 py-4
+                          text-center
+                          align-middle
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          class="
+                            inline-flex
+                            h-[32px]
+                            items-center
+                            justify-center
+                            rounded
+                            border border-[#99ABC6]
+                            bg-white
+                            px-3
+                            text-sm
+                            font-medium
+                            text-black
+                          "
+                        >
+                          상세
+                        </button>
+
+                      </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                        ROW 02
+                    ================================================== -->
+                    <tr
+                      class="
+                        border-b
+                        border-[#E1E7F2]
+                      "
+                    >
+
+                      <!-- 키 이름 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        최근 위치 업데이트된 선박-2026-08-11
+                      </td>
+
+
+                      <!-- 키 / 비밀번호 재확인 -->
+                      <td class="px-4 py-4 align-middle">
+
+                        <div class="flex flex-nowrap items-center gap-1">
+
+                          <input
+                            type="password"
+                            placeholder="비밀번호 재확인"
+                            class="
+                              h-[36px]
+                              w-[110px]
+                              shrink-0
+                              rounded
+                              border border-[#CDD6E8]
+                              bg-white
+                              px-1
+                              text-sm
+                              text-black
+                              placeholder:text-[#99ABC6]
+                              outline-none
+                            "
+                          />
+
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              h-[36px]
+                              min-w-[52px]
+                              shrink-0
+                              items-center
+                              justify-center
+                              whitespace-nowrap
+                              rounded
+                              bg-[#0061F0]
+                              px-1
+                              text-sm
+                              font-semibold
+                              text-white
+                            "
+                          >
+                            열람
+                          </button>
+
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              h-[36px]
+                              min-w-[52px]
+                              shrink-0
+                              items-center
+                              justify-center
+                              whitespace-nowrap
+                              rounded
+                              border border-[#99ABC6]
+                              bg-white
+                              px-1
+                              text-sm
+                              font-medium
+                              text-black
+                            "
+                          >
+                            취소
+                          </button>
+
+                        </div>
+
+                      </td>
+
+
+                      <!-- 상태 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                        "
+                      >
+
+                        <span
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            whitespace-nowrap
+                            rounded-full
+                            bg-[#0061F0]
+                            px-3 py-1
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
+                          활성
+                        </span>
+
+                      </td>
+
+
+                      <!-- 만료일 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-11-11
+                      </td>
+
+
+                      <!-- 최근 사용 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-08-11
+                      </td>
+
+
+                      <!-- 발급일 -->
+                      <td
+                        class="
+                          px-4 py-4
+                          align-middle
+                          whitespace-nowrap
+                        "
+                      >
+                        2026-08-11
+                      </td>
+
+
+                      <!-- 상세 -->
+                      <td
+                        class="
+                          px-2 py-4
+                          text-center
+                          align-middle
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          class="
+                            inline-flex
+                            h-[32px]
+                            items-center
+                            justify-center
+                            rounded
+                            border border-[#99ABC6]
+                            bg-white
+                            px-3
+                            text-sm
+                            font-medium
+                            text-black
+                          "
+                        >
+                          상세
+                        </button>
+
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                다운로드 승인신청 현황
+            ====================================================== -->
+            <section
+              data-mypage-panel="download"
+              class="mypage-panel hidden"
+            >
+
+              <h2 class="mb-4 text-lg font-semibold text-black">
+                다운로드 승인신청 현황
+              </h2>
+
+
+              <!-- =================================================
+                  검색 조건
+              ================================================== -->
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  p-6
+                "
+              >
+
+                <div
+                  class="
+                    grid
+                    grid-cols-2
+                    gap-x-10
+                    gap-y-5
+                  "
+                >
+
+                  <!-- =============================================
+                      데이터셋
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      데이터셋
+                    </label>
+
+                    <input
+                      type="text"
+                      class="
+                        h-[42px]
+                        w-full
+                        rounded
+                        border border-[#CDD6E8]
+                        bg-white
+                        px-3
+                        text-base
+                        text-black
+                        outline-none
+                      "
+                    />
+
+                  </div>
+
+
+                  <!-- =============================================
+                      상태
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      상태
+                    </label>
+
+
+                    <div
+                      class="
+                        mypage-custom-dropdown
+                        relative
+                        w-full
+                      "
+                      data-mypage-dropdown
+                      data-default-value="전체"
+                    >
+
+                      <!-- trigger -->
+                      <button
+                        type="button"
+                        class="
+                          mypage-dropdown-trigger
+                          flex h-[42px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-left
+                          text-base
+                          text-black
+                          focus:outline-none
+                        "
+                        aria-expanded="false"
+                      >
+
+                        <span class="mypage-dropdown-label">
+                          전체
+                        </span>
+
+                        <i
+                          data-lucide="chevron-down"
+                          class="
+                            mypage-dropdown-icon
+                            h-5 w-5
+                            shrink-0
+                            transition-transform
+                          "
+                        ></i>
+
+                      </button>
+
+
+                      <!-- dropdown menu -->
+                      <div
+                        class="
+                          mypage-dropdown-menu
+                          absolute
+                          left-0
+                          top-full
+                          z-[100]
+                          mt-2
+                          hidden
+                          w-full
+                          overflow-hidden
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          shadow-lg
+                        "
+                      >
+
+                        <!-- 전체 -->
+                        <button
+                          type="button"
+                          data-value="전체"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-[#E1E7F2]
+                            px-3
+                            text-left
+                            text-base
+                            font-semibold
+                            text-black
+                          "
+                        >
+                          전체
+                        </button>
+
+
+                        <!-- 심사 대기 -->
+                        <button
+                          type="button"
+                          data-value="심사 대기"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          심사 대기
+                        </button>
+
+
+                        <!-- 승인 -->
+                        <button
+                          type="button"
+                          data-value="승인"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            border-b border-[#E1E1E1]
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          승인
+                        </button>
+
+
+                        <!-- 반려 -->
+                        <button
+                          type="button"
+                          data-value="반려"
+                          class="
+                            mypage-dropdown-option
+                            flex h-[46px]
+                            w-full
+                            items-center
+                            bg-white
+                            px-3
+                            text-left
+                            text-base
+                            font-normal
+                            text-black
+                          "
+                        >
+                          반려
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- =============================================
+                      신청일
+                  ============================================== -->
+                  <div>
+
+                    <label
+                      class="
+                        mb-2
+                        block
+                        text-base
+                        font-semibold
+                        text-black
+                      "
+                    >
+                      신청일
+                    </label>
+
+                    <div
+                      class="
+                        flex
+                        items-center
+                        gap-3
+                      "
+                    >
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                      <span class="shrink-0 text-base text-black">
+                        ~
+                      </span>
+
+                      <input
+                        type="date"
+                        class="
+                          h-[42px]
+                          min-w-0
+                          flex-1
+                          rounded
+                          border border-[#CDD6E8]
+                          bg-white
+                          px-3
+                          text-base
+                          text-black
+                          outline-none
+                        "
+                      />
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- =================================================
+                    초기화 / 검색
+                ================================================== -->
+                <div
+                  class="
+                    mt-6
+                    flex
+                    justify-end
+                    gap-2
+                  "
+                >
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#E1E7F2]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-black
+                    "
+                  >
+
+                    <i
+                      data-lucide="refresh-cw"
+                      class="h-5 w-5"
+                    ></i>
+
+                    초기화
+
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      flex h-[42px]
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded
+                      bg-[#0061F0]
+                      px-4
+                      text-base
+                      font-semibold
+                      text-white
+                    "
+                  >
+
+                    <i
+                      data-lucide="search"
+                      class="h-5 w-5"
+                    ></i>
+
+                    검색
+
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- =================================================
+                  결과
+              ================================================== -->
+              <h3
+                class="
+                  mb-4
+                  mt-8
+                  text-lg
+                  font-semibold
+                  text-black
+                "
+              >
+                총 0건
+              </h3>
+
+
+              <div
+                class="
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  px-5
+                  py-6
+                  text-base
+                  text-black
+                "
+              >
+                자료가 없습니다. 데이터셋 상세의 "제공 파일"에서 사용 신청을 할 수 있습니다.
+              </div>
+
+            </section>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  
+    <!-- =====================================================
+         CHATBOT FLOATING BUTTON
+    ====================================================== -->
+    <button
+      class="
+    fixed bottom-6 right-6
+    z-50
+    h-14 w-14
+    rounded-full
+    bg-transparent
+    shadow-none
+  "
+>
+      <img
+    src="./img/chat-bot.png"
+    alt="AI 챗봇"
+    class="
+      block
+      h-full w-full
+      rounded-full
+      object-cover
+      mix-blend-multiply
+      drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
+    "
+  />
+    </button>
+
+  </div>
+
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/hub-common.js"></script>
+
+</body>
+</html>

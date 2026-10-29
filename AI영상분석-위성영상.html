@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>위성영상</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- AI영상분석 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+
+        <div class="flex min-w-0 items-center gap-4">
+          <i data-lucide="plane"
+            class="h-[17px] w-[17px] shrink-0"
+            aria-hidden="true"></i>
+          <span>AI영상분석</span>
+        </div>
+
+        <span class="flex items-center gap-3">
+          <em class="reference-badge">참고</em>
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+        <a class="nav-item">
+            <i data-lucide="cctv"></i>
+            <span>CCTV</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="plane-takeoff"></i>
+            <span>드론</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="life-buoy"></i>
+            <span>익수자분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sailboat"></i>
+            <span>소형보트탐지</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>영상분석</span>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="satellite"></i>
+            <span>위성영상</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="box"></i>
+            <span>3D분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="droplets"></i>
+            <span>오염탐지</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="images"></i>
+            <span>영상사진 게시판</span>
+          </a>
+        </div>
+      
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">위성영상</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+<main id="mainContent" class="satellite-page" tabindex="-1">
+
+  <div class="satellite-scroll">
+
+    <!-- 페이지 타이틀 -->
+    <div class="satellite-heading">
+      <div class="satellite-title-row">
+        <i data-lucide="satellite"></i>
+        <h1>위성영상</h1>
+        <p>위성영상 수집 · 처리 현황과 분석 서비스</p>
+      </div>
+    </div>
+
+    <!-- 상단 탭 : 클릭 불가 -->
+    <nav class="satellite-tabs" aria-label="위성영상 메뉴">
+      <span class="satellite-tab is-active">
+        <i data-lucide="clipboard-list"></i>
+        요청 목록
+      </span>
+      <span class="satellite-tab">
+        <i data-lucide="satellite"></i>
+        위성 위치
+      </span>
+      <span class="satellite-tab">
+        <i data-lucide="scan-search"></i>
+        SAR 알고리즘
+      </span>
+      <span class="satellite-tab">참고자료</span>
+      <span class="satellite-tab">
+        <i data-lucide="satellite-dish"></i>
+        영상수집기
+      </span>
+      <span class="satellite-tab">
+        <i data-lucide="chart-no-axes-combined"></i>
+        네비게이터(예측)
+      </span>
+      <span class="satellite-tab">선박탐지(VDIS)</span>
+      <span class="satellite-tab">항로안전(VRSS)</span>
+      <span class="satellite-tab">이상행동(VAMS)</span>
+      <span class="satellite-tab">시설물(MFMS)</span>
+      <span class="satellite-tab">오염(MPMS)</span>
+    </nav>
+
+    <!-- 신규 요청 -->
+    <div class="satellite-actions">
+      <button type="button" class="satellite-new-button" disabled>
+        <i data-lucide="plus"></i>
+        요청 신규
+      </button>
+    </div>
+
+    <!-- 현황 카드 -->
+    <section class="satellite-stats" aria-label="위성 요청 현황">
+
+      <article class="satellite-stat-card">
+        <strong>3</strong>
+        <span>요청 대기</span>
+      </article>
+
+      <article class="satellite-stat-card">
+        <strong>0</strong>
+        <span>촬영 진행 중</span>
+      </article>
+
+      <article class="satellite-stat-card">
+        <strong>0</strong>
+        <span>수신 완료</span>
+      </article>
+
+      <article class="satellite-stat-card">
+        <strong>0.3m</strong>
+        <span>최고 해상도</span>
+      </article>
+
+    </section>
+
+    <!-- 위성 요청 목록 -->
+    <section class="satellite-request-section">
+
+      <div class="satellite-request-heading">
+        <div class="satellite-request-title">
+          <h2>위성 요청 목록</h2>
+          <span class="satellite-filter-label">전체</span>
+        </div>
+        <i data-lucide="chevron-down"></i>
+      </div>
+
+      <div class="satellite-table-wrap">
+        <table class="satellite-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>촬영구역 <span class="satellite-sort">↕</span></th>
+              <th>위성 <span class="satellite-sort">↕</span></th>
+              <th>요청일시 <span class="satellite-sort">↕</span></th>
+              <th>예상수신 <span class="satellite-sort">↕</span></th>
+              <th>해상도 <span class="satellite-sort">↕</span></th>
+              <th>상태</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>-</td>
+              <td>Sentinel-1 SAR</td>
+              <td>2026-07-28T06:16:46.117107Z</td>
+              <td>-</td>
+              <td>20m</td>
+              <td><span class="satellite-status">요청 대기</span></td>
+            </tr>
+
+            <tr>
+              <td>2</td>
+              <td>-</td>
+              <td>Pléiades Neo</td>
+              <td>2026-07-03T08:01:00.438173Z</td>
+              <td>-</td>
+              <td>0.3m</td>
+              <td><span class="satellite-status">요청 대기</span></td>
+            </tr>
+
+            <tr>
+              <td>3</td>
+              <td>-</td>
+              <td>Copernicus DEM</td>
+              <td>2026-06-25T06:14:19.50695Z</td>
+              <td>-</td>
+              <td>10m</td>
+              <td><span class="satellite-status">요청 대기</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 하단 2열 -->
+    <div class="satellite-bottom-grid">
+
+      <!-- 가용 위성 현황 -->
+      <section class="satellite-panel">
+        <h2 class="satellite-panel-title">
+          <i data-lucide="satellite"></i>
+          가용 위성 현황
+        </h2>
+
+        <div class="satellite-availability-list">
+
+          <div class="satellite-availability-item available">
+            <span class="satellite-dot"></span>
+            <div class="satellite-availability-info">
+              <strong>UP42 Optical</strong>
+              <small>Pléiades Neo · 0.3m · 광학 · 야간 가능</small>
+            </div>
+            <span class="satellite-availability-state">가용</span>
+          </div>
+
+          <div class="satellite-availability-item available">
+            <span class="satellite-dot"></span>
+            <div class="satellite-availability-info">
+              <strong>UP42 SAR</strong>
+              <small>Sentinel-1 · 20m · SAR · 악천후 가능</small>
+            </div>
+            <span class="satellite-availability-state">가용</span>
+          </div>
+
+          <div class="satellite-availability-item limited">
+            <span class="satellite-dot"></span>
+            <div class="satellite-availability-info">
+              <strong>Blacksky</strong>
+              <small>BlackSky-6 · ~1m · EO · 긴급 태스킹</small>
+            </div>
+            <span class="satellite-availability-state">일부용</span>
+          </div>
+
+          <div class="satellite-availability-item available">
+            <span class="satellite-dot"></span>
+            <div class="satellite-availability-info">
+              <strong>KOMPSAT-5</strong>
+              <small>KOMPSAT-5 · 1m · SAR · 야간/우천 가능</small>
+            </div>
+            <span class="satellite-availability-state">가용</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 촬영 가능 시간 -->
+      <section class="satellite-panel">
+        <h2 class="satellite-panel-title">
+          <i data-lucide="alarm-clock"></i>
+          오늘 촬영 가능 시간 (KST)
+        </h2>
+
+        <div class="satellite-schedule-list">
+          <div class="satellite-schedule-item">
+            <strong>14:10 – 14:24</strong>
+            <span>KOMPSAT-3A 패스 (제주 남방)</span>
+          </div>
+
+          <div class="satellite-schedule-item">
+            <strong>16:55 – 17:08</strong>
+            <span>Sentinel-1 패스 (제주 전역)</span>
+          </div>
+
+          <div class="satellite-schedule-item tomorrow">
+            <strong>내일 09:12</strong>
+            <span>KOMPSAT-3 패스 (가라도·마라도)</span>
+          </div>
+
+          <div class="satellite-schedule-item tomorrow">
+            <strong>내일 10:40</strong>
+            <span>Sentinel-2 패스 (제주 서측)</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
+
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

@@ -1,0 +1,588 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061629">
+
+  <title>기상포털 | 소해구도</title>
+
+  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <link rel="stylesheet" href="./css/wea-common.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./js/wea-common.js" defer></script>
+</head>
+
+<body class="page-forecast">
+  <div class="app-shell">
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+    <header class="topbar">
+
+      <div class="brand-area">
+        <a class="brand" aria-label="기상포털 홈">
+          <img src="./img/logo.png" alt="" width="44" height="44">
+          <span>기상포털</span>
+        </a>
+
+        <button
+          class="icon-button nav-toggle"
+          type="button"
+          id="navToggle"
+          aria-label="전체 메뉴 열기"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <time class="clock" id="clock" aria-label="현재 한국 시간">
+          --:--:-- KST
+        </time>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="downloadButton"
+          aria-label="자료 다운로드"
+        >
+          <i data-lucide="download" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="printButton"
+          aria-label="인쇄"
+        >
+          <i data-lucide="printer" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="notificationButton"
+          aria-label="알림"
+        >
+          <i data-lucide="bell" aria-hidden="true"></i>
+        </button>
+
+        <button
+          class="icon-button"
+          type="button"
+          id="brightnessButton"
+          aria-label="화면 밝기 전환"
+        >
+          <i data-lucide="sun" aria-hidden="true"></i>
+        </button>
+
+        <span class="header-separator" aria-hidden="true"></span>
+
+        <button
+          class="account-button"
+          type="button"
+          id="accountButton"
+          aria-expanded="false"
+          aria-controls="accountMenu"
+        >
+          <span class="avatar" aria-hidden="true">초</span>
+          <span class="account-name">초기 관리자</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="account-menu" id="accountMenu" hidden>
+          <span>초기 관리자</span>
+          <span>관리자 계정</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================
+         전체메뉴 오버레이
+    ========================================= -->
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+
+    <!-- =========================================
+         전체메뉴
+    ========================================= -->
+    <nav
+      class="nav-menu"
+      id="navMenu"
+      aria-label="전체메뉴"
+      aria-hidden="true"
+      inert
+    >
+      <div class="nav-menu-header">
+        <strong>전체메뉴</strong>
+
+        <button
+          type="button"
+          class="nav-close"
+          id="navClose"
+          aria-label="전체메뉴 닫기"
+        >
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 기상청 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navWeather"
+        >
+          <span>기상청</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navWeather">
+
+          <div class="nav-item-group">
+            <div class="nav-item nav-item-parent">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+              <span>예·특보</span>
+            </div>
+
+            <a class="nav-sub-item is-active" aria-current="page">
+              예보
+            </a>
+            <a class="nav-sub-item">특보</a>
+          </div>
+
+          <a class="nav-item">
+            <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            <span>현재날씨</span>
+          </a>
+
+          <a class="nav-item">
+            <img src="./img/typhoon-icon.svg" alt="">
+            <span>태풍</span>
+          </a>
+
+          <a class="nav-item nav-item-detail is-active" aria-current="page">
+            <i data-lucide="grip" aria-hidden="true"></i>
+            <span>
+              <strong>해구별 해양기상정보</strong>
+              <small>해구별 값 9종 · 대해구도·소해구도</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="wind" aria-hidden="true"></i>
+            <span>
+              <strong>저고도 WINTEM</strong>
+              <small>항공기상청 고도별 바람 · 기온 예측</small>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 기타 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navOthers"
+        >
+          <span>기타</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navOthers">
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            <span>
+              <strong>CMEMS 예측 <em>모델</em></strong>
+              <small>코페르니쿠스 해양서비스</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            <span>
+              <strong>GOCI-II 위성 <em>관측</em></strong>
+              <small>천리안위성 2B호 관측 장면</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            <span>
+              <strong>GDACS 재난 <em>자동산출</em></strong>
+              <small>글로벌 재난 인식 및 조정 시스템</small>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 브리핑 -->
+      <section class="nav-section">
+        <button
+          type="button"
+          class="nav-section-toggle"
+          aria-expanded="true"
+          aria-controls="navBriefing"
+        >
+          <span>브리핑</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-section-content" id="navBriefing">
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="square-activity" aria-hidden="true"></i>
+            <span>
+              <strong>해상풍·파고 예상도</strong>
+              <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>
+              <strong>출항 브리핑</strong>
+              <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
+            </span>
+          </a>
+
+          <a class="nav-item nav-item-detail">
+            <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            <span>
+              <strong>태풍특보비교</strong>
+              <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
+            </span>
+          </a>
+        </div>
+      </section>
+    </nav>
+
+   
+
+<main class="map-main marine-grid-main" id="map">
+
+  <!-- =========================================
+       지도 이미지
+       격자 및 파고별 색상은 이미지에 포함
+  ========================================= -->
+  <div
+    class="map-viewport"
+    id="mapViewport"
+    aria-label="해구별 해양기상정보 지도"
+  >
+    <div class="map-scene" id="mapScene">
+      <div
+        class="map-background"
+        role="img"
+        aria-label="해구별 유의파고 분포 및 소해구도 격자 지도"
+        style="background-image: url('./img/wea-grid-bg.png');"
+      ></div>
+    </div>
+  </div>
+
+  <!-- 지도 출처 -->
+  <div class="map-attribution">
+    NASA/GSFC SVS | NASA/USGS · NOAA ETOPO · 기상청
+  </div>
+
+  <!-- =========================================
+       좌측 범례
+  ========================================= -->
+  <aside class="marine-grid-legend" aria-label="해구별 해양기상정보 범례">
+
+    <div class="marine-grid-legend-header">
+      <strong>
+        <i data-lucide="grip" aria-hidden="true"></i>
+        범례
+      </strong>
+
+      <button
+        type="button"
+        class="marine-grid-legend-collapse"
+        id="gridLegendCollapse"
+        aria-label="범례 접기"
+        aria-expanded="true"
+        aria-controls="gridLegendContent"
+      >
+        <i data-lucide="minimize-2" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="marine-grid-legend-content" id="gridLegendContent">
+      <div class="marine-grid-legend-title">
+        <span>해구별 해양기상정보</span>
+        <i data-lucide="chevron-up" aria-hidden="true"></i>
+      </div>
+
+      <div class="marine-grid-legend-label">유의파고(m)</div>
+
+      <div
+        class="marine-grid-legend-gradient"
+        role="img"
+        aria-label="유의파고 범례: 0에서 4미터까지 파란색, 청록색, 노란색, 주황색, 빨간색 순서"
+      ></div>
+
+      <div class="marine-grid-legend-scale" aria-hidden="true">
+        <span>0</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================
+       우측 레이어 설정
+  ========================================= -->
+  <aside class="marine-layer-panel" aria-label="레이어 설정">
+
+    <div class="marine-layer-header">
+      <strong>
+        <i data-lucide="grip" aria-hidden="true"></i>
+        레이어 설정
+      </strong>
+
+      <button
+        type="button"
+        class="marine-layer-collapse"
+        id="marineLayerCollapse"
+        aria-label="레이어 설정 접기"
+        aria-expanded="true"
+        aria-controls="marineLayerContent"
+      >
+        <i data-lucide="minimize-2" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="marine-layer-content" id="marineLayerContent">
+
+      <div class="marine-layer-section-title">
+        <strong>해구별 해양기상정보</strong>
+        <button type="button" aria-label="레이어 닫기" id="marineLayerClose">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="marine-layer-field">
+        <span class="marine-layer-label">그리드</span>
+        <div class="marine-layer-options">
+          <button type="button" class="is-active" aria-pressed="true">대해구도</button>
+          <button type="button" aria-pressed="false">소해구도</button>
+        </div>
+      </div>
+
+      <div class="marine-layer-field">
+        <span class="marine-layer-label">변수</span>
+        <div class="marine-layer-options">
+          <button type="button" class="is-active" aria-pressed="true">유의파고</button>
+          <button type="button" aria-pressed="false">최대파주기</button>
+          <button type="button" aria-pressed="false">파향</button>
+          <button type="button" aria-pressed="false">풍속</button>
+          <button type="button" aria-pressed="false">풍향</button>
+          <button type="button" aria-pressed="false">시정</button>
+          <button type="button" disabled>예상강수량</button>
+          <button type="button" disabled>수온</button>
+          <button type="button" disabled>너울위험</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================
+       우측 공용 툴바
+  ========================================= -->
+  <div class="toolbar" id="toolbar" aria-label="지도 도구">
+
+    <div class="toolbar-main">
+      <button
+        class="toolbar-collapse"
+        id="toolbarCollapse"
+        type="button"
+        aria-expanded="true"
+        aria-controls="toolbarGroups"
+        aria-label="도구 모음 접기"
+      >
+        <i data-lucide="chevron-up" aria-hidden="true"></i>
+      </button>
+
+      <div id="toolbarGroups">
+        <div class="tool-group">
+          <span class="tool-title">기상청</span>
+
+          <button class="tool-btn" type="button" data-tool="calendar"
+                  aria-label="예·특보" aria-pressed="false">
+            <i data-lucide="calendar-clock" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button" data-tool="temperature"
+                  aria-label="현재날씨" aria-pressed="false">
+            <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button" data-tool="typhoon"
+                  aria-label="태풍" aria-pressed="false">
+            <img src="./img/typhoon-icon.svg" alt="">
+          </button>
+
+          <button class="tool-btn is-active" type="button" data-tool="grid"
+                  aria-label="해구별 해양기상정보" aria-pressed="true">
+            <i data-lucide="grip" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button" data-tool="wind"
+                  aria-label="저고도 WINTEM" aria-pressed="false">
+            <i data-lucide="wind" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- 기타 -->
+          <div class="tool-group">
+            <span class="tool-title">기타</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="chart" aria-label="CMEMS 예측">
+              <i data-lucide="chart-column" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="satellite" aria-label="GOCI-ll위성">
+              <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="alert" aria-label="GDACS 재난">
+              <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        <!-- 브리핑 -->
+          <div class="tool-group">
+            <span class="tool-title">브리핑</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="briefing" aria-label="해상풍•파고 예상도">
+              <i data-lucide="square-activity" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="marine" aria-label="출항 브리핑">
+              <i data-lucide="anchor" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="compare" aria-label="태풍특보비교">
+              <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    <!-- 지도: 별도 박스 -->
+      <div class="toolbar-map">
+        <div class="tool-group">
+          <span class="tool-title">지도</span>
+
+          <button class="tool-btn" type="button"
+                  id="fullscreenButton" aria-label="전체 화면">
+            <i data-lucide="maximize" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomIn" aria-label="확대">
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomOut" aria-label="축소">
+            <i data-lucide="minus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomReset" aria-label="방향 전환">
+            <i data-lucide="compass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- =========================================
+       하단 시간 선택
+  ========================================= -->
+  <section class="marine-timeline" aria-label="해양기상 예측 시간">
+
+    <div class="marine-timeline-current">10.27 21:00</div>
+
+    <div class="marine-timeline-progress" aria-hidden="true">
+      <span></span>
+    </div>
+
+    <div class="marine-timeline-scroll">
+      <div class="marine-timeline-days">
+        <span>10/27</span>
+        <span>10/28</span>
+        <span>10/29</span>
+        <span>10/30</span>
+      </div>
+
+      <div class="marine-timeline-hours">
+        <button type="button" class="is-active" aria-pressed="true">21시</button>
+        <button type="button" aria-pressed="false">00시</button>
+        <button type="button" aria-pressed="false">03시</button>
+        <button type="button" aria-pressed="false">06시</button>
+        <button type="button" aria-pressed="false">09시</button>
+        <button type="button" aria-pressed="false">12시</button>
+        <button type="button" aria-pressed="false">15시</button>
+        <button type="button" aria-pressed="false">18시</button>
+        <button type="button" aria-pressed="false">21시</button>
+        <button type="button" aria-pressed="false">00시</button>
+        <button type="button" aria-pressed="false">03시</button>
+        <button type="button" aria-pressed="false">06시</button>
+        <button type="button" aria-pressed="false">09시</button>
+        <button type="button" aria-pressed="false">12시</button>
+        <button type="button" aria-pressed="false">15시</button>
+        <button type="button" aria-pressed="false">18시</button>
+        <button type="button" aria-pressed="false">21시</button>
+        <button type="button" aria-pressed="false">00시</button>
+        <button type="button" aria-pressed="false">03시</button>
+        <button type="button" aria-pressed="false">06시</button>
+        <button type="button" aria-pressed="false">09시</button>
+        <button type="button" aria-pressed="false">12시</button>
+        <button type="button" aria-pressed="false">15시</button>
+        <button type="button" aria-pressed="false">18시</button>
+        <button type="button" aria-pressed="false">21시</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 상태 메시지 -->
+  <div
+    class="map-toast"
+    id="mapToast"
+    role="status"
+    aria-live="polite"
+    hidden
+  ></div>
+
+</main>
+
+
+  </div>
+</body>
+</html>

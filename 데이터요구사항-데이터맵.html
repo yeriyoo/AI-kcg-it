@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>데이터맵</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+        <div class="permit-menu-group">보조</div>
+
+        <a class="nav-item">
+          <i data-lucide="database"></i>
+          <span>원천데이터 관리</span>
+          <small>DAR-01·02·03</small>
+          <em class="reference-badge">AI-HUB</em>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="file-text"></i>
+          <span>한글문서 파싱</span>
+          <small>DAR-01</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="scan-search"></i>
+          <span>PDF 파싱</span>
+          <small>DAR-01</small>
+          <span class="permit-new-badge">NEW</span>
+        </a>
+
+        <!-- 보조 -->
+        <div class="permit-menu-group">보조</div>
+
+        <a class="nav-item">
+          <i data-lucide="scale"></i>
+          <span>법령저장소</span>
+          <small>DAR-01·08</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="sparkles"></i>
+          <span>정제데이터 관리</span>
+          <small>DAR-05</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="file-text"></i>
+          <span>산출물·가이드</span>
+          <small>붙임2&nbsp; 지침</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="shield-check"></i>
+          <span>데이터 관리체계</span>
+          <small>DAR-13~17</small>
+          <span class="permit-new-badge">NEW</span>
+        </a>
+
+        <!-- 사용 신청 -->
+        <div class="permit-menu-group">사용 신청</div>
+
+        <a class="nav-item">
+          <i data-lucide="file-text"></i>
+          <span>AI 허브 사용 신청</span>
+          <small>DAR-17</small>
+          <em class="reference-badge">AI-HUB</em>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="square-check-big"></i>
+          <span>신청 검토·승인</span>
+          <small>DAR-17</small>
+          <em class="reference-badge">AI-HUB</em>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="settings"></i>
+          <span>시스템 관리</span>
+          <small>DAR-15·17</small>
+        </a>
+
+        </div>
+
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">데이터맵</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+
+<!-- =========================================
+     데이터맵
+========================================= -->
+<main id="mainContent" class="data-map-page" tabindex="-1">
+
+  <!-- 상단 영역 -->
+  <section class="dm-intro">
+
+    <div class="dm-intro-top">
+      <div class="dm-title-group">
+        <span class="dm-outline-btn">
+          <i data-lucide="arrow-left"></i>
+          이전 화면
+        </span>
+
+        <span class="dm-outline-btn dm-muted">
+          <i data-lucide="house"></i>
+          처음으로
+        </span>
+
+        <span class="dm-title-icon">
+          <i data-lucide="network"></i>
+        </span>
+
+        <h1>데이터맵</h1>
+      </div>
+
+      <div class="dm-font-control">
+        <span>글자 크기</span>
+        <span class="dm-font-option selected">보통</span>
+        <span class="dm-font-option">크게</span>
+        <span class="dm-font-option">아주 크게</span>
+      </div>
+    </div>
+
+    <div class="dm-search">
+      <i data-lucide="search"></i>
+      <span>
+        찾으시는 화면을 검색하세요. 예: 중국어선, 항적, 단속 기록
+      </span>
+    </div>
+
+  </section>
+
+  <!-- 화면 개수 -->
+  <div class="dm-count">
+    들어갈 수 있는 화면 <strong>102개</strong> · 분류 <strong>15개</strong>
+  </div>
+
+  <!-- 본문 2열 -->
+  <div class="dm-content-layout">
+
+    <!-- 좌측 -->
+    <div class="dm-left">
+
+      <!-- 업무로 찾기 -->
+      <section class="dm-work-section">
+        <h2>업무로 찾기</h2>
+
+        <div class="dm-work-grid">
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon blue">
+              <i data-lucide="navigation"></i>
+            </span>
+            <h3>아침 출동 준비</h3>
+            <p>오늘 위험한 곳과 갈 길을 확인합니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon teal">
+              <i data-lucide="eye-off"></i>
+            </span>
+            <h3>의심 선박 찾기</h3>
+            <p>신호를 끈 배, 중국어선, 항적 의심 배를 찾습니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon sky">
+              <i data-lucide="ship"></i>
+            </span>
+            <h3>선박 정보·항적 보기</h3>
+            <p>배 한 척의 정보와 지나간 길을 봅니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon red">
+              <i data-lucide="clipboard-list"></i>
+            </span>
+            <h3>단속 기록하기</h3>
+            <p>단속 사건을 적고 지난 기록을 찾습니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon gray">
+              <i data-lucide="chart-column"></i>
+            </span>
+            <h3>통계·보고서</h3>
+            <p>성과를 숫자로 보고 보고서를 만듭니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon blue">
+              <i data-lucide="monitor"></i>
+            </span>
+            <h3>영상으로 확인하기</h3>
+            <p>CCTV·드론·위성 영상을 봅니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon teal">
+              <i data-lucide="message-square"></i>
+            </span>
+            <h3>궁금한 것 물어보기</h3>
+            <p>AI에게 묻거나 법령을 찾아봅니다.</p>
+          </article>
+
+          <article class="dm-work-card">
+            <span class="dm-work-icon sky">
+              <i data-lucide="database"></i>
+            </span>
+            <h3>데이터 관리</h3>
+            <p>데이터를 모으고 정리하고 신청합니다.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 데이터맵 -->
+      <section class="dm-map-section">
+
+        <div class="dm-view-tabs" aria-label="지도 표시 방식">
+          <span class="dm-view-tab active">확장맵</span>
+          <span class="dm-view-tab">목록 보기</span>
+        </div>
+
+        <div class="dm-network-scroll">
+          <div class="dm-network">
+
+            <!-- 연결선 -->
+            <svg class="dm-network-lines"
+                 viewBox="0 0 1100 660"
+                 preserveAspectRatio="xMidYMid meet"
+                 aria-hidden="true">
+              <path d="M550 330 Q540 160 550 70" class="line-blue"/>
+              <path d="M550 330 Q630 170 740 90" class="line-teal"/>
+              <path d="M550 330 Q720 190 900 155" class="line-sky"/>
+              <path d="M550 330 Q800 320 990 270" class="line-red"/>
+              <path d="M550 330 Q790 405 990 385" class="line-gray"/>
+              <path d="M550 330 Q735 505 900 485" class="line-blue"/>
+              <path d="M550 330 Q665 565 740 565" class="line-teal"/>
+              <path d="M550 330 Q575 515 580 590" class="line-sky"/>
+              <path d="M550 330 Q470 520 420 565" class="line-red"/>
+              <path d="M550 330 Q370 480 270 490" class="line-gray"/>
+              <path d="M550 330 Q325 375 170 385" class="line-blue"/>
+              <path d="M550 330 Q310 290 155 270" class="line-teal"/>
+              <path d="M550 330 Q370 175 270 155" class="line-red"/>
+              <path d="M550 330 Q450 150 420 90" class="line-gray"/>
+              <path d="M550 330 Q390 245 130 260" class="line-sky"/>
+            </svg>
+
+            <!-- 중앙 -->
+            <div class="dm-center-node">
+              <i data-lucide="network"></i>
+              <strong>AI 분석포털</strong>
+            </div>
+
+            <!-- 주변 노드 -->
+            <div class="dm-node n1">
+              <span class="dm-node-icon blue"><i data-lucide="fish"></i></span>
+              <strong>불법조업감시</strong>
+              <small>화면 7개</small>
+            </div>
+
+            <div class="dm-node n2">
+              <span class="dm-node-icon teal"><i data-lucide="radar"></i></span>
+              <strong>실시간AIS</strong>
+              <small>화면 1개</small>
+            </div>
+
+            <div class="dm-node n3">
+              <span class="dm-node-icon sky"><i data-lucide="ship-wheel"></i></span>
+              <strong>AI분석알고리즘</strong>
+              <small>화면 19개</small>
+            </div>
+
+            <div class="dm-node n4">
+              <span class="dm-node-icon red"><i data-lucide="route"></i></span>
+              <strong>경비함정 운용·<br>현장작전</strong>
+              <small>화면 7개</small>
+            </div>
+
+            <div class="dm-node n5">
+              <span class="dm-node-icon gray"><i data-lucide="chart-column"></i></span>
+              <strong>단속·이력·통계</strong>
+              <small>화면 5개</small>
+            </div>
+
+            <div class="dm-node n6">
+              <span class="dm-node-icon blue"><i data-lucide="handshake"></i></span>
+              <strong>한중어업공동단속시스템</strong>
+              <small>화면 9개</small>
+            </div>
+
+            <div class="dm-node n7">
+              <span class="dm-node-icon teal"><i data-lucide="ship-wheel"></i></span>
+              <strong>북한선박</strong>
+              <small>화면 1개</small>
+            </div>
+
+            <div class="dm-node n8">
+              <span class="dm-node-icon sky"><i data-lucide="fish"></i></span>
+              <strong>어선모니터링</strong>
+              <small>화면 2개</small>
+            </div>
+
+            <div class="dm-node n9">
+              <span class="dm-node-icon red"><i data-lucide="ship"></i></span>
+              <strong>여객선모니터링</strong>
+              <small>화면 2개</small>
+            </div>
+
+            <div class="dm-node n10">
+              <span class="dm-node-icon gray"><i data-lucide="plane"></i></span>
+              <strong>AI영상분석</strong>
+              <small>화면 9개</small>
+            </div>
+
+            <div class="dm-node n11">
+              <span class="dm-node-icon blue"><i data-lucide="clipboard-list"></i></span>
+              <strong>게시판</strong>
+              <small>화면 5개</small>
+            </div>
+
+            <div class="dm-node n12">
+              <span class="dm-node-icon teal"><i data-lucide="database"></i></span>
+              <strong>데이터요구사항</strong>
+              <small>화면 15개</small>
+            </div>
+
+            <div class="dm-node n13">
+              <span class="dm-node-icon sky"><i data-lucide="brain-circuit"></i></span>
+              <strong>AI모델</strong>
+              <small>화면 6개</small>
+            </div>
+
+            <div class="dm-node n15">
+              <span class="dm-node-icon gray"><i data-lucide="briefcase-business"></i></span>
+              <strong>프로젝트관리</strong>
+              <small>화면 13개</small>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 우측 설명 패널 -->
+    <aside class="dm-info-panel">
+      <h2>화면을 고르면 설명이 나옵니다</h2>
+      <p>지도나 목록에서 궁금한 화면을 눌러 보세요.</p>
+    </aside>
+
+  </div>
+
+</main>
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

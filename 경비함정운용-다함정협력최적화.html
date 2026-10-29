@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>다함정 협력 최적화</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+
+      <!-- 경비함정 운용·현장작전 : 펼침 상태 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+        <div class="flex items-center gap-4">
+          <i data-lucide="route"
+            class="h-[17px] w-[17px]"
+            aria-hidden="true"></i>
+          경비함정 운용·현장작전
+        </div>
+
+        <i data-lucide="minus"
+          class="h-4 w-4"
+          aria-hidden="true"></i>
+      </div>
+
+      <!-- 하위 메뉴 -->
+      <div class="sidebar-submenu">
+        <a class="nav-item">
+          <i data-lucide="navigation" aria-hidden="true"></i>
+          <span>단일 함정 경로 추천</span>
+          <small>SFR-07</small>
+
+        </a>
+
+        <a class="nav-item active" aria-current="page">
+            <i data-lucide="workflow" aria-hidden="true"></i>
+            <span>다함정 협력 최적화</span>
+            <small>SFR-08</small>
+          </a>
+
+        <a class="nav-item">
+          <i data-lucide="megaphone" aria-hidden="true"></i>
+          <span>현장함정 즉각대응</span>
+          <small>SFR-17</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="shield" aria-hidden="true"></i>
+          <span>단속 계획 수립</span>
+          <small>SFR-06-02</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="clipboard-list" aria-hidden="true"></i>
+          <span>상황보고</span>
+        </a>
+
+         <a class="nav-item">
+          <i data-lucide="ship" aria-hidden="true"></i>
+          <span>함정용플랫폼</span>
+          <small>SFR-15</small>
+        </a>
+
+        <a class="nav-item">
+          <i data-lucide="wifi" aria-hidden="true"></i>
+          <span>함정 단말 Agent</span>
+          <small>SFR-16</small>
+        </a>
+      </div>
+
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">다함정 협력 최적화</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+    
+        <main id="mainContent" class="multi-page" tabindex="-1">
+
+          <!-- 페이지 제목 / 탭 -->
+          <div class="multi-heading">
+            <div class="multi-heading-title">
+              <i data-lucide="users-round"></i>
+              <h1>다함정 협력형 경로 최적화</h1>
+              <span>지방청별 다함정 합동 작전 경로 추천 — 목표 분담(능력 가중 배정 · 부하 균형) · 2차 협동 대응 · 육지 우회 · EEZ 제한</span>
+            </div>
+
+            <nav class="multi-tabs" aria-label="다함정 최적화 메뉴">
+              <button type="button" class="active">작전</button>
+              <button type="button">다함정 지도</button>
+              <button type="button">탐지 알고리즘</button>
+              <button type="button">학습·벤치마크</button>
+              <button type="button">참고자료</button>
+              <button type="button">학습 결과</button>
+              <button type="button">성능·평가</button>
+            </nav>
+          </div>
+
+          <div class="multi-content">
+
+            <!-- 작전 설정 -->
+            <section class="multi-filter-panel">
+
+              <div class="multi-filter-main">
+
+                <div class="multi-filter-field">
+                  <label for="multiDistrict">관할구역</label>
+                  <select id="multiDistrict">
+                    <option>중부지방청</option>
+                    <option>서해지방청</option>
+                    <option>남해지방청</option>
+                    <option>동해지방청</option>
+                  </select>
+                </div>
+
+                <div class="multi-filter-field">
+                  <label>작전 목표</label>
+                  <div class="multi-segment" id="multiMission">
+                    <button type="button" class="active" data-mission="safe">단속 + 안전 점검</button>
+                    <button type="button" data-mission="enforce">불법선박 합동 단속</button>
+                    <button type="button" data-mission="fishery">어민 안전 합동 점검</button>
+                  </div>
+                </div>
+
+                <div class="multi-filter-field">
+                  <label for="multiResponse">2차 협동 대응 지점</label>
+                  <select id="multiResponse">
+                    <option>위험도 상위 2곳</option>
+                    <option>위험도 상위 3곳</option>
+                    <option>위험도 상위 5곳</option>
+                  </select>
+                </div>
+
+                <div class="multi-filter-checks">
+                  <label><input type="checkbox" checked> 위험선박</label>
+                  <label><input type="checkbox" checked> 작전 목표</label>
+                </div>
+
+              </div>
+
+              <div class="multi-ship-selection">
+                <strong>투입 함정 (4/4척)</strong>
+                <span class="multi-separator"></span>
+                <label><input type="checkbox" checked><span class="multi-ship-dot blue"></span>1002함 · 태극급</label>
+                <label><input type="checkbox" checked><span class="multi-ship-dot purple"></span>1506함 · 태극급</label>
+                <label><input type="checkbox" checked><span class="multi-ship-dot green"></span>3001함 · 태극급</label>
+                <label><input type="checkbox" checked><span class="multi-ship-dot orange"></span>3005함 · 태극급</label>
+              </div>
+
+            </section>
+
+            <!-- 안내 -->
+            <div class="multi-warning">
+              <i data-lucide="triangle-alert"></i>
+              <span>항속 · 순찰시간 예산이나 육지 우회 때문에 배정하고도 가지 못한 목표가 3곳 있습니다. 함정을 추가하거나 협동 지점 수를 줄여 보세요.</span>
+            </div>
+
+            <!-- KPI -->
+            <section class="multi-kpi-grid" aria-label="작전 요약">
+              <article class="multi-kpi">
+                <span>투입 함정</span>
+                <strong>4척</strong>
+                <small>합동 지점 2곳</small>
+              </article>
+              <article class="multi-kpi">
+                <span>위험도 커버</span>
+                <strong>100%</strong>
+                <small>핫스팟 18/18</small>
+              </article>
+              <article class="multi-kpi">
+                <span>어민 점검</span>
+                <strong>96%</strong>
+                <small>밀집 27/28</small>
+              </article>
+              <article class="multi-kpi">
+                <span>총 항주거리</span>
+                <strong>2245 km</strong>
+                <small>전 함정 합계</small>
+              </article>
+              <article class="multi-kpi">
+                <span>작전 종료</span>
+                <strong>21.1 h</strong>
+                <small>마지막 함정 복귀</small>
+              </article>
+              <article class="multi-kpi">
+                <span>부하 불균형</span>
+                <strong>70%</strong>
+                <small>(최대-최소)/평균</small>
+              </article>
+              <article class="multi-kpi">
+                <span>항로 교차</span>
+                <strong>0곳</strong>
+                <small>함정 지점 제외</small>
+              </article>
+            </section>
+
+            <!-- 지도 -->
+            <section class="multi-map-card" aria-label="다함정 협력 작전 지도">
+              <div class="multi-map-viewport" id="multiMapViewport">
+
+                <!-- 다함정 지도 이미지로 교체 -->
+                <img
+                  src="./img/statelite-map.png"
+                  alt="다함정 협력 최적화 경로 지도"
+                  class="multi-map-image"
+                  id="multiMapImage"
+                >
+
+                <div class="multi-map-info">
+                  <i data-lucide="users-round"></i>
+                  <strong>중부지방청 합동 작전</strong>
+                  <em>단속 + 안전 점검</em>
+                  <span>위험선박 127척 · 핫스팟 18곳 · 어민 34곳</span>
+                </div>
+
+                <div class="multi-map-zoom">
+                  <button type="button" id="multiZoomIn" aria-label="지도 확대">
+                    <i data-lucide="plus"></i>
+                  </button>
+                  <button type="button" id="multiZoomOut" aria-label="지도 축소">
+                    <i data-lucide="minus"></i>
+                  </button>
+                </div>
+
+                <div class="multi-map-legend">
+                  <strong>함동 작전 추천 경로</strong>
+                  <span><i class="multi-line blue"></i>1002함 경로</span>
+                  <span><i class="multi-line purple"></i>1506함 경로</span>
+                  <span><i class="multi-line green"></i>3001함 경로</span>
+                  <span><i class="multi-line orange"></i>3005함 경로</span>
+                  <span><i class="multi-dot red"></i>2차 협동 대응 지점</span>
+                  <span><i class="multi-dot orange"></i>위험선박 핫스팟</span>
+                  <span><i class="multi-dot green"></i>어민 밀집</span>
+                  <span><i class="multi-dot gray"></i>항로 교차</span>
+                  <span><i class="multi-dot yellow"></i>직접구역 (육지 제외)</span>
+                </div>
+
+                <div class="multi-map-credit">NASA/USGS · NOAA ETOPO <i data-lucide="info"></i></div>
+
+              </div>
+            </section>
+
+            <!-- 함정별 비교 -->
+            <section class="multi-card multi-summary">
+              <div class="multi-table-scroll">
+                <table class="multi-table">
+                  <thead>
+                    <tr>
+                      <th>함정</th>
+                      <th>기점</th>
+                      <th>배정 목표</th>
+                      <th>경유</th>
+                      <th>항주거리</th>
+                      <th>소요시간</th>
+                      <th>담당 위험도</th>
+                      <th>합동 대응</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><i class="multi-line blue"></i>1002함 태극급</td>
+                      <td><span class="multi-tag blue">배치 해역</span></td>
+                      <td>13</td><td>13</td><td>603 km</td><td>16.3 h</td><td>268</td>
+                      <td><span class="multi-tag red">합동 1</span> <span class="multi-tag red">합동 2</span></td>
+                    </tr>
+                    <tr>
+                      <td><i class="multi-line purple"></i>1506함 태극급</td>
+                      <td><span class="multi-tag blue">배치 해역</span></td>
+                      <td>11</td><td>11</td><td>781 km</td><td>21.1 h</td><td>219</td>
+                      <td><span class="multi-tag red">합동 1</span> <span class="multi-tag red">합동 2</span></td>
+                    </tr>
+                    <tr>
+                      <td><i class="multi-line green"></i>3001함 태극급</td>
+                      <td><span class="multi-tag gray">모항</span></td>
+                      <td>11</td><td>11</td><td>390 km</td><td>10.5 h</td><td>56</td><td>–</td>
+                    </tr>
+                    <tr>
+                      <td><i class="multi-line orange"></i>3005함 태극급</td>
+                      <td><span class="multi-tag gray">모항</span></td>
+                      <td>13</td><td>10 <small class="multi-muted">(-3)</small></td>
+                      <td>471 km</td><td>12.7 h</td><td>77</td><td>–</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- 함정별 경유지 카드 -->
+            <div class="multi-route-grid">
+
+              <section class="multi-card multi-route-card">
+                <div class="multi-route-heading">
+                  <i class="multi-line blue"></i>
+                  <h2>1002함</h2>
+                  <span>603 km · 16.3 h</span>
+                </div>
+                <ol class="multi-stop-list" id="multiStops1002"></ol>
+              </section>
+
+              <section class="multi-card multi-route-card">
+                <div class="multi-route-heading">
+                  <i class="multi-line purple"></i>
+                  <h2>1506함</h2>
+                  <span>781 km · 21.1 h</span>
+                </div>
+                <ol class="multi-stop-list" id="multiStops1506"></ol>
+              </section>
+
+              <section class="multi-card multi-route-card">
+                <div class="multi-route-heading">
+                  <i class="multi-line green"></i>
+                  <h2>3001함</h2>
+                  <span>390 km · 10.5 h</span>
+                </div>
+                <ol class="multi-stop-list" id="multiStops3001"></ol>
+              </section>
+
+              <section class="multi-card multi-route-card">
+                <div class="multi-route-heading">
+                  <i class="multi-line orange"></i>
+                  <h2>3005함</h2>
+                  <span>471 km · 12.7 h</span>
+                </div>
+                <ol class="multi-stop-list" id="multiStops3005"></ol>
+              </section>
+
+            </div>
+
+          </div>
+        </main>
+
+
+  
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

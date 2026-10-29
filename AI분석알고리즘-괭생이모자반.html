@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>괭생이모자반</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        
+        <!-- =====================================
+            AI분석알고리즘
+        ====================================== -->
+
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="ship-wheel"
+              class="h-[17px] w-[17px]"
+              aria-hidden="true"></i>
+            AI분석알고리즘
+          </div>
+
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar-submenu">
+
+          <a class="nav-item">
+            <i data-lucide="eye-off" aria-hidden="true"></i>
+            <span>불법어선 / Dark Vessel</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>중국어선 분석</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>환적 의심 탐지</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="link" aria-hidden="true"></i>
+            <span>어업형태별 탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>어구 위반 종합</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="git-compare" aria-hidden="true"></i>
+            <span>어구·선박 상관점수</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag" aria-hidden="true"></i>
+            <span>모선 추론</span>
+            <small>SFR-10·09-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="satellite" aria-hidden="true"></i>
+            <span>AIS신호탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search" aria-hidden="true"></i>
+            <span>불법선박위험해역</span>
+            <small>SFR-09·10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="fish" aria-hidden="true"></i>
+            <span>물고기 탐지</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-orange">기술협상</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waypoints" aria-hidden="true"></i>
+            <span>공급망그래프</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>중국항만</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            <span>중국어시장물가</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            <span>중국선단관계분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="gavel" aria-hidden="true"></i>
+            <span>중국선박제재</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="box" aria-hidden="true"></i>
+            <span>위험 큐브</span>
+            <small>SFR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="trending-up" aria-hidden="true"></i>
+            <span>위험도 추이·이력</span>
+            <small>SFR-05-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="target" aria-hidden="true"></i>
+            <span>단속 우선지역 추천</span>
+            <small>SFR-06-01</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="waves" aria-hidden="true"></i>
+            <span>괭생이모자반</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-blue">부가</em>
+          </a>
+
+        </div>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">괭생이모자반</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    
+  <main id="mainContent" class="sargassum-page" tabindex="-1">
+
+    <!-- 페이지 제목 -->
+    <div class="sg-heading">
+      <div class="sg-heading-main">
+        <i data-lucide="waves" aria-hidden="true"></i>
+        <h1>괭생이모자반 탐지</h1>
+      </div>
+      <p>GOCI-II 실황지(NOSC) + Lagrangian 표류 예측 — 박명빈 외(2023) 식(1) C=0.82 · W=0.011 · 영향반경선 20km 유입 판정</p>
+    </div>
+
+    <!-- 상단 탭: 페이지 이동 없음 -->
+    <nav class="sg-main-tabs" aria-label="괭생이모자반 분석 메뉴">
+      <button type="button" class="active" aria-current="page">분석 지도</button>
+      <button type="button">탐지 알고리즘</button>
+      <button type="button">학습·벤치마크</button>
+      <button type="button">참고자료</button>
+      <button type="button">학습 결과</button>
+      <button type="button">성능·평가</button>
+    </nav>
+
+    <div class="sg-layout">
+
+      <!-- 왼쪽 설정 패널 -->
+      <section class="sg-control-panel" aria-label="표류 예측 설정">
+
+        <div class="sg-summary">
+          <div><strong>0</strong><span>알림지</span></div>
+          <div><strong>0</strong><span>입자</span></div>
+          <div><strong>—</strong><span>예보</span></div>
+        </div>
+
+        <button type="button" class="sg-run-btn" id="sgRun">
+          <i data-lucide="play" aria-hidden="true"></i>
+          표류 예측 실행
+        </button>
+
+        <div class="sg-subtabs" role="tablist" aria-label="설정 항목">
+          <button type="button" class="active" data-sg-tab="prediction" role="tab" aria-selected="true">예측</button>
+          <button type="button" data-sg-tab="result" role="tab" aria-selected="false">결과</button>
+          <button type="button" data-sg-tab="data" role="tab" aria-selected="false">데이터</button>
+        </div>
+
+        <div class="sg-tab-content" data-sg-panel="prediction">
+
+          <div class="sg-field-title">
+            <i data-lucide="calendar-days" aria-hidden="true"></i>
+            기준월 · 탐지일
+          </div>
+
+          <div class="sg-date-row">
+            <label>
+              <span class="sr-only">기준월</span>
+              <input type="month" value="2026-10">
+            </label>
+            <label>
+              <span class="sr-only">탐지일</span>
+              <input type="date" id="sgDate">
+            </label>
+          </div>
+
+          <div class="sg-date-chips" aria-label="탐지일 빠른 선택">
+            <button type="button" class="active" data-date="2026-10-10">26-10*</button>
+            <button type="button" data-date="2026-09-09">26-09</button>
+            <button type="button" data-date="2026-08-08">26-08</button>
+            <button type="button" data-date="2026-07-07">26-07</button>
+            <button type="button" data-date="2026-06-06">26-06</button>
+            <button type="button" data-date="2026-05-05">26-05</button>
+          </div>
+
+          <div class="sg-info-strip">
+            2026-10 최신 유효일 제한 · 조회 26일 · 기준 20일 ↑
+          </div>
+
+          <div class="sg-field-title sg-model-title">표류 모델</div>
+
+          <div class="sg-model-switch">
+            <button type="button" class="active" data-model="khoa" aria-pressed="true">KHOA 식(1)</button>
+            <button type="button" data-model="shin" aria-pressed="false">Shin 2022</button>
+          </div>
+
+          <div class="sg-range-grid">
+            <div class="sg-range-field">
+              <label for="sgCurrent">
+                <span>유속 C</span>
+                <output id="sgCurrentValue">0.820</output>
+              </label>
+              <input id="sgCurrent" type="range" min="0" max="2" step="0.001" value="0.82">
+            </div>
+
+            <div class="sg-range-field">
+              <label for="sgWind">
+                <span>풍속 W</span>
+                <output id="sgWindValue">0.011</output>
+              </label>
+              <input id="sgWind" type="range" min="0" max="0.03" step="0.001" value="0.011">
+            </div>
+          </div>
+
+          <div class="sg-range-field sg-range-full">
+            <label for="sgHours">
+              <span>예측 기간</span>
+              <output id="sgHoursValue">+48h</output>
+            </label>
+            <input id="sgHours" type="range" min="12" max="168" step="12" value="48">
+          </div>
+
+          <div class="sg-range-field sg-range-full">
+            <label for="sgFar">
+              <span>seed FAR ≥</span>
+              <output id="sgFarValue">2.0e-3</output>
+            </label>
+            <input id="sgFar" type="range" min="0" max="0.02" step="0.001" value="0.002">
+          </div>
+
+          <p class="sg-seed-info">seed 0개 · 신고 0개</p>
+
+          <button type="button" class="sg-add-point" id="sgAddPoint">
+            <i data-lucide="map-pin-plus" aria-hidden="true"></i>
+            현장 신고 추가
+          </button>
+        </div>
+
+        <div class="sg-tab-content" data-sg-panel="result" hidden>
+          <div class="sg-empty-state">표류 예측 결과가 없습니다.</div>
+        </div>
+
+        <div class="sg-tab-content" data-sg-panel="data" hidden>
+          <div class="sg-empty-state">등록된 탐지 데이터가 없습니다.</div>
+        </div>
+
+      </section>
+
+      <!-- 오른쪽 지도 패널 -->
+      <section class="sg-map-panel" aria-label="괭생이모자반 탐지 지도">
+        <div class="sg-map-viewport" id="sgMapViewport">
+
+          <!-- 첨부할 지도 이미지 경로 -->
+          <img
+            src="./img/moja-map.png"
+            alt="서해와 한반도 주변 괭생이모자반 탐지 및 표류 예측 지도"
+            class="sg-map-image"
+            id="sgMapImage"
+          >
+
+          <div class="sg-map-notice">
+            2026-10 괭생이모자반 탐지 없음
+          </div>
+
+          <div class="sg-map-zoom" role="group" aria-label="지도 확대 축소">
+            <button type="button" id="sgZoomIn" aria-label="지도 확대" title="확대">
+              <i data-lucide="plus" aria-hidden="true"></i>
+            </button>
+            <button type="button" id="sgZoomOut" aria-label="지도 축소" title="축소">
+              <i data-lucide="minus" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="sg-map-legend">
+            <div class="sg-far-scale">
+              <span>FAR 10⁻⁴~10⁻¹</span>
+            </div>
+            <div class="sg-legend-items">
+              <span><i class="sg-legend-dot purple"></i>핫스팟</span>
+              <span><i class="sg-legend-dot green"></i>신고</span>
+              <span><i class="sg-legend-line red"></i>20km</span>
+              <span><i class="sg-legend-line blue"></i>40km</span>
+              <span><i class="sg-legend-line dashed"></i>궤적</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

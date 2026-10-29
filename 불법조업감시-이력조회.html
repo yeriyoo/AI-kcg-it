@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>이력조회</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 이력조회 전용 CSS -->
+  <link rel="stylesheet" href="./css/history-page.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+
+  <!-- 이력조회 전용 JS -->
+  <script src="./js/history-page.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <!-- 불법조업감시 -->
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-2">
+            <i data-lucide="fish" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            불법조업감시
+          </div>
+
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+        <!-- 서브 메뉴 -->
+        <div class="sidebar-submenu">
+
+          <a class="nav-item">
+            <i data-lucide="gauge" aria-hidden="true"></i>
+            <span>위험분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>AI선박분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            <span>서해NLL분석</span>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="history" aria-hidden="true"></i>
+            <span>이력조회</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="map" aria-hidden="true"></i>
+            <span>해역/기관별 조회</span>
+            <small>SFR-12-03</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="activity" aria-hidden="true"></i>
+            <span>경보 현황판</span>
+            <small>SFR-12-02·06-03</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="list" aria-hidden="true"></i>
+            <span>실시간 이벤트</span>
+            <small>SFR-12</small>
+          </a>
+        </div>
+
+        <!-- 기타 메뉴 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =====================================
+       MAIN
+  ====================================== -->
+  <div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+
+    <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">이력조회</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- =====================================
+         이력조회 페이지
+    ====================================== -->
+    <main
+      id="mainContent"
+      class="history-page"
+      aria-labelledby="historyTitle"
+    >
+
+      <!-- 페이지 제목 -->
+      <div class="history-heading">
+        <i data-lucide="history" aria-hidden="true"></i>
+
+        <h1 id="historyTitle">이력조회</h1>
+
+        <span class="history-heading-desc">
+          기간으로 조회하면 그 기간 전체 내역, 선박을 고르면 그 선박의 위험 히스토리(이벤트 추이 · 유형 · 위치 · 최근 48시간 위험분석 점수)
+        </span>
+      </div>
+
+      <!-- 조회 조건 -->
+      <section class="history-filter-panel" aria-labelledby="historyFilterTitle">
+
+        <h2 id="historyFilterTitle" class="history-section-title">
+          <i data-lucide="search" aria-hidden="true"></i>
+          조회 조건
+        </h2>
+
+        <form id="historyFilterForm" class="history-filter-form" autocomplete="off">
+
+          <div class="history-mmsi-search">
+            <label for="historyMmsi" class="sr-only">MMSI 또는 선박명</label>
+            <input
+              type="search"
+              id="historyMmsi"
+              name="historyMmsi"
+              placeholder="MMSI 또는 선박명"
+              autocomplete="off"
+            >
+
+            <button type="submit" class="history-primary-btn">
+              <i data-lucide="search" aria-hidden="true"></i>
+              조회
+            </button>
+          </div>
+
+          <div class="history-period-group" role="group" aria-label="조회 기간 빠른 선택">
+
+            <button type="button" class="history-period-btn" data-days="7" aria-pressed="false">
+              최근 7일
+            </button>
+
+            <button type="button" class="history-period-btn" data-days="30" aria-pressed="false">
+              최근 30일
+            </button>
+
+            <button type="button" class="history-period-btn active" data-days="90" aria-pressed="true">
+              최근 90일
+            </button>
+
+            <button type="button" class="history-period-btn" data-days="180" aria-pressed="false">
+              최근 180일
+            </button>
+
+          </div>
+
+          <div class="history-date-group">
+            <label for="historyStartDate" class="sr-only">조회 시작일</label>
+            <input
+              type="date"
+              id="historyStartDate"
+              name="historyStartDate"
+              value="2026-07-29"
+              autocomplete="off"
+              required
+            >
+
+            <span aria-hidden="true">~</span>
+
+            <label for="historyEndDate" class="sr-only">조회 종료일</label>
+            <input
+              type="date"
+              id="historyEndDate"
+              name="historyEndDate"
+              value="2026-10-26"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <span id="historySearchStatus" class="history-search-status" role="status" aria-live="polite"></span>
+
+        </form>
+      </section>
+
+      <!-- 요약 카드 -->
+      <section class="history-summary" aria-label="조회 결과 요약">
+
+        <article class="history-summary-card">
+          <span>기간</span>
+          <strong id="historyPeriodText">2026-07-29 ~ 2026-10-26 (90일)</strong>
+        </article>
+
+        <article class="history-summary-card">
+          <span>위험 이벤트(경계·심각)</span>
+          <strong id="historyRiskCount">1,643,074건</strong>
+        </article>
+
+        <article class="history-summary-card">
+          <span>실시간 이벤트</span>
+          <strong id="historyRealtimeCount">928,177건</strong>
+        </article>
+
+        <article class="history-summary-card">
+          <span>위험 선박</span>
+          <strong id="historyVesselCount">24,479척</strong>
+        </article>
+
+      </section>
+
+      <!-- 기간 전체 위험 추이 -->
+      <section class="history-chart-panel" aria-labelledby="historyChartTitle">
+
+        <div class="history-panel-heading">
+          <h2 id="historyChartTitle">
+            <i data-lucide="trending-up" aria-hidden="true"></i>
+            <span id="historyChartHeading">
+              기간 전체 위험 추이 (2026-07-29 ~ 2026-10-26)
+            </span>
+          </h2>
+        </div>
+
+        <div class="history-chart-legend" aria-label="차트 범례">
+          <span><i class="legend-box total" aria-hidden="true"></i> 경계</span>
+          <span><i class="legend-box critical" aria-hidden="true"></i> 심각</span>
+          <span><i class="legend-line" aria-hidden="true"></i> 위험 선박(척)</span>
+        </div>
+
+        <div class="history-chart-wrap">
+          <div
+            id="historyChart"
+            class="history-chart"
+            role="img"
+            aria-label="날짜별 경계 및 심각 위험 이벤트 누적 막대와 위험 선박 수를 나타내는 그래프"
+          ></div>
+        </div>
+
+      </section>
+
+      <!-- 하단 2열 -->
+      <div class="history-bottom-grid">
+
+        <!-- 위험 선박 이력 -->
+        <section class="history-table-panel" aria-labelledby="historyVesselTableTitle">
+
+          <div class="history-panel-heading">
+            <h2 id="historyVesselTableTitle">
+              <i data-lucide="ship" aria-hidden="true"></i>
+              위험 선박 500척 — 기간 전체 (이벤트 많은 순)
+            </h2>
+
+            <span class="history-panel-hint">
+              행을 누르면 그 선박 히스토리
+            </span>
+          </div>
+
+          <div class="history-table-scroll">
+            <table class="history-table history-vessel-table">
+              <caption class="sr-only">위험 선박별 위험 이벤트 이력</caption>
+              <thead>
+                <tr>
+                  <th scope="col">MMSI</th>
+                  <th scope="col">선명</th>
+                  <th scope="col">이벤트</th>
+                  <th scope="col">심각</th>
+                  <th scope="col">주요 유형</th>
+                  <th scope="col">최근</th>
+                </tr>
+              </thead>
+              <tbody id="historyVesselRows"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- 일자별 내역 -->
+        <section class="history-table-panel" aria-labelledby="historyDailyTableTitle">
+
+          <div class="history-panel-heading">
+            <h2 id="historyDailyTableTitle">
+              <i data-lucide="list" aria-hidden="true"></i>
+              <span id="historyDailyHeading">일자별 내역 90일 (최신순)</span>
+            </h2>
+
+            <span class="history-panel-hint">
+              날짜를 누르면 그날 위험 선박
+            </span>
+          </div>
+
+          <div class="history-table-scroll">
+            <table class="history-table history-daily-table">
+              <caption class="sr-only">날짜별 위험 이벤트 및 위험 선박 현황</caption>
+              <thead>
+                <tr>
+                  <th scope="col">날짜</th>
+                  <th scope="col">위험 이벤트</th>
+                  <th scope="col">심각</th>
+                  <th scope="col">위험 선박</th>
+                </tr>
+              </thead>
+              <tbody id="historyDailyRows"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- 상세 조회 표시 -->
+      <div id="historySelectionStatus" class="sr-only" role="status" aria-live="polite"></div>
+
+    </main>
+
+  </div>
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

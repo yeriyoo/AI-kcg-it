@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>공급망그래프</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        
+        <!-- =====================================
+            AI분석알고리즘
+        ====================================== -->
+
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="ship-wheel"
+              class="h-[17px] w-[17px]"
+              aria-hidden="true"></i>
+            AI분석알고리즘
+          </div>
+
+          <i data-lucide="minus"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar-submenu">
+
+          <a class="nav-item">
+            <i data-lucide="eye-off" aria-hidden="true"></i>
+            <span>불법어선 / Dark Vessel</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>중국어선 분석</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="ship" aria-hidden="true"></i>
+            <span>환적 의심 탐지</span>
+            <small>SFR-09</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="link" aria-hidden="true"></i>
+            <span>어업형태별 탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>어구 위반 종합</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="git-compare" aria-hidden="true"></i>
+            <span>어구·선박 상관점수</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag" aria-hidden="true"></i>
+            <span>모선 추론</span>
+            <small>SFR-10·09-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="satellite" aria-hidden="true"></i>
+            <span>AIS신호탐지</span>
+            <small>SFR-10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search" aria-hidden="true"></i>
+            <span>불법선박위험해역</span>
+            <small>SFR-09·10</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="fish" aria-hidden="true"></i>
+            <span>물고기 탐지</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-orange">기술협상</em>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="waypoints" aria-hidden="true"></i>
+            <span>공급망그래프</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="anchor" aria-hidden="true"></i>
+            <span>중국항만</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="chart-no-axes-column" aria-hidden="true"></i>
+            <span>중국어시장물가</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            <span>중국선단관계분석</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="gavel" aria-hidden="true"></i>
+            <span>중국선박제재</span>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="box" aria-hidden="true"></i>
+            <span>위험 큐브</span>
+            <small>SFR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="trending-up" aria-hidden="true"></i>
+            <span>위험도 추이·이력</span>
+            <small>SFR-05-04</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="target" aria-hidden="true"></i>
+            <span>단속 우선지역 추천</span>
+            <small>SFR-06-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="waves" aria-hidden="true"></i>
+            <span>괭생이모자반</span>
+            <em class="dv-sidebar-badge dv-sidebar-badge-blue">부가</em>
+          </a>
+
+        </div>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">공급망 그래프</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+     <!-- =========================================
+          공급망그래프
+      ========================================= -->
+      <main id="mainContent" class="supply-page" tabindex="-1">
+
+        <!-- 페이지 제목 -->
+        <div class="supply-page-heading">
+          <div class="supply-title-group">
+            <i data-lucide="network" aria-hidden="true"></i>
+            <h1>불법어획물 공급망 그래프</h1>
+            <span class="supply-title-divider" aria-hidden="true"></span>
+            <p>
+              어획–환적–입항–가공–유통–수산시장 공급망을 구성하기 위한
+              데이터 확보·연결 설계
+            </p>
+          </div>
+
+          <span class="supply-heading-badge">
+            어선→운반선 실데이터 · 이후 구간 설계
+          </span>
+        </div>
+
+        <div class="supply-content">
+
+          <!-- =====================================
+              공급망 단계
+          ====================================== -->
+          <section class="supply-card supply-overview">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="git-branch" aria-hidden="true"></i>
+              공급망 흐름과 구간별 확장 가능성
+            </h2>
+
+            <div class="supply-flow" aria-label="공급망 흐름">
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">어선</span>
+                <span class="supply-status confirmed">상당 부분 확정</span>
+              </div>
+
+              <i data-lucide="arrow-right" class="supply-flow-arrow" aria-hidden="true"></i>
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">운반선</span>
+                <span class="supply-status confirmed">상당 부분 확정</span>
+              </div>
+
+              <i data-lucide="arrow-right" class="supply-flow-arrow" aria-hidden="true"></i>
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">항만</span>
+                <span class="supply-status confirmed">상당 부분 확정</span>
+              </div>
+
+              <i data-lucide="arrow-right" class="supply-flow-arrow" aria-hidden="true"></i>
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">냉동창고·가공업체</span>
+                <span class="supply-status estimated">확률 추정</span>
+              </div>
+
+              <i data-lucide="arrow-right" class="supply-flow-arrow" aria-hidden="true"></i>
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">수산시장</span>
+                <span class="supply-status estimated">확률 추정</span>
+              </div>
+
+              <i data-lucide="arrow-right" class="supply-flow-arrow" aria-hidden="true"></i>
+
+              <div class="supply-flow-step">
+                <span class="supply-flow-name">수입업체</span>
+                <span class="supply-status inferred">추정</span>
+              </div>
+
+            </div>
+
+            <p class="supply-overview-description">
+              공개데이터만으로는 어선→운반선→항만까지는 상당 부분 구성할 수 있으나,
+              항만→특정 가공업체→특정 수산시장을 확정적으로 연결하기는 어렵다.
+              이 구간은 Panjiva 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
+              가격 변화를 결합해 확률 관계로 구성해야 한다.
+              각 공개 통계가 시장·지역·HS코드 단위로 제공되고,
+              Panjiva가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
+            </p>
+
+          </section>
+
+
+          <!-- =====================================
+              1. 공급망 단계별 데이터 확보처
+          ====================================== -->
+          <section class="supply-card">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="database" aria-hidden="true"></i>
+              1. 공급망 단계별 데이터 확보처
+            </h2>
+
+            <div class="supply-table-scroll">
+              <table class="supply-table supply-source-table">
+
+                <thead>
+                  <tr>
+                    <th scope="col">공급망 단계</th>
+                    <th scope="col">우선 데이터 확보처</th>
+                    <th scope="col">가져올 데이터</th>
+                    <th scope="col">공개·상용</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>어선 식별</td>
+                    <td>해경·해수부 내부 데이터</td>
+                    <td>MMSI, IMO, 호출부호, 선박번호, 국적, 선종, 허가번호</td>
+                    <td><span class="supply-tag purple">내부</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>어선·선주·운영사</td>
+                    <td>S&amp;P Sea-web</td>
+                    <td>선박 제원, 현재·과거 선명, 선주, 운영사, 관리자, 최대 7단계 소유관계</td>
+                    <td><span class="supply-tag red">상용</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>어선 위치·항적</td>
+                    <td>S&amp;P AISLive, 해경 AIS·VTS·D-HF</td>
+                    <td>실시간·과거 항적, 입출항, 정박, AIS 단절</td>
+                    <td><span class="supply-tag orange">내부·상용</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>조업·환적 추정</td>
+                    <td>Global Fishing Watch API</td>
+                    <td>조업 이벤트, 선박 간 조우, 장시간 체류, 환적 가능 이벤트, 항만 방문</td>
+                    <td><span class="supply-tag yellow">공개·승인</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>운반선 식별</td>
+                    <td>FAO Global Record, GFW Vessel API</td>
+                    <td>냉동운반선, 보급선, 어선 식별 및 허가정보</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>항만 위치</td>
+                    <td>UN/LOCODE</td>
+                    <td>항만명, 국가, 지역, 항만 코드</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>항만 입항·검사</td>
+                    <td>FAO PSMA-GIES</td>
+                    <td>지정항만, 입항 사전요청, 항만검사, 입항 거부 정보</td>
+                    <td><span class="supply-tag yellow">일부 공개·기관</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 수산시장</td>
+                    <td>중점 농산물시장 정보 플랫폼 (pfsc.agri.cn) — 공개 API 확인</td>
+                    <td>시장별·품목별 최신 도매가격, 품목 상승·하락 순위, 성별 시장 목록, 일별 가격지수</td>
+                    <td><span class="supply-tag green">공개 API</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 수산시장</td>
+                    <td>농업농촌부 데이터 포털 (data.moa.gov.cn)</td>
+                    <td>농산물 도매가격 200지수, 수산물 가격지수, 전국 도매시장 주간 가격 동향, 일별 가격 보고서, 월별 수급 분석</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 수산시장</td>
+                    <td>개별 수산시장 주간 시황 (웨이하이·칭다오 등)</td>
+                    <td>시장별 주간 시황, 입하량, 가격 변동, 시장 공지</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 수산 생산</td>
+                    <td>중국 농업농촌부 어업경제관리국</td>
+                    <td>어종별 생산량, 해면어업 생산량, 가공업체·냉동창고 통계</td>
+                    <td><span class="supply-tag green">공개·통계</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 수출입</td>
+                    <td>중국 해관총서 통계 플랫폼</td>
+                    <td>HS코드별 국가·지역·월별 수출입 물량·금액</td>
+                    <td><span class="supply-tag green">공개·집계</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>국가 간 수산물 무역</td>
+                    <td>UN Comtrade</td>
+                    <td>HS03 계열 수산물의 국가 간 물량·금액·기간</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>기업 간 실제 거래</td>
+                    <td>S&amp;P Panjiva</td>
+                    <td>수출자, 수입자, 선적항, 도착항, 품목, HS코드, 물량, 선하증권</td>
+                    <td><span class="supply-tag red">상용</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>중국 기업정보</td>
+                    <td>중국 국가기업신용정보공시시스템</td>
+                    <td>기업명, 통일사회신용코드, 대표자, 주소, 주주, 행정처분</td>
+                    <td><span class="supply-tag green">공개·조회</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>IUU 위험정보</td>
+                    <td>WCPFC·ICCAT 등 RFMO IUU 목록</td>
+                    <td>IUU 선박, 과거 선명, 국적, IMO, 호출부호, 선주, 위반내용</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>통합 IUU 목록</td>
+                    <td>TMT Combined IUU Vessel List</td>
+                    <td>여러 RFMO의 IUU 목록 통합, 선박 이력과 연관 회사</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>국내 수입업체</td>
+                    <td>식약처 수산물 수입업체 API</td>
+                    <td>업체명, 영업허가번호, 주소, 대표자, 업종</td>
+                    <td><span class="supply-tag green">공개 API</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>국내 생산·무역</td>
+                    <td>해수부 수산정보포털 FIPS</td>
+                    <td>어업생산, 원양어업, 수산물 수출입, 유통 통계</td>
+                    <td><span class="supply-tag green">공개</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>국내 항만 통계</td>
+                    <td>해수부 항만별 선박입출항 API</td>
+                    <td>항만별·월별 입출항 선박 수와 총톤수</td>
+                    <td><span class="supply-tag green">공개 API</span></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+
+            <div class="supply-notes">
+              <p>· 중점 농산물시장 정보 플랫폼(pfsc.agri.cn)은 인증 없이 응답하는 공개 API를 제공한다. 공개 API 확인 및 실제 연동 가능 여부는 별도 검증이 필요하다.</p>
+              <p>· 수집 전에는 각 데이터 제공기관의 이용약관, 접근 권한, 라이선스 및 재배포 조건을 확인해야 한다.</p>
+              <p>· 농업농촌부 데이터 포털(data.moa.gov.cn)은 농산물 도매가격·수산물 가격지수·주간 가격 동향·월별 수급 분석을 제공한다.</p>
+              <p>· Global Fishing Watch의 Events API는 선박 신원·조업·조우·체류·항만 방문 데이터를 제공하므로 어선→운반선→항만 연결의 출발점으로 활용한다.</p>
+              <p>· S&amp;P Sea-web과 AISLive는 선박·선주·운영사·항만·과거 항적을 연결할 수 있어, 구매 예정인 S&amp;P 데이터를 공급망 그래프의 선박 마스터로 활용하는 것이 적합하다.</p>
+            </div>
+
+          </section>
+
+
+          <!-- =====================================
+              2. 가장 중요한 데이터 조합
+          ====================================== -->
+          <section class="supply-card">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="git-merge" aria-hidden="true"></i>
+              2. 가장 중요한 데이터 조합
+            </h2>
+
+            <div class="supply-combination-grid">
+
+              <!-- 1 -->
+              <article class="supply-combination">
+                <div class="supply-combination-heading">
+                  <h3>① 어선 → 운반선</h3>
+                  <span class="supply-status confirmed">상당 부분 확정</span>
+                </div>
+
+                <h4>연결 조건</h4>
+                <ul>
+                  <li>GFW encounter 이벤트</li>
+                  <li>두 선박이 일정 거리 이내에서 지속 또는 정지</li>
+                  <li>어선과 냉동운반선의 AIS 동시 존재</li>
+                  <li>AIS 단절 직전·재점등 직후 위치</li>
+                  <li>출수 변화</li>
+                  <li>조업 종료 후 운반선과의 반복 접촉</li>
+                  <li>동일 운항사·선주 또는 연관회사</li>
+                </ul>
+
+                <h4>원천</h4>
+                <div class="supply-chip-list">
+                  <span>GFW Events API (encounter·loitering)</span>
+                  <span>S&amp;P AISLive 항적</span>
+                  <span>S&amp;P Sea-web 소유관계</span>
+                </div>
+
+                <p class="supply-combination-note">
+                  ※ GFW가 조우·체류·환적 가능 이벤트와 항만 방문을 제공하므로 기본 연결 후보를 만들 수 있다.
+                </p>
+              </article>
+
+              <!-- 2 -->
+              <article class="supply-combination">
+                <div class="supply-combination-heading">
+                  <h3>② 운반선 → 항만</h3>
+                  <span class="supply-status confirmed">상당 부분 확정</span>
+                </div>
+
+                <h4>연결 조건</h4>
+                <ul>
+                  <li>AIS 항적과 항만 지오펜스 교차</li>
+                  <li>GFW Port Visit</li>
+                  <li>S&amp;P 항만 방문 이력</li>
+                  <li>UN/LOCODE 항만 코드 정합</li>
+                  <li>FAO PSMA 지정항만·검사·입항거부 기록</li>
+                </ul>
+
+                <h4>원천</h4>
+                <div class="supply-chip-list">
+                  <span>GFW Events API (port_visit)</span>
+                  <span>UN/LOCODE</span>
+                  <span>FAO PSMA-GIES</span>
+                  <span>S&amp;P AISLive</span>
+                </div>
+
+                <p class="supply-combination-note">
+                  ※ UN/LOCODE를 항만 노드 기준키로 사용한다.
+                  PSMA-GIES 상세자료 일부는 기관 계정이 필요하다.
+                </p>
+              </article>
+
+              <!-- 3 -->
+              <article class="supply-combination">
+                <div class="supply-combination-heading">
+                  <h3>③ 항만 → 중국 수산시장</h3>
+                  <span class="supply-status estimated">확률 추정</span>
+                </div>
+
+                <h4>연결 조건</h4>
+                <ul>
+                  <li>항만 도착시간과 시장별 품목 가격·물량 급증의 시차 상관</li>
+                  <li>항만–시장 이동거리 및 육상 이동시간</li>
+                  <li>항만 주변 냉동창고·가공업체 위치</li>
+                  <li>기업 거래자료(선적·세관)</li>
+                  <li>동일 항만–시장 패턴 반복성</li>
+                  <li>거리·시차·시장별 품목 연관성을 시장별 연결 후보에 반영</li>
+                </ul>
+
+                <h4>원천</h4>
+                <div class="supply-chip-list">
+                  <span>pfsc.agri.cn 공개 API — 시장별·품목별 최신 도매가격·품목 상승·하락 순위·일별 가격지수</span>
+                  <span>data.moa.gov.cn — 수산물 가격지수·주간 가격 동향·월별 가격 보고서</span>
+                  <span>개별 수산시장 주간 시황 (웨이하이·칭다오 등)</span>
+                  <span>중국 농업농촌부 어업경제관리국 (가공업체·냉동창고 통계)</span>
+                </div>
+
+                <p class="supply-combination-note">
+                  ※ 가격 통계만으로 특정 선박의 어획물이 특정 시장으로 이동했다는 직접 거래관계를 알 수 없어
+                  확률 관계로 생성한다. 다만 pfsc.agri.cn 공개 API가 확인되어 시장별·품목별 가격지수와
+                  상승·하락 순위 데이터로 수집 가능하다.
+                </p>
+              </article>
+
+              <!-- 4 -->
+              <article class="supply-combination">
+                <div class="supply-combination-heading">
+                  <h3>④ 시장·가공업체 → 수입업체</h3>
+                  <span class="supply-status inferred">추정</span>
+                </div>
+
+                <h4>연결 조건</h4>
+                <ul>
+                  <li>HS코드(HS 03류) 기반 품목 연계</li>
+                  <li>국가·지역·월별 수출입 물량 정합</li>
+                  <li>선하증권 기준 수출자–수입자 관계</li>
+                  <li>기업 주소와 항만·시장 간 이동경로</li>
+                </ul>
+
+                <h4>원천</h4>
+                <div class="supply-chip-list">
+                  <span>중국 해관총서 통계 플랫폼 (기간·수출입·상품코드 조건 조회)</span>
+                  <span>UN Comtrade (HS03 국가 간 물량·금액)</span>
+                  <span>S&amp;P Panjiva (선하증권·세관자료 기반 기업 간 관계)</span>
+                  <span>식약처 수산물 수입업체 API (업체명·영업허가번호·주소·대표자)</span>
+                </div>
+
+                <p class="supply-combination-note">
+                  ※ 해관총서 공개 통계와 UN Comtrade는 대부분 집계 데이터라 실제 중국 업체와
+                  한국 수입업체를 직접 연결하기 어렵다. 기업 간 실제 선적 관계는 Panjiva가 가장 적합하다.
+                </p>
+              </article>
+
+            </div>
+          </section>
+
+
+          <!-- =====================================
+              3. 구축 우선순위
+          ====================================== -->
+          <section class="supply-card">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="list-checks" aria-hidden="true"></i>
+              3. 구축 우선순위
+            </h2>
+
+            <div class="supply-priority-grid">
+
+              <article class="supply-priority">
+                <h3><span class="supply-tag green">1단계</span> 즉시 수집 가능한 데이터</h3>
+                <ul>
+                  <li>해경 내부 AIS·외국어선 허가·선박제원</li>
+                  <li>S&amp;P AISLive·Sea-web</li>
+                  <li>Global Fishing Watch Vessel·Events API</li>
+                  <li>UN/LOCODE</li>
+                  <li>FAO Global Record</li>
+                  <li>WCPFC·ICCAT·TMT IUU 목록</li>
+                  <li>중국 수산물 도매시장 가격 — pfsc.agri.cn 공개 API (UA·Referer 헤더 필요)</li>
+                  <li>중국 수산물 가격지수·주간 동향 — data.moa.gov.cn</li>
+                  <li>개별 수산시장 주간 시황 (웨이하이·칭다오 등) — 입하량·가격변동·공지</li>
+                  <li>중국 해관총서·UN Comtrade</li>
+                  <li>식약처 수산물 수입업체 API</li>
+                </ul>
+
+                <p class="supply-combination-note">
+                  ※ FAO Global Record는 어선뿐 아니라 냉동운반선·보급선 정보를 포함하며,
+                  선명·국적이 바뀌어도 유지되는 UVI를 핵심 식별자로 사용한다.
+                </p>
+                <p class="supply-combination-note">
+                  ※ WCPFC IUU 목록은 CSV로 선명·과거 선명·국적·IMO·호출부호·IUU 행위를 제공하며,
+                  ICCAT 목록에는 선주·운영사 정보도 포함된다.
+                </p>
+              </article>
+
+              <article class="supply-priority">
+                <h3><span class="supply-tag yellow">2단계</span> 추정 연결 생성</h3>
+                <ul>
+                  <li>어선–운반선 환적 가능성</li>
+                  <li>운반선–항만 방문</li>
+                  <li>항만–시장 거리와 이동시간</li>
+                  <li>시장별 어종·가격 변화</li>
+                  <li>항만 주변 냉동창고·가공업체</li>
+                  <li>기업 주소와 항만·시장 간 이동경로</li>
+                  <li>HS코드 기반 품목 연계</li>
+                </ul>
+              </article>
+
+              <article class="supply-priority">
+                <h3><span class="supply-tag red">3단계</span> 상용데이터 보강</h3>
+                <ul>
+                  <li>S&amp;P Panjiva — 기업 간 수출입 거래</li>
+                  <li>S&amp;P Sea-web — 선주·운영사·관리회사</li>
+                  <li>Windward — 다크활동, AIS 조작, 허상 항적, 소유구조 위험</li>
+                  <li>위성 SAR 극광영상 — AIS 미송신 선박 확인</li>
+                </ul>
+
+                <p class="supply-combination-note">
+                  ※ Windward는 다크활동·AIS 조작·의심 선박 간 접촉·비정상 항만 행동·
+                  소유구조 위험을 분석하므로 공급망 그래프의 위험도 속성으로 활용할 수 있다.
+                </p>
+              </article>
+
+            </div>
+          </section>
+
+
+          <!-- =====================================
+              4. 지식 그래프 설계
+          ====================================== -->
+          <section class="supply-knowledge-grid" aria-label="지식 그래프 설계">
+
+            <!-- 4-1 노드 -->
+            <article class="supply-card">
+              <h2 class="supply-section-title">
+                <i data-lucide="network" aria-hidden="true"></i>
+                4-1. 권장 그래프 노드
+              </h2>
+
+              <div class="supply-table-scroll">
+                <table class="supply-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">노드</th>
+                      <th scope="col">설명</th>
+                      <th scope="col">주 확보처</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>Vessel</code></td><td>어선·운반선·보급선</td><td>해경 내부 · S&amp;P Sea-web · FAO Global Record</td></tr>
+                    <tr><td><code>Company</code></td><td>선주·운영사·관리사·가공업체·수입업체</td><td>S&amp;P Sea-web · 중국 기업신용정보 · 식약처 API</td></tr>
+                    <tr><td><code>Person</code></td><td>대표자·실소유자·선장</td><td>중국 기업신용정보 · S&amp;P Sea-web</td></tr>
+                    <tr><td><code>Encounter</code></td><td>선박 간 조우·환적 후보</td><td>GFW Events API</td></tr>
+                    <tr><td><code>FishingEvent</code></td><td>조업 이벤트</td><td>GFW Events API · 해경 AIS 분석</td></tr>
+                    <tr><td><code>PortVisit</code></td><td>항만 방문</td><td>GFW Port Visit · S&amp;P AISLive · FAO PSMA</td></tr>
+                    <tr><td><code>Port</code></td><td>항만·부두</td><td>UN/LOCODE</td></tr>
+                    <tr><td><code>Market</code></td><td>수산시장·도매시장</td><td>중국 농업농촌부 가격정보시스템</td></tr>
+                    <tr><td><code>ColdStorage</code></td><td>냉동창고</td><td>중국 어업경제관리국 통계</td></tr>
+                    <tr><td><code>ProcessingPlant</code></td><td>가공공장</td><td>중국 어업경제관리국 · 기업신용정보</td></tr>
+                    <tr><td><code>Shipment</code></td><td>수출입 선적</td><td>S&amp;P Panjiva · 해관총서 · UN Comtrade</td></tr>
+                    <tr><td><code>Species</code></td><td>어종</td><td>FAO ASFIS · 국가 표준 어종코드</td></tr>
+                    <tr><td><code>IUUCase</code></td><td>불법조업·제재·검사 사건</td><td>RFMO IUU 목록 · TMT · FAO PSMA</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <!-- 4-2 관계 -->
+            <article class="supply-card">
+              <h2 class="supply-section-title">
+                <i data-lucide="workflow" aria-hidden="true"></i>
+                4-2. 관계 정의
+              </h2>
+
+              <div class="supply-table-scroll">
+                <table class="supply-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">관계</th>
+                      <th scope="col">생성 근거</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>어선 —[<code>OPERATED_BY</code>]→ 운영사</td><td>S&amp;P Sea-web 운영사 정보</td></tr>
+                    <tr><td>어선 —[<code>OWNED_BY</code>]→ 선주</td><td>S&amp;P Sea-web 최대 7단계 소유관계</td></tr>
+                    <tr><td>어선 —[<code>FISHED_AT</code>]→ 조업해역</td><td>GFW FishingEvent · 해경 AIS 분석</td></tr>
+                    <tr><td>어선 —[<code>ENCOUNTERED</code>]→ 운반선</td><td>GFW encounter + 거리·속도·출수 변화</td></tr>
+                    <tr><td>운반선 —[<code>VISITED</code>]→ 항만</td><td>GFW Port Visit · 항만 지오펜스 교차</td></tr>
+                    <tr><td>항만 —[<code>SUPPLIES</code>]→ 냉동창고</td><td>거리·이동시간 + 냉동창고 위치 통계</td></tr>
+                    <tr><td>냉동창고 —[<code>DELIVERS_TO</code>]→ 가공업체</td><td>기업 주소·거리 + 가공업체 통계</td></tr>
+                    <tr><td>가공업체 —[<code>SELLS_TO</code>]→ 수산시장</td><td>시장별 품목 가격·물량 급증 시차 상관</td></tr>
+                    <tr><td>가공업체 —[<code>EXPORTS</code>]→ 수입업체</td><td>Panjiva 선하증권 · 해관총서 HS코드</td></tr>
+                    <tr><td>선적 —[<code>CONTAINS</code>]→ 어종</td><td>HS 03류 세부코드 · FAO ASFIS</td></tr>
+                    <tr><td>어선 —[<code>LISTED_IN</code>]→ IUU사건</td><td>RFMO IUU 목록 · TMT 통합 목록</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+          </section>
+
+
+          <!-- =====================================
+              5. 식별키 표준
+          ====================================== -->
+          <section class="supply-card">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="key-round" aria-hidden="true"></i>
+              5. 식별키 표준
+            </h2>
+
+            <p class="supply-section-description">
+              공급망 그래프에서 가장 중요한 것은 서로 다른 원천의 동일 객체를
+              합치는 것이다. 위 우선순위에 따라 식별키를 적용해 엔티티를 병합한다.
+            </p>
+
+            <div class="supply-table-scroll">
+              <table class="supply-table supply-identifier-table">
+                <thead>
+                  <tr>
+                    <th scope="col">객체</th>
+                    <th scope="col">우선 식별키</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>선박</td><td>IMO → UVI → MMSI → 호출부호 → 선명+국적+기간</td></tr>
+                  <tr><td>중국 기업</td><td>통일사회신용코드</td></tr>
+                  <tr><td>한국 업체</td><td>사업자등록번호 · 영업허가번호</td></tr>
+                  <tr><td>항만</td><td>UN/LOCODE</td></tr>
+                  <tr><td>어종</td><td>FAO ASFIS 코드 · 국가 표준 어종코드</td></tr>
+                  <tr><td>수산물</td><td>HS 03류 및 세부 HS코드</td></tr>
+                  <tr><td>시장</td><td>시장명 + 행정구역 + 좌표</td></tr>
+                  <tr><td>이벤트</td><td>선박ID + 시작시각 + 종료시각 + 위치</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </section>
+
+
+          <!-- =====================================
+              현 사업 권장 조합
+          ====================================== -->
+          <section class="supply-card supply-recommendation">
+
+            <h2 class="supply-section-title">
+              <i data-lucide="circle-alert" aria-hidden="true"></i>
+              현 사업 권장 조합
+            </h2>
+
+            <div class="supply-recommendation-flow">
+              <span>S&amp;P AIS·선박소유정보</span>
+              <b>+</b>
+              <span>Global Fishing Watch 조우·입항 이벤트</span>
+              <b>+</b>
+              <span>중국 도매시장 가격</span>
+              <b>+</b>
+              <span>중국 해관 통계</span>
+              <b>+</b>
+              <span>Panjiva 기업 간 선적자료</span>
+            </div>
+
+            <p>
+              공개데이터만으로는 어선→운반선→항만까지는 상당 부분 구성할 수 있으나,
+              항만→특정 가공업체→특정 수산시장을 확정적으로 연결하기는 어렵다.
+              이 구간은 Panjiva 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
+              가격 변화를 결합해 확률 관계로 구성해야 한다.
+              각 공개 통계가 시장·지역·HS코드 단위로 제공되고,
+              Panjiva가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
+            </p>
+
+          </section>
+
+
+          <!-- 하단 이동 -->
+          <div class="supply-footer-actions">
+            <span>실데이터 기반 탐지 화면으로 이동</span>
+
+            <div>
+              <a href="./index.html">상황판</a>
+              <a href="./vessel-analysis.html">선박분석</a>
+              <a href="./history.html">이력조회</a>
+            </div>
+          </div>
+
+        </div>
+      </main>
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

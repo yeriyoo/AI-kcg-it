@@ -1,0 +1,3128 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI-HUB - 데이터 제공신청</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- Common CSS -->
+  <link
+    rel="stylesheet"
+    href="./css/hub-common.css"
+  />
+  <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+</head>
+
+
+<body
+  class="
+    linked-data-page
+    min-w-[1280px]
+    bg-white
+    font-['Pretendard']
+    text-[#142A4D]
+  "
+>
+
+  <div class="min-h-screen">
+
+
+    <!-- =====================================================
+        TOP NAVIGATION
+    ====================================================== -->
+    <header
+      class="
+        header-shell
+        fixed
+        left-0 top-0 right-0
+        z-50
+        flex h-[60px] shrink-0
+        items-center
+        border-b border-[#476187]
+        px-8
+      "
+    >
+
+  <!-- =====================================================
+       LOGO
+  ====================================================== -->
+  <h1
+    class="
+      mr-20
+      flex shrink-0
+      items-center gap-2
+      text-[24px] font-semibold
+      text-white
+    "
+  >
+    <span
+      class="
+        flex h-8 w-8
+        items-center justify-center
+        rounded-full
+      "
+    >
+      <img
+      src="./img/logo.svg"
+      alt="AI-HUB"
+      class="
+        h-8 w-8
+        shrink-0
+        object-contain
+      "
+    />
+
+    </span>
+
+    AI-HUB
+  </h1>
+
+
+  <!-- =====================================================
+       MAIN MENU
+  ====================================================== -->
+  <nav
+      id="mainHeaderNav"
+      class="flex h-full items-center gap-10"
+      aria-label="주요 메뉴"
+    >
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="scroll-text"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 목록
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="workflow"
+        class="h-6 w-6"
+      ></i>
+
+      연계 데이터
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        active
+        relative
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+      "
+      aria-current="page"
+    >
+      <i
+        data-lucide="file-pen"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 제공신청
+      <span
+        class="
+          absolute inset-x-0 bottom-2
+          h-[4px]
+          bg-[#0061F0]
+        "
+      ></span>
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="book-bookmark"
+        class="h-6 w-6"
+      ></i>
+
+      데이터 출처
+    </button>
+
+
+    <button
+      type="button"
+      class="
+        flex h-full items-center gap-2
+        px-2
+        text-lg font-semibold
+        text-white
+        hover:text-white
+      "
+    >
+      <i
+        data-lucide="file-cog"
+        class="h-6 w-6"
+      ></i>
+
+      표준화
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       HEADER UTILITY
+  ====================================================== -->
+  <div class="ml-auto shrink-0">
+
+
+    <!-- =================================================
+         DESKTOP / 1651px 이상
+    ================================================== -->
+    <div
+      id="headerUtilityDesktop"
+      class="flex items-center gap-3"
+    >
+
+      <!-- Time -->
+      <span
+        class="
+          whitespace-nowrap
+          text-lg font-medium
+          text-white
+        "
+      >
+        11:43:50 KST
+      </span>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- Download -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="다운로드"
+      >
+        <i
+          data-lucide="download"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- App -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="메뉴"
+      >
+        <i
+          data-lucide="grid-3x3"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Print -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="인쇄"
+      >
+        <i
+          data-lucide="printer"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          relative
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="shopping-cart"
+          class="h-5 w-5"
+        ></i>
+
+        <span
+          class="
+            absolute right-0 top-0
+            flex h-[16px] min-w-[16px]
+            items-center justify-center
+            rounded-full
+            bg-[#F84141]
+            px-1
+            text-[10px] font-semibold
+            leading-none
+            text-white
+          "
+        >
+          2
+        </span>
+      </button>
+
+      <!-- Notification -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="알림"
+      >
+        <i
+          data-lucide="bell"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <!-- Theme -->
+      <button
+        type="button"
+        class="
+          flex h-8 w-8
+          items-center justify-center
+          text-white
+          hover:text-white
+        "
+        aria-label="화면 모드"
+      >
+        <i
+          data-lucide="moon"
+          class="h-5 w-5"
+        ></i>
+      </button>
+
+
+      <div class="h-5 w-px bg-[#476187]"></div>
+
+
+      <!-- User -->
+      <button
+        id="userMenuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        class="
+          flex items-center gap-2
+          text-[#E7F7FF]
+          hover:text-white
+        "
+      >
+        <span
+          class="
+            flex h-7 w-7
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <span class="whitespace-nowrap text-base">
+          여한상 (경위)
+        </span>
+      </button>
+
+    </div>
+
+    <!-- =================================================
+        COMPACT / 1650px 이하
+    ================================================== -->
+    <div
+      id="headerUtilityCompact"
+      class="relative hidden"
+    >
+
+      <button
+        id="headerUtilityToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="userMenu"
+        aria-label="계정 메뉴"
+        class="
+          flex h-10 w-10
+          items-center justify-center
+          rounded
+          text-white
+          hover:bg-[#476187]
+          hover:text-white
+        "
+      >
+        <i
+          data-lucide="menu"
+          class="h-6 w-6"
+        ></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+    <!-- =====================================================
+     USER MENU
+     1650px 이하 / 260 x 372
+    ====================================================== -->
+    <div
+      id="userMenu"
+      class="
+        fixed right-[28px] top-[50px]
+        z-[300]
+        hidden
+        h-[400px] w-[260px]
+        overflow-hidden
+        rounded
+        border border-[#476187]
+        bg-[#142A4D]
+        shadow-2xl
+      "
+    >
+      <nav
+      id="mobileMainNav"
+      class="hidden"
+      aria-label="모바일 주요 메뉴"
+    ></nav>
+
+      <!-- CURRENT TIME -->
+      <div
+        class="
+          flex h-[64px]
+          flex-col justify-center
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            text-base
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+        <strong
+          id="accountCurrentTime"
+          class="
+            mt-1
+            text-base
+            font-medium
+            text-white
+          "
+        >
+          2026-10-06 15:48:55
+        </strong>
+      </div>
+
+
+      <!-- TIMEZONE -->
+      <div
+        class="
+          flex h-[48px]
+          items-center justify-between
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span class="text-base text-[#99ABC6]">
+          시간대
+        </span>
+
+        <div
+          class="
+            flex h-7
+            overflow-hidden
+            rounded
+            bg-[#476187]
+          "
+        >
+          <button
+            id="timezoneKst"
+            type="button"
+            data-timezone="Asia/Seoul"
+            class="
+              timezone-button active
+              flex min-w-[44px]
+              items-center justify-center
+              bg-white
+              px-3
+              text-base font-semibold
+              text-[#142A4D]
+            "
+          >
+            KST
+          </button>
+
+          <button
+            id="timezoneUtc"
+            type="button"
+            data-timezone="UTC"
+            class="
+              timezone-button
+              flex min-w-[44px]
+              items-center justify-center
+              bg-[#476187]
+              px-3
+              text-base font-semibold
+              text-[#CBD6EA]
+            "
+          >
+            UTC
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOOLS -->
+      <div
+        class="
+          grid
+          grid-cols-3
+          border-b border-[#476187]
+        "
+      >
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            다운로드
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            엑셀
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            인쇄
+          </span>
+        </button>
+
+         <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <span class="relative">
+            <i
+              data-lucide="shopping-cart"
+              class="h-5 w-5"
+            ></i>
+
+            <span
+              class="
+                absolute -right-2 -top-2
+                flex h-4 min-w-4
+                items-center justify-center
+                rounded-full
+                bg-[#F84141]
+                px-1
+                text-[10px] font-semibold
+                leading-none text-white
+              "
+            >
+              2
+            </span>
+          </span>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            알림
+          </span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex flex-col h-14
+            items-center justify-center
+            gap-1
+            border-r border-[#476187]
+            border-t border-[#476187
+            text-[#CBD6EA]
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-5 w-5"
+          ></i>
+
+          <span class="text-base">
+            다크모드
+          </span>
+        </button>
+      </div>
+
+
+      <!-- ACCOUNT -->
+      <div
+        class="
+          flex h-[52px]
+          items-center gap-3
+          border-b border-[#476187]
+          px-4
+        "
+      >
+        <span
+          class="
+            flex h-8 w-8
+            shrink-0
+            items-center justify-center
+            rounded-full
+            bg-[#476187]
+            text-base font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+        <strong
+          class="
+            truncate
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+      </div>
+
+
+      <!-- ACCOUNT MENU -->
+      <div
+        class="
+          h-[100px]
+          px-3 py-2
+        "
+      >
+    
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>내 정보</span>
+        </button>
+
+
+        <button
+          type="button"
+          class="
+            flex h-11 w-full
+            items-center gap-3
+            rounded
+            px-2
+            text-left
+            text-base
+            text-white
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="h-5 w-5 text-[#CBD6EA]"
+          ></i>
+
+          <span>로그아웃</span>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     MAIN
+====================================================== -->
+<main class="pt-[60px]">
+
+  <section class="bg-white">
+
+    <div
+      class="
+        mx-auto
+        max-w-[1300px]
+        px-6
+        pb-16
+        pt-7
+      "
+    >
+
+      <!-- =================================================
+           PAGE TITLE
+      ================================================== -->
+      <div
+        class="
+          flex
+          items-center
+          gap-3
+        "
+      >
+
+        <div class="flex items-center gap-2">
+
+          <i
+            data-lucide="database-plus"
+            class="h-6 w-6 text-black"
+          ></i>
+
+          <h1
+            class="
+              text-lg
+              font-semibold
+              text-black
+            "
+          >
+            데이터 제공신청
+          </h1>
+
+        </div>
+
+
+        <p
+          class="
+            text-base
+            font-medium
+            text-[#476187]
+          "
+        >
+          필요한 연계 데이터의 제공을 신청하고, 신청 내역과 처리 상태를 확인합니다.
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           SEARCH / FILTER
+      ================================================== -->
+      <div
+        class="
+          mt-10
+          flex
+          items-end
+          gap-3
+        "
+      >
+
+        <!-- 신청일자 -->
+        <div class="shrink-0">
+
+          <label
+            class="
+              mb-1.5
+              block
+              text-base
+              font-medium
+              text-[#476187]
+            "
+          >
+            신청일자
+          </label>
+
+
+          <div class="flex items-center gap-2">
+
+            <!-- 시작일 -->
+            <div
+              class="
+                flex h-[44px] w-[150px]
+                items-center
+                rounded
+                border border-[#476187]
+                bg-white
+              "
+            >
+
+              <input
+                type="text"
+                placeholder="연도. 월. 일."
+                class="
+                  min-w-0 flex-1
+                  bg-transparent
+                  pl-4
+                  text-base
+                  text-[#142A4D]
+                  placeholder:text-[#476187]
+                  focus:outline-none
+                "
+              />
+
+              <button
+                type="button"
+                class="
+                  flex h-full w-11
+                  shrink-0
+                  items-center justify-center
+                  text-black
+                "
+                aria-label="시작일 선택"
+              >
+                <i
+                  data-lucide="calendar-days"
+                  class="h-5 w-5"
+                ></i>
+              </button>
+
+            </div>
+
+
+            <span
+              class="
+                text-base
+                font-medium
+                text-black
+              "
+            >
+              ~
+            </span>
+
+
+            <!-- 종료일 -->
+            <div
+              class="
+                flex h-[44px] w-[150px]
+                items-center
+                rounded
+                border border-[#476187]
+                bg-white
+              "
+            >
+
+              <input
+                type="text"
+                placeholder="연도. 월. 일."
+                class="
+                  min-w-0 flex-1
+                  bg-transparent
+                  pl-4
+                  text-base
+                  text-[#142A4D]
+                  placeholder:text-[#476187]
+                  focus:outline-none
+                "
+              />
+
+              <button
+                type="button"
+                class="
+                  flex h-full w-11
+                  shrink-0
+                  items-center justify-center
+                  text-black
+                "
+                aria-label="종료일 선택"
+              >
+                <i
+                  data-lucide="calendar-days"
+                  class="h-5 w-5"
+                ></i>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- 처리상태 -->
+        <div class="w-[155px] shrink-0">
+
+          <label
+            class="
+              mb-1.5
+              block
+              text-base
+              font-medium
+              text-[#476187]
+            "
+          >
+            처리상태
+          </label>
+
+
+          <div
+            class="relative"
+            data-custom-dropdown
+          >
+
+            <!-- TRIGGER -->
+            <button
+              type="button"
+              class="
+                custom-dropdown-trigger
+                flex h-[44px] w-full
+                items-center
+                rounded
+                border border-[#476187]
+                bg-white
+                px-4
+                text-left
+                text-base
+                text-black
+                outline-none
+              "
+              aria-expanded="false"
+            >
+              <span
+                class="custom-dropdown-label min-w-0 flex-1 truncate"
+              >
+                전체
+              </span>
+
+              <i
+                data-lucide="chevron-down"
+                class="
+                  custom-dropdown-icon
+                  ml-3 h-5 w-5
+                  shrink-0
+                  text-black
+                  transition-transform
+                  duration-200
+                "
+              ></i>
+            </button>
+
+
+            <!-- MENU -->
+            <div
+              class="
+                custom-dropdown-menu
+                absolute
+                left-0 top-[52px]
+                z-50
+                hidden
+                w-full
+                overflow-hidden
+                rounded
+                border border-[#CDD6E8]
+                bg-white
+                shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+              "
+            >
+
+              <button
+                type="button"
+                data-value="전체"
+                class="
+                  custom-dropdown-option
+                  selected
+                  flex h-[44px] w-full
+                  items-center
+                  bg-[#E1E7F2]
+                  px-4
+                  text-left
+                  text-base font-semibold
+                  text-black
+                "
+              >
+                전체
+              </button>
+
+              <button
+                type="button"
+                data-value="접수대기중"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                접수대기중
+              </button>
+
+              <button
+                type="button"
+                data-value="접수완료"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                접수완료
+              </button>
+
+              <button
+                type="button"
+                data-value="처리중"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                처리중
+              </button>
+
+              <button
+                type="button"
+                data-value="제공"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                제공
+              </button>
+
+              <button
+                type="button"
+                data-value="제공신청취소"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                제공신청취소
+              </button>
+
+              <button
+                type="button"
+                data-value="제공거부"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                제공거부
+              </button>
+
+              <button
+                type="button"
+                data-value="제공신청반려"
+                class="
+                  custom-dropdown-option
+                  flex h-[44px] w-full
+                  items-center
+                  border-t border-[#CDD6E8]
+                  bg-white
+                  px-4
+                  text-left
+                  text-base
+                  text-black
+                  hover:bg-[#F2F6FF]
+                "
+              >
+                제공신청반려
+              </button>
+
+            </div>
+
+
+            <!-- 필요하면 실제 검색값으로 사용 -->
+            <input
+              type="hidden"
+              name="requestStatus"
+              value="전체"
+              class="custom-dropdown-value"
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- 데이터명 -->
+        <div class="min-w-0 flex-1">
+
+          <label
+            class="
+              mb-1.5
+              block
+              text-base
+              font-medium
+              text-[#476187]
+            "
+          >
+            데이터명
+          </label>
+
+          <input
+            type="text"
+            placeholder="신청 데이터명을 입력해 주세요"
+            class="
+              h-[44px] w-full
+              rounded
+              border border-[#476187]
+              bg-white
+              px-4
+              text-base
+              text-[#142A4D]
+              placeholder:text-[#99ABC6]
+              focus:outline-none
+            "
+          />
+
+        </div>
+
+
+        <!-- 초기화 -->
+        <button
+          type="button"
+          class="
+            flex h-[44px]
+            shrink-0
+            items-center justify-center
+            gap-1.5
+            rounded
+            bg-[#E1E7F2]
+            px-4
+            text-base
+            font-semibold
+            text-black
+          "
+        >
+          <i
+            data-lucide="refresh-cw"
+            class="h-5 w-5"
+          ></i>
+
+          초기화
+        </button>
+
+
+        <!-- 검색 -->
+        <button
+          type="button"
+          class="
+            flex h-[44px]
+            shrink-0
+            items-center justify-center
+            gap-2
+            rounded
+            bg-[#0061F0]
+            px-4
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          <i
+            data-lucide="search"
+            class="h-5 w-5"
+          ></i>
+
+          검색
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           ALL REQUEST LIST
+      ================================================== -->
+      <div
+        id="allRequestPanel"
+        class="mt-10"
+      >
+
+        <!-- LIST HEADER -->
+        <div
+          class="
+            mb-5
+            flex
+            items-center
+            justify-between
+          "
+        >
+
+          <strong
+            class="
+              text-lg
+              font-semibold
+              text-black
+            "
+          >
+            총 12건
+          </strong>
+
+
+          <div class="flex items-center gap-2">
+
+            <!-- 최신순 -->
+              <div
+                class="relative w-[100px]"
+                data-custom-dropdown
+              >
+
+                <button
+                  type="button"
+                  class="
+                    custom-dropdown-trigger
+                    flex h-[40px] w-full
+                    items-center
+                    rounded
+                    border border-[#476187]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    outline-none
+                  "
+                  aria-expanded="false"
+                >
+                  <span
+                    class="custom-dropdown-label min-w-0 flex-1 truncate"
+                  >
+                    최신순
+                  </span>
+
+                  <i
+                    data-lucide="chevron-down"
+                    class="
+                      custom-dropdown-icon
+                      ml-2 h-4 w-4
+                      shrink-0
+                      text-black
+                      transition-transform
+                      duration-200
+                    "
+                  ></i>
+                </button>
+
+
+                <div
+                  class="
+                    custom-dropdown-menu
+                    absolute
+                    left-0 top-[48px]
+                    z-50
+                    hidden
+                    w-full
+                    overflow-hidden
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <button
+                    type="button"
+                    data-value="최신순"
+                    class="
+                      custom-dropdown-option
+                      selected
+                      flex h-[44px] w-full
+                      items-center
+                      bg-[#E1E7F2]
+                      px-3
+                      text-left
+                      text-base font-semibold
+                      text-black
+                    "
+                  >
+                    최신순
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="오래된순"
+                    class="
+                      custom-dropdown-option
+                      flex h-[44px] w-full
+                      items-center
+                      border-t border-[#CDD6E8]
+                      bg-white
+                      px-3
+                      text-left
+                      text-base
+                      text-black
+                      hover:bg-[#F2F6FF]
+                    "
+                  >
+                    오래된순
+                  </button>
+
+                </div>
+
+                <input
+                  type="hidden"
+                  value="최신순"
+                  class="custom-dropdown-value"
+                />
+
+              </div>
+
+
+            <!-- 목록 개수 -->
+            <div
+              class="relative w-[90px]"
+              data-custom-dropdown
+            >
+
+              <button
+                type="button"
+                class="
+                  custom-dropdown-trigger
+                  flex h-[40px] w-full
+                  items-center
+                  rounded
+                  border border-[#476187]
+                  bg-white
+                  px-3
+                  text-left
+                  text-base
+                  text-black
+                  outline-none
+                "
+                aria-expanded="false"
+              >
+                <span
+                  class="custom-dropdown-label min-w-0 flex-1 truncate"
+                >
+                  10개
+                </span>
+
+                <i
+                  data-lucide="chevron-down"
+                  class="
+                    custom-dropdown-icon
+                    ml-2 h-4 w-4
+                    shrink-0
+                    text-black
+                    transition-transform
+                    duration-200
+                  "
+                ></i>
+              </button>
+
+
+              <div
+                class="
+                  custom-dropdown-menu
+                  absolute
+                  left-0 top-[48px]
+                  z-50
+                  hidden
+                  w-full
+                  overflow-hidden
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                "
+              >
+
+                <button
+                  type="button"
+                  data-value="10"
+                  class="
+                    custom-dropdown-option
+                    selected
+                    flex h-[44px] w-full
+                    items-center
+                    bg-[#E1E7F2]
+                    px-3
+                    text-left
+                    text-base font-semibold
+                    text-black
+                  "
+                >
+                  10개
+                </button>
+
+
+                <button
+                  type="button"
+                  data-value="20"
+                  class="
+                    custom-dropdown-option
+                    flex h-[44px] w-full
+                    items-center
+                    border-t border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    hover:bg-[#F2F6FF]
+                  "
+                >
+                  20개
+                </button>
+
+
+                <button
+                  type="button"
+                  data-value="30"
+                  class="
+                    custom-dropdown-option
+                    flex h-[44px] w-full
+                    items-center
+                    border-t border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    hover:bg-[#F2F6FF]
+                  "
+                >
+                  30개
+                </button>
+
+              </div>
+
+
+              <input
+                type="hidden"
+                value="10"
+                class="custom-dropdown-value"
+              />
+
+            </div>
+
+
+            <!-- 내 신청 보기 -->
+            <button
+              id="showMyRequestButton"
+              type="button"
+              class="
+                flex h-[40px]
+                items-center justify-center
+                rounded
+                bg-[#476187]
+                px-4
+                text-base
+                font-semibold
+                text-white
+              "
+            >
+              내 신청 보기
+            </button>
+
+
+            <!-- 작성하기 -->
+            <button
+              type="button"
+              class="
+                ml-1
+                flex h-[40px]
+                items-center justify-center
+                gap-2
+                rounded
+                bg-[#0061F0]
+                px-4
+                text-base
+                font-semibold
+                text-white
+              "
+            >
+              <i
+                data-lucide="file-plus-2"
+                class="h-5 w-5"
+              ></i>
+
+              데이터 제공신청서 작성하기
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+        <div class="w-full">
+
+          <!-- TABLE HEADER -->
+          <div
+            class="
+              grid min-h-[48px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              rounded
+              bg-[#142A4D]
+              px-3
+              text-base
+              font-semibold
+              text-white
+            "
+          >
+            <div>No.</div>
+            <div>신청 데이터명</div>
+            <div>접수기관</div>
+            <div>연계 데이터</div>
+            <div>신청일자</div>
+            <div>처리일자</div>
+            <div>처리상태</div>
+          </div>
+
+
+          <!-- 01 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>1</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>
+              Mercator Ocean International
+            </div>
+
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>-</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#99ABC6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span
+                  class="
+                    h-2.5 w-2.5
+                    rounded-full
+                    bg-white
+                  "
+                ></span>
+
+                접수대기중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 02 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>2</div>
+
+            <div>
+              <strong class="block font-semibold">
+                해양생물 데이터 신청합니다.
+              </strong>
+
+              <span
+                class="
+                  mt-0.5 block
+                  text-base
+                  text-[#476187]
+                "
+              >
+                연구개발
+              </span>
+            </div>
+
+            <div>국립수산과학원</div>
+
+            <div>
+              <button
+                type="button"
+                class="
+                  font-semibold
+                  text-[#0046AD]
+                  underline
+                  underline-offset-2
+                "
+              >
+                상세보기
+              </button>
+            </div>
+
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#B8E5A6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-[#2F6D24]
+                "
+              >
+                <span
+                  class="
+                    h-2.5 w-2.5
+                    rounded-full
+                    bg-[#2E9C39]
+                  "
+                ></span>
+
+                제공
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 03 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>3</div>
+
+            <div>
+              <strong class="block font-semibold">
+                연안 해양관측 부이 실시간 관측자료
+              </strong>
+
+              <span
+                class="
+                  mt-0.5 block
+                  text-base
+                  text-[#476187]
+                "
+              >
+                연구개발
+              </span>
+            </div>
+
+            <div>국립해양조사원</div>
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>-</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#99ABC6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                접수대기중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 04 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>4</div>
+
+            <div>
+              <strong class="block font-semibold">
+                해역별 실시간 수온 관측 데이터
+              </strong>
+
+              <span class="mt-0.5 block text-base text-[#476187]">
+                연구개발
+              </span>
+            </div>
+
+            <div>국립해양조사원</div>
+            <div>-</div>
+            <div>2026-08-23</div>
+            <div>-</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#99ABC6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                접수대기중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 05 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>5</div>
+
+            <div>
+              <strong class="block font-semibold">
+                연근해 어선 위치 항적 이력
+              </strong>
+
+              <span class="mt-0.5 block text-base text-[#476187]">
+                통계·분석
+              </span>
+            </div>
+
+            <div>해양수산부</div>
+
+            <div class="text-[#99ABC6]">
+              서비스 예정
+            </div>
+
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#0061F0]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                접수완료
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 06 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>6</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>한국해양과학기술원</div>
+
+            <div class="text-[#99ABC6]">
+              서비스 예정
+            </div>
+
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F4D276]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-[#765A12]
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-[#9D7817]"></span>
+                처리중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 07 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>7</div>
+
+            <div>
+              <strong class="block font-semibold">
+                선박 입출항 신고 정보
+              </strong>
+
+              <span class="mt-0.5 block text-base text-[#476187]">
+                정책수립
+              </span>
+            </div>
+
+            <div>한국해양교통안전공단</div>
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F4B4A4]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-[#A0412F]
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-[#A0412F]"></span>
+                제공신청취소
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 08 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>8</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>해양수산부</div>
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F84141]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                제공거부
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 09 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>9</div>
+
+            <div>
+              <strong class="block font-semibold">
+                기상 위성영상(천리안)
+              </strong>
+
+              <span class="mt-0.5 block text-base text-[#476187]">
+                기타
+              </span>
+            </div>
+
+            <div>기상청</div>
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F84141]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                제공신청반려
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 10 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>10</div>
+
+            <div>
+              <strong class="block font-semibold">
+                불법조업 의심선박 이력
+              </strong>
+
+              <span class="mt-0.5 block text-base text-[#476187]">
+                정책수립
+              </span>
+            </div>
+
+            <div>국립수산과학원</div>
+
+            <div>
+              <button
+                type="button"
+                class="
+                  font-semibold
+                  text-[#0046AD]
+                  underline
+                  underline-offset-2
+                "
+              >
+                상세보기
+              </button>
+            </div>
+
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#B8E5A6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-[#2F6D24]
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-[#2E9C39]"></span>
+                제공
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- PAGINATION -->
+        <nav
+          class="
+            mt-14
+            flex
+            items-center
+            justify-center
+            gap-2
+          "
+          aria-label="전체 목록 페이지네이션"
+        >
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+            "
+          >
+            <i
+              data-lucide="chevron-left"
+              class="h-5 w-5 text-black"
+            ></i>
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              rounded
+              bg-[#476187]
+              text-base font-semibold
+              text-white
+            "
+          >
+            1
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              text-base
+              text-black
+            "
+          >
+            2
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+            "
+          >
+            <i
+              data-lucide="chevron-right"
+              class="h-5 w-5 text-black"
+            ></i>
+          </button>
+
+        </nav>
+
+      </div>
+      <!-- /allRequestPanel -->
+
+
+      <!-- =================================================
+           MY REQUEST LIST
+      ================================================== -->
+      <div
+        id="myRequestPanel"
+        class="mt-10 hidden"
+      >
+
+        <!-- LIST HEADER -->
+        <div
+          class="
+            mb-5
+            flex
+            items-center
+            justify-between
+          "
+        >
+
+          <strong
+            class="
+              text-lg
+              font-semibold
+              text-black
+            "
+          >
+            총 3건
+          </strong>
+
+
+          <div class="flex items-center gap-2">
+
+            <!-- 최신순 -->
+              <div
+                class="relative w-[100px]"
+                data-custom-dropdown
+              >
+
+                <button
+                  type="button"
+                  class="
+                    custom-dropdown-trigger
+                    flex h-[40px] w-full
+                    items-center
+                    rounded
+                    border border-[#476187]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    outline-none
+                  "
+                  aria-expanded="false"
+                >
+                  <span
+                    class="custom-dropdown-label min-w-0 flex-1 truncate"
+                  >
+                    최신순
+                  </span>
+
+                  <i
+                    data-lucide="chevron-down"
+                    class="
+                      custom-dropdown-icon
+                      ml-2 h-4 w-4
+                      shrink-0
+                      text-black
+                      transition-transform
+                      duration-200
+                    "
+                  ></i>
+                </button>
+
+
+                <div
+                  class="
+                    custom-dropdown-menu
+                    absolute
+                    left-0 top-[48px]
+                    z-50
+                    hidden
+                    w-full
+                    overflow-hidden
+                    rounded
+                    border border-[#CDD6E8]
+                    bg-white
+                    shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                  "
+                >
+
+                  <button
+                    type="button"
+                    data-value="최신순"
+                    class="
+                      custom-dropdown-option
+                      selected
+                      flex h-[44px] w-full
+                      items-center
+                      bg-[#E1E7F2]
+                      px-3
+                      text-left
+                      text-base font-semibold
+                      text-black
+                    "
+                  >
+                    최신순
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="오래된순"
+                    class="
+                      custom-dropdown-option
+                      flex h-[44px] w-full
+                      items-center
+                      border-t border-[#CDD6E8]
+                      bg-white
+                      px-3
+                      text-left
+                      text-base
+                      text-black
+                      hover:bg-[#F2F6FF]
+                    "
+                  >
+                    오래된순
+                  </button>
+
+                </div>
+
+                <input
+                  type="hidden"
+                  value="최신순"
+                  class="custom-dropdown-value"
+                />
+
+              </div>
+
+
+            <!-- 목록 개수 -->
+            <div
+              class="relative w-[90px]"
+              data-custom-dropdown
+            >
+
+              <button
+                type="button"
+                class="
+                  custom-dropdown-trigger
+                  flex h-[40px] w-full
+                  items-center
+                  rounded
+                  border border-[#476187]
+                  bg-white
+                  px-3
+                  text-left
+                  text-base
+                  text-black
+                  outline-none
+                "
+                aria-expanded="false"
+              >
+                <span
+                  class="custom-dropdown-label min-w-0 flex-1 truncate"
+                >
+                  10개
+                </span>
+
+                <i
+                  data-lucide="chevron-down"
+                  class="
+                    custom-dropdown-icon
+                    ml-2 h-4 w-4
+                    shrink-0
+                    text-black
+                    transition-transform
+                    duration-200
+                  "
+                ></i>
+              </button>
+
+
+              <div
+                class="
+                  custom-dropdown-menu
+                  absolute
+                  left-0 top-[48px]
+                  z-50
+                  hidden
+                  w-full
+                  overflow-hidden
+                  rounded
+                  border border-[#CDD6E8]
+                  bg-white
+                  shadow-[0_8px_16px_rgba(20,42,77,0.22)]
+                "
+              >
+
+                <button
+                  type="button"
+                  data-value="10"
+                  class="
+                    custom-dropdown-option
+                    selected
+                    flex h-[44px] w-full
+                    items-center
+                    bg-[#E1E7F2]
+                    px-3
+                    text-left
+                    text-base font-semibold
+                    text-black
+                  "
+                >
+                  10개
+                </button>
+
+
+                <button
+                  type="button"
+                  data-value="20"
+                  class="
+                    custom-dropdown-option
+                    flex h-[44px] w-full
+                    items-center
+                    border-t border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    hover:bg-[#F2F6FF]
+                  "
+                >
+                  20개
+                </button>
+
+
+                <button
+                  type="button"
+                  data-value="30"
+                  class="
+                    custom-dropdown-option
+                    flex h-[44px] w-full
+                    items-center
+                    border-t border-[#CDD6E8]
+                    bg-white
+                    px-3
+                    text-left
+                    text-base
+                    text-black
+                    hover:bg-[#F2F6FF]
+                  "
+                >
+                  30개
+                </button>
+
+              </div>
+
+
+              <input
+                type="hidden"
+                value="10"
+                class="custom-dropdown-value"
+              />
+
+            </div>
+
+
+            <!-- 전체 목록 보기 -->
+            <button
+              id="showAllRequestButton"
+              type="button"
+              class="
+                flex h-[40px]
+                items-center justify-center
+                rounded
+                bg-[#476187]
+                px-4
+                text-base
+                font-semibold
+                text-white
+              "
+            >
+              전체 목록 보기
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                ml-1
+                flex h-[40px]
+                items-center justify-center
+                gap-2
+                rounded
+                bg-[#0061F0]
+                px-4
+                text-base
+                font-semibold
+                text-white
+              "
+            >
+              <i
+                data-lucide="file-plus-2"
+                class="h-5 w-5"
+              ></i>
+
+              데이터 제공신청서 작성하기
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- MY REQUEST TABLE -->
+        <div>
+
+          <!-- HEADER -->
+          <div
+            class="
+              grid min-h-[50px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              rounded
+              bg-[#142A4D]
+              px-3
+              text-base
+              font-semibold
+              text-white
+            "
+          >
+            <div>No.</div>
+            <div>신청 데이터명</div>
+            <div>접수기관</div>
+            <div>연계 데이터</div>
+            <div>신청일자</div>
+            <div>처리일자</div>
+            <div>처리상태</div>
+          </div>
+
+
+          <!-- MY 01 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>1</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>
+              Mercator Ocean International
+            </div>
+
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>-</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#99ABC6]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                접수대기중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- MY 02 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>2</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>한국해양과학기술원</div>
+
+            <div class="text-[#99ABC6]">
+              서비스 예정
+            </div>
+
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F4D276]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-[#765A12]
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-[#9D7817]"></span>
+                처리중
+              </span>
+            </div>
+          </div>
+
+
+          <!-- MY 03 -->
+          <div
+            class="
+              grid min-h-[64px]
+              grid-cols-[60px_2.45fr_1.65fr_0.9fr_0.9fr_0.9fr_1.15fr]
+              items-center
+              border-b border-[#CDD6E8]
+              px-3
+              text-base
+              text-black
+            "
+          >
+            <div>3</div>
+
+            <div
+              class="
+                flex w-full
+                items-center
+                gap-3
+              "
+            >
+
+              <div class="min-w-0">
+                <strong
+                  class="
+                    block
+                    truncate
+                    font-semibold
+                  "
+                >
+                  연안 해양관측 부이 실시간 관측자료
+                </strong>
+
+                <span
+                  class="
+                    mt-0.5
+                    block
+                    text-base
+                    text-[#476187]
+                  "
+                >
+                  정책수립
+                </span>
+              </div>
+
+
+              <span
+                class="
+                  ml-auto
+                  mr-5
+                  shrink-0
+                  rounded-full
+                  bg-[#7C73DE]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                내 신청
+              </span>
+
+            </div>
+
+            <div>해양수산부</div>
+            <div>-</div>
+            <div>2026-08-24</div>
+            <div>2026-08-24</div>
+
+            <div>
+              <span
+                class="
+                  inline-flex
+                  items-center gap-1.5
+                  rounded-full
+                  bg-[#F84141]
+                  px-3 py-1
+                  text-base font-semibold
+                  text-white
+                "
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-white"></span>
+                제공거부
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- MY PAGINATION -->
+        <nav
+          class="
+            mt-14
+            flex
+            items-center
+            justify-center
+            gap-2
+          "
+          aria-label="내 신청 페이지네이션"
+        >
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+            "
+          >
+            <i
+              data-lucide="chevron-left"
+              class="h-5 w-5 text-black"
+            ></i>
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+              rounded
+              bg-[#476187]
+              text-base font-semibold
+              text-white
+            "
+          >
+            1
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex h-8 w-8
+              items-center justify-center
+            "
+          >
+            <i
+              data-lucide="chevron-right"
+              class="h-5 w-5 text-black"
+            ></i>
+          </button>
+
+        </nav>
+
+      </div>
+      <!-- /myRequestPanel -->
+
+    </div>
+
+  </section>
+
+</main>
+    
+
+
+
+    <!-- =====================================================
+         CHATBOT FLOATING BUTTON
+    ====================================================== -->
+    <button
+      class="
+    fixed bottom-6 right-6
+    z-50
+    h-14 w-14
+    rounded-full
+    bg-transparent
+    shadow-none
+  "
+>
+      <img
+    src="./img/chat-bot.png"
+    alt="AI 챗봇"
+    class="
+      block
+      h-full w-full
+      rounded-full
+      object-cover
+      mix-blend-multiply
+      drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
+    "
+  />
+    </button>
+
+  </div>
+
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/hub-common.js"></script>
+
+</body>
+</html>

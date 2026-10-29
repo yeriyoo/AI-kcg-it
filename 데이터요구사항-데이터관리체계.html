@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>데이터 관리체계</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">데이터 관리체계</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+<!-- =========================================
+     데이터 관리체계 - DAR-13
+========================================= -->
+<main id="mainContent" class="data-system-page" tabindex="-1">
+
+  <!-- 페이지 제목 -->
+  <div class="data-system-heading">
+    <div class="data-system-heading-title">
+      <i data-lucide="shield-check" aria-hidden="true"></i>
+      <h1>데이터 관리체계</h1>
+    </div>
+
+    <span class="data-system-heading-divider"></span>
+
+    <p>
+      DAR-13~17 데이터 구조 관리 도구 · 값 검증 · 관계체계 ·
+      연계 관계체계 · 데이터 개방 방법론
+    </p>
+  </div>
+
+  <!-- 상단 탭 : 디자인만 적용 -->
+  <nav class="data-system-tabs" aria-label="데이터 관리체계 메뉴">
+    <span class="data-system-tab is-active" aria-current="page">
+      <i data-lucide="git-branch"></i>
+      DAR-13 구조 관리 도구
+    </span>
+
+    <span class="data-system-tab">
+      <i data-lucide="square-check-big"></i>
+      DAR-14 값 검증
+    </span>
+
+    <span class="data-system-tab">
+      <i data-lucide="users"></i>
+      DAR-15 관리체계
+    </span>
+
+    <span class="data-system-tab">
+      <i data-lucide="share-2"></i>
+      DAR-16 연계 관리체계
+    </span>
+
+    <span class="data-system-tab">
+      <i data-lucide="globe"></i>
+      DAR-17 데이터 개방
+    </span>
+  </nav>
+
+  <!-- 현재 메뉴 -->
+  <div class="data-system-section-label">
+    <span class="data-system-code">DAR-13</span>
+    <strong>구조 관리 도구</strong>
+  </div>
+
+  <!-- =====================================
+       1. 관리 도구 체계
+  ====================================== -->
+  <section class="data-system-card">
+    <h2>관리 도구 체계 — 모델이 정본, DDL은 파생</h2>
+
+    <div class="data-system-table-wrap">
+      <table class="data-system-table data-system-table-tools">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 30%">
+          <col style="width: 7%">
+          <col style="width: 53%">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th>단계</th>
+            <th>도구 · 산출물</th>
+            <th>정본 여부</th>
+            <th>산출 규칙</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">개념 · 논리 모델</th>
+            <td>ER 모델링 도구(ERwin / DA#)</td>
+            <td><span class="data-system-status is-original">정본</span></td>
+            <td>
+              주제영역 → 개념 → 논리 3단계.
+              표준단어 · 도메인 적용 후 확정
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">물리 모델</th>
+            <td>AIFS_SB_08 데이터베이스설계서 · SB_09 전체ERD</td>
+            <td><span class="data-system-status is-original">정본</span></td>
+            <td>
+              논리 모델에서 파생. 설계 범위 222 테이블 ·
+              3,428 컬럼 (계획 테이블 포함 → 운영 DB와 범위가 다름)
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">DDL 반영</th>
+            <td>Flyway 마이그레이션 (V001~)</td>
+            <td><span class="data-system-status is-derived">파생</span></td>
+            <td>
+              물리 모델 확정 후 작성. 운영 DB 직접 DDL 금지
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">운영 DB</th>
+            <td>PostgreSQL kcgaidb (스키마 kcg)</td>
+            <td><span class="data-system-status is-derived">파생</span></td>
+            <td>
+              마이그레이션으로만 변경. 수기 변경 시
+              형상 불일치로 검출
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="data-system-alert">
+      <i data-lucide="alert-triangle" aria-hidden="true"></i>
+      <p>
+        <strong>단일 방향 원칙</strong> — 변경은 항상
+        「모델 → 설계서 → 마이그레이션 → 운영 DB」
+        순서로만 흐른다. 운영 DB에서 역방향으로 모델을 갱신
+        (리버스 엔지니어링)하는 경로는 형상 관리를 무력화하므로
+        사용하지 않는다.
+      </p>
+    </div>
+  </section>
+
+  <!-- =====================================
+       2. 형상 일치 점검 방법론
+  ====================================== -->
+  <section class="data-system-card">
+    <h2>형상 일치 점검 방법론</h2>
+
+    <div class="data-system-table-wrap">
+      <table class="data-system-table">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 90%">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">점검 주기</th>
+            <td>월 1회 정기 + 마이그레이션 릴리즈 시마다 수시</td>
+          </tr>
+
+          <tr>
+            <th scope="row">추출 방법</th>
+            <td>
+              운영 DB `information_schema.columns` 전수 추출 →
+              설계서(SB_08) 전수 대조
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">대조 기준</th>
+            <td>
+              테이블 존재 여부 · 컬럼 존재 여부 · 데이터타입 ·
+              NOT NULL · PK/FK
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">산출물</th>
+            <td>
+              AIFS_SB_08_불일치_전수대조표 —
+              불일치 건별 원인 · 조치 기재
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">보고</th>
+            <td>
+              불일치 0건이면 「일치」 확인서,
+              1건 이상이면 조치 완료 후 재점검
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">최근 실적</th>
+            <td>
+              2026-09-17 전수 대조 — SB_08 222 테이블 ↔
+              ERD 222 테이블 전건 일치 확인 (설계서 ↔ ERD)
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">최근 실적(운영 DB)</th>
+            <td>
+              2026-10-04 표준화 재점검 — 운영 DB 131 테이블 ·
+              1,915 컬럼(Flyway V127, 2026-10-01).
+              설계서 222 테이블은 계획 테이블을 포함한 설계 범위라
+              운영 DB와 범위가 달라 단순 건수 비교 대상이 아니다.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =====================================
+       3. 운영 DB 실측
+  ====================================== -->
+  <section class="data-system-card">
+    <h2>운영 DB 실측 — kcgaidb 스키마 kcg (2026-10-04 점검)</h2>
+
+    <div class="data-system-table-wrap">
+      <table class="data-system-table">
+        <colgroup>
+          <col style="width: 25%">
+          <col style="width: 31%">
+          <col style="width: 44%">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>실측</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">테이블</th>
+            <td>131개 (점검 대상 123)</td>
+            <td>파티션 자식 · Flyway 이력 테이블 제외</td>
+          </tr>
+
+          <tr>
+            <th scope="row">컬럼</th>
+            <td>1,915개 (점검 대상 1,810)</td>
+            <td>점검 대상 테이블 기준</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Flyway 최신</th>
+            <td>V127 (2026-10-01)</td>
+            <td>V128(MR #147)은 미머지</td>
+          </tr>
+
+          <tr>
+            <th scope="row">한글 논리명(테이블)</th>
+            <td>73/123 (59.3%)</td>
+            <td>V128 적용 시 112/123 (91.1%)</td>
+          </tr>
+
+          <tr>
+            <th scope="row">한글 논리명(컬럼)</th>
+            <td>89/1,810 (4.9%)</td>
+            <td>V128 적용 시 1,513/1,810 (83.6%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="data-system-alert">
+      <i data-lucide="alert-triangle" aria-hidden="true"></i>
+      <p>
+        설계서 SB_08의 222 테이블 · 3,428 컬럼은 계획 테이블을
+        포함한 <strong>설계 범위</strong>이고,
+        위 수치는 <strong>현재 운영 DB</strong>다.
+        두 값의 차이는 불일치가 아니라 범위 차이이며,
+        전수 대조는 설계서↔ERD 및 운영 DB↔마이그레이션을
+        따로 수행한다.
+      </p>
+    </div>
+  </section>
+
+  <!-- =====================================
+       4. 변경 이력 3중 관리
+  ====================================== -->
+  <section class="data-system-card">
+    <h2>변경 이력 3중 관리</h2>
+
+    <div class="data-system-table-wrap">
+      <table class="data-system-table">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 30%">
+          <col style="width: 60%">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th>계층</th>
+            <th>기록 위치</th>
+            <th>남는 정보</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">스키마</th>
+            <td>Flyway `flyway_schema_history`</td>
+            <td>
+              적용 버전 · 시각 · 체크섬 —
+              되돌릴 수 없는 사실 기록
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">형상</th>
+            <td>Git 커밋 (마이그레이션 SQL + 설계서)</td>
+            <td>
+              누가 · 왜 바꿨는지, MR 리뷰로 승인 경로 확보
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">문서</th>
+            <td>설계서 개정이력 표</td>
+            <td>
+              업무적 변경 사유 · 영향 범위 · 승인자
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="data-system-alert">
+      <i data-lucide="alert-triangle" aria-hidden="true"></i>
+      <p>
+        <strong>재반 충돌 방지</strong> — 마이그레이션 번호는
+        선정 방식이라 브랜치 병행 작업 시 충돌한다.
+        운영 반영 전 스크래치 DB에서 검증하고,
+        재반은 기존 로그의 Current version 기준으로 확정한다.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>LIVE선박정보</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-2">
+            <i data-lucide="radar" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            실시간AIS
+          </div>
+
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar-submenu">
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="radar" aria-hidden="true"></i>
+            <span>LIVE선박정보</span>
+            <small>SFR-12-01</small>
+          </a>
+        </div>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+        <!-- 데이터요구사항 -->
+        <a class="nav-parent active">
+          <span>
+            <i data-lucide="database" aria-hidden="true"></i>
+            데이터요구사항
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">LIVE 선박정보</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+      <main id="mainContent" class="live-page" tabindex="-1">
+
+      <!-- 상단 기능 툴바 -->
+      <section class="live-toolbar" aria-label="지도 기능">
+
+        <div class="live-toolbar-left">
+
+          <div class="live-map-type">
+            <button type="button" class="live-tool-btn active" data-map-type="satellite">
+              <i data-lucide="satellite"></i>
+              위성
+            </button>
+
+            <button type="button" class="live-tool-btn" data-map-type="enc">
+              <i data-lucide="map"></i>
+              ENC
+            </button>
+          </div>
+
+          <div class="live-tools">
+            <button type="button" class="live-tool-btn" data-live-tool="illegal">
+              <i data-lucide="ban"></i>
+              불법어선
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="fishing">
+              <i data-lucide="ship"></i>
+              불법벌점
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="military">
+              <i data-lucide="flag"></i>
+              다국적해
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="boundary">
+              <i data-lucide="route"></i>
+              해저케이블
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="island">
+              <i data-lucide="map-pin"></i>
+              독도감시
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="scheduled">
+              <i data-lucide="calendar-days"></i>
+              여객선감시
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="china">
+              <i data-lucide="ship-wheel"></i>
+              중국어선감시
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="analysis">
+              <i data-lucide="chart-no-axes-column"></i>
+              현황분석
+            </button>
+
+            <button type="button" class="live-tool-btn" data-live-tool="operations">
+              <i data-lucide="anchor"></i>
+              작전가이드
+            </button>
+          </div>
+
+        </div>
+
+        <div class="live-toolbar-stats">
+          <span class="live-stat live-stat-green">실시간 · 20,888척</span>
+          <span class="live-stat live-stat-blue">612 AC</span>
+          <span class="live-stat live-stat-orange">1 MIL</span>
+          <span class="live-stat live-stat-orange">20888 SHIP</span>
+          <span class="live-stat live-stat-red">100 SAT</span>
+        </div>
+
+      </section>
+
+      <!-- 지도 및 우측 패널 -->
+      <div class="live-workspace">
+
+        <section class="live-map-area" aria-label="선박 관제 지도">
+
+          <!-- LIVE 선박 지도 배경 -->
+          <div
+            class="live-map-canvas"
+            id="liveMapCanvas"
+            role="img"
+            aria-label="한반도 주변 실시간 선박 관제 지도"
+          ></div>
+
+          <!-- 좌측 지도 패널 -->
+          <div class="live-map-left">
+
+            <!-- 레이어 -->
+            <section class="live-floating-panel live-layer-panel">
+
+              <button type="button" class="live-panel-heading" data-live-toggle="liveLayerBody" aria-expanded="true">
+                <span>LAYERS</span>
+                <i data-lucide="chevron-up"></i>
+              </button>
+
+              <div id="liveLayerBody" class="live-layer-body">
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="true">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot orange"></span>
+      <span class="live-layer-name">선박</span>
+    </button>
+    <span>20888</span>
+  </div>
+
+  <div class="live-layer-children">
+
+    <div class="live-layer-item">
+      <span class="live-dot yellow"></span>
+      <span>화물선</span>
+      <small>3818</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot red"></span>
+      <span>유조선</span>
+      <small>1445</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot green"></span>
+      <span>여객선</span>
+      <small>358</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot blue"></span>
+      <span>어선</span>
+      <small>4464</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot orange"></span>
+      <span>예인·기타</span>
+      <small>2056</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot pink"></span>
+      <span>군함</span>
+      <small>23</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot emerald"></span>
+      <span>예인선</span>
+      <small>1051</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot amber"></span>
+      <span>고속선</span>
+      <small>14</small>
+    </div>
+
+    <div class="live-layer-item">
+      <span class="live-dot gray"></span>
+      <span>미분류</span>
+      <small>7659</small>
+    </div>
+
+    <div class="live-layer-item live-layer-subtitle">
+      <span class="live-layer-chevron"></span>
+      <span>VESSEL TYPE</span>
+    </div>
+
+  </div>
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="false">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot gray"></span>
+      <span class="live-layer-name">국적 분류</span>
+    </button>
+    <span>20888</span>
+  </div>
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="false">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot blue"></span>
+      <span class="live-layer-name">항공망</span>
+    </button>
+    <span>712</span>
+  </div>
+
+  <div class="live-layer-parent">
+    <span class="live-layer-static">
+      <span class="live-dot gray"></span>
+      <span class="live-layer-name">위성영상 (SAR)</span>
+    </span>
+    <span>0</span>
+  </div>
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="false">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot blue"></span>
+      <span class="live-layer-name">해양안전</span>
+    </button>
+    <span>167</span>
+  </div>
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="false">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot amber"></span>
+      <span class="live-layer-name">국가기관망</span>
+    </button>
+    <span>204</span>
+  </div>
+
+  <div class="live-layer-parent">
+    <button type="button" class="live-layer-toggle" aria-expanded="false">
+      <span class="live-layer-chevron"></span>
+      <span class="live-dot pink"></span>
+      <span class="live-layer-name">에너지/발전시설</span>
+    </button>
+    <span>8</span>
+  </div>
+
+  <button type="button" class="live-layer-option">
+    Aa 글꼴 크기
+    <i data-lucide="chevron-right"></i>
+  </button>
+
+  <button type="button" class="live-layer-option">
+    ◆ 심볼 크기
+    <i data-lucide="chevron-right"></i>
+  </button>
+
+</div>
+            </section>
+
+            <!-- 날짜 및 시간 -->
+            <section class="live-floating-panel live-date-panel">
+
+              <div class="live-date-heading">
+                <i data-lucide="calendar-clock"></i>
+                <strong id="liveSelectedDate">2026. 10. 26.</strong>
+                <input type="date" id="liveDateInput" value="2026-10-26" aria-label="지도 조회 날짜">
+              </div>
+
+              <div class="live-date-shortcuts">
+                <button type="button" class="active" data-live-days="0">오늘</button>
+                <button type="button" data-live-days="3">-3일</button>
+                <button type="button" data-live-days="7">-7일</button>
+                <button type="button" data-live-days="14">-14일</button>
+              </div>
+
+              <input type="range" id="liveTimeSlider" min="0" max="23" value="23" aria-label="조회 시간">
+
+              <div class="live-time-labels">
+                <span>10월 1일</span>
+                <span id="liveTimeLabel">23시</span>
+              </div>
+
+              <button type="button" class="live-compare-btn" id="liveCompareBtn">
+                <i data-lucide="columns-2"></i>
+                비교 모드
+              </button>
+
+            </section>
+
+            <!-- 경보 -->
+            <section class="live-floating-panel live-alert-panel">
+
+              <div class="live-alert-heading">
+                <span><i data-lucide="siren"></i> 경보 <small>주의 77</small></span>
+                <button type="button" aria-label="경보 설정">
+                  <i data-lucide="sliders-horizontal"></i>
+                </button>
+              </div>
+
+              <div class="live-alert-list" id="liveAlertList">
+                <button type="button" class="live-alert-item">
+                  <strong>중국어선 76척 집결</strong>
+                  <span>20 km 격자 · 평균 0.3 kn</span>
+                </button>
+
+                <button type="button" class="live-alert-item">
+                  <strong>정선 어선 744척</strong>
+                  <span>1노트 미만 · 국적 CN/unclassified</span>
+                </button>
+
+                <button type="button" class="live-alert-item">
+                  <strong>중국어선 256척 집결</strong>
+                  <span>20 km 격자 · 평균 0.7 kn</span>
+                </button>
+
+                <button type="button" class="live-alert-item">
+                  <strong>정선 어선 225척</strong>
+                  <span>1노트 미만 · 국적 CN/unclassified</span>
+                </button>
+              </div>
+
+            </section>
+
+          </div>
+
+          <!-- 지도 우측 도구 -->
+          <div class="live-map-controls">
+
+            <div class="live-control-group live-zoom-controls">
+              <button type="button" id="liveZoomIn" aria-label="지도 확대">
+                <i data-lucide="plus" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" id="liveZoomOut" aria-label="지도 축소">
+                <i data-lucide="minus" aria-hidden="true"></i>
+              </button>
+
+              <!-- 지도 방향 조절 -->
+              <button
+                type="button"
+                id="liveCompassBtn"
+                class="live-compass-btn"
+                aria-label="지도 방향 초기화"
+              >
+                <svg
+                  class="live-compass-icon"
+                  width="16"
+                  height="26"
+                  viewBox="0 0 16 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <!-- 위쪽 방향 -->
+                  <path d="M8 2L14 12H2L8 2Z" fill="#142A4D"/>
+
+                  <!-- 아래쪽 방향 -->
+                  <path d="M8 24L2 14H14L8 24Z" fill="#99ABC6"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="live-control-group">
+              <button type="button" aria-label="지도 이동"><i data-lucide="move"></i></button>
+              <button type="button" aria-label="다각형"><i data-lucide="pentagon"></i></button>
+              <button type="button" aria-label="사각형"><i data-lucide="square"></i></button>
+              <button type="button" aria-label="원"><i data-lucide="circle"></i></button>
+              <button type="button" aria-label="거리 측정"><i data-lucide="ruler"></i></button>
+              <button type="button" aria-label="위치 표시"><i data-lucide="map-pin"></i></button>
+              <button type="button" aria-label="되돌리기"><i data-lucide="undo-2"></i></button>
+              <button type="button" aria-label="지우기"><i data-lucide="eraser"></i></button>
+            </div>
+
+          </div>
+
+          <div class="live-map-attribution">NASA/USGS · NOAA ETOPO | MapLibre</div>
+
+        </section>
+
+        <!-- 오른쪽 정보 패널 -->
+        <aside class="live-right-panel" aria-label="실시간 선박 및 뉴스 정보">
+
+          <div class="live-vessel-summary">
+            <button type="button" class="live-summary-row">
+              <span>🇰🇷 한국 선박 현황</span>
+              <strong>3475척</strong>
+            </button>
+
+            <button type="button" class="live-summary-row">
+              <span>🇨🇳 중국 선박 현황</span>
+              <strong>5890척</strong>
+            </button>
+
+            <button type="button" class="live-summary-row">
+              <span>🇨🇳 중국어선 조업분석</span>
+              <strong class="red-text">1413척</strong>
+            </button>
+          </div>
+
+          <section class="live-news-section">
+
+            <div class="live-news-heading">
+              <strong><span class="live-status-dot"></span> OSINT LIVE</strong>
+              <span>7</span>
+            </div>
+
+            <div class="live-news-list">
+              <article class="live-news-item">
+                <span class="live-news-badge">해양재난</span>
+                <time>3시간 전</time>
+                <h3>부산해경, 남미 마약 5.4톤 운반 80대 남성 검거</h3>
+                <p>Google 뉴스 · 해양정보</p>
+              </article>
+
+              <article class="live-news-item">
+                <span class="live-news-badge">해양안전</span>
+                <time>7시간 전</time>
+                <h3>태풍 '참피' 영향으로 바닷가에 강한 바람·물결 주의</h3>
+                <p>Google 뉴스 · 해양 기상정보</p>
+              </article>
+
+              <article class="live-news-item">
+                <span class="live-news-badge">해양안전</span>
+                <time>7시간 전</time>
+                <h3>태풍 영향으로 바닷가 강풍·물결 주의</h3>
+                <p>Google 뉴스 · 해양 기상정보</p>
+              </article>
+            </div>
+
+          </section>
+
+          <section class="live-news-section live-china-news">
+            <div class="live-news-heading">
+              <strong>🇨🇳 중국 어업 뉴스</strong>
+              <span>12</span>
+            </div>
+
+            <div class="live-news-list">
+              <article class="live-news-item">
+                <span class="live-news-badge green-badge">어획물</span>
+                <time>2026-07-22</time>
+                <h3>상반기 수산물 생산량이 전년 동기 대비 4.37% 증가했다.</h3>
+                <p>중국 해양정보</p>
+              </article>
+
+              <article class="live-news-item">
+                <span class="live-news-badge red-badge">불법조업 단속</span>
+                <time>2026-07-13</time>
+                <h3>중국 어업 관리 및 불법조업 단속 관련 동향</h3>
+                <p>중국 수산 관련 정보</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="live-status-section">
+            <div class="live-news-heading">
+              <strong>🇨🇳 중국 외곽 · 휴어기</strong>
+              <span>10월</span>
+            </div>
+
+            <p>휴어기 상태 <strong>휴어기 아님</strong></p>
+            <p>국경점검 · 해역 감시 상태</p>
+            <p>중국 어선 및 주변 해역 활동 감시</p>
+          </section>
+
+        </aside>
+
+      </div>
+
+      <!-- 하단 LIVE 바 -->
+      <footer class="live-bottom-bar">
+        <span class="live-indicator"></span>
+        <strong>LIVE</strong>
+        <time id="liveClock">2026-10-26 13:54:23</time>
+
+        <div class="live-timezone">
+          <button type="button" class="active" data-zone="KST">KST</button>
+          <button type="button" data-zone="UTC">UTC</button>
+        </div>
+      </footer>
+
+    </main>
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

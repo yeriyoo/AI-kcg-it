@@ -1,0 +1,726 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061629">
+  <title>기상포털 | 태풍예측비교</title>
+
+  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <link rel="stylesheet" href="./css/wea-common.css">
+  <link rel="stylesheet" href="./css/wea-gdacs.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./js/wea-common.js" defer></script>
+  <script src="./js/wea-gdacs.js" defer></script>
+</head>
+
+<body class="page-gdacs">
+<div class="app-shell">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand-area">
+      <a class="brand" aria-label="기상포털 홈">
+        <img src="./img/logo.png" alt="" width="44" height="44">
+        <span>기상포털</span>
+      </a>
+
+      <button
+        class="icon-button nav-toggle"
+        type="button"
+        id="navToggle"
+        aria-label="전체 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="navMenu">
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <time class="clock" id="clock" aria-label="현재 한국 시간">
+        --:--:-- KST
+      </time>
+
+      <button class="icon-button" type="button" id="downloadButton" aria-label="자료 다운로드">
+        <i data-lucide="download" aria-hidden="true"></i>
+      </button>
+
+      <button class="icon-button" type="button" id="printButton" aria-label="인쇄">
+        <i data-lucide="printer" aria-hidden="true"></i>
+      </button>
+
+      <button class="icon-button" type="button" id="notificationButton" aria-label="알림">
+        <i data-lucide="bell" aria-hidden="true"></i>
+      </button>
+
+      <button class="icon-button" type="button" id="brightnessButton" aria-label="화면 밝기 전환">
+        <i data-lucide="sun" aria-hidden="true"></i>
+      </button>
+
+      <span class="header-separator" aria-hidden="true"></span>
+
+      <button
+        class="account-button"
+        type="button"
+        id="accountButton"
+        aria-expanded="false"
+        aria-controls="accountMenu">
+        <span class="avatar" aria-hidden="true">초</span>
+        <span class="account-name">초기 관리자</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+
+      <div class="account-menu" id="accountMenu" hidden>
+        <span>초기 관리자</span>
+        <span>관리자 계정</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 전체 메뉴 -->
+  <div class="nav-overlay" id="navOverlay" hidden></div>
+
+  <nav class="nav-menu" id="navMenu" aria-label="전체메뉴" aria-hidden="true" inert>
+    <div class="nav-menu-header">
+      <strong>전체메뉴</strong>
+      <button type="button" class="nav-close" id="navClose" aria-label="전체메뉴 닫기">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <section class="nav-section">
+      <button
+        type="button"
+        class="nav-section-toggle"
+        aria-expanded="true"
+        aria-controls="navWeather">
+        <span>기상청</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+
+      <div class="nav-section-content" id="navWeather">
+        <div class="nav-item-group">
+          <div class="nav-item nav-item-parent">
+            <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            <span>예·특보</span>
+          </div>
+          <a href="#" class="nav-sub-item">예보</a>
+          <a href="#" class="nav-sub-item">특보</a>
+        </div>
+
+        <a href="#" class="nav-item">
+          <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+          <span>현재날씨</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <img src="./img/typhoon-icon.svg" alt="">
+          <span>태풍</span>
+        </a>
+
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="grip" aria-hidden="true"></i>
+          <span>
+            <strong>해구별 해양기상정보</strong>
+            <small>해구별 값 9종 · 대해구도·소해구도</small>
+          </span>
+        </a>
+
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="wind" aria-hidden="true"></i>
+          <span>
+            <strong>저고도 WINTEM</strong>
+            <small>항공기상청 고도별 바람 · 기온 예측</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="nav-section">
+      <button
+        type="button"
+        class="nav-section-toggle"
+        aria-expanded="true"
+        aria-controls="navOthers">
+        <span>기타</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+
+      <div class="nav-section-content" id="navOthers">
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="chart-column" aria-hidden="true"></i>
+          <span>
+            <strong>CMEMS 예측 <em>모델</em></strong>
+            <small>코페르니쿠스 해양서비스</small>
+          </span>
+        </a>
+
+        <a href="./wea-goci.html" class="nav-item nav-item-detail">
+          <i data-lucide="satellite-dish" aria-hidden="true"></i>
+          <span>
+            <strong>GOCI-II 위성 <em>관측</em></strong>
+            <small>천리안위성 2B호 관측 장면</small>
+          </span>
+        </a>
+
+        <a
+          href="./wea-gdacs.html"
+          class="nav-item nav-item-detail is-active"
+          aria-current="page">
+          <i data-lucide="triangle-alert" aria-hidden="true"></i>
+          <span>
+            <strong>GDACS 재난 <em>자동산출</em></strong>
+            <small>글로벌 재난 인식 및 조정 시스템</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="nav-section">
+      <button
+        type="button"
+        class="nav-section-toggle"
+        aria-expanded="true"
+        aria-controls="navBriefing">
+        <span>브리핑</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+
+      <div class="nav-section-content" id="navBriefing">
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="square-activity" aria-hidden="true"></i>
+          <span>
+            <strong>해상풍·파고 예상도</strong>
+            <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
+          </span>
+        </a>
+
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="anchor" aria-hidden="true"></i>
+          <span>
+            <strong>출항 브리핑</strong>
+            <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
+          </span>
+        </a>
+
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+          <span>
+            <strong>태풍특보비교</strong>
+            <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
+          </span>
+        </a>
+      </div>
+    </section>
+  </nav>
+
+  <!-- 지도 -->
+  <main class="map-main gdacs-main" id="map">
+
+    <!-- 지도와 모든 그래픽은 통 이미지 한 장 -->
+    <div
+      class="map-viewport"
+      id="mapViewport"
+      aria-label="GDACS 재난정보 지도">
+
+      <div class="map-scene" id="mapScene">
+        <div class="map-background">
+          <img
+            src="./img/wea-gdacs-bg.png"
+            class="map-background-image"
+            alt="동아시아 주변 GDACS 재난 예측 경로, 강수 분포, 관측 지점과 해양 정보를 포함한 지도"
+            draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <!-- 좌측 범례 -->
+    <aside class="gdacs-legend" id="gdacsLegend" aria-label="GDACS 재난 범례">
+      <div class="gdacs-panel-header">
+        <strong>
+          <i data-lucide="grip" aria-hidden="true"></i>
+          범례
+        </strong>
+
+        <button
+          type="button"
+          id="gdacsLegendToggle"
+          aria-label="범례 접기"
+          aria-expanded="true"
+          aria-controls="gdacsLegendContent">
+          <i data-lucide="minimize-2" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="gdacs-legend-content" id="gdacsLegendContent">
+        <div class="gdacs-section-heading">
+          <strong>GDACS 재난</strong>
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </div>
+
+        <div class="gdacs-legend-grid">
+          <div class="gdacs-legend-item">
+            <span class="gdacs-line-sample"></span>
+            <span>태풍 예측 경로</span>
+          </div>
+
+          <div class="gdacs-legend-item">
+            <span class="gdacs-swatch gdacs-red"></span>
+            <span>최대 영향권</span>
+          </div>
+
+          <div class="gdacs-legend-item">
+            <span class="gdacs-swatch gdacs-brown"></span>
+            <span>중간 영향권</span>
+          </div>
+
+          <div class="gdacs-legend-item">
+            <span class="gdacs-swatch gdacs-green"></span>
+            <span>바깥 영향권</span>
+          </div>
+        </div>
+
+        <div class="gdacs-legend-divider"></div>
+
+        <div class="gdacs-rain-title">강수량(mm)</div>
+
+        <div class="gdacs-rain-scale" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span>
+        </div>
+
+        <div class="gdacs-rain-labels">
+          <span>25</span>
+          <span>50</span>
+          <span>75</span>
+          <span>100</span>
+          <span>125</span>
+          <span>150</span>
+          <span>175</span>
+          <span>200</span>
+          <span>250</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 우측 레이어 설정 -->
+    <aside
+      class="gdacs-layer-panel"
+      id="gdacsLayerPanel"
+      aria-label="GDACS 재난정보 레이어 설정">
+
+      <div class="gdacs-panel-header">
+        <strong>
+          <i data-lucide="grip" aria-hidden="true"></i>
+          레이어 설정
+        </strong>
+
+        <button
+          type="button"
+          id="gdacsLayerToggle"
+          aria-label="레이어 설정 접기"
+          aria-expanded="true"
+          aria-controls="gdacsLayerContent">
+          <i data-lucide="minimize-2" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div id="gdacsLayerContent">
+        <div class="gdacs-layer-title">
+          <strong>GDACS 재난정보</strong>
+
+          <div class="gdacs-layer-actions">
+            <button
+              type="button"
+              id="gdacsSettingsToggle"
+              aria-label="GDACS 설정 접기"
+              aria-expanded="true"
+              aria-controls="gdacsSettings">
+              <i data-lucide="chevron-up" aria-hidden="true"></i>
+            </button>
+
+            <button
+              type="button"
+              id="gdacsLayerClose"
+              aria-label="레이어 설정 닫기">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="gdacs-settings" id="gdacsSettings">
+
+          <p class="gdacs-region-count">영역 내 30건</p>
+
+          <!-- 조회 기간 -->
+          <fieldset class="gdacs-fieldset">
+            <legend>조회 기간 (최대 7일)</legend>
+
+            <div class="gdacs-period-buttons" id="gdacsPeriodButtons">
+              <button type="button" class="is-active" data-days="4" aria-pressed="true">4일</button>
+              <button type="button" data-days="5" aria-pressed="false">5일</button>
+              <button type="button" data-days="6" aria-pressed="false">6일</button>
+              <button type="button" data-days="7" aria-pressed="false">7일</button>
+            </div>
+          </fieldset>
+
+          <!-- 재해 유형 -->
+          <fieldset class="gdacs-fieldset">
+            <legend>재해 유형</legend>
+
+            <div class="gdacs-check-grid gdacs-disaster-grid">
+              <label><input type="checkbox" name="disaster" value="earthquake" checked> 지진</label>
+              <label><input type="checkbox" name="disaster" value="cyclone" checked> 태풍</label>
+              <label><input type="checkbox" name="disaster" value="flood" checked> 홍수</label>
+              <label><input type="checkbox" name="disaster" value="volcano" checked> 화산</label>
+              <label><input type="checkbox" name="disaster" value="drought" checked> 가뭄</label>
+              <label><input type="checkbox" name="disaster" value="wildfire" checked> 산불</label>
+            </div>
+          </fieldset>
+
+          <!-- 경보 등급 -->
+          <fieldset class="gdacs-fieldset">
+            <legend>경보 등급</legend>
+
+            <div class="gdacs-check-grid gdacs-alert-grid">
+              <label>
+                <input type="checkbox" name="alert" value="green" checked>
+                <span class="gdacs-alert-dot green"></span>
+                관심
+              </label>
+
+              <label>
+                <input type="checkbox" name="alert" value="orange" checked>
+                <span class="gdacs-alert-dot orange"></span>
+                주의
+              </label>
+
+              <label>
+                <input type="checkbox" name="alert" value="red" checked>
+                <span class="gdacs-alert-dot red"></span>
+                경보
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- 레이어 -->
+          <fieldset class="gdacs-fieldset">
+            <legend>레이어</legend>
+
+            <div class="gdacs-check-grid gdacs-layer-grid">
+              <label>
+                <input type="checkbox" name="layer" value="typhoon" checked>
+                태풍 경로
+              </label>
+
+              <label>
+                <input type="checkbox" name="layer" value="rainfall" checked>
+                최근 강수
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- 안내 문구 -->
+          <div class="gdacs-disclaimer">
+            <p>
+              Disclaimer: 참고용으로, 공식 재난 판단 근거로 보증되지 않습니다.
+              (출처: GDACS · EC-JRC)
+            </p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 우측 공용 툴바 -->
+    <div class="toolbar" id="toolbar" aria-label="지도 도구">
+      <div class="toolbar-main">
+        <button
+          class="toolbar-collapse"
+          id="toolbarCollapse"
+          type="button"
+          aria-expanded="true"
+          aria-controls="toolbarGroups"
+          aria-label="도구 모음 접기">
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <div id="toolbarGroups">
+          <div class="tool-group">
+            <span class="tool-title">기상청</span>
+
+            <button class="tool-btn" type="button" data-tool="calendar" aria-label="예·특보" aria-pressed="false">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="temperature" aria-label="현재날씨" aria-pressed="false">
+              <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="typhoon" aria-label="태풍" aria-pressed="false">
+              <img src="./img/typhoon-icon.svg" alt="">
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="grid" aria-label="해구별 해양기상정보" aria-pressed="false">
+              <i data-lucide="grip" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="wind" aria-label="저고도 WINTEM" aria-pressed="false">
+              <i data-lucide="wind" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="tool-group">
+            <span class="tool-title">기타</span>
+
+            <button class="tool-btn" type="button" data-tool="chart" aria-label="CMEMS 예측모델" aria-pressed="false">
+              <i data-lucide="chart-column" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="satellite" aria-label="GOCI-II 위성" aria-pressed="false">
+              <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            </button>
+
+            <button
+              class="tool-btn is-active"
+              type="button"
+              data-tool="alert"
+              aria-label="GDACS 재난정보"
+              aria-pressed="true">
+              <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="tool-group">
+            <span class="tool-title">브리핑</span>
+
+            <button class="tool-btn" type="button" data-tool="briefing" aria-label="기상 브리핑">
+              <i data-lucide="square-activity" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="marine" aria-label="해양 정보">
+              <i data-lucide="anchor" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button" data-tool="compare" aria-label="정보 비교">
+              <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 지도: 별도 박스 -->
+      <div class="toolbar-map">
+        <div class="tool-group">
+          <span class="tool-title">지도</span>
+
+          <button class="tool-btn" type="button"
+                  id="fullscreenButton" aria-label="전체 화면">
+            <i data-lucide="maximize" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomIn" aria-label="확대">
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomOut" aria-label="축소">
+            <i data-lucide="minus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomReset" aria-label="방향 전환">
+            <i data-lucide="compass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="map-attribution">
+      NASA/GSFC SVS | NASA/USGS · NOAA ETOPO · 기상청
+    </div>
+
+    <div
+      class="map-toast"
+      id="mapToast"
+      role="status"
+      aria-live="polite"
+      hidden></div>
+
+  </main>
+
+
+
+<!-- 태풍 예측 비교 팝업 -->
+<div class="tycompare-overlay" id="tycompareModal" hidden>
+  <section
+    class="tycompare-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tycompareTitle"
+    tabindex="-1"
+  >
+    <header class="tycompare-header">
+      <div class="tycompare-header-left">
+        <h2 id="tycompareTitle">태풍 예측 비교</h2>
+
+        <label class="tycompare-select-label" for="tycompareStorm">
+          태풍 선택
+        </label>
+        <select id="tycompareStorm" class="tycompare-select">
+          <option value="31" selected>제31호 · 인파</option>
+        </select>
+      </div>
+
+      <div class="tycompare-header-right">
+        <div class="tycompare-status">
+          <span class="tycompare-status-label jma">JMA</span>
+          <strong>945 hPa · 50 m/s</strong>
+          <span>28일 15시 발표</span>
+        </div>
+
+        <div class="tycompare-status">
+          <span class="tycompare-status-label kma">KMA</span>
+          <strong>930 hPa · 50 m/s</strong>
+          <span>28일 15시 발표</span>
+        </div>
+
+        <!-- 닫기 아이콘: 화면 표시용, 동작 없음 -->
+        <button
+          type="button"
+          class="tycompare-close"
+          aria-label="닫기 (동작하지 않음)"
+        >
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="tycompare-grid">
+      <!-- 미국 JTWC -->
+      <section class="tycompare-cell">
+        <div class="tycompare-cell-header">
+          <h3>미국 <span>JTWC</span></h3>
+          <span>TY WP3026 (In-fa) · Warning #19</span>
+        </div>
+
+        <div class="tycompare-image-frame">
+          <img
+            src="./img/tycompare-jtwc.png"
+            alt="미국 JTWC 태풍 예측 진로도"
+          >
+        </div>
+
+        <div class="tycompare-cell-footer">
+          <a
+            href="https://www.metoc.navy.mil/jtwc/jtwc.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i data-lucide="globe" aria-hidden="true"></i>
+            JTWC 원문 열기
+          </a>
+        </div>
+      </section>
+
+      <!-- 일본 JMA -->
+      <section class="tycompare-cell">
+        <div class="tycompare-cell-header">
+          <h3>일본 <span>JMA</span></h3>
+          <span>In-fa · TY</span>
+        </div>
+
+        <div class="tycompare-image-frame">
+          <img
+            src="./img/tycompare-jma.png"
+            alt="일본 JMA 태풍 예측 진로도"
+          >
+        </div>
+
+        <div class="tycompare-cell-footer">
+          <a
+            href="https://www.jma.go.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i data-lucide="globe" aria-hidden="true"></i>
+            JMA 원문 열기
+          </a>
+        </div>
+      </section>
+
+      <!-- 한국 기상청 -->
+      <section class="tycompare-cell">
+        <div class="tycompare-cell-header">
+          <h3>한국 <span>기상청</span></h3>
+          <div class="tycompare-cell-meta">
+            <span>제31호 인파</span>
+            <span class="tycompare-badge">강도 4</span>
+          </div>
+        </div>
+
+        <div class="tycompare-image-frame">
+          <img
+            src="./img/tycompare-kma.png"
+            alt="한국 기상청 태풍 예측 진로도"
+          >
+        </div>
+
+        <div class="tycompare-cell-footer">
+          <a
+            href="https://www.weather.go.kr/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i data-lucide="globe" aria-hidden="true"></i>
+            기상청 원문 열기
+          </a>
+        </div>
+      </section>
+
+      <!-- NOAA -->
+      <section class="tycompare-cell">
+        <div class="tycompare-cell-header">
+          <h3>태평양 특약선 <span>NOAA</span></h3>
+
+          <div class="tycompare-time-buttons" role="group" aria-label="NOAA 예측 시간">
+            <button type="button" class="is-active" data-hour="0" aria-pressed="true">현재</button>
+            <button type="button" data-hour="24" aria-pressed="false">24h</button>
+            <button type="button" data-hour="48" aria-pressed="false">48h</button>
+            <button type="button" data-hour="72" aria-pressed="false">72h</button>
+          </div>
+        </div>
+
+        <div class="tycompare-image-frame">
+          <img
+            src="./img/tycompare-noaa.png"
+            alt="NOAA 태평양 일기도"
+            id="tycompareNoaaImage"
+          >
+        </div>
+
+        <div class="tycompare-cell-footer">
+          <a
+            href="https://www.noaa.gov/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i data-lucide="globe" aria-hidden="true"></i>
+            NOAA 원문 열기
+          </a>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>
+
+</div>
+</body>
+</html>

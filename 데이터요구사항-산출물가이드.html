@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>산출물·가이드</title>
+
+  <!-- 기존 공통 라이브러리 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <!-- 기존 공통 CSS -->
+  <link rel="stylesheet" href="./css/fishing-common.css">
+
+  <!-- 기존 공통 JS -->
+  <script src="./js/fishing-common.js" defer></script>
+  <link rel="icon" type="image/png" href="./img/ai-favicon.png">
+</head>
+
+<body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
+
+<div class="app-layout flex min-h-screen">
+
+   <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+    <aside
+      id="sidebar"
+      class="sidebar fixed inset-y-0 left-0 z-40 flex w-[280px] flex-col border-r border-[#CBD6EA] bg-white"
+      aria-label="주 메뉴"
+    >
+
+      <!-- 로고 -->
+      <div class="relative flex h-[96px] shrink-0 flex-col items-center justify-center gap-2 bg-[#0B1A30] text-white">
+
+        <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#476187] bg-[#193053]">
+          <div class="sidebar-logo-wrap flex justify-center">
+            <img
+              src="./img/menu-icon.png"
+              alt="AI 기반 플랫폼 로고"
+              class="sidebar-logo"
+            >
+          </div>
+        </div>
+
+        <strong class="text-base font-bold">AI기반 플랫폼</strong>
+
+        <button
+          type="button"
+          id="sidebarCloseButton"
+          class="sidebar-close-button"
+          aria-label="사이드바 닫기"
+          title="사이드바 닫기"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- 현장담당자 -->
+      <div class="flex h-11 shrink-0 items-center justify-between border-b border-[#CBD6EA] bg-[#F2F6FF] px-3">
+
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0061F0]" aria-hidden="true"></span>
+          현장담당자
+        </div>
+
+        <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+      </div>
+
+      <!-- 현장담당자 메뉴 -->
+      <nav id="staff" class="sidebar-nav flex-1 overflow-y-auto" aria-label="현장담당자 메뉴">
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            불법조업감시
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="radar" aria-hidden="true"></i>
+            실시간AIS
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            AI분석알고리즘
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+        
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="route" aria-hidden="true"></i>
+            경비함정 운용·현장작전
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="chart-column" aria-hidden="true"></i>
+            단속·이력·통계
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            한중어업공동단속시스템
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship-wheel" aria-hidden="true"></i>
+            북한선박
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="fish" aria-hidden="true"></i>
+            어선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="ship" aria-hidden="true"></i>
+            여객선모니터링
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="plane" aria-hidden="true"></i>
+            AI영상분석
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+         <a class="nav-parent">
+          <span>
+            <i data-lucide="clipboard-list" aria-hidden="true"></i>
+            게시판
+          </span>
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+       <!-- 관리자 -->
+        <div class="flex h-9 items-center justify-between bg-[#F2F6FF] px-3 font-semibold">
+          <div class="flex items-center gap-2">
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-[#00A88F]"
+              aria-hidden="true"
+            ></span>
+            관리자
+          </div>
+
+          <button
+          type="button"
+          class="staff-toggle flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1 text-xs text-[#476187]"
+          disabled
+        >
+          <i data-lucide="chevrons-down-up"
+            class="h-4 w-4"
+            aria-hidden="true"></i>
+          <span>접기</span>
+        </button>
+        </div>
+
+         <!-- 데이터요구사항 -->
+      <div class="flex h-10 items-center justify-between bg-[#0061F0] px-3 font-semibold text-white">
+          <div class="flex items-center gap-4">
+            <i data-lucide="database" class="h-[17px] w-[17px]" aria-hidden="true"></i>
+            데이터요구사항
+          </div>
+          <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
+        </div>
+
+
+      <div class="sidebar-submenu permit-sidebar-menu">
+          <div class="permit-menu-group">핵심</div>
+
+          <a class="nav-item">
+            <i data-lucide="network"></i>
+            <span>데이터맵</span>
+            <small>DAR-08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="layout-dashboard"></i>
+            <span>AI 데이터 현황</span>
+            <small>DAR-04</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="package"></i>
+            <span>학습데이터셋 관리</span>
+            <small>SFR-04-01·DAR-06</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="tag"></i>
+            <span>라벨링 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>품질검수 관리</span>
+            <small>DAR-09-14</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="brain"></i>
+            <span>AI 모델 연계</span>
+            <small>SFR-04</small>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="database"></i>
+            <span>원천데이터 관리</span>
+            <small>DAR-01·02·03</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>한글문서 파싱</span>
+            <small>DAR-01</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="scan-search"></i>
+            <span>PDF 파싱</span>
+            <small>DAR-01</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 보조 -->
+          <div class="permit-menu-group">보조</div>
+
+          <a class="nav-item">
+            <i data-lucide="scale"></i>
+            <span>법령저장소</span>
+            <small>DAR-01·08</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>정제데이터 관리</span>
+            <small>DAR-05</small>
+          </a>
+
+          <a class="nav-item active" aria-current="page">
+            <i data-lucide="file-text"></i>
+            <span>산출물·가이드</span>
+            <small>붙임2&nbsp; 지침</small>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="shield-check"></i>
+            <span>데이터 관리체계</span>
+            <small>DAR-13~17</small>
+            <span class="permit-new-badge">NEW</span>
+          </a>
+
+          <!-- 사용 신청 -->
+          <div class="permit-menu-group">사용 신청</div>
+
+          <a class="nav-item">
+            <i data-lucide="file-text"></i>
+            <span>AI 허브 사용 신청</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="square-check-big"></i>
+            <span>신청 검토·승인</span>
+            <small>DAR-17</small>
+            <em class="reference-badge">AI-HUB</em>
+          </a>
+
+          <a class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>시스템 관리</span>
+            <small>DAR-15·17</small>
+          </a>
+
+          </div>
+
+        <!-- AI모델 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="brain-circuit" aria-hidden="true"></i>
+            AI모델
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 연계·서비스 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="share-2" aria-hidden="true"></i>
+            연계·서비스 관리
+          </span>
+          <i data-lucide="plus" aria-hidden="true"></i>
+        </a>
+
+        <!-- 시스템 관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="settings" aria-hidden="true"></i>
+            시스템 관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">별도</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <!-- 프로젝트관리 -->
+        <a class="nav-parent">
+          <span>
+            <i data-lucide="briefcase-business" aria-hidden="true"></i>
+            프로젝트관리
+          </span>
+
+          <span class="flex items-center gap-1">
+            <em class="reference-badge">참고</em>
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </nav>
+
+      <!-- 사이드바 하단 -->
+      <div class="flex h-9 shrink-0 items-center justify-center gap-2 border-t border-[#CBD6EA] bg-[#F2F6FF] text-xs text-[#476187]">
+        <i data-lucide="building-2" class="h-4 w-4" aria-hidden="true"></i>
+        해양경찰청 정보통신과
+      </div>
+    </aside>
+
+  <!-- =========================================
+     우측 메인 영역
+========================================= -->
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
+  <!-- 기존 공통 헤더 -->
+    <header class="top-header flex h-[44px] shrink-0 items-center gap-4 border-b border-[#CBD6EA] bg-[#EDF2F9] px-4">
+
+      <div class="flex shrink-0 items-center gap-2">
+
+        <button
+          type="button"
+          id="menuButton"
+          class="hidden"
+          aria-label="메뉴 열기"
+          aria-controls="sidebar"
+          aria-expanded="false"
+          title="메뉴 열기"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+
+        <strong class="whitespace-nowrap font-semibold">산출물·가이드</strong>
+      </div>
+
+      <div class="ml-auto flex min-w-0 items-center justify-end gap-4">
+
+        <form
+          id="headerSearchForm"
+          class="header-search flex h-8 shrink-0 items-center overflow-hidden rounded-md border border-[#CBD6EA] bg-white"
+          role="search"
+          autocomplete="off"
+        >
+          <span class="flex h-full items-center bg-[#0B1A30] px-3 text-xs font-semibold text-white">
+            통합검색
+          </span>
+
+          <label for="searchCategory" class="sr-only">검색 유형</label>
+          <select
+            id="searchCategory"
+            name="searchCategory"
+            class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
+          >
+            <option value="vessel">선박명</option>
+            <option value="mmsi">MMSI</option>
+          </select>
+
+          <label for="vesselSearch" class="sr-only">선박 검색어</label>
+          <div class="flex items-center gap-2 px-3">
+            <i data-lucide="search" class="h-4 w-4 text-[#476187]" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="vesselSearch"
+              name="vesselSearch"
+              placeholder="선박명 검색"
+              autocomplete="off"
+              class="w-36 bg-transparent text-xs outline-none"
+            >
+          </div>
+        </form>
+
+        <div class="header-utils ml-auto flex shrink-0 items-center justify-end gap-3 text-xs text-[#476187]">
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="network" aria-hidden="true"></i>
+            데이터맵
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="download" aria-hidden="true"></i>
+            다운로드
+          </button>
+
+          <button type="button" class="flex items-center gap-1">
+            <i data-lucide="file-spreadsheet" aria-hidden="true"></i>
+            엑셀
+          </button>
+
+          <button type="button" class="flex items-center gap-1" onclick="window.print()">
+            <i data-lucide="printer" aria-hidden="true"></i>
+            인쇄
+          </button>
+
+          <button type="button" class="relative" aria-label="알림 99개 이상" title="알림">
+            <i data-lucide="bell" aria-hidden="true"></i>
+            <span class="absolute -right-2 -top-2 rounded-full bg-[#F84141] px-1 text-[10px] text-white" aria-hidden="true">99+</span>
+          </button>
+
+          <button type="button" aria-label="도움말" title="도움말">
+            <i data-lucide="circle-help" aria-hidden="true"></i>
+          </button>
+
+          <span class="flex items-center gap-1 rounded border border-[#CBD6EA] px-2 py-1">
+            <i data-lucide="clock-3" aria-hidden="true"></i>
+            <span>29:54</span>
+          </span>
+
+          <label for="languageSelect" class="sr-only">언어 선택</label>
+          <select
+            id="languageSelect"
+            name="language"
+            class="rounded border border-[#CBD6EA] bg-white px-2 py-1 text-[#0B1A30]"
+          >
+            <option value="ko" selected>한국어</option>
+            <option value="en">English</option>
+          </select>
+
+          <button
+            type="button"
+            id="themeButton"
+            aria-label="다크모드 전환"
+            aria-pressed="false"
+            title="다크모드 전환"
+          >
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <div class="flex shrink-0 items-center gap-2 border-l border-[#CBD6EA] pl-3">
+            <div class="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCE9FF] text-[#0061F0]">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+            </div>
+
+            <div class="whitespace-nowrap text-right leading-tight">
+              <strong class="block text-xs text-[#0B1A30]">어현상 (경위)</strong>
+              <span class="text-[11px]">시스템 관리자 · ID/PW</span>
+            </div>
+          </div>
+
+          <button type="button" aria-label="로그아웃" title="로그아웃">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+
+<!-- =========================================
+     산출물·가이드
+========================================= -->
+<main id="mainContent" class="guide-page" tabindex="-1">
+
+  <!-- 페이지 타이틀 -->
+  <div class="guide-heading">
+    <div class="guide-heading-info">
+      <div class="guide-heading-title">
+        <i data-lucide="file-spreadsheet"></i>
+        <h1>산출물·가이드</h1>
+      </div>
+
+      <span class="guide-heading-divider"></span>
+
+      <p>
+        라벨링 가이드 · 검수 기준서 · 데이터 정의서 · 코드북 · 정책·지침을
+        한 곳에서 관리합니다. 데이터 정의서는 AI-HUB 메타데이터 표준화
+        (표준 용어 · 단어 · 도메인 · 코드 · 메타항목 · 카탈로그) 반영,
+        버전 · 태그 · 상세 · 다운로드 추적.
+      </p>
+    </div>
+
+    <div class="guide-heading-actions">
+      <button type="button" class="guide-btn guide-btn-outline">
+        <i data-lucide="folder-open"></i>
+        폴더 보기
+      </button>
+      <button type="button" class="guide-btn guide-btn-primary">
+        <i data-lucide="plus"></i>
+        업로드
+      </button>
+    </div>
+  </div>
+
+  <!-- 상단 통계 -->
+  <section class="guide-stats">
+    <article class="guide-stat-card">
+      <span>전체 자료</span>
+      <strong>45건</strong>
+      <small>라벨링 · 검수 · 정의서 · 코드북 · 정책 5분류</small>
+    </article>
+
+    <article class="guide-stat-card">
+      <span>데이터 정의서</span>
+      <strong>8종</strong>
+      <small>표준정의서 3 + 코드 · 메타 + 목록화 · 산정 · 수집</small>
+    </article>
+
+    <article class="guide-stat-card">
+      <span>최신 품질관리 가이드</span>
+      <strong>v4.0 (제1~4권)</strong>
+      <small>NIA-TTA · 2026.02 발간</small>
+    </article>
+
+    <article class="guide-stat-card">
+      <span>자가점검 체크리스트</span>
+      <strong>5종</strong>
+      <small>샘플 → 초기 → 중간 → 보완 → 최종</small>
+    </article>
+  </section>
+
+  <!-- 안내 배너 -->
+  <section class="guide-notice">
+    <div class="guide-notice-info">
+      <strong>
+        📘 데이터 정의서 — 표준정의서 V1.0 · 데이터 목록화 ver1.31 ·
+        4분축 사이즈 산정
+      </strong>
+      <p>
+        표준 용어 1,793 · 단어 1,071 · 도메인 294 + 표준코드 ·
+        개인정보 기준 + 4분축 재분류 625건 · 23기관 +
+        연~95TB 용량 산정
+      </p>
+    </div>
+
+    <button type="button" class="guide-notice-button">
+      데이터 정의서 보기
+      <i data-lucide="arrow-right"></i>
+    </button>
+  </section>
+
+  <!-- 탭 메뉴: 디자인만 구현 / 기능 없음 -->
+  <nav class="guide-tabs" aria-label="산출물 분류">
+    <span class="guide-tab is-active" aria-current="page">전체</span>
+    <span class="guide-tab">라벨링 가이드</span>
+    <span class="guide-tab">검수 기준서</span>
+    <span class="guide-tab">데이터 정의서</span>
+    <span class="guide-tab">코드북</span>
+    <span class="guide-tab">정책·지침</span>
+  </nav>
+
+  <!-- 산출물 목록 -->
+  <section class="guide-list-panel">
+    <h2>산출물 45건</h2>
+
+    <div class="guide-card-grid">
+
+      <!-- 카드 1 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon"><i data-lucide="file-text"></i></span>
+          <div>
+            <h3>AIS 신호 라벨링 가이드 (다크베셀·불법어선)</h3>
+            <span>라벨링 가이드</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          중국어선 AIS 신호 단절(off) · 간헐송신 · 재점등 이벤트 라벨링 —
+          의도적 신호 차단과 고위험 판정등급, 단절 전 조업형 행동
+          (저속 · 선회) · NLL · EEZ 중첩 · 반복 단절 라벨.
+          위험점수 배경(해상 선박만 단절 · 비정상 장기 단절 · 구역 인접 ·
+          조업형 행동 · 비정상 재점등 · 반복 · VTS 미식별) 기준.
+          재구성오차(비지도 PCA/Conv-AE) CL95 이상도 판정
+          (벤치 F1 0.979) + 항적 결합. SNPDB 실 AIS 기반.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.4</span>
+          <span>PDF</span>
+          <span>2.4 MB</span>
+        </div>
+        <p class="guide-card-tags">태그: SIG·AIS·다크베셀·SFR-09</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-04-15">2026-04-15</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 2 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon"><i data-lucide="file-text"></i></span>
+          <div>
+            <h3>어업형태별 조업패턴 라벨링 가이드</h3>
+            <span>라벨링 가이드</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          중국어선 허가현황(kcg.fishery_permit_cn) 업종별 조업패턴 라벨링 —
+          업종(C21 2척식저인망 · C22 1척식저인망 · C23 위망 · C25 유망)
+          라벨과 특수 · 조업수역 · 기간 · 항당 · 소유주 속성 정의,
+          항적 AI 어구분류(트롤/자망/선망)로 등록 업종 ↔ 실제
+          조업행동 대조(어구 위반 G-03), GFW 공개라벨 교차검증
+          (저인망 일치 100%, Macro-F1 0.994) 기준.
+          선단 관계(소유주 · 선명계열 · 항적 공존) 라벨 포함.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.2</span>
+          <span>PDF</span>
+          <span>3.1 MB</span>
+        </div>
+        <p class="guide-card-tags">태그: TRK·어업형태·업종·SFR-04/10</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-04-12">2026-04-12</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 3 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon"><i data-lucide="file-text"></i></span>
+          <div>
+            <h3>영상·이미지 객체 라벨링 가이드 (영상분석)</h3>
+            <span>라벨링 가이드</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          위성 · 항공 영상 선박 객체 라벨링 — YOLOv8-OBB 방향성
+          바운딩박스 · SegFormer 세그멘테이션 라벨 규격,
+          정상보정 · 마스킹 · 타일링 전처리 기준, 후처리 단계
+          AIS 매칭 라벨(다크베셀 후보-AIS 미매칭, 중국 국적 식별),
+          수집(Optical · SAR · AIS) → 전처리 → AI 분석
+          (SegFormer-YOLOv8-OBB-Fusion) → 후처리(AIS 매칭 ·
+          다크베셀 · 위험도) 4단계 영상분석 파이프라인 라벨 체계.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v2.0</span>
+          <span>PDF</span>
+          <span>4.6 MB</span>
+        </div>
+        <p class="guide-card-tags">태그: IMG·OBB·segmentation·영상분석</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-04-10">2026-04-10</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 4 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon"><i data-lucide="file-text"></i></span>
+          <div>
+            <h3>불법조업 탐지 라벨링 가이드 (KCG 표준)</h3>
+            <span>라벨링 가이드</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          해양경찰 불법조업 탐지 라벨링 KCG 표준 —
+          위반유형(G-01~06) · 어구 · 해역 라벨 체계 통합,
+          자동 라벨(규칙 · GFW 교차) 정합 기준.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>PDF</span>
+          <span>3.4 MB</span>
+        </div>
+        <p class="guide-card-tags">태그: KCG·라벨링·불법조업</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-05-15">2026-05-15</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 5 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon guide-icon-chart">
+            <i data-lucide="chart-no-axes-column"></i>
+          </span>
+          <div>
+            <h3>표준 용어 정의서 (표준정의서 V1.0)</h3>
+            <span>데이터 정의서</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          공통표준 용어 사전 1,793건 — 용어명 · 용어 설명 · 영문약어명 ·
+          표준 도메인명 · 허용값 · 저장형식 · 표현형식 · 행정표준코드명 ·
+          소관기관 · 사용여부. 데이터 항목(컬럼)의 논리 · 물리 명칭
+          표준. (예: 7글자 TD7 · 도메인 영문V100)
+          출처: 표준정의서_V1_0.xlsx.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>XLSX</span>
+          <span>표준용어</span>
+        </div>
+        <p class="guide-card-tags">태그: 표준용어·1,793건</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-01-01">2026-01-01</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 6 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon guide-icon-chart">
+            <i data-lucide="chart-no-axes-column"></i>
+          </span>
+          <div>
+            <h3>표준 단어 정의서 (표준정의서 V1.0)</h3>
+            <span>데이터 정의서</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          공통표준 단어 사전 1,071건 — 단어명 · 영문약어명 · 영문명 ·
+          설명 · 형식단어 여부 · 도메인 분류명 · 이음동의어 · 금칙어 ·
+          사용여부. 컬럼 물리명을 표준단어 영문약어를 조합.
+          (예: ONE · OCT) 출처: 표준정의서_V1_0.xlsx.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>XLSX</span>
+          <span>표준단어</span>
+        </div>
+        <p class="guide-card-tags">태그: 표준단어·1,071건</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-01-01">2026-01-01</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 7 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon guide-icon-chart">
+            <i data-lucide="chart-no-axes-column"></i>
+          </span>
+          <div>
+            <h3>표준 도메인 정의서 (표준정의서 V1.0)</h3>
+            <span>데이터 정의서</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          공통표준 도메인 294건 — 도메인 그룹명 · 분류명 · 도메인명 ·
+          설명 · 데이터 타입 · 길이 · 소수점 · 저장형식 · 표현형식 ·
+          단위 · 허용값 · 행정표준코드명 · 사용여부.
+          (예: AUX_ENGINE_ID BIGINT(19) · MDA 4차)
+          출처: 표준정의서_V1_0.xlsx.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>XLSX</span>
+          <span>표준도메인</span>
+        </div>
+        <p class="guide-card-tags">태그: 표준도메인·294건</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-01-01">2026-01-01</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 8 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon guide-icon-chart">
+            <i data-lucide="chart-no-axes-column"></i>
+          </span>
+          <div>
+            <h3>표준 코드 + 개인정보·보안 기준</h3>
+            <span>데이터 정의서</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          표준코드 등록 + 개인정보 · 보안 관리 기준 —
+          공개여부(01 공개/02 비공개/03 부분공개) · 개인정보/암호화
+          여부(Y/N) · 비공개 사유코드(01~09호) · 자료 보안등급 ·
+          정보구분(공분류/소분류) 표준코드. 메타데이터 4계층에
+          표준코드 등록.
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>XLSX</span>
+          <span>—</span>
+        </div>
+        <p class="guide-card-tags">태그: 표준코드·공개여부·비공개사유</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-04-01">2026-04-01</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 카드 9 -->
+      <article class="guide-card">
+        <div class="guide-card-header">
+          <span class="guide-file-icon guide-icon-chart">
+            <i data-lucide="chart-no-axes-column"></i>
+          </span>
+          <div>
+            <h3>메타항목 정의서 (행안부 DB표준 · 4계층)</h3>
+            <span>데이터 정의서</span>
+          </div>
+        </div>
+        <p class="guide-card-desc">
+          메타데이터 4계층 식별 — 정보시스템 · 데이터베이스 · 테이블 ·
+          칼럼(행안부 DB 표준), 각 계층 메타항목 · 필수/조건필수 ·
+          표준코드 등록, 데이터 구축 7단계 순환
+          (수집요청→원시자료 수집→표준서 변환→코드부여→적재→유효성
+          검증→검수→등록 · 반영→품질관리 · 갱신).
+        </p>
+        <div class="guide-card-badges">
+          <span class="guide-version">v1.0</span>
+          <span>XLSX</span>
+          <span>—</span>
+        </div>
+        <p class="guide-card-tags">태그: 메타항목·4계층·7단계</p>
+        <div class="guide-card-footer">
+          <time datetime="2026-04-01">2026-04-01</time>
+          <div class="guide-card-actions">
+            <button type="button" class="guide-preview">
+              <i data-lucide="eye"></i> 미리보기
+            </button>
+            <button type="button" class="guide-download">
+              <i data-lucide="download"></i> 다운로드
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+      
+<script src="./js/report-management.js" defer></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/stats-analysis.js" defer></script>
+   
+</div>
+
+<!-- 모바일 사이드바 오버레이 -->
+<div
+  id="overlay"
+  class="fixed inset-0 z-30 hidden bg-black/40"
+  aria-hidden="true"
+></div>
+
+</body>
+</html>

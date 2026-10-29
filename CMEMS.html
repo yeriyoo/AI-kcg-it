@@ -1,0 +1,425 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061629">
+  <title>기상포털 | CMEMS 예측모델</title>
+  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="./css/wea-common.css">
+  <link rel="stylesheet" href="./css/wea-cmems.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./js/wea-common.js" defer></script>
+  <script src="./js/wea-cmems.js" defer></script>
+</head>
+<body class="page-cmems">
+<div class="app-shell">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand-area">
+      <a class="brand" aria-label="기상포털 홈">
+        <img src="./img/logo.png" alt="" width="44" height="44">
+        <span>기상포털</span>
+      </a>
+      <button class="icon-button nav-toggle" type="button"
+              id="navToggle" aria-label="전체 메뉴 열기"
+              aria-expanded="false" aria-controls="navMenu">
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <time class="clock" id="clock" aria-label="현재 한국 시간">--:--:-- KST</time>
+      <button class="icon-button" type="button" id="downloadButton" aria-label="자료 다운로드">
+        <i data-lucide="download" aria-hidden="true"></i>
+      </button>
+      <button class="icon-button" type="button" id="printButton" aria-label="인쇄">
+        <i data-lucide="printer" aria-hidden="true"></i>
+      </button>
+      <button class="icon-button" type="button" id="notificationButton" aria-label="알림">
+        <i data-lucide="bell" aria-hidden="true"></i>
+      </button>
+      <button class="icon-button" type="button" id="brightnessButton" aria-label="화면 밝기 전환">
+        <i data-lucide="sun" aria-hidden="true"></i>
+      </button>
+      <span class="header-separator" aria-hidden="true"></span>
+      <button class="account-button" type="button" id="accountButton"
+              aria-expanded="false" aria-controls="accountMenu">
+        <span class="avatar" aria-hidden="true">초</span>
+        <span class="account-name">초기 관리자</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="account-menu" id="accountMenu" hidden>
+        <span>초기 관리자</span>
+        <span>관리자 계정</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 전체메뉴 -->
+  <div class="nav-overlay" id="navOverlay" hidden></div>
+  <nav class="nav-menu" id="navMenu" aria-label="전체메뉴" aria-hidden="true" inert>
+    <div class="nav-menu-header">
+      <strong>전체메뉴</strong>
+      <button type="button" class="nav-close" id="navClose" aria-label="전체메뉴 닫기">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <section class="nav-section">
+      <button type="button" class="nav-section-toggle"
+              aria-expanded="true" aria-controls="navWeather">
+        <span>기상청</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="nav-section-content" id="navWeather">
+        <div class="nav-item-group">
+          <div class="nav-item nav-item-parent">
+            <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            <span>예·특보</span>
+          </div>
+          <a href="#" class="nav-sub-item">예보</a>
+          <a href="#" class="nav-sub-item">특보</a>
+        </div>
+        <a href="#" class="nav-item">
+          <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+          <span>현재날씨</span>
+        </a>
+        <a href="#" class="nav-item">
+          <img src="./img/typhoon-icon.svg" alt="">
+          <span>태풍</span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="grip" aria-hidden="true"></i>
+          <span>
+            <strong>해구별 해양기상정보</strong>
+            <small>해구별 값 9종 · 대해구도·소해구도</small>
+          </span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="wind" aria-hidden="true"></i>
+          <span>
+            <strong>저고도 WINTEM</strong>
+            <small>항공기상청 고도별 바람 · 기온 예측</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="nav-section">
+      <button type="button" class="nav-section-toggle"
+              aria-expanded="true" aria-controls="navOthers">
+        <span>기타</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="nav-section-content" id="navOthers">
+        <a href="#" class="nav-item nav-item-detail is-active" aria-current="page">
+          <i data-lucide="chart-column" aria-hidden="true"></i>
+          <span>
+            <strong>CMEMS 예측 <em>모델</em></strong>
+            <small>코페르니쿠스 해양서비스</small>
+          </span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="satellite-dish" aria-hidden="true"></i>
+          <span>
+            <strong>GOCI-II 위성 <em>관측</em></strong>
+            <small>천리안위성 2B호 관측 장면</small>
+          </span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="triangle-alert" aria-hidden="true"></i>
+          <span>
+            <strong>GDACS 재난 <em>자동산출</em></strong>
+            <small>글로벌 재난 인식 및 조정 시스템</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="nav-section">
+      <button type="button" class="nav-section-toggle"
+              aria-expanded="true" aria-controls="navBriefing">
+        <span>브리핑</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="nav-section-content" id="navBriefing">
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="square-activity" aria-hidden="true"></i>
+          <span>
+            <strong>해상풍·파고 예상도</strong>
+            <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
+          </span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="anchor" aria-hidden="true"></i>
+          <span>
+            <strong>출항 브리핑</strong>
+            <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
+          </span>
+        </a>
+        <a href="#" class="nav-item nav-item-detail">
+          <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+          <span>
+            <strong>태풍특보비교</strong>
+            <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
+          </span>
+        </a>
+      </div>
+    </section>
+  </nav>
+
+  <!-- 지도 영역 -->
+  <main class="map-main cmems-main" id="map">
+
+    <div class="map-viewport" id="mapViewport" aria-label="CMEMS 해양 예측 지도">
+      <div class="map-scene" id="mapScene">
+        <div class="map-background">
+          <img src="./img/wea-cmems-bg.png"
+               class="map-background-image"
+               alt="한반도 주변 CMEMS 해류 예측 지도와 유속 분포 및 흐름 그래픽"
+               draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <!-- 좌측 범례 -->
+    <aside class="cmems-legend" aria-label="CMEMS 유속 범례">
+      <div class="cmems-panel-header">
+        <strong><i data-lucide="grip" aria-hidden="true"></i> 범례</strong>
+        <button type="button" id="cmemsLegendToggle"
+                aria-label="범례 접기" aria-expanded="true"
+                aria-controls="cmemsLegendContent">
+          <i data-lucide="minimize-2" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="cmems-legend-content" id="cmemsLegendContent">
+        <div class="cmems-legend-heading">
+          <strong>CMEMS 예측 · <span id="cmemsLegendVariable">해류</span></strong>
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </div>
+        <p>유속(m/s)</p>
+        <div class="cmems-colorbar" aria-label="유속 0에서 1.5미터 매초까지의 색상 범례"></div>
+        <div class="cmems-colorbar-labels">
+          <span>0</span><span>0.5</span><span>1</span><span>1.5</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 상단 타임라인 -->
+    <section class="cmems-timeline" aria-label="CMEMS 예측 시간">
+      <div class="cmems-timeline-top">
+        <div class="cmems-timeline-label">
+          <strong>타임라인</strong>
+          <button type="button" id="cmemsNow">현재</button>
+        </div>
+        <div class="cmems-timeline-right">
+          <time id="cmemsSelectedTime" datetime="2026-10-28T16:00:00+09:00">
+            2026-10-28 16:00 KST
+          </time>
+          <button type="button" id="cmemsTimelineToggle"
+                  aria-label="타임라인 접기" aria-expanded="true"
+                  aria-controls="cmemsTimelineContent">
+            <i data-lucide="chevron-up" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="cmems-timeline-content" id="cmemsTimelineContent">
+        <label class="cmems-sr-only" for="cmemsHourSlider">예측 시간</label>
+        <input type="range" id="cmemsHourSlider" min="0" max="48" step="6" value="30">
+        <div class="cmems-timeline-ticks" aria-hidden="true">
+          <span>+0</span><span>+6</span><span>+12</span>
+          <span>+18</span><span>+24</span><span>+30</span>
+          <span>+36</span><span>+42</span><span>+48</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 우측 레이어 설정 -->
+    <aside class="cmems-layer-panel" aria-label="CMEMS 레이어 설정">
+      <div class="cmems-panel-header">
+        <strong><i data-lucide="grip" aria-hidden="true"></i> 레이어 설정</strong>
+        <button type="button" id="cmemsLayerToggle"
+                aria-label="레이어 설정 접기" aria-expanded="true"
+                aria-controls="cmemsLayerContent">
+          <i data-lucide="minimize-2" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div id="cmemsLayerContent">
+        <div class="cmems-layer-title">
+          <strong>CMEMS 예측모델</strong>
+          <div class="cmems-layer-actions">
+            <button type="button" id="cmemsSettingsToggle"
+                    aria-label="세부 설정 접기" aria-expanded="true"
+                    aria-controls="cmemsSettings">
+              <i data-lucide="chevron-up" aria-hidden="true"></i>
+            </button>
+            <button type="button" id="cmemsLayerClose" aria-label="레이어 설정 닫기">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="cmems-settings" id="cmemsSettings">
+          <div class="cmems-field">
+            <span class="cmems-field-label">변수</span>
+            <div class="cmems-variable-buttons" role="group" aria-label="예측 변수 선택">
+              <button type="button" class="is-active" aria-pressed="true" data-variable="해류">해류</button>
+              <button type="button" aria-pressed="false" data-variable="파랑">파랑</button>
+              <button type="button" aria-pressed="false" data-variable="수온">수온</button>
+              <button type="button" aria-pressed="false" data-variable="염분">염분</button>
+            </div>
+          </div>
+
+          <div class="cmems-field">
+            <label class="cmems-field-label" for="cmemsPalette">컬러맵 프리셋 및 범위 (m/s)</label>
+            <div class="cmems-palette-select">
+              <span class="cmems-palette-preview" aria-hidden="true"></span>
+              <select id="cmemsPalette">
+                <option value="turbo">Turbo</option>
+                <option value="viridis">Viridis</option>
+                <option value="plasma">Plasma</option>
+              </select>
+            </div>
+            <div class="cmems-range-fields">
+              <label>
+                <span class="cmems-sr-only">최솟값</span>
+                <input id="cmemsMin" type="number" value="0" min="0" step="0.1">
+              </label>
+              <span aria-hidden="true">~</span>
+              <label>
+                <span class="cmems-sr-only">최댓값</span>
+                <input id="cmemsMax" type="number" value="1.5" min="0" step="0.1">
+              </label>
+            </div>
+          </div>
+
+          <div class="cmems-field">
+            <div class="cmems-opacity-heading">
+              <label for="cmemsOpacity">배경장 불투명도</label>
+              <output id="cmemsOpacityValue" for="cmemsOpacity">75%</output>
+            </div>
+            <input type="range" id="cmemsOpacity" min="0" max="100" step="1" value="75">
+          </div>
+
+          <div class="cmems-particle-section">
+            <button type="button" id="cmemsParticleToggle"
+                    aria-expanded="false" aria-controls="cmemsParticleContent">
+              <span>입자 설정</span>
+              <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="cmemsParticleContent" hidden>
+              <p>지도에 포함된 입자 그래픽은 정적 이미지로 표시됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 우측 공용 툴바 -->
+    <div class="toolbar" id="toolbar" aria-label="지도 도구">
+      <div class="toolbar-main">
+        <button class="toolbar-collapse" id="toolbarCollapse"
+                type="button" aria-expanded="true"
+                aria-controls="toolbarGroups" aria-label="도구 모음 접기">
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </button>
+        <div id="toolbarGroups">
+          <div class="tool-group">
+            <span class="tool-title">기상청</span>
+            <button class="tool-btn" type="button" data-tool="calendar" aria-label="예·특보" aria-pressed="false">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            </button>
+            <button class="tool-btn" type="button" data-tool="temperature" aria-label="현재날씨" aria-pressed="false">
+              <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            </button>
+            <button class="tool-btn" type="button" data-tool="typhoon" aria-label="태풍" aria-pressed="false">
+              <img src="./img/typhoon-icon.svg" alt="">
+            </button>
+            <button class="tool-btn" type="button" data-tool="grid" aria-label="해구별 해양기상정보" aria-pressed="false">
+              <i data-lucide="grip" aria-hidden="true"></i>
+            </button>
+            <button class="tool-btn" type="button" data-tool="wind" aria-label="저고도 WINTEM" aria-pressed="false">
+              <i data-lucide="wind" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="tool-group">
+            <span class="tool-title">기타</span>
+            <button class="tool-btn is-active" type="button" data-tool="chart"
+                    aria-label="CMEMS 예측모델" aria-pressed="true">
+              <i data-lucide="chart-column" aria-hidden="true"></i>
+            </button>
+            <button class="tool-btn" type="button" data-tool="satellite" aria-label="위성 정보" aria-pressed="false">
+              <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            </button>
+            <button class="tool-btn" type="button" data-tool="alert" aria-label="주의 정보" aria-pressed="false">
+              <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- 브리핑 -->
+          <div class="tool-group">
+            <span class="tool-title">브리핑</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="briefing" aria-label="해상풍•파고 예상도">
+              <i data-lucide="square-activity" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="marine" aria-label="출항 브리핑">
+              <i data-lucide="anchor" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="compare" aria-label="태풍특보비교">
+              <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 지도: 별도 박스 -->
+      <div class="toolbar-map">
+        <div class="tool-group">
+          <span class="tool-title">지도</span>
+
+          <button class="tool-btn" type="button"
+                  id="fullscreenButton" aria-label="전체 화면">
+            <i data-lucide="maximize" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomIn" aria-label="확대">
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomOut" aria-label="축소">
+            <i data-lucide="minus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomReset" aria-label="방향 전환">
+            <i data-lucide="compass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="map-attribution">
+      NASA/GSFC SVS | NASA/USGS · NOAA ETOPO · 기상청
+    </div>
+    <div class="map-toast" id="mapToast" role="status" aria-live="polite" hidden></div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,594 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061629">
+  <title>기상포털 | 현재날씨</title>
+
+  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="./css/wea-common.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./js/wea-common.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand-area">
+        <a class="brand" aria-label="기상포털 홈">
+          <img src="./img/logo.png" alt="" width="38" height="38">
+          <span>기상포털</span>
+        </a>
+
+        <button
+          class="icon-button nav-toggle"
+          type="button"
+          id="navToggle"
+          aria-label="전체 메뉴 열기"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      
+<!-- 전체메뉴 오버레이 -->
+<div
+  class="nav-overlay"
+  id="navOverlay"
+  hidden
+></div>
+
+<!-- 전체메뉴 -->
+<nav
+  class="nav-menu"
+  id="navMenu"
+  aria-label="전체메뉴"
+  aria-hidden="true"
+  inert
+>
+  <div class="nav-menu-header">
+    <strong>전체메뉴</strong>
+
+    <button
+      type="button"
+      class="nav-close"
+      id="navClose"
+      aria-label="전체메뉴 닫기"
+    >
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- 기상청 -->
+  <section class="nav-section">
+    <button
+      type="button"
+      class="nav-section-toggle"
+      aria-expanded="true"
+      aria-controls="navWeather"
+    >
+      <span>기상청</span>
+      <i data-lucide="chevron-down" aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-section-content" id="navWeather">
+
+      <div class="nav-item-group">
+        <div class="nav-item nav-item-parent">
+          <i data-lucide="calendar-clock" aria-hidden="true"></i>
+          <span>예·특보</span>
+        </div>
+
+        <a class="nav-sub-item">예보</a>
+        <a class="nav-sub-item">특보</a>
+      </div>
+
+      <a class="nav-item is-active" aria-current="page">
+        <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+        <span>현재날씨</span>
+      </a>
+
+      <a class="nav-item">
+        <img src="./img/typhoon-icon.svg" alt="">
+        <span>태풍</span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="grip" aria-hidden="true"></i>
+        <span>
+          <strong>해구별 해양기상정보</strong>
+          <small>해구별 값 9종 · 대해구도·소해구도</small>
+        </span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="wind" aria-hidden="true"></i>
+        <span>
+          <strong>저고도 WINTEM</strong>
+          <small>항공기상청 고도별 바람 · 기온 예측</small>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 기타 -->
+  <section class="nav-section">
+    <button
+      type="button"
+      class="nav-section-toggle"
+      aria-expanded="true"
+      aria-controls="navOthers"
+    >
+      <span>기타</span>
+      <i data-lucide="chevron-down" aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-section-content" id="navOthers">
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="chart-column" aria-hidden="true"></i>
+        <span>
+          <strong>
+            CMEMS 예측
+            <em>모델</em>
+          </strong>
+          <small>코페르니쿠스 해양서비스</small>
+        </span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="satellite-dish" aria-hidden="true"></i>
+        <span>
+          <strong>
+            GOCI-II 위성
+            <em>관측</em>
+          </strong>
+          <small>천리안위성 2B호 관측 장면</small>
+        </span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="triangle-alert" aria-hidden="true"></i>
+        <span>
+          <strong>
+            GDACS 재난
+            <em>자동산출</em>
+          </strong>
+          <small>글로벌 재난 인식 및 조정 시스템</small>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 브리핑 -->
+  <section class="nav-section">
+    <button
+      type="button"
+      class="nav-section-toggle"
+      aria-expanded="true"
+      aria-controls="navBriefing"
+    >
+      <span>브리핑</span>
+      <i data-lucide="chevron-down" aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-section-content" id="navBriefing">
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="square-activity" aria-hidden="true"></i>
+        <span>
+          <strong>해상풍·파고 예상도</strong>
+          <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
+        </span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="anchor" aria-hidden="true"></i>
+        <span>
+          <strong>출항 브리핑</strong>
+          <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
+        </span>
+      </a>
+
+      <a class="nav-item nav-item-detail">
+        <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+        <span>
+          <strong>태풍특보비교</strong>
+          <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
+        </span>
+      </a>
+    </div>
+  </section>
+</nav>
+
+
+      <div class="header-actions">
+        <time class="clock" id="clock" aria-label="현재 한국 시간">
+          --:--:-- KST
+        </time>
+
+        <button class="icon-button" type="button"
+                aria-label="자료 다운로드" id="downloadButton">
+          <i data-lucide="download" aria-hidden="true"></i>
+        </button>
+
+        <button class="icon-button" type="button"
+                aria-label="인쇄" id="printButton">
+          <i data-lucide="printer" aria-hidden="true"></i>
+        </button>
+
+        <button class="icon-button" type="button"
+                aria-label="알림" id="notificationButton">
+          <i data-lucide="bell" aria-hidden="true"></i>
+        </button>
+
+        <button class="icon-button" type="button"
+                aria-label="화면 밝기 전환" id="brightnessButton">
+          <i data-lucide="sun" aria-hidden="true"></i>
+        </button>
+
+        <span class="header-separator" aria-hidden="true"></span>
+
+        <button
+          class="account-button"
+          type="button"
+          id="accountButton"
+          aria-expanded="false"
+          aria-controls="accountMenu"
+        >
+          <span class="avatar" aria-hidden="true">초</span>
+          <span class="account-name">초기 관리자</span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <div class="account-menu" id="accountMenu" hidden>
+          <span>초기 관리자</span>
+          <span>관리자 계정</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="map-main" id="map">
+
+      <!-- 지도 영역 -->
+      <div
+        class="map-viewport"
+        id="mapViewport"
+        aria-label="한국 주변 해역 위성지도"
+      >
+        <div class="map-scene" id="mapScene">
+
+         <!-- 배경 이미지 -->
+        <div class="map-background">
+          <img
+            src="./img/wea-bg.jpg"
+            alt="한국과 주변 해역 지도"
+            class="map-background-image"
+            draggable="false"
+          >
+        </div>
+
+          <!-- 해상 관측 지점 -->
+          <div
+            class="station-layer"
+            id="stations"
+            aria-label="해상 관측 지점"
+          >
+
+            <button class="station" type="button"
+                    style="--x:44.2%;--y:28.5%"
+                    data-station="덕적도">
+              <span class="station-name">덕적도</span>
+              <span class="station-speed">
+                3.5<small>m/s</small>
+                <span class="wind-arrow">↘</span>
+              </span>
+              <span class="station-wave">파고 0.3m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:35.5%;--y:42%"
+                    data-station="서해170">
+              <span class="station-name">서해170</span>
+              <span class="station-speed">
+                1.1<small>m/s</small>
+                <span class="wind-arrow">↖</span>
+              </span>
+              <span class="station-wave">파고 1.2m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:45.3%;--y:42%"
+                    data-station="서천">
+              <span class="station-name">서천</span>
+              <span class="station-speed">
+                0.2<small>m/s</small>
+                <span class="wind-arrow">↓</span>
+              </span>
+              <span class="station-wave">파고 0.0m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:63.1%;--y:31.5%"
+                    data-station="동해78">
+              <span class="station-name">동해78</span>
+              <span class="station-speed">
+                4.6<small>m/s</small>
+                <span class="wind-arrow">↘</span>
+              </span>
+              <span class="station-wave">파고 1.4m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:68.7%;--y:28%"
+                    data-station="독도">
+              <span class="station-name">독도</span>
+              <span class="station-speed">
+                0.7<small>m/s</small>
+                <span class="wind-arrow">↙</span>
+              </span>
+              <span class="station-wave">파고 0.0m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:35.6%;--y:55.5%"
+                    data-station="서해190">
+              <span class="station-name">서해190</span>
+              <span class="station-speed">
+                2.3<small>m/s</small>
+                <span class="wind-arrow">↙</span>
+              </span>
+              <span class="station-wave">파고 1.7m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:31.6%;--y:67%"
+                    data-station="서해206">
+              <span class="station-name">서해206</span>
+              <span class="station-speed">
+                2.3<small>m/s</small>
+                <span class="wind-arrow">↙</span>
+              </span>
+              <span class="station-wave">파고 1.4m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:40.2%;--y:67%"
+                    data-station="거가도">
+              <span class="station-name">거가도</span>
+              <span class="station-speed">
+                6.2<small>m/s</small>
+                <span class="wind-arrow">↙</span>
+              </span>
+              <span class="station-wave">파고 1.6m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:44.8%;--y:58.5%"
+                    data-station="신안">
+              <span class="station-name">신안</span>
+              <span class="station-speed">
+                5.1<small>m/s</small>
+                <span class="wind-arrow">↓</span>
+              </span>
+              <span class="station-wave">파고 0.3m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:50.7%;--y:62.5%"
+                    data-station="나로도">
+              <span class="station-name">나로도</span>
+              <span class="station-speed">
+                0.5<small>m/s</small>
+                <span class="wind-arrow">↙</span>
+              </span>
+              <span class="station-wave">파고 0.0m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:58.1%;--y:53.5%"
+                    data-station="기장">
+              <span class="station-name">기장</span>
+              <span class="station-speed">
+                1.1<small>m/s</small>
+                <span class="wind-arrow">↓</span>
+              </span>
+              <span class="station-wave">파고 0.0m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:47.8%;--y:72.7%"
+                    data-station="하도">
+              <span class="station-name">하도</span>
+              <span class="station-speed">
+                0.3<small>m/s</small>
+                <span class="wind-arrow">↓</span>
+              </span>
+              <span class="station-wave">파고 0.0m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:38%;--y:81%"
+                    data-station="남해239">
+              <span class="station-name">남해239</span>
+              <span class="station-speed">
+                6.0<small>m/s</small>
+                <span class="wind-arrow">↓</span>
+              </span>
+              <span class="station-wave">파고 1.8m</span>
+            </button>
+
+            <button class="station" type="button"
+                    style="--x:45.3%;--y:94%"
+                    data-station="남해465">
+              <span class="station-name">남해465</span>
+              <span class="station-speed">
+                8.2<small>m/s</small>
+                <span class="wind-arrow wind-warning">↙</span>
+              </span>
+              <span class="station-wave">파고 2.3m</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 지도 출처 -->
+      <div class="map-attribution">
+        NASA/GSFC SVS | NASA/USGS · NOAA ETOPO · 기상청
+      </div>
+
+      
+    <!-- 우측 도구 모음 -->
+    <div class="toolbar" id="toolbar" aria-label="지도 도구">
+
+      <!-- 기상청 / 기타 / 브리핑 묶음 -->
+      <div class="toolbar-main">
+
+        <button
+          class="toolbar-collapse"
+          id="toolbarCollapse"
+          type="button"
+          aria-expanded="true"
+          aria-controls="toolbarGroups"
+          aria-label="도구 모음 접기"
+        >
+          <i data-lucide="chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <div id="toolbarGroups">
+
+          <!-- 기상청 -->
+          <div class="tool-group">
+            <span class="tool-title">기상청</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="calendar" aria-label="예·특보">
+              <i data-lucide="calendar-clock" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn is-active" type="button"
+                    data-tool="temperature"
+                    aria-label="현재 날씨"
+                    aria-pressed="true">
+              <i data-lucide="thermometer-sun" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="typhoon"
+                    aria-label="태풍"
+                    aria-pressed="false">
+              <img src="./img/typhoon-icon.svg" alt="">
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="grid"
+                    aria-label="해구별 해양기상정보"
+                    aria-pressed="false">
+              <i data-lucide="grip" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="wind"
+                    aria-label="저고도 WINTEM"
+                    aria-pressed="false">
+              <i data-lucide="wind" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- 기타 -->
+          <div class="tool-group">
+            <span class="tool-title">기타</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="chart" aria-label="CMEMS 예측">
+              <i data-lucide="chart-column" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="satellite" aria-label="GOCI-ll위성">
+              <i data-lucide="satellite-dish" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="alert" aria-label="GDACS 재난">
+              <i data-lucide="triangle-alert" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- 브리핑 -->
+          <div class="tool-group">
+            <span class="tool-title">브리핑</span>
+
+            <button class="tool-btn" type="button"
+                    data-tool="briefing" aria-label="해상풍•파고 예상도">
+              <i data-lucide="square-activity" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="marine" aria-label="출항 브리핑">
+              <i data-lucide="anchor" aria-hidden="true"></i>
+            </button>
+
+            <button class="tool-btn" type="button"
+                    data-tool="compare" aria-label="태풍특보비교">
+              <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 지도: 별도 박스 -->
+      <div class="toolbar-map">
+        <div class="tool-group">
+          <span class="tool-title">지도</span>
+
+          <button class="tool-btn" type="button"
+                  id="fullscreenButton" aria-label="전체 화면">
+            <i data-lucide="maximize" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomIn" aria-label="확대">
+            <i data-lucide="plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomOut" aria-label="축소">
+            <i data-lucide="minus" aria-hidden="true"></i>
+          </button>
+
+          <button class="tool-btn" type="button"
+                  id="zoomReset" aria-label="방향 전환">
+            <i data-lucide="compass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+      <!-- 알림 메시지 -->
+      <div
+        class="map-toast"
+        id="mapToast"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+    </main>
+  </div>
+</body>
+</html>

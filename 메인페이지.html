@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI-HUB - 메인페이지</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Pretendard -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+
+  <!-- Common CSS -->
+  <link
+    rel="stylesheet"
+    href="./css/hub-common.css"
+  />
+
+  <link rel="icon" type="image/png" href="./img/hub-favicon.png">
+</head>
+
+
+<body
+  class="
+    min-w-0
+    font-['Pretendard']
+    text-white
+    overflow-x-hidden
+  "
+>
+
+  <div class="min-h-screen bg-[#0B1A30]">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header
+      class="
+        fixed
+        left-0
+        right-0
+        top-0
+        z-50
+        h-[60px]
+        bg-[#0B1A30]
+      "
+    >
+
+      <div
+        class="
+          relative
+          flex
+          h-full
+          w-full
+          items-center
+          px-8
+        "
+      >
+
+        <!-- =================================================
+             BRAND LOGO
+             기존 위치 그대로
+        ================================================== -->
+        <h1
+          class="
+            relative
+            z-10
+            flex
+            shrink-0
+            items-center
+            gap-2
+            text-[24px]
+            font-semibold
+            text-white
+          "
+        >
+          <img
+            src="./img/logo.svg"
+            alt="AI-HUB"
+            class="
+              h-8
+              w-8
+              shrink-0
+              object-contain
+            "
+          />
+
+          <span>AI-HUB</span>
+        </h1>
+
+
+
+        <!-- =================================================
+             MAIN MENU
+             화면 기준 정확히 중앙
+        ================================================== -->
+        <nav
+          id="mainHeaderNav"
+          class="
+            absolute
+            left-1/2
+            top-0
+            flex
+            h-full
+            -translate-x-1/2
+            items-center
+            gap-14
+            whitespace-nowrap
+          "
+        >
+
+          <button
+            type="button"
+            class="
+              flex
+              h-full
+              items-center
+              gap-2
+              px-1
+              text-lg
+              font-semibold
+              text-white
+              transition-colors
+              hover:text-[#5FE7F4]
+            "
+          >
+            <i
+              data-lucide="scroll-text"
+              class="h-6 w-6"
+            ></i>
+
+            데이터 목록
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex
+              h-full
+              items-center
+              gap-2
+              px-1
+              text-lg
+              font-semibold
+              text-white
+              transition-colors
+              hover:text-[#5FE7F4]
+            "
+          >
+            <i
+              data-lucide="workflow"
+              class="h-6 w-6"
+            ></i>
+
+            연계 데이터
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex
+              h-full
+              items-center
+              gap-2
+              px-1
+              text-lg
+              font-semibold
+              text-white
+              transition-colors
+              hover:text-[#5FE7F4]
+            "
+          >
+            <i
+              data-lucide="file-pen"
+              class="h-6 w-6"
+            ></i>
+
+            데이터 제공신청
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex
+              h-full
+              items-center
+              gap-2
+              px-1
+              text-lg
+              font-semibold
+              text-white
+              transition-colors
+              hover:text-[#5FE7F4]
+            "
+          >
+            <i
+              data-lucide="book-bookmark"
+              class="h-6 w-6"
+            ></i>
+
+            데이터 출처
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              flex
+              h-full
+              items-center
+              gap-2
+              px-1
+              text-lg
+              font-semibold
+              text-white
+              transition-colors
+              hover:text-[#5FE7F4]
+            "
+          >
+            <i
+              data-lucide="file-cog"
+              class="h-6 w-6"
+            ></i>
+
+            표준화
+          </button>
+
+        </nav>
+
+
+
+        <!-- =================================================
+             RIGHT MENU
+        ================================================== -->
+        <div class="ml-auto flex items-center">
+
+          <button
+            id="mainHeaderMenuToggle"
+            type="button"
+            aria-label="전체 메뉴"
+            aria-expanded="false"
+            aria-controls="mainUserMenu"
+            class="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded
+              text-white
+              transition-colors
+              hover:bg-white/10
+            "
+          >
+            <i
+              data-lucide="menu"
+              class="h-6 w-6"
+            ></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- =====================================================
+         HAMBURGER USER MENU
+         화면 크기 관계없이 동일
+    ====================================================== -->
+    <div
+      id="mainUserMenu"
+      class="
+        fixed
+        right-[28px]
+        top-[60px]
+        z-[300]
+
+        hidden
+
+        w-[260px]
+
+        overflow-hidden
+
+        rounded
+        border
+        border-[#476187]
+
+        bg-[#142A4D]
+
+        shadow-[0_12px_30px_rgba(0,0,0,0.28)]
+      "
+    >
+
+    <!-- 768px 이하 메인메뉴 -->
+    <nav
+      id="mobileMainNav"
+      class="hidden border-b border-[#476187] py-2"
+      aria-label="모바일 메인메뉴"
+    ></nav>
+
+      <!-- =================================================
+           CURRENT TIME
+      ================================================== -->
+      <div
+        class="
+          flex
+          min-h-[86px]
+          flex-col
+          justify-center
+
+          border-b
+          border-[#476187]
+
+          px-4
+        "
+      >
+
+        <span
+          class="
+            text-sm
+            text-[#99ABC6]
+          "
+        >
+          현재 시각
+        </span>
+
+
+        <strong
+          id="mainAccountCurrentTime"
+          class="
+            mt-2
+            whitespace-nowrap
+
+            text-[16px]
+            font-medium
+            text-white
+          "
+        >
+          2026-10-07 16:47:00
+        </strong>
+
+      </div>
+
+
+
+      <!-- =================================================
+           TIMEZONE
+      ================================================== -->
+      <div
+        class="
+          flex
+          h-[48px]
+          items-center
+          justify-between
+
+          border-b
+          border-[#476187]
+
+          px-4
+        "
+      >
+
+        <span
+          class="
+            text-sm
+            text-[#99ABC6]
+          "
+        >
+          시간대
+        </span>
+
+
+        <div
+          class="
+            flex
+            h-7
+
+            overflow-hidden
+            rounded
+
+            bg-[#476187]
+          "
+        >
+
+          <button
+            id="mainTimezoneKst"
+            type="button"
+
+            class="
+              flex
+              min-w-[52px]
+              items-center
+              justify-center
+
+              bg-white
+
+              px-3
+
+              text-sm
+              font-semibold
+              text-[#142A4D]
+
+              outline-none
+              ring-0
+            "
+          >
+            KST
+          </button>
+
+
+          <button
+            id="mainTimezoneUtc"
+            type="button"
+
+            class="
+              flex
+              min-w-[52px]
+              items-center
+              justify-center
+
+              bg-[#476187]
+
+              px-3
+
+              text-sm
+              font-semibold
+              text-[#CBD6EA]
+
+              outline-none
+              ring-0
+            "
+          >
+            UTC
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           TOOL MENU
+      ================================================== -->
+      <div
+        class="
+          grid
+          grid-cols-3
+
+          border-b
+          border-[#476187]
+        "
+      >
+
+
+        <!-- 다운로드 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            border-r
+            border-[#476187]
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="download"
+            class="h-6 w-6"
+          ></i>
+
+          <span class="text-sm">
+            다운로드
+          </span>
+        </button>
+
+
+
+        <!-- 엑셀 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            border-r
+            border-[#476187]
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="grid-3x3"
+            class="h-6 w-6"
+          ></i>
+
+          <span class="text-sm">
+            엑셀
+          </span>
+        </button>
+
+
+
+        <!-- 인쇄 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="printer"
+            class="h-6 w-6"
+          ></i>
+
+          <span class="text-sm">
+            인쇄
+          </span>
+        </button>
+
+
+
+        <!-- 신청 장바구니 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            border-r
+            border-t
+            border-[#476187]
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+
+          <span class="relative">
+
+            <i
+              data-lucide="shopping-cart"
+              class="h-6 w-6"
+            ></i>
+
+            <span
+              class="
+                absolute
+                -right-2
+                -top-2
+
+                flex
+                h-4
+                min-w-4
+                items-center
+                justify-center
+
+                rounded-full
+
+                bg-[#F84141]
+
+                px-1
+
+                text-[10px]
+                font-semibold
+                leading-none
+                text-white
+              "
+            >
+              2
+            </span>
+
+          </span>
+
+          <span class="text-sm">
+            신청 장바구니
+          </span>
+
+        </button>
+
+
+
+        <!-- 알림 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            border-r
+            border-t
+            border-[#476187]
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="bell"
+            class="h-6 w-6"
+          ></i>
+
+          <span class="text-sm">
+            알림
+          </span>
+        </button>
+
+
+
+        <!-- 다크모드 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-[64px]
+            flex-col
+            items-center
+            justify-center
+            gap-1
+
+            border-t
+            border-[#476187]
+
+            text-[#CBD6EA]
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+            hover:text-white
+          "
+        >
+          <i
+            data-lucide="moon"
+            class="h-6 w-6"
+          ></i>
+
+          <span class="text-sm">
+            다크모드
+          </span>
+        </button>
+
+      </div>
+
+
+
+      <!-- =================================================
+           USER
+      ================================================== -->
+      <div
+        class="
+          flex
+          h-[58px]
+          items-center
+          gap-3
+
+          border-b
+          border-[#476187]
+
+          px-4
+        "
+      >
+
+        <span
+          class="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+
+            rounded-full
+
+            bg-[#476187]
+
+            text-sm
+            font-semibold
+            text-white
+          "
+        >
+          여
+        </span>
+
+
+        <strong
+          class="
+            truncate
+
+            text-base
+            font-semibold
+            text-white
+          "
+        >
+          여한상 (경위)
+        </strong>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ACCOUNT
+      ================================================== -->
+      <div class="px-3 py-2">
+
+        <!-- 내 정보 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-11
+            w-full
+            items-center
+            gap-3
+
+            rounded
+
+            px-2
+
+            text-left
+            text-base
+            text-white
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="user-round"
+            class="
+              h-5
+              w-5
+              text-[#CBD6EA]
+            "
+          ></i>
+
+          <span>
+            내 정보
+          </span>
+        </button>
+
+
+
+        <!-- 로그아웃 -->
+        <button
+          type="button"
+          class="
+            flex
+            h-11
+            w-full
+            items-center
+            gap-3
+
+            rounded
+
+            px-2
+
+            text-left
+            text-base
+            text-white
+
+            transition-colors
+            duration-150
+
+            hover:bg-[#0046AD]
+          "
+        >
+          <i
+            data-lucide="log-out"
+            class="
+              h-5
+              w-5
+              text-[#CBD6EA]
+            "
+          ></i>
+
+          <span>
+            로그아웃
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN HERO
+         #0B1A30 위에 main_bg.jpg
+    ====================================================== -->
+    <main
+      class="
+        relative
+        min-h-[calc(100vh-88px)]
+        pt-[60px]
+        bg-[#0B1A30]
+      "
+    >
+
+      <!-- BACKGROUND IMAGE -->
+      <section
+        class="
+          relative
+          min-h-[calc(100vh-148px)]
+          overflow-hidden
+          bg-[#0B1A30]
+          bg-cover
+          bg-center
+          bg-no-repeat
+        "
+        style="
+          background-image: url('./img/main_bg.png');
+        "
+      >
+
+        <!-- 약간의 딥블루 오버레이
+             원본 이미지가 충분히 어두우면 이 div 삭제 가능 -->
+        <div
+          class="
+            pointer-events-none
+            absolute
+            inset-0
+            bg-[#0B1A30]/10
+          "
+        ></div>
+
+
+
+        <!-- =================================================
+             CENTER CONTENT
+        ================================================== -->
+        <div
+          class="
+            relative
+            z-10
+            mx-auto
+            flex
+            min-h-[calc(100vh-148px)]
+            w-full
+            max-w-[1440px]
+            flex-col
+            items-center
+            px-10
+          "
+        >
+
+          <!-- TITLE + SEARCH -->
+          <div
+            class="
+              mt-[330px]
+              flex
+              w-full
+              flex-col
+              items-center
+            "
+          >
+
+            <h2
+              class="
+                text-center
+                text-[36px]
+                font-semibold
+                leading-tight
+                text-white
+              "
+            >
+              AI 기반 해양 안전·감시 학습데이터
+            </h2>
+
+
+
+            <!-- SEARCH -->
+            <div
+              class="
+                mt-5
+                flex
+                h-[50px]
+                w-[880px]
+                items-center
+                rounded-full
+                bg-white
+                p-1
+                shadow-[0_6px_20px_rgba(0,0,0,0.12)]
+              "
+            >
+
+              <input
+                type="text"
+                placeholder="데이터명을 입력하세요."
+                class="
+                  min-w-0
+                  flex-1
+                  border-0
+                  bg-transparent
+                  px-4
+                  text-base
+                  font-medium
+                  text-[#142A4D]
+                  placeholder:text-[#99ABC6]
+
+                  outline-none
+                  ring-0
+
+                  focus:border-0
+                  focus:border-transparent
+                  focus:outline-none
+                  focus:ring-0
+                  focus:shadow-none
+                "
+              />
+
+
+              <button
+                type="button"
+                class="
+                  flex
+                  h-[42px]
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-[#0061F0]
+                  px-6
+                  text-base
+                  font-semibold
+                  text-white
+                  transition-colors
+                  hover:bg-[#0046AD]
+                "
+              >
+                검색
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               QUICK MENU CARDS
+          ================================================== -->
+          <div
+            class="
+              mt-[175px]
+              grid
+              w-full
+              grid-cols-6
+              gap-8
+              pb-14
+            "
+          >
+
+            <!-- 01 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                연계<br />
+                데이터
+              </span>
+
+              <i
+                data-lucide="link"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+
+
+            <!-- 02 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                AI 학습<br />
+                데이터
+              </span>
+
+              <i
+                data-lucide="layout-grid"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+
+
+            <!-- 03 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                API 데이터<br />
+                제공신청
+              </span>
+
+              <i
+                data-lucide="file-plus"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+
+
+            <!-- 04 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                데이터<br />
+                출처
+              </span>
+
+              <i
+                data-lucide="file-text"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+
+
+            <!-- 05 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                데이터<br />
+                표준화
+              </span>
+
+              <i
+                data-lucide="book-bookmark"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+
+
+            <!-- 06 -->
+            <button
+              type="button"
+              class="
+                group
+                flex
+                h-[182px]
+                rounded
+                flex-col
+                justify-between
+                border
+                border-[#31C4E8]
+                bg-[#063A6A]/55
+                px-5
+                py-5
+                text-left
+                backdrop-blur-[2px]
+                transition
+                hover:-translate-y-1
+                hover:bg-[#064B82]/70
+              "
+            >
+              <span
+                class="
+                  text-[21px]
+                  font-semibold
+                  leading-[1.25]
+                  text-white
+                "
+              >
+                관심<br />
+                데이터
+              </span>
+
+              <i
+                data-lucide="heart"
+                class="
+                  h-8
+                  w-8
+                  text-[#4BE3F4]
+                  transition-transform
+                  group-hover:scale-110
+                "
+              ></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer
+      class="
+        flex
+        h-[88px]
+        items-center
+        justify-between
+        bg-white
+        px-10
+        text-[#476187]
+      "
+    >
+
+      <div
+        class="
+          text-sm
+          leading-5
+        "
+      >
+        <p>
+          <strong class="font-semibold text-[#476187]">
+            해양경찰청 KCG-AI-HUB
+          </strong>
+          — 인공지능 기반 해양 감시 학습데이터 카탈로그
+        </p>
+
+        <p class="text-[#99ABC6]">
+          본 사이트는 전자정부 표준프레임워크(eGovFrame 4.3) 기반으로 구축되었습니다.
+        </p>
+      </div>
+
+
+      <div class="flex shrink-0 items-center">
+        <img
+          src="./img/police-logo.png"
+          alt="해양경찰청"
+          class="
+            h-[36px]
+            w-auto
+            object-contain
+          "
+        />
+      </div>
+
+    </footer>
+
+  </div>
+
+
+
+  <!-- Lucide -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Common JS -->
+  <script src="./js/hub-common.js"></script>
+
+</body>
+</html>
