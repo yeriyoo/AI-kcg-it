@@ -3231,18 +3231,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    updateMap();
+     updateMap();
     renderPage();
+
+    // 브라우저 크기 변경 시 차트 다시 그리기
+    window.addEventListener('resize', function () {
+      var start = parseDate(startInput.value);
+      var end = parseDate(endInput.value);
+
+      if (!start || !end || start > end) return;
+
+      renderChart(start, end, selectedAgencies());
+    });
   });
-
-  window.addEventListener('resize', function () {
-  var start = parseDate(startInput.value);
-  var end = parseDate(endInput.value);
-
-  if (!start || !end || start > end) return;
-
-  renderChart(start, end, selectedAgencies());
-});
 })();
 
 /* =========================================
@@ -8206,6 +8207,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 보고서 페이지가 아니면 실행하지 않음
+  if (!document.getElementById('rpReportList')) return;
+  
   const initialReports = [
     {
       id: 'REP-20260917-0001',
@@ -8369,21 +8373,27 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.hidden = true;
   }
 
-  // 검색
+  if (search) {
   search.addEventListener('input', renderReports);
+}
 
-  // 새로고침: 현재 화면의 검색 조건 유지
-  document.getElementById('rpRefresh').addEventListener('click', () => {
+ const rpRefresh = document.getElementById('rpRefresh');
+
+if (rpRefresh) {
+  rpRefresh.addEventListener('click', () => {
     renderReports();
   });
+}
+const rpNew = document.getElementById('rpNew');
 
-  // 새 보고서
-  document.getElementById('rpNew').addEventListener('click', () => {
+if (rpNew) {
+  rpNew.addEventListener('click', () => {
     openModal();
   });
+}
 
   // 보고서 카드 버튼
-  list.addEventListener('click', event => {
+  list?.addEventListener('click', event => {
     const button = event.target.closest('button[data-action]');
     if (!button) return;
 
@@ -8408,7 +8418,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 저장
-  form.addEventListener('submit', event => {
+  form?.addEventListener('submit', event => {
     event.preventDefault();
 
     const title = titleInput.value.trim();
@@ -11847,7 +11857,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ['13','재라벨링','루프 복귀','대기','pink']
   ];
 
-  document.getElementById('adProcessGrid').innerHTML = process.map(([num,title,desc,status,color]) => `
+const adProcessGrid = document.getElementById('adProcessGrid');
+
+if (adProcessGrid) {
+  adProcessGrid.innerHTML = process.map(([num, title, desc, status, color]) => `
     <div class="ad-process-card ${color} ${status === '진행 중' ? 'is-current' : ''}">
       <span class="ad-process-num">${num}</span>
       <strong>${title}</strong>
@@ -11855,6 +11868,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="ad-process-status">${status === '완료' ? '✓' : '●'} ${status}</span>
     </div>
   `).join('');
+}
 
   const events = [
     ['DARK_VESSEL','850,715'],
@@ -11867,9 +11881,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ['GEAR_IDENTITY_COLLISION','702'],
     ['ILLEGAL_TRANSSHIP','634']
   ];
-  document.getElementById('adEventRows').innerHTML = events.map(([name,count]) =>
+  const adEventRows = document.getElementById('adEventRows');
+
+if (adEventRows) {
+  adEventRows.innerHTML = events.map(([name, count]) =>
     `<tr><td>${name}</td><td class="ad-right">${count}</td></tr>`
   ).join('');
+}
 
   const models = [
     ['다크베셀 탐지 v3','SNPDB 24h 2026-09-30 · 11,243,571점 / 37,836척','Recall / P@Top-100','0.911 / 0.910','배포'],
@@ -11880,9 +11898,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ['AIS 정합성 검토','5분 표 4월 · 83,105척','확정 이상','3,189척 (3.84%)','검수'],
     ['모선 추론','GFW 어구 교차원천 표본','지인망 일치','90.2%','검수']
   ];
-  document.getElementById('adModelRows').innerHTML = models.map(r =>
+  const adModelRows = document.getElementById('adModelRows');
+
+if (adModelRows) {
+  adModelRows.innerHTML = models.map(r =>
     `<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td><td>${r[2]}</td><td class="ad-center"><span class="ad-badge green">${r[3]}</span></td><td class="ad-center"><span class="ad-badge ${r[4] === '배포' ? 'green' : 'blue'}">${r[4]}</span></td></tr>`
   ).join('');
+}
 
   const datasets = [
     ['DS-2026-006','다크베셀 탐지 v3 (24h 선박 단위 · 규칙 참조 라벨)','SIG','37,836','88점','배포','2026-10-04'],
@@ -11895,9 +11917,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ['DS-2026-008','SAR 선박인식 학습셋 (AIS 조인 · 선장/선종 검증)','SAT','5,625','84점','검수','2026-08-28']
   ];
   const catColor = {SIG:'blue',TRK:'cyan',ENF:'yellow',SAT:'purple'};
-  document.getElementById('adDatasetRows').innerHTML = datasets.map(r =>
+  const adDatasetRows = document.getElementById('adDatasetRows');
+
+    if (adDatasetRows) {
+      adDatasetRows.innerHTML = datasets.map(r =>
     `<tr><td class="ad-link">${r[0]}</td><td><strong>${r[1]}</strong></td><td><span class="ad-badge ${catColor[r[2]]}">${r[2]}</span></td><td class="ad-right">${r[3]}</td><td class="ad-center"><span class="ad-badge ${Number.parseInt(r[4]) >= 93 ? 'green' : 'blue'}">${r[4]}</span></td><td class="ad-center"><span class="ad-badge ${r[5] === '배포' ? 'green' : 'blue'}">${r[5]}</span></td><td>${r[6]}</td></tr>`
   ).join('');
+}
 
   const dar = [
     ['01','비정형 단속 정보 조사·수집화','원천데이터 관리 · 한글문서 파싱 · PDF 파싱 · 라벨링 관리','구현','—'],
@@ -11919,9 +11945,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ['17','데이터 개방 관리체계','데이터 관리체계 → DAR-17 (기상정보 개방) · 외부 제공 API · 사용 신청/승인','부분','태풍·특보·예보/관측 4종 개방 API-HUB 공유'],
     ['18','DB 설계 및 구축','수집현황 모니터링 · 데이터 모델 검증 · 온톨로지(트리플 그래프 구조)','구현','—']
   ];
-  document.getElementById('adDarRows').innerHTML = dar.map(r =>
+  const adDarRows = document.getElementById('adDarRows');
+
+if (adDarRows) {
+  adDarRows.innerHTML = dar.map(r =>
     `<tr><td class="ad-link">DAR-${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td><td class="ad-center"><span class="ad-badge ${r[3] === '구현' ? 'green' : 'yellow'}">${r[3]}</span></td><td>${r[4]}</td></tr>`
   ).join('');
+}
 });
 
 
