@@ -2547,18 +2547,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <input
                 type="text"
+                name="standardTermFilter"
+                aria-label="용어명 필터"
                 placeholder="용어명"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
               <input
                 type="text"
+                name="standardTermEnglish"
+                aria-label="영문용어 필터"
                 placeholder="영문용어"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
               <input
                 type="text"
+                name="standardTermDomain"
+                aria-label="도메인 필터"
                 placeholder="도메인"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
@@ -2572,6 +2578,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <input
                 type="text"
+                name="standardTermSource"
+                aria-label="행안부 필터"
                 placeholder="행안부"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
@@ -4519,23 +4527,7 @@ document.addEventListener(
     }
 
 
-    mypageMenuButtons.forEach(
-      (button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            activateMyPage(
-              button.dataset.mypageMenu
-            );
-
-          }
-        );
-
-      }
-    );
-
+   
 
     /* =====================================================
        FAVORITE DATA TAB

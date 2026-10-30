@@ -34822,7 +34822,129 @@ body:has(.law-page) .top-header {
   color: #fff;
 }
 
+/* =========================================
+   허가선박분석 페이지 세로 스크롤
+========================================= */
 
+.app-layout:has(.permit-page) {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .permit-page) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .permit-page) > .top-header {
+  flex-shrink: 0;
+}
+
+.main-area > .permit-page {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* =========================================
+   허가어선 전체목록 페이지 세로 스크롤
+========================================= */
+
+.app-layout:has(.vessel-list-page) {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .vessel-list-page) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .vessel-list-page) > .top-header {
+  flex-shrink: 0;
+}
+
+.main-area > .vessel-list-page {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* =========================================
+   공동대응시스템 전체 목록 세로 스크롤
+========================================= */
+
+.app-layout:has(.joint-vessel-page) {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .joint-vessel-page) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .joint-vessel-page) > .top-header {
+  flex-shrink: 0;
+}
+
+.main-area > .joint-vessel-page {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.app-layout:has(.dr-page) {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .dr-page) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.main-area:has(> .dr-page) > .top-header {
+  flex-shrink: 0;
+}
+
+.main-area > .dr-page {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 
 /* =========================================================
   Responsive - 1600px

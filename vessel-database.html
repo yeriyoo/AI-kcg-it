@@ -10,26 +10,20 @@
   <title>함정용 플랫폼 - 선박정보-전체DB(반응형)</title>
 
   <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/tailwind.css">
 
   <!-- Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./js/lucide.min.js" defer></script>
 
   <!-- Pretendard -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-  />
+  <link rel="stylesheet" href="./css/ship-common.css">
 
-  <!-- 최소 공통 CSS -->
-  <link rel="stylesheet" href="./css/ship-common.css" />
   <!-- Favicon -->
   <link
     rel="icon"
     type="image/png"
     href="./img/ship-favicon.png"
   >
-
 </head>
 
 <body class="overflow-hidden bg-[#050505] font-['Pretendard'] text-white">
@@ -180,7 +174,7 @@
               "
             >
               <i
-                data-lucide="wifi-cog"
+                data-lucide="wifi"
                 class="h-5 w-5"
               ></i>
 
@@ -698,6 +692,7 @@
             <input
               id="headerSearchInput"
               type="text"
+              aria-label="상단 선박 검색"
               placeholder="선박명 · MMSI · IMO · 위도, 경도"
               class="
                 h-full
@@ -801,7 +796,9 @@
           <label class="relative block">
 
             <input
+              id="headerMenuSearchInput"
               type="text"
+              aria-label="상단 메뉴 선박 검색"
               placeholder="선박명 · MMSI · IMO · 위도, 경도"
               class="
                 h-10 w-full
@@ -944,7 +941,7 @@
               "
             >
               <i
-                data-lucide="wifi-cog"
+                data-lucide="wifi"
                 class="h-5 w-5"
               ></i>
 
@@ -1534,6 +1531,7 @@
         <div class="mt-7">
 
           <label
+            for="vesselNationality"
             class="
               mb-2 block
               text-sm font-medium
@@ -1546,6 +1544,8 @@
           <div class="relative">
 
             <select
+              id="vesselNationality"
+              name="vesselNationality"
               class="
                 h-9 w-full
                 appearance-none
@@ -1591,7 +1591,10 @@
           <div class="grid grid-cols-2 gap-2">
 
             <input
+              id="vesselBuildYearFrom"
+              name="vesselBuildYearFrom"
               type="text"
+              aria-label="건조년도 시작"
               placeholder="From"
               class="
                 h-9
@@ -1607,7 +1610,10 @@
             />
 
             <input
+              id="vesselBuildYearTo"
+              name="vesselBuildYearTo"
               type="text"
+              aria-label="건조년도 종료"
               placeholder="To"
               class="
                 h-9
@@ -1701,6 +1707,9 @@
           <div class="relative mt-11">
 
             <select
+              id="vesselDbPageSize"
+              name="vesselDbPageSize"
+              aria-label="페이지당 표시 개수"
               class="
                 h-9
                 appearance-none
@@ -2174,13 +2183,17 @@
   </div>
 
 
-  <!-- Lucide -->
+<!-- Lucide -->
   <script>
-    lucide.createIcons();
-  </script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  });
+</script>
 
   <!-- Common JS -->
-  <script src="./js/ship-common.js"></script>
+  <script src="./js/ship-common.js" defer></script>
 
 </body>
 </html>

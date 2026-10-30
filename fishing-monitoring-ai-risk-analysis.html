@@ -630,24 +630,30 @@
       <!-- 지도 종류 -->
       <div class="dr-map-layers">
         <strong>지도종류 <i data-lucide="x"></i></strong>
-        <label><input type="radio" name="drMapType"> 해도</label>
-        <label><input type="radio" name="drMapType" checked> 위성</label>
+        <label><input type="radio" id="drMapTypeChart" name="drMapType"> 해도</label>
+        <label><input type="radio" id="drMapTypeSatellite" name="drMapType" checked> 위성</label>
         <hr>
-        <label><input type="checkbox" checked> AIS 어선</label>
-        <label><input type="checkbox"> 기상정보</label>
-        <label><input type="checkbox" checked> 위험구역</label>
-        <label><input type="checkbox"> 어장정보</label>
-        <label><input type="checkbox" checked> 표류예측</label>
-        <label><input type="checkbox" checked> 함정 · 항공기</label>
+        <label><input type="checkbox" id="drLayerAIS" name="drLayerAIS" checked> AIS 어선</label>
+        <label><input type="checkbox" id="drLayerWeather" name="drLayerWeather"> 기상정보</label>
+        <label><input type="checkbox" id="drLayerRisk" name="drLayerRisk" checked> 위험구역</label>
+        <label><input type="checkbox" id="drLayerFishing" name="drLayerFishing"> 어장정보</label>
+        <label><input type="checkbox" id="drLayerDrift" name="drLayerDrift" checked> 표류예측</label>
+        <label><input type="checkbox" id="drLayerPatrol" name="drLayerPatrol" checked> 함정 · 항공기</label>
       </div>
 
       <label class="dr-map-search">
-        <input type="search" placeholder="선박명, 어선번호, MMSI 검색">
+        <input
+            type="search"
+            id="drMapSearch"
+            name="drMapSearch"
+            placeholder="선박명, 어선번호, MMSI 검색"
+            autocomplete="off"
+          >
         <i data-lucide="search"></i>
       </label>
 
       <label class="dr-map-history">
-        <input type="checkbox"> 실시간 기상 레이어
+        <input type="checkbox" id="drRealtimeWeather" name="drRealtimeWeather"> 실시간 기상 레이어
       </label>
 
       <div class="dr-map-zoom">
@@ -873,13 +879,8 @@
   </div>
 </main>
 
-
-
-<script src="./js/report-management.js" defer></script>
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./js/stats-analysis.js" defer></script>
+<!-- Chart.js 로컬 파일 -->
+<script src="./js/chart.umd.js" defer></script>
    
 </div>
 

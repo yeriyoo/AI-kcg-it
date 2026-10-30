@@ -7882,6 +7882,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const chartBars = root.querySelector('#hiChartBars');
+  if (!chartBars) return;
   const maxValue = 180;
 
   chartBars.innerHTML = chartData.map(item => {
@@ -11364,6 +11365,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const excelButton = document.getElementById("noticeExcelBtn");
   const printButton = document.getElementById("noticePrintBtn");
 
+  if (!tableBody || !searchInput) return;
+
   const rows = Array.from(tableBody.querySelectorAll("tr")).map(row => {
     const cells = row.querySelectorAll("td");
 
@@ -11503,6 +11506,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tbody = document.getElementById("boardTableBody");
   const searchInput = document.getElementById("boardSearchInput");
+  if (!tbody || !searchInput) return;
 
   const rows = Array.from(tbody.querySelectorAll("tr")).map(row => ({
     element: row,

@@ -608,11 +608,26 @@
               </div>
 
               <div class="cn-field">
-                <label>기간</label>
+                <span class="cn-date-label">기간</span>
+
                 <div class="cn-date-fields">
-                  <input type="date" id="cnStartDate" value="2026-09-26">
-                  <span>~</span>
-                  <input type="date" id="cnEndDate" value="2026-10-26">
+                  <input
+                    type="date"
+                    id="cnStartDate"
+                    name="cnStartDate"
+                    aria-label="조회 시작 날짜"
+                    value="2026-09-26"
+                  >
+
+                  <span aria-hidden="true">~</span>
+
+                  <input
+                    type="date"
+                    id="cnEndDate"
+                    name="cnEndDate"
+                    aria-label="조회 종료 날짜"
+                    value="2026-10-26"
+                  >
                 </div>
               </div>
 

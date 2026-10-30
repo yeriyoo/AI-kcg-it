@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -8,16 +7,22 @@
 
   <title>기상포털 | 예·특보</title>
 
-  <link rel="icon" type="image/png" href="./img/wea-favicon.png">
+ 
+   <!-- Tailwind -->
+  <link rel="stylesheet" href="./css/tailwind.css">
 
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <!-- Lucide -->
+  <script src="./js/lucide.min.js" defer></script>
 
+  <!-- Pretendard -->
   <link rel="stylesheet" href="./css/wea-common.css">
 
-  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-  <script src="./js/wea-common.js" defer></script>
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="./img/wea-favicon.png"
+  >
 </head>
 
 <body class="page-forecast">
@@ -705,5 +710,16 @@
 
     </main>
   </div>
+
+   <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  });
+</script>
+
+  <!-- Common JS -->
+  <script src="./js/wea-common.js" defer></script>
 </body>
 </html>

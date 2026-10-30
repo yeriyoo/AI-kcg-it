@@ -487,11 +487,23 @@
                 </div>
 
                 <div class="multi-filter-field">
-                  <label>작전 목표</label>
-                  <div class="multi-segment" id="multiMission">
-                    <button type="button" class="active" data-mission="safe">단속 + 안전 점검</button>
-                    <button type="button" data-mission="enforce">불법선박 합동 단속</button>
-                    <button type="button" data-mission="fishery">어민 안전 합동 점검</button>
+                  <div id="multiMissionLabel">작전 목표</div>
+
+                  <div
+                    class="multi-segment"
+                    id="multiMission"
+                    role="group"
+                    aria-labelledby="multiMissionLabel"
+                  >
+                    <button type="button" class="active" data-mission="safe">
+                      단속 + 안전 점검
+                    </button>
+                    <button type="button" data-mission="enforce">
+                      불법선박 합동 단속
+                    </button>
+                    <button type="button" data-mission="fishery">
+                      어민 안전 합동 점검
+                    </button>
                   </div>
                 </div>
 

@@ -872,6 +872,7 @@
         <div class="shrink-0">
 
           <label
+            for="requestStartDate"
             class="
               mb-1.5
               block
@@ -897,8 +898,14 @@
               "
             >
 
+            <label for="requestStartDate" class="sr-only">
+              신청 시작일
+            </label>
+
               <input
                 type="text"
+                id="requestStartDate"
+                name="requestStartDate"
                 placeholder="연도. 월. 일."
                 class="
                   min-w-0 flex-1
@@ -951,9 +958,11 @@
                 bg-white
               "
             >
-
+            <label for="requestEndDate" class="sr-only">신청 종료일</label>
               <input
                 type="text"
+                id="requestEndDate"
+                name="requestEndDate"
                 placeholder="연도. 월. 일."
                 class="
                   min-w-0 flex-1
@@ -992,7 +1001,7 @@
         <!-- 처리상태 -->
         <div class="w-[155px] shrink-0">
 
-          <label
+          <span
             class="
               mb-1.5
               block
@@ -1002,7 +1011,7 @@
             "
           >
             처리상태
-          </label>
+        </span>
 
 
           <div
@@ -1013,6 +1022,7 @@
             <!-- TRIGGER -->
             <button
               type="button"
+              aria-labelledby="requestStatusLabel"
               class="
                 custom-dropdown-trigger
                 flex h-[44px] w-full
@@ -1236,6 +1246,7 @@
         <div class="min-w-0 flex-1">
 
           <label
+            for="requestDataName"
             class="
               mb-1.5
               block
@@ -1249,6 +1260,8 @@
 
           <input
             type="text"
+            id="requestDataName"
+            name="requestDataName"
             placeholder="신청 데이터명을 입력해 주세요"
             class="
               h-[44px] w-full
@@ -3117,7 +3130,7 @@
 </script>
 
   <!-- Common JS -->
-  <script src="./js/hub-common.js"></script>
+  <script src="./js/hub-common.js" defer></script>
 
 </body>
 </html>
