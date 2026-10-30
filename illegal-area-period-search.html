@@ -442,6 +442,9 @@
     <!-- 기존 mainContent 영역 전체를 아래 코드로 교체 -->
 <main id="mainContent" class="region-page" tabindex="-1">
 
+  <!-- 페이지 제목: 스크린리더용 -->
+  <h1 class="sr-only">해역/기관별 조회</h1>
+  
   <!-- 조회 조건 -->
   <section class="region-filter-panel" aria-labelledby="regionFilterTitle">
     <h2 id="regionFilterTitle" class="region-section-label">
@@ -491,27 +494,29 @@
   </section>
 
   <!-- 요약 카드 -->
-  <section class="region-summary-grid" aria-label="조회 결과 요약">
-    <article class="region-summary-card">
-      <span class="region-summary-label">기간</span>
-      <strong id="regionPeriodText">2026-09-27 ~ 2026-10-26 (30일)</strong>
-    </article>
+<section class="region-summary-grid" aria-label="조회 결과 요약">
 
-    <article class="region-summary-card">
-      <span class="region-summary-label">위험 이벤트</span>
-      <strong id="regionEventCount">655,193건</strong>
-    </article>
+  <div class="region-summary-card">
+    <span class="region-summary-label">기간</span>
+    <strong id="regionPeriodText">2026-09-27 ~ 2026-10-26 (30일)</strong>
+  </div>
 
-    <article class="region-summary-card">
-      <span class="region-summary-label">심각 이벤트</span>
-      <strong id="regionCriticalCount">399,283건</strong>
-    </article>
+  <div class="region-summary-card">
+    <span class="region-summary-label">위험 이벤트</span>
+    <strong id="regionEventCount">655,193건</strong>
+  </div>
 
-    <article class="region-summary-card">
-      <span class="region-summary-label">위험 선박</span>
-      <strong id="regionVesselCount">16,945척</strong>
-    </article>
-  </section>
+  <div class="region-summary-card">
+    <span class="region-summary-label">심각 이벤트</span>
+    <strong id="regionCriticalCount">399,283건</strong>
+  </div>
+
+  <div class="region-summary-card">
+    <span class="region-summary-label">위험 선박</span>
+    <strong id="regionVesselCount">16,945척</strong>
+  </div>
+
+</section>
 
   <!-- 추이 그래프 -->
   <section class="region-panel region-chart-panel" aria-labelledby="regionChartTitle">
@@ -522,7 +527,7 @@
       </h2>
     </div>
 
-    <div class="region-chart-legend" aria-label="지청별 범례">
+    <div class="region-chart-legend" role="group" aria-label="지청별 범례">
       <span><i class="region-dot central"></i>중부청</span>
       <span><i class="region-dot west"></i>서해청</span>
       <span><i class="region-dot jeju"></i>제주청</span>
