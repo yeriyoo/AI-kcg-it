@@ -600,7 +600,7 @@
         <div class="cv-content">
 
           <!-- 개요 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="overview">
 
@@ -686,10 +686,10 @@
 
             </div>
 
-          </section>
+          </div>
 
           <!-- 탐지 알고리즘 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="algorithm"
             hidden>
@@ -701,10 +701,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 시나리오 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="scenario"
             hidden>
@@ -716,10 +716,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 학습·벤치마크 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="benchmark"
             hidden>
@@ -731,10 +731,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 참고자료 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="reference"
             hidden>
@@ -746,10 +746,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 학습 결과 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="result"
             hidden>
@@ -761,10 +761,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 분석 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="analysis"
             hidden>
@@ -776,10 +776,10 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
           <!-- 성능·평가 -->
-          <section
+          <div
             class="cv-tab-panel"
             data-cv-panel="evaluation"
             hidden>
@@ -791,19 +791,22 @@
               </p>
             </article>
 
-          </section>
+          </div>
 
-        </div>
+            </div> <!-- cv-content 닫기 -->
 
-      </main>
-</div>
+      </main> <!-- mainContent 닫기 -->
 
-<!-- 모바일 사이드바 오버레이 -->
-<div
-  id="overlay"
-  class="fixed inset-0 z-30 hidden bg-black/40"
-  aria-hidden="true"
-></div>
+    </div> <!-- main-area 닫기 -->
+
+  </div> <!-- app-layout 닫기 -->
+
+  <!-- 모바일 사이드바 오버레이 -->
+  <div
+    id="overlay"
+    class="fixed inset-0 z-30 hidden bg-black/40"
+    aria-hidden="true"
+  ></div>
 
 </body>
 </html>
