@@ -481,36 +481,43 @@
       </div>
 
       <!-- 요약 카드 -->
-      <section class="alert-summary-grid" aria-label="경보 현황 요약">
-        <article class="alert-summary-card">
-          <span>구역 분석 선박</span>
-          <strong>2,989<small>척</small></strong>
-        </article>
-        <article class="alert-summary-card">
-          <span>고위험(주의 이상)</span>
-          <strong id="alertStatHigh">1,204<small>척</small></strong>
-        </article>
-        <article class="alert-summary-card">
-          <span>심각</span>
-          <strong>76<small>척</small></strong>
-          <p>우리 EEZ 74 · 접경 2</p>
-        </article>
-        <article class="alert-summary-card">
-          <span>경계</span>
-          <strong>118<small>척</small></strong>
-          <p>우리 EEZ 91 · 접경 27</p>
-        </article>
-        <article class="alert-summary-card">
-          <span>주의</span>
-          <strong>1,010<small>척</small></strong>
-          <p>우리 EEZ 434 · 접경 576</p>
-        </article>
-        <article class="alert-summary-card">
-          <span>24시간 전 대비</span>
-          <strong>-150<small>척</small></strong>
-          <p>985 → 835 (시간당 고위험)</p>
-        </article>
-      </section>
+        <section class="alert-summary-grid" aria-label="경보 현황 요약">
+
+          <div class="alert-summary-card">
+            <span>구역 분석 선박</span>
+            <strong>2,989<small>척</small></strong>
+          </div>
+
+          <div class="alert-summary-card">
+            <span>고위험(주의 이상)</span>
+            <strong id="alertStatHigh">1,204<small>척</small></strong>
+          </div>
+
+          <div class="alert-summary-card">
+            <span>심각</span>
+            <strong>76<small>척</small></strong>
+            <p>우리 EEZ 74 · 접경 2</p>
+          </div>
+
+          <div class="alert-summary-card">
+            <span>경계</span>
+            <strong>118<small>척</small></strong>
+            <p>우리 EEZ 91 · 접경 27</p>
+          </div>
+
+          <div class="alert-summary-card">
+            <span>주의</span>
+            <strong>1,010<small>척</small></strong>
+            <p>우리 EEZ 434 · 접경 576</p>
+          </div>
+
+          <div class="alert-summary-card">
+            <span>24시간 전 대비</span>
+            <strong>-150<small>척</small></strong>
+            <p>985 → 835 (시간당 고위험)</p>
+          </div>
+
+        </section>
 
       <!-- 시간대별 추이 그래프 -->
       <section class="alert-panel alert-chart-panel" aria-labelledby="alertChartTitle">
@@ -522,7 +529,7 @@
           <span class="alert-chart-badge">고위험 최다 10. 24. 14시 · 1379척</span>
         </div>
 
-        <div class="alert-chart-legend" aria-label="그래프 범례">
+        <div class="alert-chart-legend" role="group" aria-label="그래프 범례">
           <span><i class="alert-legend-color caution"></i>주의</span>
           <span><i class="alert-legend-color warning"></i>경계</span>
           <span><i class="alert-legend-color critical"></i>심각</span>
