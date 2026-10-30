@@ -485,7 +485,7 @@
       <!-- 지도 및 우측 패널 -->
       <div class="live-workspace">
 
-        <section class="live-map-area" aria-label="선박 관제 지도">
+        <div class="live-map-area" aria-label="선박 관제 지도">
 
           <!-- LIVE 선박 지도 배경 -->
           <div
@@ -499,7 +499,7 @@
           <div class="live-map-left">
 
             <!-- 레이어 -->
-            <section class="live-floating-panel live-layer-panel">
+            <div class="live-floating-panel live-layer-panel">
 
               <button type="button" class="live-panel-heading" data-live-toggle="liveLayerBody" aria-expanded="true">
                 <span>LAYERS</span>
@@ -508,14 +508,14 @@
 
               <div id="liveLayerBody" class="live-layer-body">
 
-  <div class="live-layer-parent">
-    <button type="button" class="live-layer-toggle" aria-expanded="true">
-      <span class="live-layer-chevron"></span>
-      <span class="live-dot orange"></span>
-      <span class="live-layer-name">선박</span>
-    </button>
-    <span>20888</span>
-  </div>
+              <div class="live-layer-parent">
+                <button type="button" class="live-layer-toggle" aria-expanded="true">
+                  <span class="live-layer-chevron"></span>
+                  <span class="live-dot orange"></span>
+                  <span class="live-layer-name">선박</span>
+                </button>
+                <span>20888</span>
+              </div>
 
   <div class="live-layer-children">
 
@@ -644,8 +644,8 @@
     <i data-lucide="chevron-right"></i>
   </button>
 
-</div>
-            </section>
+  </div>
+            </div>
 
             <!-- 날짜 및 시간 -->
             <div class="live-floating-panel live-date-panel">
@@ -678,7 +678,7 @@
             </div>
 
             <!-- 경보 -->
-            <section class="live-floating-panel live-alert-panel">
+            <div class="live-floating-panel live-alert-panel">
 
               <div class="live-alert-heading">
                 <span><i data-lucide="siren"></i> 경보 <small>주의 77</small></span>
@@ -709,7 +709,7 @@
                 </button>
               </div>
 
-            </section>
+            </div>
 
           </div>
 
@@ -787,7 +787,7 @@
             </button>
           </div>
 
-          <section class="live-news-section">
+          <div class="live-news-section">
 
             <div class="live-news-heading">
               <strong><span class="live-status-dot"></span> OSINT LIVE</strong>
@@ -817,9 +817,9 @@
               </article>
             </div>
 
-          </section>
+          </div>
 
-          <section class="live-news-section live-china-news">
+          <div class="live-news-section live-china-news">
             <div class="live-news-heading">
               <strong>🇨🇳 중국 어업 뉴스</strong>
               <span>12</span>
@@ -840,9 +840,9 @@
                 <p>중국 수산 관련 정보</p>
               </article>
             </div>
-          </section>
+          </div>
 
-          <section class="live-status-section">
+          <div class="live-status-section">
             <div class="live-news-heading">
               <strong>🇨🇳 중국 외곽 · 휴어기</strong>
               <span>10월</span>
@@ -851,7 +851,7 @@
             <p>휴어기 상태 <strong>휴어기 아님</strong></p>
             <p>국경점검 · 해역 감시 상태</p>
             <p>중국 어선 및 주변 해역 활동 감시</p>
-          </section>
+          </div>
 
         </aside>
 
