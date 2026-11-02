@@ -521,22 +521,59 @@
   </section>
 
   <!-- 상세 탭 -->
-  <div class="detail-tabs" role="tablist" aria-label="선박 상세정보">
-    <button type="button" class="detail-tab active" data-detail-tab="info" role="tab" aria-selected="true">
-      상세정보
-    </button>
-    <button type="button" class="detail-tab" data-detail-tab="report" role="tab" aria-selected="false">
-      입출역 보고
-    </button>
-    <button type="button" class="detail-tab" data-detail-tab="location" role="tab" aria-selected="false">
-      위치 및 어획보고정보
-    </button>
-  </div>
+      <div class="detail-tabs" role="tablist" aria-label="선박 상세정보">
+      <button
+        type="button"
+        id="detailTabInfo"
+        class="detail-tab active"
+        data-detail-tab="info"
+        role="tab"
+        aria-selected="true"
+        aria-controls="detailPanelInfo"
+        tabindex="0"
+      >
+        상세정보
+      </button>
+
+      <button
+        type="button"
+        id="detailTabReport"
+        class="detail-tab"
+        data-detail-tab="report"
+        role="tab"
+        aria-selected="false"
+        aria-controls="detailPanelReport"
+        tabindex="-1"
+      >
+        입출역 보고
+      </button>
+
+      <button
+        type="button"
+        id="detailTabLocation"
+        class="detail-tab"
+        data-detail-tab="location"
+        role="tab"
+        aria-selected="false"
+        aria-controls="detailPanelLocation"
+        tabindex="-1"
+      >
+        위치 및 어획보고정보
+      </button>
+    </div>
+
 
   <!-- 탭 콘텐츠 -->
   <section class="detail-content-panel">
 
-    <div class="detail-tab-content active" data-detail-content="info">
+    <div
+        id="detailPanelInfo"
+        class="detail-tab-content active"
+        data-detail-content="info"
+        role="tabpanel"
+        aria-labelledby="detailTabInfo"
+        tabindex="0"
+      >
       <h2 id="detailInfoTitle">상세정보 — 허가번호 C21-10087</h2>
 
       <div class="detail-info-table-wrap">
@@ -551,14 +588,30 @@
       </p>
     </div>
 
-    <div class="detail-tab-content" data-detail-content="report" hidden>
+    <div
+        id="detailPanelReport"
+        class="detail-tab-content"
+        data-detail-content="report"
+        role="tabpanel"
+        aria-labelledby="detailTabReport"
+        tabindex="0"
+        hidden
+      >
       <h2>입출역 보고</h2>
       <div class="detail-empty-state">
         선택한 선박의 입출역 보고정보가 표시되는 영역입니다.
       </div>
     </div>
 
-    <div class="detail-tab-content" data-detail-content="location" hidden>
+    <div
+      id="detailPanelLocation"
+      class="detail-tab-content"
+      data-detail-content="location"
+      role="tabpanel"
+      aria-labelledby="detailTabLocation"
+      tabindex="0"
+      hidden
+    >
       <h2>위치 및 어획보고정보</h2>
       <div class="detail-empty-state">
         선택한 선박의 위치 및 어획보고정보가 표시되는 영역입니다.
@@ -568,6 +621,7 @@
   </section>
 
 </main>
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
