@@ -471,29 +471,40 @@
     <div class="rp-tabs" role="tablist" aria-label="보고서 관리 탭">
       <button
         type="button"
+        id="rpTabList"
         class="rp-tab active"
         data-tab="list"
         role="tab"
         aria-selected="true"
+        aria-controls="rpListPanel"
+        tabindex="0"
       >
-        <i data-lucide="list"></i>
+        <i data-lucide="list" aria-hidden="true"></i>
         보고서 목록
       </button>
 
       <button
         type="button"
+        id="rpTabTemplates"
         class="rp-tab"
         data-tab="templates"
         role="tab"
         aria-selected="false"
+        aria-controls="rpTemplatePanel"
+        tabindex="-1"
       >
-        <i data-lucide="layout-template"></i>
+        <i data-lucide="layout-template" aria-hidden="true"></i>
         템플릿 · 샘플
       </button>
     </div>
 
     <!-- 보고서 목록 -->
-    <section class="rp-panel active" id="rpListPanel" role="tabpanel">
+    <section
+      class="rp-panel active"
+      id="rpListPanel"
+      role="tabpanel"
+      aria-labelledby="rpTabList"
+    >
       <div class="rp-panel-heading">
         <h2>보고서 목록</h2>
         <span id="rpCount">6건</span>
@@ -509,7 +520,13 @@
     </section>
 
     <!-- 템플릿 · 샘플 -->
-    <section class="rp-panel" id="rpTemplatePanel" role="tabpanel" hidden>
+    <section
+      class="rp-panel"
+      id="rpTemplatePanel"
+      role="tabpanel"
+      aria-labelledby="rpTabTemplates"
+      hidden
+    >
       <div class="rp-panel-heading">
         <h2>템플릿 · 샘플</h2>
         <span>3건</span>
@@ -518,7 +535,7 @@
       <div class="rp-template-grid">
         <article class="rp-template-card">
           <i data-lucide="file-text"></i>
-          <strong>단속 결과 보고서</strong>
+          <h3>단속 결과 보고서</h3>
           <p>단속 사건 개요, 선박 정보, 조치 결과를 정리하는 보고서</p>
           <button type="button" class="rp-btn rp-template-use" data-template="단속 결과 보고서">
             <i data-lucide="plus"></i> 이 템플릿으로 작성
@@ -527,7 +544,7 @@
 
         <article class="rp-template-card">
           <i data-lucide="file-check"></i>
-          <strong>단속 증거 보고서</strong>
+          <h3>단속 증거 보고서</h3>
           <p>탐지 정보와 증거 자료를 정리하는 보고서</p>
           <button type="button" class="rp-btn rp-template-use" data-template="단속 증거 보고서">
             <i data-lucide="plus"></i> 이 템플릿으로 작성
@@ -536,7 +553,7 @@
 
         <article class="rp-template-card">
           <i data-lucide="files"></i>
-          <strong>월간 단속 실적 보고서</strong>
+          <h3>월간 단속 실적 보고서</h3>
           <p>월별 단속 실적과 주요 성과를 정리하는 보고서</p>
           <button type="button" class="rp-btn rp-template-use" data-template="월간 단속 실적 보고서">
             <i data-lucide="plus"></i> 이 템플릿으로 작성
@@ -579,6 +596,7 @@
   </div>
 </main>
    
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
