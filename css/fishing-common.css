@@ -24517,7 +24517,7 @@ body:has(.satellite-page) .top-header {
   background: #fff;
 }
 
-.satellite-stat-card strong {
+.satellite-stat-card h2{
   color: #263d61;
   font-size: 24px;
   font-weight: 700;
