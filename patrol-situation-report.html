@@ -469,12 +469,22 @@
           </div>
         </div>
 
-        <!-- 탭 -->
         <div class="sr-tabs" role="tablist" aria-label="상황보고 유형">
-          <button type="button" class="sr-tab active" data-report="typhoon" aria-selected="true">태풍보고</button>
-          <button type="button" class="sr-tab" data-report="weather" aria-selected="false">기상보고</button>
-          <button type="button" class="sr-tab" data-report="security" aria-selected="false">경비/치안수요현황</button>
-          <button type="button" class="sr-tab" data-report="aviation" aria-selected="false">항공순찰</button>
+          <button type="button" class="sr-tab active"
+            data-report="typhoon" role="tab"
+            aria-selected="true">태풍보고</button>
+
+          <button type="button" class="sr-tab"
+            data-report="weather" role="tab"
+            aria-selected="false">기상보고</button>
+
+          <button type="button" class="sr-tab"
+            data-report="security" role="tab"
+            aria-selected="false">경비/치안수요현황</button>
+
+          <button type="button" class="sr-tab"
+            data-report="aviation" role="tab"
+            aria-selected="false">항공순찰</button>
         </div>
 
         <!-- 기관 영상 -->
@@ -591,11 +601,11 @@
         <button type="button" class="sr-lightbox-close" id="srLightboxClose" aria-label="이미지 닫기">
           <i data-lucide="x"></i>
         </button>
-        <img id="srLightboxImage" src="" alt="확대 이미지">
+        <img id="srLightboxImage" alt="확대 이미지">
       </div>
     </main>
 
-  
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
