@@ -20,7 +20,7 @@
 
 <body class="bg-[#EDF2F9] text-[#0B1A30] text-sm">
 
-<div class="app-layout flex min-h-screen">
+<div class="main-area ml-[280px] flex min-w-0 flex-1 flex-col">
 
    <!-- =====================================
          SIDEBAR
@@ -659,40 +659,40 @@
 
         <div class="sc-plan-list">
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>IUU 선박</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
+            <div class="sc-plan-heading"><h3>IUU 선박</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
             <p>FAO Global Record 공개 API 로 UVI(IMO 번호)·선주·선박운영자를 채운다. 인증이 필요 없고 MMSI 가 응답에 포함되면 우리 MMSI 로 바로 붙일 수 있다. 내부 MARSIS 선박목록과 중국 국적 어선 자료에도 IMO↔MMSI 쌍이 이미 있어 교차 보강이 가능하다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>IUU 이력</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
+            <div class="sc-plan-heading"><h3>IUU 이력</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
             <p>3단으로 채운다. ① MARSIS 제재·PSC·타임라인을 IMO 키로 iuu_vessel_listing·iuu_incident 에 적재해 즉시 이력 축을 세운다. ② FAO Global Record 상세의 compliance.iuuListings / portDenials / inspectionSurveillance 를 붙여 이력 폭을 보강한다. ③ 국내 enforcement_records 를 연계해 위반유형·처분을 채운다.</p>
             <p class="sc-warning">선행 조건 — MARSIS 는 IMO 키라서 IMO 미송신 중국어선은 MMSI 로 교차 매칭해야 한다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>조업행위</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
+            <div class="sc-plan-heading"><h3>조업행위</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
             <p>정답 라벨을 만들어야 한다. 단속 실적이 있는 선박의 조업 구간을 정답으로 삼아 소규모 검증셋을 구축하고, 그 위에서 성능을 재측정한다. FAO GR 의 vesselType(어법 분류 코드)을 라벨 보조 근거로 쓸 수 있다.</p>
             <p class="sc-warning">선행 조건 — 정답 라벨 구축에 단속 이력 연계가 선행되어야 한다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>환적</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
+            <div class="sc-plan-heading"><h3>환적</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
             <p>FAO Global Record 가 어선 외에 냉동운반선(Reefer)·보급선(Supply)까지 vesselType 으로 구분해 등록한다. 이를 붙이면 조우 상대선의 역할을 판정할 수 있다. 내부 MARSIS 의 STS 위험등급과도 교차 근거로 쓴다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>어획물</strong><span class="sc-badge red">미확보</span><span class="sc-badge gray">P3 협의·간접</span></div>
+            <div class="sc-plan-heading"><h3>어획물</h3><span class="sc-badge red">미확보</span><span class="sc-badge gray">P3 협의·간접</span></div>
             <p>직접 어획 실적을 얻을 경로는 없다. 대신 간접 추정으로 간다 — ① FAO GR 의 fishHoldCap(어창 용량)·vesselType 으로 조업 능력 상한을 잡고, ② 조업 구간 체류시간과 결합해 어획 규모를 구간 추정하고, ③ 시장 도매가·품목 신호와 대조한다.</p>
             <p class="sc-warning">선행 조건 — 실제 어획량 정답이 없어 추정치는 검증 불가. 실제값이 아닌 추정·근거값으로 표시해야 한다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>공급망</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
+            <div class="sc-plan-heading"><h3>공급망</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
             <p>운반선 단계를 FAO GR 로 채운다 — 냉동운반선·보급선 등록정보로 운반선 노드를 세우고, 환적(조우) → 운반선의 기항 → 시장 품목으로 경로를 잇는다. 중국 물류 플랫폼 없이도 어선·운반선·항만·시장 4단이 닫힌다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><strong>제재 / 조치</strong><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
+            <div class="sc-plan-heading"><h3>제재 / 조치</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
             <p>MARSIS PSC 검사(억류)와 제재 통계를 iuu_vessel_listing 에 적재하고, FAO GR 상세의 portDenials(입항 거부)를 추가한다. 새 원천을 합쳐 선박별 조치 이력을 만들고 위험도 가중치로 환산한다.</p>
           </article>
         </div>
@@ -805,9 +805,7 @@
       </section>
 
     </main>
-
-
-
+   </div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
