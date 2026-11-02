@@ -519,6 +519,7 @@
     
   
       <main id="mainContent" class="china-network-page" tabindex="-1">
+         <h1 class="sr-only">중국선단관계분석</h1>
 
         <div class="cn-layout">
 
@@ -658,17 +659,43 @@
 
               <div class="cn-graph-toolbar">
                 <div class="cn-view-tabs" role="tablist" aria-label="분석 보기 방식">
-                  <button type="button" class="is-active" data-cn-view="graph"
-                    role="tab" aria-selected="true">
-                    <i data-lucide="share-2"></i> 네트워크 그래프
+                  <button
+                    type="button"
+                    id="cnTabGraph"
+                    class="is-active"
+                    data-cn-view="graph"
+                    role="tab"
+                    aria-controls="cnGraphPanel"
+                    aria-selected="true"
+                  >
+                    <i data-lucide="share-2" aria-hidden="true"></i>
+                    네트워크 그래프
                   </button>
-                  <button type="button" data-cn-view="list"
-                    role="tab" aria-selected="false">
-                    <i data-lucide="list"></i> 목록 보기
+
+                  <button
+                    type="button"
+                    id="cnTabList"
+                    data-cn-view="list"
+                    role="tab"
+                    aria-controls="cnListView"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    <i data-lucide="list" aria-hidden="true"></i>
+                    목록 보기
                   </button>
-                  <button type="button" data-cn-view="report"
-                    role="tab" aria-selected="false">
-                    <i data-lucide="git-branch"></i> 본선·부속선 신고관계
+
+                  <button
+                    type="button"
+                    id="cnTabReport"
+                    data-cn-view="report"
+                    role="tab"
+                    aria-controls="cnReportView"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    <i data-lucide="git-branch" aria-hidden="true"></i>
+                    본선·부속선 신고관계
                   </button>
                 </div>
 
@@ -677,7 +704,7 @@
                 </button>
               </div>
 
-              <div class="cn-legend" aria-label="네트워크 범례">
+              <div class="cn-legend" role="group" aria-label="네트워크 범례">
                 <span><b class="cn-dot cn-blue"></b> 선박</span>
                 <span><b class="cn-dot cn-purple"></b> 선단 그룹</span>
                 <span><b class="cn-dot cn-green"></b> 소유자</span>
@@ -696,7 +723,11 @@
               <div class="cn-view-content" id="cnGraphContent">
 
                 <!-- 캡처한 그래프 이미지 -->
-                <div class="cn-graph-stage" id="cnGraphStage">
+                <div
+                    id="cnGraphPanel"
+                    role="tabpanel"
+                    aria-labelledby="cnTabGraph"
+                  >
                   <img
                     src="./img/graph-img.png"
                     alt="중국 선단 네트워크 관계 그래프. 보라색 노드는 선단 그룹을 나타냅니다."
@@ -738,7 +769,13 @@
                 </aside>
 
                 <!-- 목록 보기 -->
-                <div class="cn-alt-view" id="cnListView" hidden>
+                <div
+                  class="cn-alt-view"
+                  id="cnListView"
+                  role="tabpanel"
+                  aria-labelledby="cnTabList"
+                  hidden
+                >
                   <h3>선단 목록</h3>
                   <div class="cn-table-scroll">
                     <table class="cn-table">
@@ -753,7 +790,13 @@
                 </div>
 
                 <!-- 신고관계 -->
-                <div class="cn-alt-view" id="cnReportView" hidden>
+                <div
+                  class="cn-alt-view"
+                  id="cnReportView"
+                  role="tabpanel"
+                  aria-labelledby="cnTabReport"
+                  hidden
+                >
                   <h3>본선·부속선 신고관계</h3>
                   <p class="cn-empty-message">
                     현재 조회 조건에서 확인된 본선·부속선 신고관계 데이터가 없습니다.
@@ -893,9 +936,7 @@
 
         </div>
       </main>
-
-
-
+  </div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
