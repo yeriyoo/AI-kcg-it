@@ -482,27 +482,39 @@
 
         <button
           type="button"
+          id="ecTabReports"
           class="ec-tab active"
           data-ec-tab="reports"
+          role="tab"
           aria-selected="true"
+          aria-controls="ec-reports"
+          tabindex="0"
         >
           현장 보고내역
         </button>
 
         <button
           type="button"
+          id="ecTabReceived"
           class="ec-tab"
           data-ec-tab="received"
+          role="tab"
           aria-selected="false"
+          aria-controls="ec-received"
+          tabindex="-1"
         >
           함정 보고 수신 내역
         </button>
 
         <button
           type="button"
+          id="ecTabClassification"
           class="ec-tab"
           data-ec-tab="classification"
+          role="tab"
           aria-selected="false"
+          aria-controls="ec-classification"
+          tabindex="-1"
         >
           분류체계·기준
         </button>
@@ -510,7 +522,7 @@
       </div>
 
       <!-- 현장 보고내역 -->
-      <section class="ec-panel active" id="ec-reports">
+      <div class="ec-panel active" id="ec-reports">
 
         <!-- 검색 필터 -->
         <div class="ec-filter-card">
@@ -683,30 +695,30 @@
           </div>
         </div>
 
-      </section>
+      </div>
 
       <!-- 함정 보고 수신 내역 -->
-      <section class="ec-panel" id="ec-received" hidden>
+      <div class="ec-panel" id="ec-received" hidden>
         <div class="ec-empty">
           <i data-lucide="inbox"></i>
           <strong>함정 보고 수신 내역</strong>
           <p>함정에서 수신한 보고 내역을 표시하는 영역입니다.</p>
         </div>
-      </section>
+      </div>
 
       <!-- 분류체계·기준 -->
-      <section class="ec-panel" id="ec-classification" hidden>
+      <div class="ec-panel" id="ec-classification" hidden>
         <div class="ec-empty">
           <i data-lucide="list-tree"></i>
           <strong>분류체계·기준</strong>
           <p>단속 사건의 분류체계 및 기준을 표시하는 영역입니다.</p>
         </div>
-      </section>
+      </div>
 
     </div>
   </main>
 
-  
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
