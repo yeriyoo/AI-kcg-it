@@ -34953,6 +34953,14 @@ body:has(.law-page) .top-header {
   gap: 8px;
 }
 
+.dispatch-vessel-detail {
+  display: block;
+}
+
+.dispatch-vessel-top {
+  display: flex;
+}
+
 /* =========================================================
   Responsive - 1600px
 ========================================================= */

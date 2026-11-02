@@ -465,7 +465,7 @@
   <div class="dispatch-content">
 
     <!-- AI 대응 프로세스 -->
-    <section class="dispatch-process dispatch-card">
+    <div class="dispatch-process dispatch-card">
       <div class="dispatch-process-heading">
         <i data-lucide="radio-tower"></i>
         <strong>AI 상황실 · 현장함정 알림 연계 체계</strong>
@@ -497,7 +497,7 @@
         동시에 함정 단말 피드(DISPATCH)에 기록되어 단말이 poll로 수신한다.
         함정 단말이 확인하면 '확인'으로 바뀐다.
       </p>
-    </section>
+    </div>
 
     <!-- 3단 카드 -->
     <div class="dispatch-workspace">
@@ -553,26 +553,38 @@
         >
 
         <div class="dispatch-vessel-list">
+
           <button type="button" class="dispatch-vessel active" data-vessel="1502">
-            <div class="dispatch-vessel-top">
-              <div>
+            <span class="dispatch-vessel-top">
+              <span>
                 <span class="dispatch-tag green">최우선</span>
                 <strong>1502함</strong>
-              </div>
-              <i data-lucide="check"></i>
-            </div>
-            <p>함수리급 · 인천해양경찰서 · 60km · ETA 55분 · 적합도 39</p>
-            <p>60km · ETA 55분 · 타 임무 수행중 — 전환 검토 필요</p>
+              </span>
+              <i data-lucide="check" aria-hidden="true"></i>
+            </span>
+
+            <span class="dispatch-vessel-detail">
+              함수리급 · 인천해양경찰서 · 60km · ETA 55분 · 적합도 39
+            </span>
+            <span class="dispatch-vessel-detail">
+              60km · ETA 55분 · 타 임무 수행중 — 전환 검토 필요
+            </span>
           </button>
 
           <button type="button" class="dispatch-vessel" data-vessel="3001">
-            <div class="dispatch-vessel-top">
+            <span class="dispatch-vessel-top">
               <strong>3001함</strong>
-              <i data-lucide="check"></i>
-            </div>
-            <p>태극급 · 인천해양경찰서 · 83km · ETA 90분 · 적합도 27</p>
-            <p>83km · ETA 90분 · 타 임무 수행중 — 전환 검토 필요</p>
+              <i data-lucide="check" aria-hidden="true"></i>
+            </span>
+
+            <span class="dispatch-vessel-detail">
+              태극급 · 인천해양경찰서 · 83km · ETA 90분 · 적합도 27
+            </span>
+            <span class="dispatch-vessel-detail">
+              83km · ETA 90분 · 타 임무 수행중 — 전환 검토 필요
+            </span>
           </button>
+
         </div>
       </section>
 
@@ -700,7 +712,7 @@
   </div>
 </main> 
 
-  
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
