@@ -467,25 +467,29 @@
     </div>
 
     <!-- 탭 -->
-    <div class="ep-tabs" role="tablist" aria-label="단속 업무">
-      <button type="button" class="ep-tab active" data-tab="plan" role="tab" aria-selected="true">
-        <i data-lucide="calendar-days"></i>
+    <div class="ep-tabs" aria-label="단속 업무">
+      <button type="button" class="ep-tab active" data-tab="plan" aria-pressed="true">
+        <i data-lucide="calendar-days" aria-hidden="true"></i>
         단속 계획
       </button>
-      <button type="button" class="ep-tab" data-tab="schedule" role="tab" aria-selected="false">
-        <i data-lucide="calendar-clock"></i>
+
+      <button type="button" class="ep-tab" data-tab="schedule" aria-pressed="false">
+        <i data-lucide="calendar-clock" aria-hidden="true"></i>
         단속 예정
       </button>
-      <button type="button" class="ep-tab" data-tab="zones" role="tab" aria-selected="false">
-        <i data-lucide="target"></i>
+
+      <button type="button" class="ep-tab" data-tab="zones" aria-pressed="false">
+        <i data-lucide="target" aria-hidden="true"></i>
         작전구역 검토
       </button>
-      <button type="button" class="ep-tab" data-tab="single" role="tab" aria-selected="false">
-        <i data-lucide="navigation"></i>
+
+      <button type="button" class="ep-tab" data-tab="single" aria-pressed="false">
+        <i data-lucide="navigation" aria-hidden="true"></i>
         단일 함정 순찰 작전
       </button>
-      <button type="button" class="ep-tab" data-tab="multi" role="tab" aria-selected="false">
-        <i data-lucide="anchor"></i>
+
+      <button type="button" class="ep-tab" data-tab="multi" aria-pressed="false">
+        <i data-lucide="anchor" aria-hidden="true"></i>
         다함정 순찰 작전
       </button>
     </div>
@@ -541,7 +545,7 @@
     </section>
 
     <!-- 단속 계획 목록 -->
-    <section class="ep-plan-section">
+    <div class="ep-plan-section">
       <div class="ep-toolbar">
         <label class="ep-search">
           <i data-lucide="search"></i>
@@ -576,7 +580,7 @@
           <tbody id="epPlanBody"></tbody>
         </table>
       </div>
-    </section>
+    </div>
 
     <!-- 지도 -->
     <section class="ep-map-card ep-card" aria-label="단속 구역 지도">
@@ -688,7 +692,8 @@
     </div>
   </div>
 </main>
-  
+
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
