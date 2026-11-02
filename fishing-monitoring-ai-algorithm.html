@@ -438,7 +438,8 @@
   </div>
 
   <!-- 상단 요약 지표 -->
-  <section class="algo-stats">
+  <section class="algo-stats" aria-label="AI 알고리즘 주요 지표">
+    <h2 class="sr-only">AI 알고리즘 주요 지표</h2>
 
     <div class="algo-stat">
       <span>적용 탐지 알고리즘</span>
@@ -481,9 +482,9 @@
   <!-- 처리 흐름 -->
   <section class="algo-panel algo-flow-panel">
 
-    <div class="algo-section-title">
+    <h2 class="algo-section-title">
       처리 흐름 — Detection → Prediction → Response
-    </div>
+    </h2>
 
     <div class="algo-table-scroll">
       <table class="algo-flow-table">
@@ -569,9 +570,9 @@
     <!-- 왼쪽 : 위험도 가중치 -->
     <section class="algo-panel algo-weight-panel">
 
-      <div class="algo-section-title">
+      <h2 class="algo-section-title">
         위험도 가중치 (합 100)
-      </div>
+      </h2>
 
       <div class="algo-weight-list">
 
@@ -652,7 +653,7 @@
     <section class="algo-panel algo-anomaly-panel">
 
       <div class="algo-anomaly-heading">
-        <div class="algo-section-title">진행 중 이상징후 (유형별)</div>
+        <h2 class="algo-section-title">진행 중 이상징후 (유형별)</h2>
         <span class="algo-outline-pill">탐지 알고리즘</span>
       </div>
 
@@ -745,10 +746,7 @@
   </div>
 
 </main>
-
-<!-- Chart.js 로컬 파일 -->
-<script src="./js/chart.umd.js" defer></script>
-   
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
@@ -758,5 +756,7 @@
   aria-hidden="true"
 ></div>
 
+<!-- Chart.js 로컬 파일 -->
+<script src="./js/chart.umd.js" defer></script>
 </body>
 </html>
