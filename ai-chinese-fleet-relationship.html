@@ -665,7 +665,7 @@
                     class="is-active"
                     data-cn-view="graph"
                     role="tab"
-                    aria-controls="cnGraphPanel"
+                    aria-controls="cnGraphStage"
                     aria-selected="true"
                   >
                     <i data-lucide="share-2" aria-hidden="true"></i>
@@ -724,10 +724,11 @@
 
                 <!-- 캡처한 그래프 이미지 -->
                 <div
-                    id="cnGraphPanel"
-                    role="tabpanel"
-                    aria-labelledby="cnTabGraph"
-                  >
+                  id="cnGraphStage"
+                  class="cn-graph-stage"
+                  role="tabpanel"
+                  aria-labelledby="cnTabGraph"
+                >
                   <img
                     src="./img/graph-img.png"
                     alt="중국 선단 네트워크 관계 그래프. 보라색 노드는 선단 그룹을 나타냅니다."
