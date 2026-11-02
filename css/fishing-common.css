@@ -20202,7 +20202,7 @@ body:has(.ai-algorithm-page) .top-header {
   border-bottom: 1px solid #dce5f1;
 }
 
-.nk-news-item strong {
+.nk-news-item h2 {
   display: block;
   margin-bottom: 5px;
   color: #334b6d;
