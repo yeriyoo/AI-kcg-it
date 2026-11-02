@@ -522,7 +522,12 @@
       </div>
 
       <!-- 현장 보고내역 -->
-      <div class="ec-panel active" id="ec-reports">
+      <div
+        class="ec-panel active"
+        id="ec-reports"
+        role="tabpanel"
+        aria-labelledby="ecTabReports"
+      >
 
         <!-- 검색 필터 -->
         <div class="ec-filter-card">
@@ -698,7 +703,13 @@
       </div>
 
       <!-- 함정 보고 수신 내역 -->
-      <div class="ec-panel" id="ec-received" hidden>
+      <div
+          class="ec-panel"
+          id="ec-received"
+          role="tabpanel"
+          aria-labelledby="ecTabReceived"
+          hidden
+        >
         <div class="ec-empty">
           <i data-lucide="inbox"></i>
           <strong>함정 보고 수신 내역</strong>
@@ -707,7 +718,13 @@
       </div>
 
       <!-- 분류체계·기준 -->
-      <div class="ec-panel" id="ec-classification" hidden>
+      <div
+          class="ec-panel"
+          id="ec-classification"
+          role="tabpanel"
+          aria-labelledby="ecTabClassification"
+          hidden
+        >
         <div class="ec-empty">
           <i data-lucide="list-tree"></i>
           <strong>분류체계·기준</strong>
