@@ -34946,6 +34946,13 @@ body:has(.law-page) .top-header {
   overscroll-behavior: contain;
 }
 
+.sargassum-page .sg-range-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 /* =========================================================
   Responsive - 1600px
 ========================================================= */

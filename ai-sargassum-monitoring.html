@@ -554,13 +554,25 @@
           표류 예측 실행
         </button>
 
-        <div class="sg-subtabs" role="tablist" aria-label="설정 항목">
-          <button type="button" class="active" data-sg-tab="prediction" role="tab" aria-selected="true">예측</button>
-          <button type="button" data-sg-tab="result" role="tab" aria-selected="false">결과</button>
-          <button type="button" data-sg-tab="data" role="tab" aria-selected="false">데이터</button>
-        </div>
+      <div class="sg-subtabs" role="tablist" aria-label="설정 항목">
+        <button type="button" id="sgTabPrediction"
+          class="active" data-sg-tab="prediction"
+          role="tab" aria-selected="true"
+          aria-controls="sgPanelPrediction">예측</button>
 
-        <div class="sg-tab-content" data-sg-panel="prediction">
+        <button type="button" id="sgTabResult"
+          data-sg-tab="result"
+          role="tab" aria-selected="false"
+          aria-controls="sgPanelResult" tabindex="-1">결과</button>
+
+        <button type="button" id="sgTabData"
+          data-sg-tab="data"
+          role="tab" aria-selected="false"
+          aria-controls="sgPanelData" tabindex="-1">데이터</button>
+      </div>
+
+
+        <div class="sg-tab-content" id="sgPanelPrediction" data-sg-panel="prediction" role="tabpanel" aria-labelledby="sgTabPrediction">
 
           <div class="sg-field-title">
             <i data-lucide="calendar-days" aria-hidden="true"></i>
@@ -588,7 +600,7 @@
             </label>
           </div>
 
-          <div class="sg-date-chips" aria-label="탐지일 빠른 선택">
+          <div class="sg-date-chips" role="group" aria-label="탐지일 빠른 선택">
             <button type="button" class="active" data-date="2026-10-10">26-10*</button>
             <button type="button" data-date="2026-09-09">26-09</button>
             <button type="button" data-date="2026-08-08">26-08</button>
@@ -608,39 +620,41 @@
             <button type="button" data-model="shin" aria-pressed="false">Shin 2022</button>
           </div>
 
-          <div class="sg-range-grid">
-            <div class="sg-range-field">
-              <label for="sgCurrent">
-                <span>유속 C</span>
-                <output id="sgCurrentValue">0.820</output>
-              </label>
-              <input id="sgCurrent" type="range" min="0" max="2" step="0.001" value="0.82">
+          
+        <div class="sg-range-grid">
+          <div class="sg-range-field">
+            <div class="sg-range-heading">
+              <label for="sgCurrent">유속 C</label>
+              <output id="sgCurrentValue" for="sgCurrent">0.820</output>
             </div>
+            <input id="sgCurrent" type="range" min="0" max="2" step="0.001" value="0.82">
+          </div>
 
-            <div class="sg-range-field">
-              <label for="sgWind">
-                <span>풍속 W</span>
-                <output id="sgWindValue">0.011</output>
-              </label>
-              <input id="sgWind" type="range" min="0" max="0.03" step="0.001" value="0.011">
+          <div class="sg-range-field">
+            <div class="sg-range-heading">
+              <label for="sgWind">풍속 W</label>
+              <output id="sgWindValue" for="sgWind">0.011</output>
             </div>
+            <input id="sgWind" type="range" min="0" max="0.03" step="0.001" value="0.011">
           </div>
+        </div>
 
-          <div class="sg-range-field sg-range-full">
-            <label for="sgHours">
-              <span>예측 기간</span>
-              <output id="sgHoursValue">+48h</output>
-            </label>
-            <input id="sgHours" type="range" min="12" max="168" step="12" value="48">
+        <div class="sg-range-field sg-range-full">
+          <div class="sg-range-heading">
+            <label for="sgHours">예측 기간</label>
+            <output id="sgHoursValue" for="sgHours">+48h</output>
           </div>
+          <input id="sgHours" type="range" min="12" max="168" step="12" value="48">
+        </div>
 
-          <div class="sg-range-field sg-range-full">
-            <label for="sgFar">
-              <span>seed FAR ≥</span>
-              <output id="sgFarValue">2.0e-3</output>
-            </label>
-            <input id="sgFar" type="range" min="0" max="0.02" step="0.001" value="0.002">
+        <div class="sg-range-field sg-range-full">
+          <div class="sg-range-heading">
+            <label for="sgFar">seed FAR ≥</label>
+            <output id="sgFarValue" for="sgFar">2.0e-3</output>
           </div>
+          <input id="sgFar" type="range" min="0" max="0.02" step="0.001" value="0.002">
+        </div>
+
 
           <p class="sg-seed-info">seed 0개 · 신고 0개</p>
 
@@ -650,11 +664,11 @@
           </button>
         </div>
 
-        <div class="sg-tab-content" data-sg-panel="result" hidden>
+        <div class="sg-tab-content" id="sgPanelResult" data-sg-panel="result" role="tabpanel" aria-labelledby="sgTabResult" hidden>
           <div class="sg-empty-state">표류 예측 결과가 없습니다.</div>
         </div>
 
-        <div class="sg-tab-content" data-sg-panel="data" hidden>
+        <div class="sg-tab-content" id="sgPanelData" data-sg-panel="data" role="tabpanel" aria-labelledby="sgTabData" hidden>
           <div class="sg-empty-state">등록된 탐지 데이터가 없습니다.</div>
         </div>
 
@@ -705,7 +719,7 @@
   </main>
 
 
-
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
