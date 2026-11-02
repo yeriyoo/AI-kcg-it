@@ -475,35 +475,35 @@
 
   <!-- KPI -->
   <section class="permit-kpis" aria-label="허가선박 주요 지표">
-    <article class="permit-kpi">
+    <div class="permit-kpi">
       <span>허가 척수</span>
       <strong>1,077<small>척</small></strong>
-    </article>
+    </div>
 
-    <article class="permit-kpi">
+    <div class="permit-kpi">
       <span>선적항</span>
       <strong>33<small>곳</small></strong>
-    </article>
+    </div>
 
-    <article class="permit-kpi">
+    <div class="permit-kpi">
       <span>할당량 합계</span>
       <strong>50,021<small> t</small></strong>
-    </article>
+    </div>
 
-    <article class="permit-kpi">
+    <div class="permit-kpi">
       <span>1월 이후 추가 허가</span>
       <strong>171<small>척</small></strong>
-    </article>
+    </div>
 
-    <article class="permit-kpi">
+    <div class="permit-kpi">
       <span>입출역 보고</span>
       <strong>11,232<small>건</small></strong>
-    </article>
+    </div>
   </section>
 
   <!-- 분석 탭 -->
-  <div class="permit-tabs" role="tablist" aria-label="허가선박 분석 메뉴">
-    <button type="button" class="active" aria-selected="true">어업별 분석</button>
+  <div class="permit-tabs" role="group" aria-label="허가선박 분석 메뉴">
+    <button type="button" class="active">어업별 분석</button>
     <button type="button">운반선 분석</button>
     <button type="button">제원 분포</button>
     <button type="button">허가 추이</button>
@@ -518,7 +518,7 @@
   </div>
 
   <!-- 상단 그래프 -->
-  <section class="permit-charts">
+  <div class="permit-charts">
 
     <article class="permit-panel permit-donut-panel">
       <h2>업종 구성</h2>
@@ -534,7 +534,7 @@
       </div>
     </article>
 
-  </section>
+  </div>
 
   <!-- 업종별 제원 및 할당량 -->
   <section class="permit-panel permit-stat-panel">
@@ -699,11 +699,7 @@
   </section>
 
 </main>
-
-
-<!-- Chart.js 로컬 파일 -->
-<script src="./js/chart.umd.js" defer></script>
-   
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
@@ -713,5 +709,8 @@
   aria-hidden="true"
 ></div>
 
+
+<!-- Chart.js 로컬 파일 -->
+<script src="./js/chart.umd.js" defer></script>
 </body>
 </html>
