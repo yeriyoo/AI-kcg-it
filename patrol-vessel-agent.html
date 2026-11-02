@@ -450,62 +450,75 @@
 
    
    <!-- =========================================
-     함정 단말 Agent (SFR-16)
-========================================= -->
-<main id="mainContent" class="vessel-agent-page" tabindex="-1">
+        함정 단말 Agent (SFR-16)
+    ========================================= -->
+    <main id="mainContent" class="vessel-agent-page" tabindex="-1">
 
-  <div class="va-content">
+      <div class="va-content">
 
-    <!-- 페이지 제목 -->
-    <div class="va-heading">
-      <div class="va-heading-left">
-        <i data-lucide="monitor"></i>
-        <h1>함정 단말 Agent</h1>
-        <span class="va-heading-desc">
-          함정 단말 접속 현황 · 위험선박 전달(수동·자동) · 발송 이력 · 채널 진단
-        </span>
-      </div>
-    </div>
+        <!-- 페이지 제목 -->
+        <div class="va-heading">
+          <div class="va-heading-left">
+            <i data-lucide="monitor"></i>
+            <h1>함정 단말 Agent</h1>
+            <span class="va-heading-desc">
+              함정 단말 접속 현황 · 위험선박 전달(수동·자동) · 발송 이력 · 채널 진단
+            </span>
+          </div>
+        </div>
 
-    <!-- 탭 -->
+        <!-- 탭 -->
+        <!-- 탭 -->
     <div class="va-tabs" role="tablist" aria-label="함정 단말 Agent 메뉴">
 
       <button
         type="button"
+        id="vaTabStatus"
         class="va-tab active"
         data-va-tab="status"
         role="tab"
         aria-selected="true"
+        aria-controls="va-status"
+        tabindex="0"
       >
         단말 접속 현황
       </button>
 
       <button
         type="button"
+        id="vaTabDelivery"
         class="va-tab"
         data-va-tab="delivery"
         role="tab"
         aria-selected="false"
+        aria-controls="va-delivery"
+        tabindex="-1"
       >
         위험선박 전달
       </button>
 
       <button
         type="button"
+        id="vaTabHistory"
         class="va-tab"
         data-va-tab="history"
         role="tab"
         aria-selected="false"
+        aria-controls="va-history"
+        tabindex="-1"
       >
         발송 이력
       </button>
 
       <button
         type="button"
+        id="vaTabDiagnosis"
         class="va-tab"
         data-va-tab="diagnosis"
         role="tab"
         aria-selected="false"
+        aria-controls="va-diagnosis"
+        tabindex="-1"
       >
         채널 진단
       </button>
@@ -513,7 +526,7 @@
     </div>
 
     <!-- 단말 접속 현황 -->
-    <section class="va-panel active" id="va-status" role="tabpanel">
+    <div class="va-panel active" id="va-status" role="tabpanel">
 
       <div class="va-toolbar">
         <button type="button" class="va-refresh" id="vaRefresh">
@@ -542,7 +555,7 @@
           <tbody>
             <tr>
               <td>1502함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -551,7 +564,7 @@
 
             <tr>
               <td>2003함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -560,7 +573,7 @@
 
             <tr>
               <td>3001함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -569,7 +582,7 @@
 
             <tr>
               <td>3005함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -578,7 +591,7 @@
 
             <tr>
               <td>3009함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -587,7 +600,7 @@
 
             <tr>
               <td>5001함</td>
-              <td><span class="va-offline" aria-label="미접속"></span></td>
+              <td><span class="va-offline" role="img" aria-label="미접속"></span></td>
               <td>0</td>
               <td>—</td>
               <td>—</td>
@@ -597,39 +610,39 @@
         </table>
       </div>
 
-    </section>
+    </div>
 
     <!-- 위험선박 전달 -->
-    <section class="va-panel" id="va-delivery" role="tabpanel" hidden>
+    <div   class="va-panel" id="va-delivery" role="tabpanel" hidden>
       <div class="va-empty">
         <i data-lucide="send"></i>
         <strong>위험선박 전달</strong>
         <p>위험선박 전달 정보를 표시하는 영역입니다.</p>
       </div>
-    </section>
+    </div>
 
     <!-- 발송 이력 -->
-    <section class="va-panel" id="va-history" role="tabpanel" hidden>
+    <div class="va-panel" id="va-history" role="tabpanel" hidden>
       <div class="va-empty">
         <i data-lucide="history"></i>
         <strong>발송 이력</strong>
         <p>함정 단말 발송 이력을 표시하는 영역입니다.</p>
       </div>
-    </section>
+    </div>
 
     <!-- 채널 진단 -->
-    <section class="va-panel" id="va-diagnosis" role="tabpanel" hidden>
+    <div class="va-panel" id="va-diagnosis" role="tabpanel" hidden>
       <div class="va-empty">
         <i data-lucide="activity"></i>
         <strong>채널 진단</strong>
         <p>통신 채널 진단 정보를 표시하는 영역입니다.</p>
       </div>
-    </section>
+    </div>
 
   </div>
 </main>
 
-  
+</div>
 </div>
 
 <!-- 모바일 사이드바 오버레이 -->
