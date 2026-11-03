@@ -247,7 +247,7 @@
                 text-sm font-semibold
                 text-black
               "
-              aria-pressed="true"
+              aria-selected="true"
             >
               KST
             </button>
@@ -261,7 +261,7 @@
                 text-sm font-semibold
                 text-[#ADADAD]
               "
-              aria-pressed="false"
+              aria-selected="false"
             >
               UTC
             </button>
@@ -1067,7 +1067,7 @@
                     text-sm font-semibold
                     text-black
                   "
-                  aria-pressed="true"
+                  aria-selected="true"
                 >
                   KST
                 </button>
@@ -1081,7 +1081,7 @@
                     text-sm font-semibold
                     text-[#ADADAD]
                   "
-                  aria-pressed="false"
+                  aria-selected="false"
                 >
                   UTC
                 </button>
@@ -1951,7 +1951,7 @@
                   text-black
                 "
                 role="tab"
-                aria-pressed="true"
+                aria-selected="true"
                 data-radius="20"
               >
                 20NM
@@ -1974,7 +1974,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-pressed="false"
+                aria-selected="false"
                 data-radius="50"
               >
                 50NM
@@ -1997,7 +1997,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-pressed="false"
+                aria-selected="false"
                 data-radius="100"
               >
                 100NM
@@ -2020,7 +2020,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-pressed="false"
+                aria-selected="false"
                 data-radius="200"
               >
                 200NM
@@ -2592,7 +2592,7 @@
           id="emergencyAlertOpen"
           type="button"
           aria-label="긴급 알림"
-          aria-pressed="true"
+          aria-selected="true"
           class="map-toolbar-item
             relative
             flex h-10 w-10 shrink-0
@@ -3098,7 +3098,7 @@
                     text-black
                   "
                   data-filter="all"
-                  aria-pressed="true"
+                  aria-selected="true"
                 >
                   전체
                 </button>
@@ -3117,7 +3117,7 @@
                     text-[#777777]
                   "
                   data-filter="danger"
-                  aria-pressed="false"
+                  aria-selected="false"
                 >
                   위험
                 </button>
@@ -3470,47 +3470,39 @@
                     >
 
                     <svg
-                        class="absolute inset-0 h-full w-full"
-                        viewBox="0 0 145 105"
-                        fill="none"
+                      class="absolute inset-0 h-full w-full"
+                      viewBox="0 0 145 105"
+                      fill="none"
                     >
-
-                        <!-- Background -->
-                        <path
-                        d="
-                            M 16 82
-                            A 56 56 0 0 1 128 82
-                        "
+                      <!-- Background -->
+                      <path
+                        d="M 16 82 A 56 56 0 0 1 128 82"
                         stroke="#191919"
                         stroke-width="16"
                         stroke-linecap="round"
                         fill="none"
-                        >
+                      ></path>
 
-                        <!-- Progress -->
-                        <path
-                        d="
-                            M 16 82
-                            A 56 56 0 0 1 128 82
-                        "
+                      <!-- Progress -->
+                      <path
+                        d="M 16 82 A 56 56 0 0 1 128 82"
                         stroke="#FFFFFF"
                         stroke-width="16"
                         stroke-linecap="round"
                         fill="none"
                         pathLength="100"
                         stroke-dasharray="20 100"
-                        >
+                      ></path>
 
-                        <!-- Current Point -->
-                        <circle
+                      <!-- Current Point -->
+                      <circle
                         cx="37"
                         cy="43"
                         r="10"
                         fill="#8A8A8A"
                         stroke="#FFFFFF"
                         stroke-width="1.5"
-                        >
-
+                      ></circle>
                     </svg>
 
 
