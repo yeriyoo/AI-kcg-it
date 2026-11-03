@@ -247,7 +247,7 @@
                 text-sm font-semibold
                 text-black
               "
-              aria-selected="true"
+              aria-pressed="true"
             >
               KST
             </button>
@@ -261,7 +261,7 @@
                 text-sm font-semibold
                 text-[#ADADAD]
               "
-              aria-selected="false"
+              aria-pressed="false"
             >
               UTC
             </button>
@@ -1067,7 +1067,7 @@
                     text-sm font-semibold
                     text-black
                   "
-                  aria-selected="true"
+                  aria-pressed="true"
                 >
                   KST
                 </button>
@@ -1081,7 +1081,7 @@
                     text-sm font-semibold
                     text-[#ADADAD]
                   "
-                  aria-selected="false"
+                  aria-pressed="false"
                 >
                   UTC
                 </button>
@@ -1932,7 +1932,7 @@
               class="
                 flex items-center gap-2
               "
-              role="tablist"
+              role="group"
               aria-label="주변 선박 조회 반경"
             >
 
@@ -1950,8 +1950,7 @@
                   text-sm font-semibold
                   text-black
                 "
-                role="tab"
-                aria-selected="true"
+                aria-pressed="true"
                 data-radius="20"
               >
                 20NM
@@ -1973,8 +1972,7 @@
                   hover:bg-[#232323]
                   hover:text-[#E7E7E7]
                 "
-                role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="50"
               >
                 50NM
@@ -1996,8 +1994,7 @@
                   hover:bg-[#232323]
                   hover:text-[#E7E7E7]
                 "
-                role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="100"
               >
                 100NM
@@ -2019,8 +2016,7 @@
                   hover:bg-[#232323]
                   hover:text-[#E7E7E7]
                 "
-                role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="200"
               >
                 200NM
@@ -2592,7 +2588,6 @@
           id="emergencyAlertOpen"
           type="button"
           aria-label="긴급 알림"
-          aria-selected="true"
           class="map-toolbar-item
             relative
             flex h-10 w-10 shrink-0
@@ -2825,7 +2820,7 @@
           <!-- 16 출항 준비 -->
           <button
             type="button"
-            aria-label="항만 정보"
+            aria-label="출항 준비"
             class="map-toolbar-item
               flex h-10 w-10 shrink-0
               items-center justify-center
@@ -2983,6 +2978,8 @@
         <button
           id="situationPanelToggle"
           type="button"
+          aria-label="상황 요약 접기"
+          aria-controls="situationPanelContent"
           aria-expanded="false"
           class="text-[#E7E7E7] hover:text-white"
         >
@@ -3098,7 +3095,7 @@
                     text-black
                   "
                   data-filter="all"
-                  aria-selected="true"
+                  aria-pressed="true"
                 >
                   전체
                 </button>
@@ -3117,7 +3114,7 @@
                     text-[#777777]
                   "
                   data-filter="danger"
-                  aria-selected="false"
+                  aria-pressed="false"
                 >
                   위험
                 </button>
@@ -3985,17 +3982,18 @@
 
       <!-- Collapsed Button -->
         <button
-        id="situationPanelCollapsed"
-        disabled
-        type="button"
-        class="
+          id="situationPanelCollapsed"
+          disabled
+          type="button"
+          aria-label="상황 요약 펼치기"
+          class="
             hidden
             absolute right-0 top-3 z-40
             w-[44px]
             flex-col
             overflow-hidden
             rounded
-        "
+          "
         >
         <!-- Arrow -->
         <span
