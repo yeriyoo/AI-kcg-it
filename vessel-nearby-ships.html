@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>함정용 플랫폼 - 주변선박</title>
 
@@ -67,7 +67,7 @@
             shrink-0
             object-contain
           "
-        />
+        >
       </span>
 
       SeaOn
@@ -738,7 +738,7 @@
                 opacity-0
                 transition-all duration-200
               "
-            />
+            >
 
             <button
               id="headerSearchToggle"
@@ -843,7 +843,7 @@
                 outline-none
                 focus:border-[#E7E7E7]
               "
-            />
+            >
 
             <i
               data-lucide="search"
@@ -1321,7 +1321,7 @@
       <!-- ===================================================
            MAP
       ==================================================== -->
-      <section class="relative min-w-0 flex-1 overflow-hidden">
+      <div class="relative min-w-0 flex-1 overflow-hidden">
 
 
         <!-- 실제 지도 SDK 영역 -->
@@ -1365,7 +1365,7 @@
                   outline-none
                   focus:border-[#E7E7E7]
                 "
-              />
+              >
               <i
                 data-lucide="search"
                 aria-hidden="true"
@@ -1439,7 +1439,7 @@
             src="./img/warship.svg"
             alt="함정"
             class="h-6 w-6"
-        />
+        >
         </div>
 
         <div
@@ -1465,7 +1465,7 @@
             src="./img/ship.svg"
             alt="선박"
             class="h-6 w-6"
-        />
+        >
         </div>
 
 
@@ -1556,7 +1556,7 @@
                   src="./img/ship.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>선박</span>
               </li>
 
@@ -1567,7 +1567,7 @@
                   src="./img/buoey.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>어구</span>
               </li>
 
@@ -1578,7 +1578,7 @@
                   src="./img/warship.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>함정</span>
               </li>
 
@@ -1951,7 +1951,7 @@
                   text-black
                 "
                 role="tab"
-                aria-selected="true"
+                aria-pressed="true"
                 data-radius="20"
               >
                 20NM
@@ -1974,7 +1974,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="50"
               >
                 50NM
@@ -1997,7 +1997,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="100"
               >
                 100NM
@@ -2020,7 +2020,7 @@
                   hover:text-[#E7E7E7]
                 "
                 role="tab"
-                aria-selected="false"
+                aria-pressed="false"
                 data-radius="200"
               >
                 200NM
@@ -2515,7 +2515,7 @@
           <button
             id="alertSettingsOpen"
             type="button"
-            aria-label="경보 설정"
+            aria-label="기상 정보"
             class="map-toolbar-item
               flex h-10 w-10 shrink-0
               items-center justify-center
@@ -2532,7 +2532,7 @@
 
           <!-- 02 경보 설정 -->
           <button
-            id="alertSettingsOpen"
+            id="warningSettingsOpen"
             type="button"
             aria-label="경보 설정"
             class="map-toolbar-item
@@ -2949,7 +2949,7 @@
         </div>
       </div>
 
-      </section>
+      </div>
 
 
       <!-- =====================================================
@@ -3017,7 +3017,7 @@
          <!-- =================================================
             위험선박
         ================================================== -->
-        <section class="mb-3">
+        <div class="mb-3">
 
           <div
             class="
@@ -3190,7 +3190,7 @@
               >
 
                 <!-- 대상 : 3줄 -->
-                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+                <span class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
 
                   <span
                     class="
@@ -3224,22 +3224,22 @@
                     YUN STAR
                   </span>
 
-                </div>
+                </span>
 
                 <!-- 국적 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   대한민국
-                </div>
+                </span>
 
                 <!-- 속력 -->
-                <div class="text-[17px] text-[#E7E7E7]">
+                <span class="text-[17px] text-[#E7E7E7]">
                   0.2
-                </div>
+                </span>
 
                 <!-- 조업상태 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   조업중
-                </div>
+                </span>
               </button>
 
 
@@ -3259,7 +3259,7 @@
               >
 
                 <!-- 대상 : 3줄 -->
-                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+                <span class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
 
                   <span
                     class="
@@ -3293,22 +3293,22 @@
                     P-119
                   </span>
 
-                </div>
+                </span>
 
                 <!-- 국적 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   대한민국
-                </div>
+                </span>
 
                 <!-- 속력 -->
-                <div class="text-[17px] text-[#E7E7E7]">
+                <span class="text-[17px] text-[#E7E7E7]">
                   0.1
-                </div>
+                </span>
 
                 <!-- 조업상태 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   조업중
-                </div>
+                </span>
               </button>
 
 
@@ -3329,7 +3329,7 @@
  
 
                 <!-- 대상 : 3줄 -->
-                <div class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
+                <span class="flex min-w-0 flex-col items-start gap-1.5 pr-2">
 
                   <span
                     class="
@@ -3363,31 +3363,31 @@
                     KCG503
                   </span>
 
-                </div>
+                </span>
 
                 <!-- 국적 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   대한민국
-                </div>
+                </span>
 
                 <!-- 속력 -->
-                <div class="text-[17px] text-[#E7E7E7]">
+                <span class="text-[17px] text-[#E7E7E7]">
                   0
-                </div>
+                </span>
 
                 <!-- 조업상태 -->
-                <div class="text-base text-[#E7E7E7]">
+                <span class="text-base text-[#E7E7E7]">
                   조업중
-                </div>
+                </span>
               </button>
-
-            </section>
+              </div>
+            </div>
 
 
           <!-- =================================================
                 해역 위험지수
             ================================================== -->
-            <section class="mb-3">
+            <div class="mb-3">
 
             <!-- Accordion Header -->
             <button
@@ -3485,7 +3485,7 @@
                         stroke-width="16"
                         stroke-linecap="round"
                         fill="none"
-                        />
+                        >
 
                         <!-- Progress -->
                         <path
@@ -3499,7 +3499,7 @@
                         fill="none"
                         pathLength="100"
                         stroke-dasharray="20 100"
-                        />
+                        >
 
                         <!-- Current Point -->
                         <circle
@@ -3509,7 +3509,7 @@
                         fill="#8A8A8A"
                         stroke="#FFFFFF"
                         stroke-width="1.5"
-                        />
+                        >
 
                     </svg>
 
@@ -3621,13 +3621,13 @@
 
             </div>
 
-            </section>
+            </div>
 
 
           <!-- =================================================
             WEATHER
         ================================================== -->
-        <section class="mb-3">
+        <div class="mb-3">
 
         <!-- Accordion Header -->
         <button
@@ -3835,13 +3835,13 @@
 
         </div>
 
-        </section>
+        </div>
 
 
           <!-- =================================================
             ALERT HISTORY
         ================================================== -->
-        <section>
+        <div>
 
         <!-- Accordion Header -->
         <button
@@ -3987,7 +3987,7 @@
         </button>
       </div>
 
-        </section>
+        </div>
 
         </div>
 

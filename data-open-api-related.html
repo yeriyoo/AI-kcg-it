@@ -2,12 +2,12 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>AI-HUB - 오픈 API(연관데이터) 상세</title>
 
@@ -55,7 +55,7 @@
   <!-- =====================================================
        LOGO
   ====================================================== -->
-  <h1
+  <div
     class="
       mr-20
       flex shrink-0
@@ -79,12 +79,12 @@
         shrink-0
         object-contain
       "
-    />
+    >
 
     </span>
 
     AI-HUB
-  </h1>
+  </div>
 
 
   <!-- =====================================================
@@ -445,358 +445,6 @@
         shadow-2xl
       "
     >
-    <nav
-      id="mobileMainNav"
-      class="hidden"
-      aria-label="모바일 주요 메뉴"
-    ></nav>
-
-      <!-- CURRENT TIME -->
-      <div
-        class="
-          flex h-[64px]
-          flex-col justify-center
-          border-b border-[#476187]
-          px-4
-        "
-      >
-        <span
-          class="
-            text-sm
-            text-[#99ABC6]
-          "
-        >
-          현재 시각
-        </span>
-
-        <strong
-          id="accountCurrentTime"
-          class="
-            mt-1
-            text-base
-            font-semibold
-            text-white
-          "
-        >
-          2026-10-06 15:48:55
-        </strong>
-      </div>
-
-
-      <!-- TIMEZONE -->
-      <div
-        class="
-          flex h-[48px]
-          items-center justify-between
-          border-b border-[#476187]
-          px-4
-        "
-      >
-        <span class="text-sm text-[#99ABC6]">
-          시간대
-        </span>
-
-        <div
-          class="
-            flex h-7
-            overflow-hidden
-            rounded
-            bg-[#476187]
-          "
-        >
-          <button
-            id="timezoneKst"
-            type="button"
-            data-timezone="Asia/Seoul"
-            class="
-              timezone-button active
-              flex min-w-[44px]
-              items-center justify-center
-              bg-white
-              px-3
-              text-sm font-semibold
-              text-[#142A4D]
-            "
-          >
-            KST
-          </button>
-
-          <button
-            id="timezoneUtc"
-            type="button"
-            data-timezone="UTC"
-            class="
-              timezone-button
-              flex min-w-[44px]
-              items-center justify-center
-              bg-[#476187]
-              px-3
-              text-sm font-semibold
-              text-[#CBD6EA]
-            "
-          >
-            UTC
-          </button>
-        </div>
-      </div>
-
-
-      <!-- TOOLS -->
-      <div
-        class="
-          grid
-          grid-cols-3
-          border-b border-[#476187]
-        "
-      >
-        <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            border-r border-[#476187]
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="download"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            다운로드
-          </span>
-        </button>
-
-
-        <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            border-r border-[#476187]
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="grid-3x3"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            엑셀
-          </span>
-        </button>
-
-
-        <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="printer"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            인쇄
-          </span>
-        </button>
-
-         <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            border-r border-[#476187]
-            border-t border-[#476187
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="shopping-cart"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            신청 장바구니
-          </span>
-        </button>
-
-
-        <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            border-r border-[#476187]
-            border-t border-[#476187
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="bell"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            알림
-          </span>
-        </button>
-
-
-        <button
-          type="button"
-          class="
-            flex flex-col h-14
-            items-center justify-center
-            gap-1
-            border-r border-[#476187]
-            border-t border-[#476187
-            text-[#CBD6EA]
-            hover:bg-[#0046AD]
-            hover:text-white
-          "
-        >
-          <i
-            data-lucide="moon"
-            class="h-5 w-5"
-          ></i>
-
-          <span class="text-sm">
-            다크모드
-          </span>
-        </button>
-      </div>
-
-
-      <!-- ACCOUNT -->
-      <div
-        class="
-          flex h-[52px]
-          items-center gap-3
-          border-b border-[#476187]
-          px-4
-        "
-      >
-        <span
-          class="
-            flex h-8 w-8
-            shrink-0
-            items-center justify-center
-            rounded-full
-            bg-[#476187]
-            text-sm font-semibold
-            text-white
-          "
-        >
-          여
-        </span>
-
-        <strong
-          class="
-            truncate
-            text-base
-            font-semibold
-            text-white
-          "
-        >
-          여한상 (경위)
-        </strong>
-      </div>
-
-
-      <!-- ACCOUNT MENU -->
-      <div
-        class="
-          h-[100px]
-          px-3 py-2
-        "
-      >
-    
-        <button
-          type="button"
-          class="
-            flex h-11 w-full
-            items-center gap-3
-            rounded
-            px-2
-            text-left
-            text-base
-            text-white
-            hover:bg-[#0046AD]
-          "
-        >
-          <i
-            data-lucide="user-round"
-            class="h-5 w-5 text-[#CBD6EA]"
-          ></i>
-
-          <span>내 정보</span>
-        </button>
-
-
-        <button
-          type="button"
-          class="
-            flex h-11 w-full
-            items-center gap-3
-            rounded
-            px-2
-            text-left
-            text-base
-            text-white
-            hover:bg-[#0046AD]
-          "
-        >
-          <i
-            data-lucide="log-out"
-            class="h-5 w-5 text-[#CBD6EA]"
-          ></i>
-
-          <span>로그아웃</span>
-        </button>
-      </div>
-
-    </div>
-
-    <!-- =====================================================
-     USER MENU
-     1650px 이하 / 260 x 372
-    ====================================================== -->
-    <div
-      id="userMenu"
-      class="
-        fixed right-[28px] top-[50px]
-        z-[300]
-        hidden
-        h-[400px] w-[260px]
-        overflow-hidden
-        rounded
-        border border-[#476187]
-        bg-[#142A4D]
-        shadow-2xl
-      "
-    >
       <nav
       id="mobileMainNav"
       class="hidden"
@@ -975,7 +623,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -1016,7 +664,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -1040,7 +688,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -1163,7 +811,7 @@
   <!-- =================================================
        BACK
   ================================================== -->
-  <section class="shrink-0 bg-white">
+  <div class="shrink-0 bg-white">
     <div
       class="
         mx-auto
@@ -1189,7 +837,7 @@
         <span>데이터 목록으로</span>
       </button>
     </div>
-  </section>
+  </div>
 
 
   <!-- =================================================
@@ -1514,7 +1162,7 @@
   <!-- =================================================
        CONTENT
   ================================================== -->
-  <section
+  <div
    id="detailScrollArea"
     class="
       min-h-0
@@ -1595,10 +1243,10 @@
             "
           >
             <colgroup>
-              <col class="w-[18%]" />
-              <col class="w-[32%]" />
-              <col class="w-[18%]" />
-              <col class="w-[32%]" />
+              <col class="w-[18%]" >
+              <col class="w-[32%]" >
+              <col class="w-[18%]" >
+              <col class="w-[32%]" >
             </colgroup>
 
             <tbody>
@@ -2001,10 +1649,13 @@
             선박 종합 스크리닝 정보(사고/제재/위험지표/변경이력)
           </strong>
 
-        </div>
+                </div>
 
       </section>
-    </main>
+
+    </div>
+  </div>
+</main>
     
 
 
@@ -2032,7 +1683,7 @@
       mix-blend-multiply
       drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
     "
-  />
+  >
     </button>
 
   </div>

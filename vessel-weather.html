@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>함정용 플랫폼 - 메인페이지,기상</title>
 
@@ -68,7 +68,7 @@
             shrink-0
             object-contain
           "
-        />
+        >
       </span>
 
       SeaOn
@@ -722,7 +722,6 @@
             <input
               id="headerSearchInput"
               type="text"
-              id="vesselSearchInput"
               name="vesselSearch"
               aria-label="선박명 검색"
               placeholder="선박명 · MMSI · IMO · 위도, 경도"
@@ -739,7 +738,7 @@
                 opacity-0
                 transition-all duration-200
               "
-            />
+            >
 
             <button
               id="headerSearchToggle"
@@ -844,7 +843,7 @@
                 outline-none
                 focus:border-[#E7E7E7]
               "
-            />
+            >
 
             <i
               data-lucide="search"
@@ -1368,7 +1367,7 @@
                   outline-none
                   focus:border-[#E7E7E7]
                 "
-              />
+              >
               <i
                 data-lucide="search"
                 aria-hidden="true"
@@ -1443,7 +1442,7 @@
             src="./img/warship.svg"
             alt="함정"
             class="h-6 w-6"
-        />
+        >
         </div>
 
         <div
@@ -1469,7 +1468,7 @@
             src="./img/ship.svg"
             alt="선박"
             class="h-6 w-6"
-        />
+        >
         </div>
 
 
@@ -1560,7 +1559,7 @@
                   src="./img/ship.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>선박</span>
               </li>
 
@@ -1571,7 +1570,7 @@
                   src="./img/buoey.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>어구</span>
               </li>
 
@@ -1582,7 +1581,7 @@
                   src="./img/warship.svg"
                   alt=""
                   class="h-5 w-5 shrink-0"
-                />
+                >
                 <span>함정</span>
               </li>
 
@@ -1942,8 +1941,10 @@
                     text-base font-semibold
                     text-black
                 "
+                id="weatherTab"
                 role="tab"
                 data-weather-tab="weather"
+                aria-controls="weatherTabWeather"
                 aria-selected="true"
                 >
                 기상 정보
@@ -1952,6 +1953,8 @@
 
                 <!-- 기상특보 -->
                 <button
+                id="warningTabButton"
+                aria-controls="weatherTabWarning"
                 type="button"
                 class="
                     weather-tab
@@ -1979,7 +1982,9 @@
                     text-[#777777]
                 "
                 role="tab"
+                id="typhoonTabButton"
                 data-weather-tab="typhoon"
+                aria-controls="weatherTabTyphoon"
                 aria-selected="false"
                 >
                 태풍정보
@@ -1992,13 +1997,15 @@
                 01. WEATHER
             ================================================== -->
             <div
-                id="weatherTabWeather"
-                class="
-                weather-tab-content
-                flex min-h-0 flex-1
-                flex-col
-                "
-            >
+              id="weatherTabWeather"
+              role="tabpanel"
+              aria-labelledby="weatherTab"
+              class="
+                  weather-tab-content
+                  flex min-h-0 flex-1
+                  flex-col
+              "
+          >
 
                 <!-- ===============================================
                     CURRENT WEATHER
@@ -2053,7 +2060,7 @@
                         h-[46px] w-[54px]
                         object-contain
                         "
-                    />
+                    >
 
                     <strong
                         class="
@@ -2189,7 +2196,7 @@
                 <!-- Row -->
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">오늘 17시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2198,7 +2205,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">오늘 20시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>21.3°</span>
                     <span>6.6</span>
                     <span>1</span>
@@ -2207,7 +2214,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">오늘 23시</span>
-                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>17.5°</span>
                     <span>3.2</span>
                     <span>0.5</span>
@@ -2216,7 +2223,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 02시</span>
-                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>16.2°</span>
                     <span>1.9</span>
                     <span>0.7</span>
@@ -2225,7 +2232,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 05시</span>
-                    <img src="./img/sunny.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/sunny.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>16.7°</span>
                     <span>4.2</span>
                     <span>0.9</span>
@@ -2234,7 +2241,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 08시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>19.7°</span>
                     <span>7</span>
                     <span>1</span>
@@ -2243,7 +2250,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 11시</span>
-                    <img src="./img/sunny.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/sunny.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>23.5°</span>
                     <span>4</span>
                     <span>0.6</span>
@@ -2252,7 +2259,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 14시</span>
-                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2261,7 +2268,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 17시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2270,7 +2277,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 20시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2279,7 +2286,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/02 23시</span>
-                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloud-sun.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2288,7 +2295,7 @@
 
                 <div class="grid grid-cols-[90px_45px_50px_45px_45px_45px] items-center border-b border-[#232323] px-3 py-[8px] text-center text-base m-3">
                     <span class="text-left">09/03 02시</span>
-                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" />
+                    <img src="./img/cloudy.svg" alt="" class="mx-auto h-5 w-6 object-contain" >
                     <span>24.3°</span>
                     <span>5.2</span>
                     <span>1.1</span>
@@ -2304,13 +2311,15 @@
                 02. WEATHER WARNING
             ================================================== -->
             <div
-                id="weatherTabWarning"
-                class="
-                weather-tab-content
-                hidden min-h-0 flex-1
-                flex-col
-                "
-            >
+              id="weatherTabWarning"
+              role="tabpanel"
+              aria-labelledby="warningTabButton"
+              class="
+              weather-tab-content
+              hidden min-h-0 flex-1
+              flex-col
+              "
+          >
 
                 <!-- Location -->
                 <div
@@ -2454,6 +2463,8 @@
             ================================================== -->
             <div
                 id="weatherTabTyphoon"
+                role="tabpanel"
+                aria-labelledby="typhoonTabButton"
                 class="
                 weather-tab-content
                 hidden min-h-0 flex-1
@@ -2524,7 +2535,7 @@
                         shrink-0
                         object-contain
                     "
-                    />
+                    >
 
                     <strong
                     class="
@@ -2808,9 +2819,9 @@
 
           <!-- 01 기상 정보 -->
           <button
-            id="alertSettingsOpen"
+            id="weatherAlertOpen"
             type="button"
-            aria-label="경보 설정"
+            aria-label="기상 정보"
             class="map-toolbar-item
               flex h-10 w-10 shrink-0
               items-center justify-center
@@ -3361,7 +3372,7 @@
     <!-- =======================================
          최우선 작전 참고 선박
     ======================================== -->
-    <section class="situation-section situation-vessel-section">
+    <div class="situation-section situation-vessel-section">
 
       <div class="situation-section-header">
 
@@ -3489,7 +3500,7 @@
 
               <h3>
                 선명 미상
-                <span aria-label="중국 국적">🇨🇳</span>
+                <span role="img" aria-label="중국 국적">🇨🇳</span>
               </h3>
 
               <p>MMSI 412400888</p>
@@ -3652,7 +3663,7 @@
         </p>
 
       </div>
-    </section>
+    </div>
 
     <!-- =======================================
          기상 특보

@@ -2,12 +2,12 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>AI-HUB - 마이페이지</title>
 
@@ -55,7 +55,7 @@
   <!-- =====================================================
        LOGO
   ====================================================== -->
-  <h1
+  <div
     class="
       mr-20
       flex shrink-0
@@ -79,12 +79,12 @@
         shrink-0
         object-contain
       "
-    />
+    >
 
     </span>
 
     AI-HUB
-  </h1>
+  </div>
 
 
   <!-- =====================================================
@@ -613,7 +613,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -654,7 +654,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -678,7 +678,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -836,7 +836,7 @@
       <!-- =================================================
           CONTENT
       ================================================== -->
-      <section>
+      <div>
         <div
           class="
             mx-auto
@@ -1068,14 +1068,11 @@
           ================================================== -->
           <div class="min-w-0 flex-1">
 
-
-            <!-- =====================================================
-                내 정보
-            ====================================================== -->
-            <section
-              data-mypage-panel="profile"
-              class="mypage-panel"
-            >
+                <!-- 내 정보 -->
+                <div
+                  data-mypage-panel="profile"
+                  class="mypage-panel"
+                >
 
               <h2 class="mb-4 text-lg font-semibold">
                 내 정보
@@ -1323,7 +1320,7 @@
                           text-base
                           outline-none
                         "
-                      />
+                      >
 
                       <i
                         data-lucide="eye"
@@ -1366,7 +1363,7 @@
                           text-base
                           outline-none
                         "
-                      />
+                      >
 
                       <i
                         data-lucide="eye-off"
@@ -1406,7 +1403,7 @@
                           placeholder:text-[#99ABC6]
                           outline-none
                         "
-                      />
+                      >
 
                       <i
                         data-lucide="eye-off"
@@ -1446,13 +1443,10 @@
 
               </div>
 
-            </section>
-
-
-
+            </div>
             
         </div>
-      </section>
+      </div>
 
     </main>
   
@@ -1460,15 +1454,17 @@
          CHATBOT FLOATING BUTTON
     ====================================================== -->
     <button
+    type="button"
+     aria-label="AI 챗봇 열기"
       class="
-    fixed bottom-6 right-6
-    z-50
-    h-14 w-14
-    rounded-full
-    bg-transparent
-    shadow-none
-  "
->
+      fixed bottom-6 right-6
+          z-50
+          h-14 w-14
+          rounded-full
+          bg-transparent
+          shadow-none
+        "
+      >
       <img
     src="./img/chat-bot.png"
     alt="AI 챗봇"
@@ -1480,7 +1476,7 @@
       mix-blend-multiply
       drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
     "
-  />
+  >
     </button>
 
   </div>

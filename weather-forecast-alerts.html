@@ -34,10 +34,11 @@
     <header class="topbar">
 
       <div class="brand-area">
-        <a class="brand" aria-label="기상포털 홈">
+       <div class="brand-area">
+        <div class="brand" aria-label="기상포털 홈" role="group">
           <img src="./img/logo.png" alt="" width="44" height="44">
           <span>기상포털</span>
-        </a>
+        </div>
 
         <button
           class="icon-button nav-toggle"
@@ -52,9 +53,9 @@
       </div>
 
       <div class="header-actions">
-        <time class="clock" id="clock" aria-label="현재 한국 시간">
+        <span class="clock" id="clock" role="timer" aria-label="현재 한국 시간">
           --:--:-- KST
-        </time>
+        </span>
 
         <button
           class="icon-button"
@@ -142,7 +143,7 @@
       </div>
 
       <!-- 기상청 -->
-      <section class="nav-section">
+      <div class="nav-section">
         <button
           type="button"
           class="nav-section-toggle"
@@ -161,42 +162,42 @@
               <span>예·특보</span>
             </div>
 
-            <a class="nav-sub-item is-active" aria-current="page">
+            <div class="nav-sub-item is-active" aria-current="page">
               예보
-            </a>
-            <a class="nav-sub-item">특보</a>
+            </div>
+            <div class="nav-sub-item">특보</div>
           </div>
 
-          <a class="nav-item">
+          <div class="nav-item">
             <i data-lucide="thermometer-sun" aria-hidden="true"></i>
             <span>현재날씨</span>
-          </a>
+          </div>
 
-          <a class="nav-item">
+          <div class="nav-item">
             <img src="./img/typhoon-icon.svg" alt="typhoon">
             <span>태풍</span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="grip" aria-hidden="true"></i>
             <span>
               <strong>해구별 해양기상정보</strong>
               <small>해구별 값 9종 · 대해구도·소해구도</small>
             </span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="wind" aria-hidden="true"></i>
             <span>
               <strong>저고도 WINTEM</strong>
               <small>항공기상청 고도별 바람 · 기온 예측</small>
             </span>
-          </a>
+          </div>
         </div>
-      </section>
+      </div>
 
       <!-- 기타 -->
-      <section class="nav-section">
+      <div class="nav-section">
         <button
           type="button"
           class="nav-section-toggle"
@@ -209,34 +210,34 @@
 
         <div class="nav-section-content" id="navOthers">
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="chart-column" aria-hidden="true"></i>
             <span>
               <strong>CMEMS 예측 <em>모델</em></strong>
               <small>코페르니쿠스 해양서비스</small>
             </span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="satellite-dish" aria-hidden="true"></i>
             <span>
               <strong>GOCI-II 위성 <em>관측</em></strong>
               <small>천리안위성 2B호 관측 장면</small>
             </span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="triangle-alert" aria-hidden="true"></i>
             <span>
               <strong>GDACS 재난 <em>자동산출</em></strong>
               <small>글로벌 재난 인식 및 조정 시스템</small>
             </span>
-          </a>
+          </div>
         </div>
-      </section>
+      </div>
 
       <!-- 브리핑 -->
-      <section class="nav-section">
+      <div class="nav-section">
         <button
           type="button"
           class="nav-section-toggle"
@@ -249,31 +250,31 @@
 
         <div class="nav-section-content" id="navBriefing">
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="square-activity" aria-hidden="true"></i>
             <span>
               <strong>해상풍·파고 예상도</strong>
               <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
             </span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="anchor" aria-hidden="true"></i>
             <span>
               <strong>출항 브리핑</strong>
               <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
             </span>
-          </a>
+          </div>
 
-          <a class="nav-item nav-item-detail">
+          <div class="nav-item nav-item-detail">
             <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
             <span>
               <strong>태풍특보비교</strong>
               <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
             </span>
-          </a>
+          </div>
         </div>
-      </section>
+      </div>
     </nav>
 
     <!-- =========================================
@@ -285,6 +286,7 @@
       <div
         class="map-viewport"
         id="mapViewport"
+        role="region"
         aria-label="한국 주변 해역 예·특보 지도"
       >
         <div class="map-scene" id="mapScene">
@@ -305,6 +307,7 @@
           <div
             class="forecast-layer"
             id="stations"
+            role="group"
             aria-label="해상 예·특보 정보"
           >
 
@@ -429,8 +432,7 @@
       </div>
 
       <!-- 우측 도구 모음 -->
-    <div class="toolbar" id="toolbar" aria-label="지도 도구">
-
+    <div class="toolbar" id="toolbar" role="toolbar" aria-label="지도 도구">
       <!-- 기상청 / 기타 / 브리핑 묶음 -->
       <div class="toolbar-main">
 
@@ -562,8 +564,9 @@
       <!-- =====================================
            하단 예보 타임라인
       ===================================== -->
-      <section
+      <div
         class="forecast-timeline"
+        role="region"
         aria-label="해상 예보 날짜 및 시간 선택"
       >
         <div class="timeline-current">
@@ -681,14 +684,14 @@
               <div class="timeline-day">
                 <span class="timeline-date">11/08</span>
                 <div class="timeline-slots">
-                  <button type="button" data-date="11.07" data-time="00:00">종일</button>
+                  <button type="button" data-date="11.08" data-time="00:00">종일</button>
                 </div>
               </div>
 
               <div class="timeline-day">
                 <span class="timeline-date">11/09</span>
                 <div class="timeline-slots">
-                  <button type="button" data-date="11.07" data-time="00:00">종일</button>
+                  <button type="button" data-date="11.09" data-time="00:00">종일</button>
                 </div>
 
                 
@@ -697,7 +700,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       <!-- 알림 메시지 -->
       <div

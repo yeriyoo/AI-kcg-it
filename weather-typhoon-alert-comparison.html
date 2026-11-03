@@ -30,10 +30,10 @@
   <!-- HEADER -->
   <header class="topbar">
     <div class="brand-area">
-      <a class="brand" aria-label="기상포털 홈">
-        <img src="./img/logo.png" alt="" width="44" height="44">
-        <span>기상포털</span>
-      </a>
+        <div class="brand" aria-label="기상포털 홈" role="group">
+          <img src="./img/logo.png" alt="" width="44" height="44">
+          <span>기상포털</span>
+        </div>
 
       <button
         class="icon-button nav-toggle"
@@ -47,9 +47,9 @@
     </div>
 
     <div class="header-actions">
-      <time class="clock" id="clock" aria-label="현재 한국 시간">
+      <span class="clock" id="clock" role="timer" aria-label="현재 한국 시간">
         --:--:-- KST
-      </time>
+      </span>
 
       <button class="icon-button" type="button" id="downloadButton" aria-label="자료 다운로드">
         <i data-lucide="download" aria-hidden="true"></i>
@@ -98,7 +98,7 @@
       </button>
     </div>
 
-    <section class="nav-section">
+    <div class="nav-section">
       <button
         type="button"
         class="nav-section-toggle"
@@ -114,39 +114,39 @@
             <i data-lucide="calendar-clock" aria-hidden="true"></i>
             <span>예·특보</span>
           </div>
-          <a href="#" class="nav-sub-item">예보</a>
-          <a href="#" class="nav-sub-item">특보</a>
+          <div class="nav-sub-item">예보</div>
+          <div class="nav-sub-item">특보</div>
         </div>
 
-        <a href="#" class="nav-item">
+        <div class="nav-item">
           <i data-lucide="thermometer-sun" aria-hidden="true"></i>
           <span>현재날씨</span>
-        </a>
+        </div>
 
-        <a href="#" class="nav-item">
+        <div class="nav-item">
           <img src="./img/typhoon-icon.svg" alt="">
           <span>태풍</span>
-        </a>
+        </div>
 
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="grip" aria-hidden="true"></i>
           <span>
             <strong>해구별 해양기상정보</strong>
             <small>해구별 값 9종 · 대해구도·소해구도</small>
           </span>
-        </a>
+        </div>
 
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="wind" aria-hidden="true"></i>
           <span>
             <strong>저고도 WINTEM</strong>
             <small>항공기상청 고도별 바람 · 기온 예측</small>
           </span>
-        </a>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="nav-section">
+    <div class="nav-section">
       <button
         type="button"
         class="nav-section-toggle"
@@ -157,36 +157,34 @@
       </button>
 
       <div class="nav-section-content" id="navOthers">
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="chart-column" aria-hidden="true"></i>
           <span>
             <strong>CMEMS 예측 <em>모델</em></strong>
             <small>코페르니쿠스 해양서비스</small>
           </span>
-        </a>
+        </div>
 
-        <a href="./wea-goci.html" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="satellite-dish" aria-hidden="true"></i>
           <span>
             <strong>GOCI-II 위성 <em>관측</em></strong>
             <small>천리안위성 2B호 관측 장면</small>
           </span>
-        </a>
+        </div>
 
-        <a
-          href="./wea-gdacs.html"
-          class="nav-item nav-item-detail is-active"
-          aria-current="page">
+        <div
+          class="nav-item nav-item-detail is-active">
           <i data-lucide="triangle-alert" aria-hidden="true"></i>
           <span>
             <strong>GDACS 재난 <em>자동산출</em></strong>
             <small>글로벌 재난 인식 및 조정 시스템</small>
           </span>
-        </a>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="nav-section">
+    <div class="nav-section">
       <button
         type="button"
         class="nav-section-toggle"
@@ -197,41 +195,43 @@
       </button>
 
       <div class="nav-section-content" id="navBriefing">
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="square-activity" aria-hidden="true"></i>
           <span>
             <strong>해상풍·파고 예상도</strong>
             <small>기상청 예상도 그림(ReWW3 · 3시간 간격)</small>
           </span>
-        </a>
+        </div>
 
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="anchor" aria-hidden="true"></i>
           <span>
             <strong>출항 브리핑</strong>
             <small>출항 판단 · 조위 · 관측값을 한 화면에</small>
           </span>
-        </a>
+        </div>
 
-        <a href="#" class="nav-item nav-item-detail">
+        <div class="nav-item nav-item-detail">
           <i data-lucide="align-horizontal-justify-center" aria-hidden="true"></i>
           <span>
             <strong>태풍특보비교</strong>
             <small>기상청 · JTWC · JMA · NOAA 진로 비교</small>
           </span>
-        </a>
+        </div>
       </div>
-    </section>
+    </div>
   </nav>
 
   <!-- 지도 -->
   <main class="map-main gdacs-main" id="map">
+    <h1 class="sr-only">기상포털 태풍예측비교</h1>
 
     <!-- 지도와 모든 그래픽은 통 이미지 한 장 -->
     <div
-      class="map-viewport"
-      id="mapViewport"
-      aria-label="GDACS 재난정보 지도">
+    class="map-viewport"
+    id="mapViewport"
+    role="region"
+    aria-label="GDACS 재난정보 지도">
 
       <div class="map-scene" id="mapScene">
         <div class="map-background">
@@ -443,7 +443,7 @@
     </aside>
 
     <!-- 우측 공용 툴바 -->
-    <div class="toolbar" id="toolbar" aria-label="지도 도구">
+    <div class="toolbar" id="toolbar" role="group" aria-label="지도 도구">
       <div class="toolbar-main">
         <button
           class="toolbar-collapse"

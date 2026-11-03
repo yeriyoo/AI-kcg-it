@@ -2,12 +2,12 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" >
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>AI-HUB - 표준화</title>
 
@@ -57,7 +57,7 @@
   <!-- =====================================================
        LOGO
   ====================================================== -->
-  <h1
+  <div
     class="
       mr-20
       flex shrink-0
@@ -81,12 +81,12 @@
         shrink-0
         object-contain
       "
-    />
+    >
 
     </span>
 
     AI-HUB
-  </h1>
+  </div>
 
 
   <!-- =====================================================
@@ -625,7 +625,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -666,7 +666,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -690,7 +690,7 @@
             items-center justify-center
             gap-1
             border-r border-[#476187]
-            border-t border-[#476187
+            border-t border-[#476187]
             text-[#CBD6EA]
             hover:bg-[#0046AD]
             hover:text-white
@@ -866,7 +866,7 @@
       <!-- =================================================
           CONTENT
       ================================================== -->
-      <section>
+      <div>
 
         <div
           class="
@@ -1537,7 +1537,7 @@
                 placeholder:text-[#99ABC6]
                 outline-none
               "
-            />
+            >
 
 
             <button
@@ -1909,9 +1909,9 @@
               DYNAMIC TABLE
           ================================================== -->
           <div
-            id="<script src="./js/hub-common.js" defer></script>"
-            class="mt-5"
-          ></div>
+              id="standardTableContainer"
+              class="mt-5"
+            ></div>
 
 
           <!-- =================================================
@@ -1930,6 +1930,7 @@
 
             <button
               type="button"
+              aria-label="이전 페이지"
               class="
                 flex h-8 w-8
                 items-center justify-center
@@ -1969,6 +1970,7 @@
 
             <button
               type="button"
+              aria-label="다음 페이지"
               class="
                 flex h-8 w-8
                 items-center justify-center
@@ -1984,7 +1986,7 @@
 
         </div>
 
-      </section>
+      </div>
 
     </main>
     
@@ -1994,6 +1996,8 @@
          CHATBOT FLOATING BUTTON
     ====================================================== -->
     <button
+    type="button"
+  aria-label="AI 챗봇 열기"
       class="
     fixed bottom-6 right-6
     z-50
@@ -2014,7 +2018,7 @@
       mix-blend-multiply
       drop-shadow-[5px_7px_6px_rgba(20,42,77,0.25)]
     "
-  />
+  >
     </button>
 
   </div>
