@@ -255,7 +255,7 @@ body:has(.ai-algorithm-page) .top-header {
 .nav-parent > span {
   display: flex;
   align-items: center;
-  gap: 12ㄴpx;
+  gap: 12px;
 }
 
 .nav-parent svg {
@@ -34959,6 +34959,32 @@ body:has(.law-page) .top-header {
 
 .dispatch-vessel-top {
   display: flex;
+}
+
+/* 이력조회 페이지 초기 레이아웃 안정화 */
+
+.history-page .history-chart {
+  height: 245px;
+  flex-shrink: 0;
+}
+
+.history-page .history-summary-card strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   상세조회 페이지 CLS 개선
+   korea-china-vessel-details.html 전용
+========================================= */
+
+/* JS로 선박 카드가 생성되기 전 공간 확보 */
+.vessel-detail-page .detail-vessel-cards {
+  min-height: 142px;
+}
+
+/* 상세정보 테이블의 초기 공간 확보 */
+.vessel-detail-page .detail-info-table-wrap {
+  min-height: 319px;
 }
 
 /* =========================================================
