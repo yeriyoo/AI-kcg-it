@@ -2568,7 +2568,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name="standardTermDomain"
                 aria-label="도메인 필터"
                 placeholder="도메인"
-                aut ocomplete="off"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 

@@ -535,13 +535,21 @@
 
       <!-- 세 번째 줄 -->
       <div class="boarding-search-field boarding-date-field">
-        <label for="boardingStartDate">조사 일자</label>
-        <div class="boarding-date-range">
-          <input id="boardingStartDate" type="date">
-          <span>~</span>
-          <input id="boardingEndDate" type="date">
+          <span>조사 일자</span>
+          <div class="boarding-date-range">
+            <input
+              id="boardingStartDate"
+              type="date"
+              aria-label="조사 시작일"
+            >
+            <span>~</span>
+            <input
+              id="boardingEndDate"
+              type="date"
+              aria-label="조사 종료일"
+            >
+          </div>
         </div>
-      </div>
 
       <div class="boarding-search-spacer"></div>
 
