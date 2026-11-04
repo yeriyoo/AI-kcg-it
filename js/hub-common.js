@@ -10,74 +10,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  /* =========================================================
-     DATA TYPE TAB
-  ========================================================= */
+  
+/* =========================================================
+   DATA TYPE TAB
+========================================================= */
 
-  const dataTabs =
-    document.querySelectorAll(".data-tab");
+const dataTabs = document.querySelectorAll(".data-tab");
 
+dataTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    dataTabs.forEach((item) => {
+      const isActive = item === tab;
 
-  dataTabs.forEach((tab) => {
+      item.classList.toggle("active", isActive);
+      item.classList.toggle("border-2", isActive);
+      item.classList.toggle("border-[#0061F0]", isActive);
+      item.classList.toggle("bg-white", isActive);
+      item.classList.toggle("text-[#142A4D]", isActive);
+      item.classList.toggle("text-[#476187]", !isActive);
 
-    tab.addEventListener("click", () => {
-
-      dataTabs.forEach((item) => {
-
-        item.classList.remove(
-          "active",
-          "border-2",
-          "border-[#0061F0]",
-          "bg-white",
-          "text-[#142A4D]"
-        );
-
-        item.classList.add(
-          "text-[#476187]"
-        );
-
-      });
+      item.setAttribute("aria-pressed", String(isActive));
+    });
+  });
+});
 
 
-      tab.classList.add(
-        "active",
-        "border-2",
-        "border-[#0061F0]",
-        "bg-white",
-        "text-[#142A4D]"
-      );
 
-      tab.classList.remove(
-        "text-[#476187]"
-      );
+/* =========================================================
+   CATEGORY CARD
+========================================================= */
 
+const categoryCards =
+  document.querySelectorAll(".category-card");
+
+categoryCards.forEach((card) => {
+  card.addEventListener("click", () => {
+
+    categoryCards.forEach((item) => {
+      const isActive = item === card;
+
+      item.classList.toggle("active", isActive);
+      item.setAttribute("aria-pressed", String(isActive));
     });
 
   });
-
-
-
-  /* =========================================================
-     CATEGORY CARD
-  ========================================================= */
-
-  const categoryCards =
-    document.querySelectorAll(".category-card");
-
-
-  categoryCards.forEach((card) => {
-
-    card.addEventListener("click", () => {
-
-      categoryCards.forEach((item) => {
-        item.classList.remove("active");
-      });
-
-      card.classList.add("active");
-
-    });
-
-  });
+});
 
 
 
@@ -2795,19 +2772,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <input
                 type="text"
+                aria-label="단어명 필터"
                 placeholder="단어명"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
               <input
                 type="text"
+                aria-label="영문 필터"
                 placeholder="영문"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
               <input
                 type="text"
+                aria-label="도메인 분류 필터"
                 placeholder="도메인 분류"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
@@ -2820,7 +2803,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <input
                 type="text"
+                aria-label="출처 필터"
                 placeholder="출처"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 

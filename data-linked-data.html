@@ -299,7 +299,7 @@
           text-white
           hover:text-white
         "
-        aria-label="알림"
+        aria-label="신청 장바구니"
       >
         <i
           data-lucide="shopping-cart"
@@ -864,8 +864,6 @@
             </p>
           </div>
 
-
-
           
           <!-- =================================================
               DATA TYPE TAB
@@ -879,67 +877,59 @@
               rounded
               bg-[#E1E7F2]
             "
-            role="tablist"
+            role="group"
             aria-label="연계 데이터 유형"
           >
             <button
+              id="linkedTabAll"
               type="button"
-              role="tab"
-              aria-selected="true"
-              tabindex="0"
               class="
-                data-tab
-                active
+                data-tab active
                 flex items-center justify-center
                 rounded
                 border-2 border-[#0061F0]
                 bg-white
-                text-base
-                font-semibold
+                text-base font-semibold
                 text-[#142A4D]
               "
               data-tab="all"
+              aria-pressed="true"
             >
               전체 (772)
             </button>
 
             <button
+              id="linkedTabLinked"
               type="button"
-              role="tab"
-              aria-selected="false"
-              tabindex="-1"
               class="
                 data-tab
                 flex items-center justify-center
                 rounded
-                text-base
-                font-semibold
+                text-base font-semibold
                 text-[#476187]
               "
-              data-tab="api"
+              data-tab="linked"
+              aria-pressed="false"
             >
               연계 (2)
             </button>
 
             <button
+              id="linkedTabUnlinked"
               type="button"
-              role="tab"
-              aria-selected="false"
-              tabindex="-1"
               class="
                 data-tab
                 flex items-center justify-center
                 rounded
-                text-base
-                font-semibold
+                text-base font-semibold
                 text-[#476187]
               "
-              data-tab="file"
+              data-tab="unlinked"
+              aria-pressed="false"
             >
               미연계 (770)
             </button>
           </div>
-
 
 
 
@@ -1126,6 +1116,8 @@
       id="searchKeyword"
       name="searchKeyword"
       placeholder="검색어를 입력해 주세요."
+      aria-label="검색어"
+      autocomplete="off"
       class="
         search-input
         h-full
@@ -1186,6 +1178,7 @@
 
             <button
               type="button"
+              aria-pressed="true"
               class="
                 category-card
                 active
@@ -1213,6 +1206,7 @@
 
             <button
               type="button"
+              aria-pressed="false"
               class="category-card
                 flex h-[110px] w-[283px]
                 flex-col
@@ -1234,6 +1228,7 @@
 
             <button
               type="button"
+              aria-pressed="false"
               class="category-card
                 flex h-[110px] w-[283px]
                 flex-col
@@ -1255,6 +1250,7 @@
 
             <button
               type="button"
+              aria-pressed="false"
               class="category-card
                 flex h-[110px] w-[283px]
                 flex-col
@@ -1276,6 +1272,7 @@
 
             <button
               type="button"
+              aria-pressed="false"
               class="category-card
                 flex h-[110px] w-[283px]
                 flex-col
@@ -1376,6 +1373,7 @@
 
               <button
                 type="button"
+                aria-pressed="true"
                 class="
                   filter-section-tab
                   active
@@ -1395,6 +1393,7 @@
 
               <button
                 type="button"
+                aria-pressed="false"
                 class="
                   filter-section-tab
                   flex h-[55px] w-[100px]
@@ -1413,6 +1412,7 @@
 
               <button
                 type="button"
+                aria-pressed="false"
                 class="
                   filter-section-tab
                   flex h-[55px] w-[100px]
@@ -1431,6 +1431,7 @@
 
               <button
                 type="button"
+                aria-pressed="false"
                 class="
                   filter-section-tab
                   flex h-[55px] w-[100px]
@@ -1449,6 +1450,7 @@
 
               <button
                 type="button"
+                aria-pressed="false"
                 class="
                   filter-section-tab
                   flex h-[55px] w-[100px]
@@ -2155,6 +2157,7 @@
       <!-- 리스트 -->
       <button
         type="button"
+        aria-pressed="true"
         class="
           view-toggle active
           flex h-10 w-10
@@ -2173,6 +2176,7 @@
       <!-- 카드 -->
       <button
         type="button"
+        aria-pressed="false"
         class="
           view-toggle
           flex h-10 w-10
@@ -2850,6 +2854,7 @@
 
             <button
               type="button"
+              aria-current="page"
               class="
                 pagination-button
                 active
@@ -2931,6 +2936,8 @@
          CHATBOT FLOATING BUTTON
     ====================================================== -->
     <button
+    type="button"
+    aria-label="AI 챗봇 열기"
       class="
     fixed bottom-6 right-6
     z-50
