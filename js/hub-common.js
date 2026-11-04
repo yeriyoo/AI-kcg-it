@@ -3838,11 +3838,23 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
 
+   
     bindStandardDropdowns();
 
     bindStandardFilterReset();
 
-    lucide.createIcons();
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // 초기 테이블 렌더링 완료
+    tableWrap.setAttribute("aria-busy", "false");
+
+    // 초기 공간 확보용 스타일 해제
+    if (tableWrap.style.minHeight) {
+      tableWrap.style.removeProperty("min-height");
+    }
+
 
   }
 
