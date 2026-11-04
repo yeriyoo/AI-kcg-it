@@ -866,8 +866,9 @@
 
 
 
+          
           <!-- =================================================
-               DATA TYPE TAB
+              DATA TYPE TAB
           ================================================== -->
           <div
             class="
@@ -879,10 +880,13 @@
               bg-[#E1E7F2]
             "
             role="tablist"
+            aria-label="연계 데이터 유형"
           >
-
             <button
               type="button"
+              role="tab"
+              aria-selected="true"
+              tabindex="0"
               class="
                 data-tab
                 active
@@ -899,9 +903,11 @@
               전체 (772)
             </button>
 
-
             <button
               type="button"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
               class="
                 data-tab
                 flex items-center justify-center
@@ -915,9 +921,11 @@
               연계 (2)
             </button>
 
-
             <button
               type="button"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
               class="
                 data-tab
                 flex items-center justify-center
@@ -931,6 +939,7 @@
               미연계 (770)
             </button>
           </div>
+
 
 
 
@@ -1320,6 +1329,7 @@
                 items-center justify-center
                 text-[#142A4D]
               "
+              aria-label="조건검색 접기/펼치기"
               aria-expanded="true"
               aria-controls="detailFilterPanel"
             >

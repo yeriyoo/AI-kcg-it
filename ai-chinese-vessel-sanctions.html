@@ -424,7 +424,7 @@
             class="h-full border-r border-[#CBD6EA] bg-white px-2 text-xs outline-none"
           >
             <option value="vessel">선박명</option>
-            <option value="mmsi">MMSI</option>
+            <option value="MMS">MMS</option>
           </select>
 
           <label for="vesselSearch" class="sr-only">선박 검색어</label>
@@ -525,14 +525,14 @@
           <i data-lucide="gavel"></i>
           <h1>국가단속정보</h1>
         </div>
-        <p>NOAA · FAO · RFMO · 국가 단속정보를 사건 단위로 모아 IUU 선박 Master로 통합하고, IMO/UVI/MMSI 로 우리 감시 대상에 결합한다</p>
+        <p>NOAA · FAO · FMO · 국가 단속정보를 사건 단위로 모아 ICU 선박 Master로 통합하고, IMO/UV/MMS 로 우리 감시 대상에 결합한다</p>
       </div>
 
       <!-- 상단 KPI -->
       <section class="sc-kpi-grid" aria-label="국가단속정보 주요 지표">
         <div class="sc-kpi"><span>확보 정보 항목</span><strong>3 / 10</strong></div>
         <div class="sc-kpi"><span>부분확보 · 미확보</span><strong>6 · 1</strong></div>
-        <div class="sc-kpi"><span>IUU 유형 · 행위</span><strong>7 · 39</strong></div>
+        <div class="sc-kpi"><span>ICU 유형 · 행위</span><strong>7 · 39</strong></div>
         <div class="sc-kpi"><span>KDE 그룹 · 필드</span><strong>14 · 100</strong></div>
         <div class="sc-kpi"><span>결합 원천</span><strong>5 / 6</strong></div>
         <div class="sc-kpi"><span>스키마 테이블</span><strong>14</strong></div>
@@ -556,7 +556,7 @@
 
       <!-- 확보 정보 -->
       <section class="sc-panel">
-        <h2>AI불법조업에서 실제로 확보해야 할 IUU 정보</h2>
+        <h2>AI불법조업에서 실제로 확보해야 할 ICU 정보</h2>
         <p class="sc-intro">구분 · 확보 정보 · AI 활용은 목표 정의이고, <strong>확보 상태</strong>는 이 리포트의 실제 구현·실측을 대조한 결과다. 근거 없이 "확보"로 표시한 항목은 없다.</p>
 
         <div class="sc-table-scroll">
@@ -572,18 +572,18 @@
             </thead>
             <tbody>
               <tr>
-                <th>IUU 선박</th>
-                <td>IMO/UVI · MMSI · 선명 · 국적 · 선주 · 선종</td>
+                <th>ICU 선박</th>
+                <td>IMO/UV · MMS · 선명 · 국적 · 선주 · 선종</td>
                 <td>중국어선 식별 · 위험선박 관리</td>
                 <td><span class="sc-badge yellow">부분확보</span></td>
-                <td>MMSI·선명·선종은 SNPDB 와 허가어선 모집단에서 확보. IMO 는 SNPDB 에 컬럼이 있지만 중국어선은 대체로 미송신이고, UVI 는 원천에 없다.</td>
+                <td>MMS·선명·선종은 SNPDB 와 허가어선 모집단에서 확보. IMO 는 SNPDB 에 컬럼이 있지만 중국어선은 대체로 미송신이고, UV 는 원천에 없다.</td>
               </tr>
               <tr>
-                <th>IUU 이력</th>
+                <th>ICU 이력</th>
                 <td>적발일 · 위치 · 위반유형 · 처분</td>
                 <td>선박 위험도</td>
                 <td><span class="sc-badge yellow">부분확보</span></td>
-                <td>내부 MARSIS 에 제재 이력이 있으나 중국 국적 어선 718척, 선박별 제재 건수·최초 제재일·종합위험등급과 하위 4등급 정보는 추가 검증 필요.</td>
+                <td>내부 MARIS 에 제재 이력이 있으나 중국 국적 어선 718척, 선박별 제재 건수·최초 제재일·종합위험등급과 하위 4등급 정보는 추가 검증 필요.</td>
               </tr>
               <tr>
                 <th>조업허가</th>
@@ -594,7 +594,7 @@
               </tr>
               <tr>
                 <th>AIS 이상</th>
-                <td>AIS OFF · 위치조작 · MMSI 변경</td>
+                <td>AIS OFF · 위치조작 · MMS 변경</td>
                 <td>Dark Vessel 탐지</td>
                 <td><span class="sc-badge green">확보</span></td>
                 <td>다크베셀은 운항 특성 및 AIS 이상 신호를 기반으로 탐지한다.</td>
@@ -630,7 +630,7 @@
               <tr>
                 <th>공급망</th>
                 <td>운반선 → 항만 → 시장</td>
-                <td>IUU 어획물 추적</td>
+                <td>ICU 어획물 추적</td>
                 <td><span class="sc-badge yellow">부분확보</span></td>
                 <td>항만(GFW)과 시장(pfsc.agri.cn) 공개 API 실연동 후 주요 항만까지만 경로를 재구성했다.</td>
               </tr>
@@ -659,30 +659,30 @@
 
         <div class="sc-plan-list">
           <article class="sc-plan">
-            <div class="sc-plan-heading"><h3>IUU 선박</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
-            <p>FAO Global Record 공개 API 로 UVI(IMO 번호)·선주·선박운영자를 채운다. 인증이 필요 없고 MMSI 가 응답에 포함되면 우리 MMSI 로 바로 붙일 수 있다. 내부 MARSIS 선박목록과 중국 국적 어선 자료에도 IMO↔MMSI 쌍이 이미 있어 교차 보강이 가능하다.</p>
+            <div class="sc-plan-heading"><h3>ICU 선박</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
+            <p>FAO Global Record 공개 API 로 UV(IMO 번호)·선주·선박운영자를 채운다. 인증이 필요 없고 MMS 가 응답에 포함되면 우리 MMS 로 바로 붙일 수 있다. 내부 MARIS 선박목록과 중국 국적 어선 자료에도 IMO↔MMS 쌍이 이미 있어 교차 보강이 가능하다.</p>
           </article>
 
           <article class="sc-plan">
-            <div class="sc-plan-heading"><h3>IUU 이력</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
-            <p>3단으로 채운다. ① MARSIS 제재·PSC·타임라인을 IMO 키로 iuu_vessel_listing·iuu_incident 에 적재해 즉시 이력 축을 세운다. ② FAO Global Record 상세의 compliance.iuuListings / portDenials / inspectionSurveillance 를 붙여 이력 폭을 보강한다. ③ 국내 enforcement_records 를 연계해 위반유형·처분을 채운다.</p>
-            <p class="sc-warning">선행 조건 — MARSIS 는 IMO 키라서 IMO 미송신 중국어선은 MMSI 로 교차 매칭해야 한다.</p>
+            <div class="sc-plan-heading"><h3>ICU 이력</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
+            <p>3단으로 채운다. ① MARIS 제재·PSC·타임라인을 IMO 키로 ICU_vessel_listing·ICU_incident 에 적재해 즉시 이력 축을 세운다. ② FAO Global Record 상세의 compliance.listings / port Denials / inspection Surveillance 를 붙여 이력 폭을 보강한다. ③ 국내 enforcement_records 를 연계해 위반유형·처분을 채운다.</p>
+            <p class="sc-warning">선행 조건 — MARIS 는 IMO 키라서 IMO 미송신 중국어선은 MMS 로 교차 매칭해야 한다.</p>
           </article>
 
           <article class="sc-plan">
             <div class="sc-plan-heading"><h3>조업행위</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
-            <p>정답 라벨을 만들어야 한다. 단속 실적이 있는 선박의 조업 구간을 정답으로 삼아 소규모 검증셋을 구축하고, 그 위에서 성능을 재측정한다. FAO GR 의 vesselType(어법 분류 코드)을 라벨 보조 근거로 쓸 수 있다.</p>
+            <p>정답 라벨을 만들어야 한다. 단속 실적이 있는 선박의 조업 구간을 정답으로 삼아 소규모 검증셋을 구축하고, 그 위에서 성능을 재측정한다. FAO GR 의 vessel Type(어법 분류 코드)을 라벨 보조 근거로 쓸 수 있다.</p>
             <p class="sc-warning">선행 조건 — 정답 라벨 구축에 단속 이력 연계가 선행되어야 한다.</p>
           </article>
 
           <article class="sc-plan">
             <div class="sc-plan-heading"><h3>환적</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge green">P1 즉시 가능</span></div>
-            <p>FAO Global Record 가 어선 외에 냉동운반선(Reefer)·보급선(Supply)까지 vesselType 으로 구분해 등록한다. 이를 붙이면 조우 상대선의 역할을 판정할 수 있다. 내부 MARSIS 의 STS 위험등급과도 교차 근거로 쓴다.</p>
+            <p>FAO Global Record 가 어선 외에 냉동운반선(Reefer)·보급선(Supply)까지 vessel Type 으로 구분해 등록한다. 이를 붙이면 조우 상대선의 역할을 판정할 수 있다. 내부 MARIS 의 STS 위험등급과도 교차 근거로 쓴다.</p>
           </article>
 
           <article class="sc-plan">
             <div class="sc-plan-heading"><h3>어획물</h3><span class="sc-badge red">미확보</span><span class="sc-badge gray">P3 협의·간접</span></div>
-            <p>직접 어획 실적을 얻을 경로는 없다. 대신 간접 추정으로 간다 — ① FAO GR 의 fishHoldCap(어창 용량)·vesselType 으로 조업 능력 상한을 잡고, ② 조업 구간 체류시간과 결합해 어획 규모를 구간 추정하고, ③ 시장 도매가·품목 신호와 대조한다.</p>
+            <p>직접 어획 실적을 얻을 경로는 없다. 대신 간접 추정으로 간다 — ① FAO GR 의 fishHoldCap(어창 용량)·vessel Type 으로 조업 능력 상한을 잡고, ② 조업 구간 체류시간과 결합해 어획 규모를 구간 추정하고, ③ 시장 도매가·품목 신호와 대조한다.</p>
             <p class="sc-warning">선행 조건 — 실제 어획량 정답이 없어 추정치는 검증 불가. 실제값이 아닌 추정·근거값으로 표시해야 한다.</p>
           </article>
 
@@ -693,7 +693,7 @@
 
           <article class="sc-plan">
             <div class="sc-plan-heading"><h3>제재 / 조치</h3><span class="sc-badge yellow">부분확보</span><span class="sc-badge blue">P2 개발 필요</span></div>
-            <p>MARSIS PSC 검사(억류)와 제재 통계를 iuu_vessel_listing 에 적재하고, FAO GR 상세의 portDenials(입항 거부)를 추가한다. 새 원천을 합쳐 선박별 조치 이력을 만들고 위험도 가중치로 환산한다.</p>
+            <p>MARIS PSC 검사(억류)와 제재 통계를 ICU_vessel_listing 에 적재하고, FAO GR 상세의 port Denials(입항 거부)를 추가한다. 새 원천을 합쳐 선박별 조치 이력을 만들고 위험도 가중치로 환산한다.</p>
           </article>
         </div>
       </section>
@@ -707,11 +707,11 @@
           <table class="sc-table">
             <thead><tr><th>대상</th><th>확보 방법</th><th>원천</th><th>적재 위치</th></tr></thead>
             <tbody>
-              <tr><th>IUU 선박 — 선주·운영사</th><td>허가현황 신청인(fleet_companies)을 MMSI 조인으로 IUU 선박 Master 에 붙인다. 중문·영문명을 함께 보관한다.</td><td>내부 허가현황</td><td><code>iuu_vessel_master.owner_nm</code> <code>owner_nm_cn</code></td></tr>
-              <tr><th>환적 — 운반선 식별</th><td>조우 상대선의 허가 역할(fleet_role)을 붙여 어선↔운반선만 TRANSSHIP_SUSPECT 로 남기고, 어선↔어선은 FLEET_CLUSTER 로 분리한다.</td><td>fleet_vessels.fleet_role</td><td><code>iuu_transship_role</code></td></tr>
-              <tr><th>공급망 — 운반선 단계</th><td>환적에서 판정한 운반선을 공급망 그래프의 중간 노드로 세운다.</td><td>허가현황 운반선 + GFW Port Visits</td><td><code>iuu_transship_role</code></td></tr>
-              <tr><th>제재 / 조치 — 선박 단위</th><td>MARSIS 제재 통계와 PSC 검사(억류)를 IMO 기준으로 매칭한다.</td><td>MARSIS /vessels</td><td><code>iuu_vessel_listing</code> <code>iuu_vessel_match</code></td></tr>
-              <tr><th>IUU 이력 — 국내 단속</th><td>enforcement_records 사건 DB 를 올리고 위반유형을 분류한다.</td><td>kcg.enforcement_records</td><td><code>iuu_incident</code> <code>iuu_incident_behavior</code></td></tr>
+              <tr><th>ICU 선박 — 선주·운영사</th><td>허가현황 신청인(fleet_companies)을 MMS 조인으로 ICU 선박 Master 에 붙인다. 중문·영문명을 함께 보관한다.</td><td>내부 허가현황</td><td><code>ICU_vessel_master.owner_nm</code> <code>owner_nm_cn</code></td></tr>
+              <tr><th>환적 — 운반선 식별</th><td>조우 상대선의 허가 역할(fleet_role)을 붙여 어선↔운반선만 TRANSSHIP_SUSPECT 로 남기고, 어선↔어선은 FLEET_CLUSTER 로 분리한다.</td><td>fleet_vessels.fleet_role</td><td><code>ICU_transship_role</code></td></tr>
+              <tr><th>공급망 — 운반선 단계</th><td>환적에서 판정한 운반선을 공급망 그래프의 중간 노드로 세운다.</td><td>허가현황 운반선 + GFW Port Visits</td><td><code>ICU_transship_role</code></td></tr>
+              <tr><th>제재 / 조치 — 선박 단위</th><td>MARIS 제재 통계와 PSC 검사(억류)를 IMO 기준으로 매칭한다.</td><td>MARIS /vessels</td><td><code>ICU_vessel_listing</code> <code>ICU_vessel_match</code></td></tr>
+              <tr><th>ICU 이력 — 국내 단속</th><td>enforcement_records 사건 DB 를 올리고 위반유형을 분류한다.</td><td>kcg.enforcement_records</td><td><code>ICU_incident</code> <code>ICU_incident_behavior</code></td></tr>
               <tr><th>조업행위 — 정답 라벨</th><td>단속 시각 ±120분 항적을 양성으로, 같은 선박의 다른 구간을 음성으로 라벨링한다.</td><td>enforcement_records + SNPDB</td><td><code>prediction/data/fishing_labels.csv</code></td></tr>
             </tbody>
           </table>
@@ -739,9 +739,9 @@
 
         <h3>목록 응답 필드</h3>
         <div class="sc-chip-list">
-          <span>name (선명)</span><span>uviImoNum (IMO/UVI)</span><span>mmsi</span><span>ircs (호출부호)</span>
-          <span>flagState</span><span>vesselType</span><span>gt</span><span>loa</span><span>draught</span>
-          <span>beamExtremeBreadth</span><span>externalMarking</span><span>nationalRegistrationNumber</span><span>iuuListed</span><span>matchedBy</span>
+          <span>name (선명)</span><span>UVImoNum (IMO/UV)</span><span>MMS</span><span>IRS (호출부호)</span>
+          <span>flag State</span><span>vessel Type</span><span>gt</span><span>loa</span><span>draught</span>
+          <span>beamExtremeBreadth</span><span>external Marking</span><span>nationalRegistrationNumber</span><span>unlisted</span><span>matched By</span>
         </div>
 
         <h3>상세 응답 ↔ 우리 스키마 대응</h3>
@@ -749,46 +749,46 @@
           <table class="sc-table">
             <thead><tr><th>FAO 응답 섹션</th><th>적재 대상</th></tr></thead>
             <tbody>
-              <tr><td><code>vesselOverview</code></td><td>iuu_vessel_master (제원·기국·등록항·선주·운영자·수익적소유자·VMS/AIS 탑재·어창)</td></tr>
-              <tr><td><code>compliance.iuuListings</code></td><td>iuu_vessel_listing (IUU 등재)</td></tr>
-              <tr><td><code>compliance.portDenials</code></td><td>iuu_vessel_listing (입항 거부 조치)</td></tr>
-              <tr><td><code>compliance.inspectionSurveillance</code></td><td>iuu_incident (검사·감시 사건)</td></tr>
-              <tr><td><code>history.flagHistory · nameHistory · ownerHistory · operatorHistory</code></td><td>iuu_vessel_identity_hist (기국·선명·선주 세탁 추적)</td></tr>
-              <tr><td><code>vesselRegionalBodies</code></td><td>iuu_vessel_listing (RFMO 등록 식별자)</td></tr>
+              <tr><td><code>vesselOverview</code></td><td>ICU_vessel_master (제원·기국·등록항·선주·운영자·수익적소유자·VMS/AIS 탑재·어창)</td></tr>
+              <tr><td><code>compliance.ICUListings</code></td><td>ICU_vessel_listing (ICU 등재)</td></tr>
+              <tr><td><code>compliance.port Denials</code></td><td>ICU_vessel_listing (입항 거부 조치)</td></tr>
+              <tr><td><code>compliance.inspection Surveillance</code></td><td>ICU_incident (검사·감시 사건)</td></tr>
+              <tr><td><code>history.flagHistory · nameHistory · ownerHistory · operatorHistory</code></td><td>ICU_vessel_identity_hist (기국·선명·선주 세탁 추적)</td></tr>
+              <tr><td><code>vesselRegionalBodies</code></td><td>ICU_vessel_listing (FMO 등록 식별자)</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="sc-note sc-note-orange">
           <strong>조회 방식 주의</strong>
-          <p>quick-search 는 선명·MMSI·호출부호·등록번호·외부표지를 함께 찾는 자유검색이라 기록으로 좁히지 못한다. 사이트에 별도 상세검색 엔드포인트가 존재할 가능성도 확인이 필요하다.</p>
+          <p>quick-search 는 선명·MMS·호출부호·등록번호·외부표지를 함께 찾는 자유검색이라 기록으로 좁히지 못한다. 사이트에 별도 상세검색 엔드포인트가 존재할 가능성도 확인이 필요하다.</p>
         </div>
 
         <h3>이 원천이 가장 파급이 큰 이유</h3>
         <ul class="sc-bullet-list">
           <li>어선뿐 아니라 냉동운반선(Refrigerated Transport Vessel)과 보급선(Supply Vessel)까지 포함한다.</li>
-          <li>IUU 대응을 목적으로 국가기관이 제공하는 공식 선박정보를 통합한다.</li>
-          <li>선명·선주·국적이 바뀌어도 IMO/UVI 를 기준으로 동일 선박을 연결할 수 있다.</li>
+          <li>ICU 대응을 목적으로 국가기관이 제공하는 공식 선박정보를 통합한다.</li>
+          <li>선명·선주·국적이 바뀌어도 IMO/UV 를 기준으로 동일 선박을 연결할 수 있다.</li>
         </ul>
       </section>
 
-      <!-- MARSIS -->
+      <!-- MARIS -->
       <section class="sc-panel">
-        <h2>확보 경로 ② 내부 MARSIS 재사용 (해경 제재선박 확인 원천)</h2>
+        <h2>확보 경로 ② 내부 MARIS 재사용 (해경 제재선박 확인 원천)</h2>
 
-        <div class="sc-marsis-kpis">
+        <div class="sc-MARIS-kpis">
           <div><span>전체 선박</span><strong>44,159</strong></div>
           <div><span>어선</span><strong>4,990</strong></div>
           <div><span>중국 국적</span><strong>2,602</strong></div>
           <div><span>중국 어선</span><strong>718</strong></div>
-          <div><span>그중 MMSI 보유</span><strong>653</strong></div>
+          <div><span>그중 MMS 보유</span><strong>653</strong></div>
         </div>
 
         <div class="sc-table-scroll">
           <table class="sc-table">
             <thead><tr><th>엔드포인트</th><th>제공 정보</th></tr></thead>
             <tbody>
-              <tr><td><code>/vessels</code></td><td>선박 목록 — IMO · MMSI · 선명 · 국적 · 선종 · 제재건수 · 최초제재일 · 종합/하위 위험등급 4종</td></tr>
+              <tr><td><code>/vessels</code></td><td>선박 목록 — IMO · MMS · 선명 · 국적 · 선종 · 제재건수 · 최초제재일 · 종합/하위 위험등급 4종</td></tr>
               <tr><td><code>/vessels/{imo}/risk</code></td><td>위험도 카테고리별 상세</td></tr>
               <tr><td><code>/vessels/{imo}/psc</code></td><td>PSC 검사·조치 — 항만국통제 억류 근거</td></tr>
               <tr><td><code>/vessels/{imo}/timeline</code></td><td>사건 타임라인</td></tr>
@@ -800,7 +800,7 @@
 
         <div class="sc-note sc-note-orange">
           <strong>성격 차이를 구분해야 한다</strong>
-          <p>제재(경제제재) 기반 데이터와 어업 위반 사건 서술은 다르다. IMO 미송신 중국어선은 MMSI 교차 매칭이 필요하다.</p>
+          <p>제재(경제제재) 기반 데이터와 어업 위반 사건 서술은 다르다. IMO 미송신 중국어선은 MMS 교차 매칭이 필요하다.</p>
         </div>
       </section>
 

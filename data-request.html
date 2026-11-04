@@ -871,8 +871,7 @@
         <!-- 신청일자 -->
         <div class="shrink-0">
 
-          <label
-            for="requestStartDate"
+          <span
             class="
               mb-1.5
               block
@@ -882,7 +881,7 @@
             "
           >
             신청일자
-          </label>
+          </span>
 
 
           <div class="flex items-center gap-2">
@@ -907,6 +906,7 @@
                 id="requestStartDate"
                 name="requestStartDate"
                 placeholder="연도. 월. 일."
+                autocomplete="off"
                 class="
                   min-w-0 flex-1
                   bg-transparent
@@ -964,6 +964,7 @@
                 id="requestEndDate"
                 name="requestEndDate"
                 placeholder="연도. 월. 일."
+                autocomplete="off"
                 class="
                   min-w-0 flex-1
                   bg-transparent
@@ -1264,6 +1265,7 @@
             id="requestDataName"
             name="requestDataName"
             placeholder="신청 데이터명을 입력해 주세요"
+            autocomplete="off"
             class="
               h-[44px] w-full
               rounded
@@ -2352,6 +2354,7 @@
 
           <button
             type="button"
+            aria-label="이전 페이지"
             class="
               flex h-8 w-8
               items-center justify-center
@@ -2366,6 +2369,7 @@
 
           <button
             type="button"
+            aria-current="page"
             class="
               flex h-8 w-8
               items-center justify-center
@@ -2394,6 +2398,7 @@
 
           <button
             type="button"
+            aria-label="다음 페이지"
             class="
               flex h-8 w-8
               items-center justify-center

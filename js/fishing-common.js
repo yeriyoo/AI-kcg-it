@@ -1207,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       {
         id: 3,
-        name: '103 YU IL HO',
+        name: '103 YOU IL HO',
         mmsi: '440016340',
         flag: '한국',
         type: '어선',
@@ -2399,7 +2399,7 @@ document.addEventListener("DOMContentLoaded", function () {
       renderVesselTable(keyword);
       renderDailyTable(data);
 
-      setStatus("");
+      setStatus("조회가 완료되었습니다.");
     }
 
     /* 초기 렌더링 */
@@ -8459,6 +8459,12 @@ if (rpNew) {
     closeModal();
     search.value = '';
     renderReports();
+
+    const saveStatus = document.getElementById('rpSaveStatus');
+
+    if (saveStatus) {
+      saveStatus.textContent = '보고서가 저장되었습니다.';
+    }
   });
 
   document.getElementById('rpModalClose').addEventListener('click', closeModal);

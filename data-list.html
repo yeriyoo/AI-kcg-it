@@ -867,87 +867,80 @@
 
 
 
-          <!-- =================================================
-               DATA TYPE TAB
-          ================================================== -->
-          <div
-            class="
-              mb-5
-              grid h-14
-              grid-cols-4
-              overflow-hidden
-              rounded
-              bg-[#E1E7F2]
-            "
-            role="tablist"
-          >
-
-            <button
-              type="button"
+          
+            <!-- =================================================
+                DATA TYPE TAB
+            ================================================== -->
+            <div
               class="
-                data-tab
-                active
-                flex items-center justify-center
+                mb-5
+                grid h-12
+                grid-cols-3
+                overflow-hidden
                 rounded
-                border-2 border-[#0061F0]
-                bg-white
-                text-base
-                font-semibold
-                text-[#142A4D]
+                bg-[#E1E7F2]
               "
-              data-tab="all"
+              role="tablist"
+              aria-label="연계 데이터 유형"
             >
-              전체 (241)
-            </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="true"
+                tabindex="0"
+                class="
+                  data-tab
+                  active
+                  flex items-center justify-center
+                  rounded
+                  border-2 border-[#0061F0]
+                  bg-white
+                  text-base
+                  font-semibold
+                  text-[#142A4D]
+                "
+                data-tab="all"
+              >
+                전체 (772)
+              </button>
 
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                class="
+                  data-tab
+                  flex items-center justify-center
+                  rounded
+                  text-base
+                  font-semibold
+                  text-[#476187]
+                "
+                data-tab="api"
+              >
+                연계 (2)
+              </button>
 
-            <button
-              type="button"
-              class="
-                data-tab
-                flex items-center justify-center
-                rounded
-                text-base
-                font-semibold
-                text-[#476187]
-              "
-              data-tab="api"
-            >
-              연계·API (28)
-            </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                class="
+                  data-tab
+                  flex items-center justify-center
+                  rounded
+                  text-base
+                  font-semibold
+                  text-[#476187]
+                "
+                data-tab="file"
+              >
+                미연계 (770)
+              </button>
+            </div>
 
-
-            <button
-              type="button"
-              class="
-                data-tab
-                flex items-center justify-center
-                rounded
-                text-base
-                font-semibold
-                text-[#476187]
-              "
-              data-tab="file"
-            >
-              연계·파일 (158)
-            </button>
-
-
-            <button
-              type="button"
-              disabled
-              class="
-                flex cursor-not-allowed
-                items-center justify-center
-                text-base
-                font-semibold
-                text-[#99ABC6]
-              "
-            >
-              AI 분석 데이터 (제공예정)
-            </button>
-
-          </div>
 
 
 

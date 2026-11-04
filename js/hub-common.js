@@ -2550,6 +2550,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name="standardTermFilter"
                 aria-label="용어명 필터"
                 placeholder="용어명"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
@@ -2558,6 +2559,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name="standardTermEnglish"
                 aria-label="영문용어 필터"
                 placeholder="영문용어"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
@@ -2566,6 +2568,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name="standardTermDomain"
                 aria-label="도메인 필터"
                 placeholder="도메인"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 
@@ -2581,6 +2584,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name="standardTermSource"
                 aria-label="행안부 필터"
                 placeholder="행안부"
+                autocomplete="off"
                 class="standard-filter-input h-[36px] w-[204px] shrink-0 rounded border border-[#99ABC6] bg-white px-3 text-base outline-none"
               />
 

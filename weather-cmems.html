@@ -241,7 +241,7 @@
       </div>
       <div class="cmems-timeline-content" id="cmemsTimelineContent">
         <label class="cmems-sr-only" for="cmemsHourSlider">예측 시간</label>
-        <input type="range" id="cmemsHourSlider" min="0" max="48" step="6" value="30">
+        <input type="range" id="cmemsHourSlider" min="0" max="48" step="6" value="30" autocomplete="off">
         <div class="cmems-timeline-ticks" aria-hidden="true">
           <span>+0</span><span>+6</span><span>+12</span>
           <span>+18</span><span>+24</span><span>+30</span>
@@ -305,7 +305,7 @@
               <span aria-hidden="true">~</span>
               <label>
                 <span class="cmems-sr-only">최댓값</span>
-                <input id="cmemsMax" type="number" value="1.5" min="0" step="0.1">
+                <input id="cmemsMax" type="number" value="1.5" min="0" step="0.1" aria-label="최대 풍속 값" autocomplete="off">
               </label>
             </div>
           </div>
@@ -315,7 +315,7 @@
               <label for="cmemsOpacity">배경장 불투명도</label>
               <output id="cmemsOpacityValue" for="cmemsOpacity">75%</output>
             </div>
-            <input type="range" id="cmemsOpacity" min="0" max="100" step="1" value="75">
+            <input type="range" id="cmemsOpacity" min="0" max="100" step="1" value="75" autocomplete="off">
           </div>
 
           <div class="cmems-particle-section">
