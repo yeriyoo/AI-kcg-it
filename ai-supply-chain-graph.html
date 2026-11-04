@@ -597,10 +597,10 @@
             <p class="supply-overview-description">
               공개데이터만으로는 어선→운반선→항만까지는 상당 부분 구성할 수 있으나,
               항만→특정 가공업체→특정 수산시장을 확정적으로 연결하기는 어렵다.
-              이 구간은 Panjiva 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
+              이 구간은 Passive 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
               가격 변화를 결합해 확률 관계로 구성해야 한다.
               각 공개 통계가 시장·지역·HS코드 단위로 제공되고,
-              Panjiva가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
+              Passive가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
             </p>
 
           </section>
@@ -645,7 +645,7 @@
 
                   <tr>
                     <td>어선 위치·항적</td>
-                    <td>S&amp;P AISLive, 해경 AIS·VTS·D-HF</td>
+                    <td>S&amp;P AIS Live, 해경 AIS·ITS·D-HF</td>
                     <td>실시간·과거 항적, 입출항, 정박, AIS 단절</td>
                     <td><span class="supply-tag orange">내부·상용</span></td>
                   </tr>
@@ -666,14 +666,14 @@
 
                   <tr>
                     <td>항만 위치</td>
-                    <td>UN/LOCODE</td>
+                    <td>UN/LOCO DE</td>
                     <td>항만명, 국가, 지역, 항만 코드</td>
                     <td><span class="supply-tag green">공개</span></td>
                   </tr>
 
                   <tr>
                     <td>항만 입항·검사</td>
-                    <td>FAO PSMA-GIES</td>
+                    <td>FAO SMARTIES</td>
                     <td>지정항만, 입항 사전요청, 항만검사, 입항 거부 정보</td>
                     <td><span class="supply-tag yellow">일부 공개·기관</span></td>
                   </tr>
@@ -715,14 +715,14 @@
 
                   <tr>
                     <td>국가 간 수산물 무역</td>
-                    <td>UN Comtrade</td>
+                    <td>UN Comrade</td>
                     <td>HS03 계열 수산물의 국가 간 물량·금액·기간</td>
                     <td><span class="supply-tag green">공개</span></td>
                   </tr>
 
                   <tr>
                     <td>기업 간 실제 거래</td>
-                    <td>S&amp;P Panjiva</td>
+                    <td>S&amp;P Passive</td>
                     <td>수출자, 수입자, 선적항, 도착항, 품목, HS코드, 물량, 선하증권</td>
                     <td><span class="supply-tag red">상용</span></td>
                   </tr>
@@ -735,16 +735,16 @@
                   </tr>
 
                   <tr>
-                    <td>IUU 위험정보</td>
-                    <td>WCPFC·ICCAT 등 RFMO IUU 목록</td>
-                    <td>IUU 선박, 과거 선명, 국적, IMO, 호출부호, 선주, 위반내용</td>
+                    <td>ICU 위험정보</td>
+                    <td>WC PFC·ICCAT 등 FMO ICU 목록</td>
+                    <td>ICU 선박, 과거 선명, 국적, IMO, 호출부호, 선주, 위반내용</td>
                     <td><span class="supply-tag green">공개</span></td>
                   </tr>
 
                   <tr>
-                    <td>통합 IUU 목록</td>
-                    <td>TMT Combined IUU Vessel List</td>
-                    <td>여러 RFMO의 IUU 목록 통합, 선박 이력과 연관 회사</td>
+                    <td>통합 ICU 목록</td>
+                    <td>TMT Combined ICU Vessel List</td>
+                    <td>여러 FMO의 ICU 목록 통합, 선박 이력과 연관 회사</td>
                     <td><span class="supply-tag green">공개</span></td>
                   </tr>
 
@@ -778,7 +778,7 @@
               <p>· 수집 전에는 각 데이터 제공기관의 이용약관, 접근 권한, 라이선스 및 재배포 조건을 확인해야 한다.</p>
               <p>· 농업농촌부 데이터 포털(data.moa.gov.cn)은 농산물 도매가격·수산물 가격지수·주간 가격 동향·월별 수급 분석을 제공한다.</p>
               <p>· Global Fishing Watch의 Events API는 선박 신원·조업·조우·체류·항만 방문 데이터를 제공하므로 어선→운반선→항만 연결의 출발점으로 활용한다.</p>
-              <p>· S&amp;P Sea-web과 AISLive는 선박·선주·운영사·항만·과거 항적을 연결할 수 있어, 구매 예정인 S&amp;P 데이터를 공급망 그래프의 선박 마스터로 활용하는 것이 적합하다.</p>
+              <p>· S&amp;P Sea-web과 AIS Live는 선박·선주·운영사·항만·과거 항적을 연결할 수 있어, 구매 예정인 S&amp;P 데이터를 공급망 그래프의 선박 마스터로 활용하는 것이 적합하다.</p>
             </div>
 
           </section>
@@ -817,7 +817,7 @@
                 <h4>원천</h4>
                 <div class="supply-chip-list">
                   <span>GFW Events API (encounter·loitering)</span>
-                  <span>S&amp;P AISLive 항적</span>
+                  <span>S&amp;P AIS Live 항적</span>
                   <span>S&amp;P Sea-web 소유관계</span>
                 </div>
 
@@ -838,21 +838,21 @@
                   <li>AIS 항적과 항만 지오펜스 교차</li>
                   <li>GFW Port Visit</li>
                   <li>S&amp;P 항만 방문 이력</li>
-                  <li>UN/LOCODE 항만 코드 정합</li>
-                  <li>FAO PSMA 지정항만·검사·입항거부 기록</li>
+                  <li>UN/LOCO DE 항만 코드 정합</li>
+                  <li>FAO PSA 지정항만·검사·입항거부 기록</li>
                 </ul>
 
                 <h4>원천</h4>
                 <div class="supply-chip-list">
                   <span>GFW Events API (port_visit)</span>
-                  <span>UN/LOCODE</span>
-                  <span>FAO PSMA-GIES</span>
-                  <span>S&amp;P AISLive</span>
+                  <span>UN/LOCO DE</span>
+                  <span>FAO SMARTIES</span>
+                  <span>S&amp;P AIS Live</span>
                 </div>
 
                 <p class="supply-combination-note">
-                  ※ UN/LOCODE를 항만 노드 기준키로 사용한다.
-                  PSMA-GIES 상세자료 일부는 기관 계정이 필요하다.
+                  ※ UN/LOCO DE를 항만 노드 기준키로 사용한다.
+                  SMARTIES 상세자료 일부는 기관 계정이 필요하다.
                 </p>
               </article>
 
@@ -906,14 +906,14 @@
                 <h4>원천</h4>
                 <div class="supply-chip-list">
                   <span>중국 해관총서 통계 플랫폼 (기간·수출입·상품코드 조건 조회)</span>
-                  <span>UN Comtrade (HS03 국가 간 물량·금액)</span>
-                  <span>S&amp;P Panjiva (선하증권·세관자료 기반 기업 간 관계)</span>
+                  <span>UN Comrade (HS03 국가 간 물량·금액)</span>
+                  <span>S&amp;P Passive (선하증권·세관자료 기반 기업 간 관계)</span>
                   <span>식약처 수산물 수입업체 API (업체명·영업허가번호·주소·대표자)</span>
                 </div>
 
                 <p class="supply-combination-note">
-                  ※ 해관총서 공개 통계와 UN Comtrade는 대부분 집계 데이터라 실제 중국 업체와
-                  한국 수입업체를 직접 연결하기 어렵다. 기업 간 실제 선적 관계는 Panjiva가 가장 적합하다.
+                  ※ 해관총서 공개 통계와 UN Comrade는 대부분 집계 데이터라 실제 중국 업체와
+                  한국 수입업체를 직접 연결하기 어렵다. 기업 간 실제 선적 관계는 Passive가 가장 적합하다.
                 </p>
               </article>
 
@@ -937,15 +937,15 @@
                 <h3><span class="supply-tag green">1단계</span> 즉시 수집 가능한 데이터</h3>
                 <ul>
                   <li>해경 내부 AIS·외국어선 허가·선박제원</li>
-                  <li>S&amp;P AISLive·Sea-web</li>
+                  <li>S&amp;P AIS Live·Sea-web</li>
                   <li>Global Fishing Watch Vessel·Events API</li>
-                  <li>UN/LOCODE</li>
+                  <li>UN/LOCO DE</li>
                   <li>FAO Global Record</li>
-                  <li>WCPFC·ICCAT·TMT IUU 목록</li>
+                  <li>WC PFC·ICCAT·TMT ICU 목록</li>
                   <li>중국 수산물 도매시장 가격 — pfsc.agri.cn 공개 API (UA·Referer 헤더 필요)</li>
                   <li>중국 수산물 가격지수·주간 동향 — data.moa.gov.cn</li>
                   <li>개별 수산시장 주간 시황 (웨이하이·칭다오 등) — 입하량·가격변동·공지</li>
-                  <li>중국 해관총서·UN Comtrade</li>
+                  <li>중국 해관총서·UN Comrade</li>
                   <li>식약처 수산물 수입업체 API</li>
                 </ul>
 
@@ -954,7 +954,7 @@
                   선명·국적이 바뀌어도 유지되는 UVI를 핵심 식별자로 사용한다.
                 </p>
                 <p class="supply-combination-note">
-                  ※ WCPFC IUU 목록은 CSV로 선명·과거 선명·국적·IMO·호출부호·IUU 행위를 제공하며,
+                  ※ WC PFC ICU 목록은 CSV로 선명·과거 선명·국적·IMO·호출부호·ICU 행위를 제공하며,
                   ICCAT 목록에는 선주·운영사 정보도 포함된다.
                 </p>
               </article>
@@ -975,7 +975,7 @@
               <article class="supply-priority">
                 <h3><span class="supply-tag red">3단계</span> 상용데이터 보강</h3>
                 <ul>
-                  <li>S&amp;P Panjiva — 기업 간 수출입 거래</li>
+                  <li>S&amp;P Passive — 기업 간 수출입 거래</li>
                   <li>S&amp;P Sea-web — 선주·운영사·관리회사</li>
                   <li>Windward — 다크활동, AIS 조작, 허상 항적, 소유구조 위험</li>
                   <li>위성 SAR 극광영상 — AIS 미송신 선박 확인</li>
@@ -1017,15 +1017,15 @@
                     <tr><td><code>Company</code></td><td>선주·운영사·관리사·가공업체·수입업체</td><td>S&amp;P Sea-web · 중국 기업신용정보 · 식약처 API</td></tr>
                     <tr><td><code>Person</code></td><td>대표자·실소유자·선장</td><td>중국 기업신용정보 · S&amp;P Sea-web</td></tr>
                     <tr><td><code>Encounter</code></td><td>선박 간 조우·환적 후보</td><td>GFW Events API</td></tr>
-                    <tr><td><code>FishingEvent</code></td><td>조업 이벤트</td><td>GFW Events API · 해경 AIS 분석</td></tr>
-                    <tr><td><code>PortVisit</code></td><td>항만 방문</td><td>GFW Port Visit · S&amp;P AISLive · FAO PSMA</td></tr>
-                    <tr><td><code>Port</code></td><td>항만·부두</td><td>UN/LOCODE</td></tr>
+                    <tr><td><code>Fishing Event</code></td><td>조업 이벤트</td><td>GFW Events API · 해경 AIS 분석</td></tr>
+                    <tr><td><code>PortVisit</code></td><td>항만 방문</td><td>GFW Port Visit · S&amp;P AIS Live · FAO PSA</td></tr>
+                    <tr><td><code>Port</code></td><td>항만·부두</td><td>UN/LOCO DE</td></tr>
                     <tr><td><code>Market</code></td><td>수산시장·도매시장</td><td>중국 농업농촌부 가격정보시스템</td></tr>
                     <tr><td><code>ColdStorage</code></td><td>냉동창고</td><td>중국 어업경제관리국 통계</td></tr>
                     <tr><td><code>ProcessingPlant</code></td><td>가공공장</td><td>중국 어업경제관리국 · 기업신용정보</td></tr>
-                    <tr><td><code>Shipment</code></td><td>수출입 선적</td><td>S&amp;P Panjiva · 해관총서 · UN Comtrade</td></tr>
+                    <tr><td><code>Shipment</code></td><td>수출입 선적</td><td>S&amp;P Passive · 해관총서 · UN Comrade</td></tr>
                     <tr><td><code>Species</code></td><td>어종</td><td>FAO ASFIS · 국가 표준 어종코드</td></tr>
-                    <tr><td><code>IUUCase</code></td><td>불법조업·제재·검사 사건</td><td>RFMO IUU 목록 · TMT · FAO PSMA</td></tr>
+                    <tr><td><code>ICUCase</code></td><td>불법조업·제재·검사 사건</td><td>FMO ICU 목록 · TMT · FAO PSA</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1049,15 +1049,15 @@
                   <tbody>
                     <tr><td>어선 —[<code>OPERATED_BY</code>]→ 운영사</td><td>S&amp;P Sea-web 운영사 정보</td></tr>
                     <tr><td>어선 —[<code>OWNED_BY</code>]→ 선주</td><td>S&amp;P Sea-web 최대 7단계 소유관계</td></tr>
-                    <tr><td>어선 —[<code>FISHED_AT</code>]→ 조업해역</td><td>GFW FishingEvent · 해경 AIS 분석</td></tr>
+                    <tr><td>어선 —[<code>FISHED_AT</code>]→ 조업해역</td><td>GFW Fishing Event · 해경 AIS 분석</td></tr>
                     <tr><td>어선 —[<code>ENCOUNTERED</code>]→ 운반선</td><td>GFW encounter + 거리·속도·출수 변화</td></tr>
                     <tr><td>운반선 —[<code>VISITED</code>]→ 항만</td><td>GFW Port Visit · 항만 지오펜스 교차</td></tr>
                     <tr><td>항만 —[<code>SUPPLIES</code>]→ 냉동창고</td><td>거리·이동시간 + 냉동창고 위치 통계</td></tr>
                     <tr><td>냉동창고 —[<code>DELIVERS_TO</code>]→ 가공업체</td><td>기업 주소·거리 + 가공업체 통계</td></tr>
                     <tr><td>가공업체 —[<code>SELLS_TO</code>]→ 수산시장</td><td>시장별 품목 가격·물량 급증 시차 상관</td></tr>
-                    <tr><td>가공업체 —[<code>EXPORTS</code>]→ 수입업체</td><td>Panjiva 선하증권 · 해관총서 HS코드</td></tr>
+                    <tr><td>가공업체 —[<code>EXPORTS</code>]→ 수입업체</td><td>Passive 선하증권 · 해관총서 HS코드</td></tr>
                     <tr><td>선적 —[<code>CONTAINS</code>]→ 어종</td><td>HS 03류 세부코드 · FAO ASFIS</td></tr>
-                    <tr><td>어선 —[<code>LISTED_IN</code>]→ IUU사건</td><td>RFMO IUU 목록 · TMT 통합 목록</td></tr>
+                    <tr><td>어선 —[<code>LISTED_IN</code>]→ ICU사건</td><td>FMO ICU 목록 · TMT 통합 목록</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1093,7 +1093,7 @@
                   <tr><td>선박</td><td>IMO → UVI → MMSI → 호출부호 → 선명+국적+기간</td></tr>
                   <tr><td>중국 기업</td><td>통일사회신용코드</td></tr>
                   <tr><td>한국 업체</td><td>사업자등록번호 · 영업허가번호</td></tr>
-                  <tr><td>항만</td><td>UN/LOCODE</td></tr>
+                  <tr><td>항만</td><td>UN/LOCO DE</td></tr>
                   <tr><td>어종</td><td>FAO ASFIS 코드 · 국가 표준 어종코드</td></tr>
                   <tr><td>수산물</td><td>HS 03류 및 세부 HS코드</td></tr>
                   <tr><td>시장</td><td>시장명 + 행정구역 + 좌표</td></tr>
@@ -1124,16 +1124,16 @@
               <b>+</b>
               <span>중국 해관 통계</span>
               <b>+</b>
-              <span>Panjiva 기업 간 선적자료</span>
+              <span>Passive 기업 간 선적자료</span>
             </div>
 
             <p>
               공개데이터만으로는 어선→운반선→항만까지는 상당 부분 구성할 수 있으나,
               항만→특정 가공업체→특정 수산시장을 확정적으로 연결하기는 어렵다.
-              이 구간은 Panjiva 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
+              이 구간은 Passive 같은 선적자료, 중국 기업정보, 냉동창고·시장 위치 및
               가격 변화를 결합해 확률 관계로 구성해야 한다.
               각 공개 통계가 시장·지역·HS코드 단위로 제공되고,
-              Panjiva가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
+              Passive가 기업·선적 단위 관계를 제공한다는 점에 근거한 판단이다.
             </p>
 
           </section>

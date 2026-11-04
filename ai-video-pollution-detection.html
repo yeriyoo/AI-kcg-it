@@ -621,7 +621,7 @@
           <h3>입력</h3>
           <p>비율 + 촬영 메타데이터</p>
           <h3>도구</h3>
-          <span class="pollution-tool">변환 역투영 · OpenDrift/OpenOil(예정)</span>
+          <span class="pollution-tool">변환 역투영 · Open Drift/Open Oil(예정)</span>
         </div>
         <div>
           <h3>처리</h3>
@@ -649,7 +649,7 @@
       <p class="pollution-research-intro">
         탐지는 <strong>지금 어디에 얼마나 있는가</strong>만 답한다.
         방제 판단에는 <strong>앞으로 어디로 가는가</strong>가 필요하다.
-        아래는 국내 KOSPS 계보와 OpenOil 물리 원전에 정리한 설계 근거다.
+        아래는 국내 KOSPS 계보와 Open Oil 물리 원전에 정리한 설계 근거다.
       </p>
 
       <h3 class="pollution-research-heading">이송장 (어디로 가는가)</h3>
@@ -703,11 +703,11 @@
           <p>오일펜스 누유율, 유처리제 분산에 따른 확산면적 변화, 유회수기 회수에 따른 해상 분포량 변화를 각각 모델화해 확산예측에 통합한다. "방제하면 어떻게 달라지는가"를 답하는 부분이다.</p>
         </article>
         <article class="pollution-paper">
-          <div class="pollution-paper-head"><h4>구현 기반 — OpenDrift / OpenOil</h4><span>Dagestad et al. (2018)</span></div>
-          <p>Python 모듈형 궤적 모델 프레임워크로, 유출유 모듈(OpenOil)에 위 항과 3항과 Stokes drift가 이미 들어 있다. 물리를 처음부터 짜는 대신 이송장(국내 조류·취송류)만 주입하는 편이 검증 부담이 적다.</p>
+          <div class="pollution-paper-head"><h4>구현 기반 — Open Drift / Open Oil</h4><span>Dagestan et al. (2018)</span></div>
+          <p>Python 모듈형 궤적 모델 프레임워크로, 유출유 모듈(Open Oil)에 위 항과 3항과 Stokes drift가 이미 들어 있다. 물리를 처음부터 짜는 대신 이송장(국내 조류·취송류)만 주입하는 편이 검증 부담이 적다.</p>
         </article>
         <article class="pollution-paper">
-          <div class="pollution-paper-head"><h4>격자 보간 — Akima quintic</h4><span>Akima (1974·1978)</span></div>
+          <div class="pollution-paper-head"><h4>격자 보간 — Yakima quintic</h4><span>Yakima (1974·1978)</span></div>
           <p>수심·수온·해류 격자를 입자 위치로 보간할 때 쓰는 2차원 5차다항식 국소 보간. 선형 보간은 격자 경계에서 유속이 꺾여 입자가 비물리적으로 튀는데, 이를 피한다.</p>
         </article>
       </div>

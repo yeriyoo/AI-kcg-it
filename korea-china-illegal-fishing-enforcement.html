@@ -539,13 +539,17 @@
 
       <!-- 3행 -->
       <div class="illegal-search-field illegal-date-field">
-        <label for="illegalStartDate">단속기간</label>
+        <span>단속기간</span>
         <div class="illegal-date-range">
-          <input id="illegalStartDate" type="date">
-          <span>~</span>
-          <input id="illegalEndDate" type="date">
+          <label for="illegalStartDate" class="sr-only">단속 시작일</label>
+          <input id="illegalStartDate" type="date" autocomplete="off">
+
+          <span aria-hidden="true">~</span>
+
+          <label for="illegalEndDate" class="sr-only">단속 종료일</label>
+          <input id="illegalEndDate" type="date" autocomplete="off">
         </div>
-      </div>
+        </div>
 
       <div class="illegal-search-field illegal-search-empty"></div>
 

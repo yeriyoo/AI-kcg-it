@@ -34987,6 +34987,30 @@ body:has(.law-page) .top-header {
   min-height: 319px;
 }
 
+/* =========================================
+   단속·탐지 이력 조회 - CLS 개선
+========================================= */
+
+.history-page .hi-chart {
+  min-height: 220px;
+}
+
+.history-page .hi-filter-line {
+  min-height: 26px;
+}
+
+.history-page .hi-filter-options button {
+  box-sizing: border-box;
+  min-height: 26px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* 중국항만 페이지 - 차트 초기 높이 확보 */
+#cpDurationChart {
+  min-height: 220px;
+}
+
 /* =========================================================
   Responsive - 1600px
 ========================================================= */
