@@ -516,14 +516,24 @@
         </select>
       </div>
 
+      
       <div class="permit-request-field permit-request-date-field">
         <label for="permitRequestStart">나포일자</label>
         <div class="permit-request-date-range">
-          <input type="date" id="permitRequestStart">
+          <input
+            type="date"
+            id="permitRequestStart"
+            aria-label="나포일자 시작일"
+          >
           <span>~</span>
-          <input type="date" id="permitRequestEnd">
+          <input
+            type="date"
+            id="permitRequestEnd"
+            aria-label="나포일자 종료일"
+          >
         </div>
       </div>
+
 
       <div class="permit-request-actions">
         <button type="submit" class="permit-request-search-btn">
