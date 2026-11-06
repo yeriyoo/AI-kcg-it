@@ -1,26 +1,29 @@
-
 from pathlib import Path
 from fontTools.ttLib import TTFont
 
-source_dir = Path("./fonts")
-output_dir = Path("./fonts-test")
+source_dir = Path("fonts")
+output_dir = Path("fonts-fixed")
+
 output_dir.mkdir(exist_ok=True)
 
-for source in sorted(source_dir.glob("Pretendard-*.woff2")):
-    print(f"처리 중: {source.name}")
+font_paths = sorted(source_dir.glob("Pretendard-*.woff2"))
 
-    font = TTFont(source)
-    font.flavor = "woff2"
+if not font_paths:
+    raise SystemExit("fonts 폴더에서 Pretendard WOFF2 파일을 찾지 못했습니다.")
 
-    destination = output_dir / source.name
-    font.save(destination)
-    font.close()
+for source in font_paths:
+    with TTFont(source) as font:
+        font["name"].names.sort(
+            key=lambda record: (
+                record.platformID,
+                record.platEncID,
+                record.langID,
+                record.nameID,
+            )
+        )
 
-    # 저장된 파일을 다시 열어 구조 확인
-    test_font = TTFont(destination)
-    assert "name" in test_font
-    test_font.close()
+        font.flavor = "woff2"
+        destination = output_dir / source.name
+        font.save(destination)
 
-    print(f"완료: {destination}")
-
-print("모든 폰트 처리 완료")
+    print(f"저장 완료: {destination}")
